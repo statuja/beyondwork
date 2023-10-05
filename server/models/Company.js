@@ -12,8 +12,8 @@ const addressSchema = new Schema(
 
 const contactSchema = new Schema(
   {
-    phoneNumber: String,
-    email: String,
+    phoneNumber: { type: String, unique: true },
+    email: { type: String, unique: true },
   },
   { _id: false }
 );
@@ -22,7 +22,7 @@ const companySchema = new Schema(
   {
     companyName: { type: String, required: true },
     companyType: { type: String, required: true },
-    numberOfEmployees: { type: String, required: true },
+    numberOfEmployees: String,
     companyAddress: { type: addressSchema, required: true },
     companyContact: { type: contactSchema, required: true },
   },
