@@ -40,3 +40,8 @@ Hello from Berlin!
     "adminRole": true
 
 }
+
+
+.env file:
+PORT = 5000
+MONGO_DB_LINK = mongodb+srv://admin:girlspower2023@beyondwork.996i5lj.mongodb.net/beyondwork

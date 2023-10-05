@@ -1,37 +1,41 @@
 import express from "express";
 import User from "../models/User.js";
-import { check } from "express-validator";
+import { check, validationResult } from "express-validator";
 import { allUsers, createUser } from "../controllers/userControllers.js";
 
 const router = express.Router();
 
 const validation = [
-  check("password")
+  check("userPassword")
     .notEmpty()
     .isLength({ min: 8 })
-    .withMessage("not a valid password"),
-  check("email")
+    .withMessage(
+      "The password you provided is not valid, it must be minimum 8 characters long"
+    ),
+  check("userContact.email")
     .notEmpty()
     .isEmail()
-    .withMessage("email is not valid")
+    .withMessage(
+      "E-mail is not valid, please provide a correct e-mail address (example: name@companyxyz.abc)"
+    )
     .custom(async (value) => {
-      const user = await User.findOne({ email: value });
+      const user = await User.findOne({ "userContact.email": value });
       if (user) {
-        throw new Error("E-mail already in use");
+        throw new Error("The e-mail you provided is already in use.");
       }
-    })
-    .withMessage("email is already in use"),
+    }),
 ];
 
 router.post(
   "/create",
   validation,
-  (req, res) => {
+  (req, res, next) => {
     const error = validationResult(req);
     if (error.isEmpty()) {
-      return res.sendStatus(201);
+      return res.json(req.body);
     }
-    res.send({ error: error.array() });
+    res.send({ error: error.array()[0].msg });
+    next();
   },
   createUser
 );
