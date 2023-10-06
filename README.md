@@ -24,3 +24,24 @@ Hello from Berlin!
 "email": "dci@gmail.com"
 }  
 }
+
+{
+"userFullName": "John Doe",
+"userJobTitle": "Web Developer",
+"userDepartment": "frontend",
+"userCompany": "651e85d1a9e0686d51301349",
+
+    "userContact":
+    {
+      "phoneNumber": "+987456321",
+      "email": "doe@gmail.com"
+    },
+    "userPassword": "johndoe",
+    "adminRole": true
+
+}
+
+
+.env file:
+PORT = 5000
+MONGO_DB_LINK = mongodb+srv://admin:girlspower2023@beyondwork.996i5lj.mongodb.net/beyondwork
