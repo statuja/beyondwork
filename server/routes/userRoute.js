@@ -32,13 +32,14 @@ router.post(
   (req, res, next) => {
     const error = validationResult(req);
     if (error.isEmpty()) {
-      return res.json(req.body);
+      next();
+    } else {
+      res.send({ error: error.array()});
     }
-    res.send({ error: error.array()[0].msg });
-    next();
   },
   createUser
 );
+
 router.get("/allUsers", allUsers);
 
 export default router;
