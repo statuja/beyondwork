@@ -12,6 +12,7 @@ import {
   deleteUser,
 } from "../controllers/userControllers.js";
 import authorization from "../middleware/authorization.js";
+import isAdmin from "../middleware/adminAuthorization.js";
 
 const router = express.Router();
 
@@ -56,6 +57,6 @@ router.get("/allUsers", authorization, allUsers);
 router.get("/myProfile", authorization, getMyProfile);
 router.put("/updateMyProfile", authorization, updateMyProfile);
 router.get("/getUserProfile/:id", authorization, getUserProfile);
-router.get("/deleteUser", authorization, deleteUser);
+router.delete("/deleteUser/:userId", authorization, isAdmin, deleteUser);
 
 export default router;

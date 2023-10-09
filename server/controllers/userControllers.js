@@ -48,8 +48,6 @@ export const loginUser = async (req, res) => {
       sameSite: "none",
       secure: true,
     });
-    console.log(token);
-    console.log(res.cookie());
     res.json({ user: user, token: token });
   } catch (error) {
     res.json(error.message);
@@ -73,4 +71,15 @@ export const updateMyProfile = async (req, res) => {};
 
 export const getUserProfile = async (req, res) => {};
 
-export const deleteUser = async (req, res) => {};
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.json(error);
+  }
+};
