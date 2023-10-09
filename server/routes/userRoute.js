@@ -1,7 +1,17 @@
 import express from "express";
 import User from "../models/User.js";
 import { check, validationResult } from "express-validator";
-import { allUsers, createUser } from "../controllers/userControllers.js";
+import {
+  allUsers,
+  createUser,
+  loginUser,
+  logout,
+  getMyProfile,
+  updateMyProfile,
+  getUserProfile,
+  deleteUser,
+} from "../controllers/userControllers.js";
+import authorization from "../middleware/authorization.js";
 
 const router = express.Router();
 
@@ -34,12 +44,18 @@ router.post(
     if (error.isEmpty()) {
       next();
     } else {
-      res.send({ error: error.array()});
+      res.send({ error: error.array() });
     }
   },
   createUser
 );
 
-router.get("/allUsers", allUsers);
+router.post("/login", loginUser);
+router.get("/logout", logout);
+router.get("/allUsers", authorization, allUsers);
+router.get("/myProfile", authorization, getMyProfile);
+router.put("/updateMyProfile", authorization, updateMyProfile);
+router.get("/getUserProfile/:id", authorization, getUserProfile);
+router.get("/deleteUser", authorization, deleteUser);
 
 export default router;

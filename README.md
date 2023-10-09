@@ -41,7 +41,21 @@ Hello from Berlin!
 
 }
 
+{
+"userFullName": "Nina Nino",
+"userJobTitle": "HR",
+"userDepartment": "HR",
+"userCompany": "651e85d1a9e0686d51301349",
+"userContact":
+{
+"phoneNumber": "+977334455",
+"email": "nina@gmail.com"
+},
+"userPassword": "ninanono",
+"adminRole": true
+}
 
 .env file:
 PORT = 5000
 MONGO_DB_LINK = mongodb+srv://admin:girlspower2023@beyondwork.996i5lj.mongodb.net/beyondwork
+SECRET_KEY = who can guess the secret code?
