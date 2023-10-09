@@ -48,6 +48,7 @@ export const loginUser = async (req, res) => {
       sameSite: "none",
       secure: true,
     });
+
     res.json({ user: user, token: token });
   } catch (error) {
     res.json(error.message);
@@ -63,13 +64,36 @@ export const allUsers = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {};
+export const logout = async (req, res) => {
+  res.clearCookie("token");
+  res.json({ message: "You are now logged out. Bye bye" });
+};
 
-export const getMyProfile = async (req, res) => {};
+export const getMyProfile = async (req, res) => {
+  res.json(req.user);
+};
 
-export const updateMyProfile = async (req, res) => {};
+export const updateMyProfile = async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+      new: true,
+    });
 
-export const getUserProfile = async (req, res) => {};
+    res.json(updatedUser);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const selectedUser = await User.findById(req.params.id);
+
+    res.json(selectedUser);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
 
 export const deleteUser = async (req, res) => {
   try {
