@@ -9,5 +9,6 @@ export const createCompany = async (req, res) => {
   }
 };
 
-export const viewCompanyProfile = async (res, req) => {};
-export const updateCompanyProfile = async (res, req) => {};
+export const viewCompanyProfile = async (req, res) => {};
+
+export const updateCompanyProfile = async (req, res) => {};
