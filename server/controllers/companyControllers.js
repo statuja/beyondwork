@@ -8,3 +8,6 @@ export const createCompany = async (req, res) => {
     res.json(error);
   }
 };
+
+export const viewCompanyProfile = async (res, req) => {};
+export const updateCompanyProfile = async (res, req) => {};
