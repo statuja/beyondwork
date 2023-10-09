@@ -7,6 +7,7 @@ import {
   updateCompanyProfile,
 } from "../controllers/companyControllers.js";
 import authorization from "../middleware/authorization.js";
+import isAdmin from "../middleware/adminAuthorization.js";
 
 const router = express.Router();
 
@@ -40,6 +41,11 @@ router.post(
 );
 
 router.get("/viewCompanyProfile", authorization, viewCompanyProfile);
-router.put("/updateCompanyProfile", authorization, updateCompanyProfile);
+router.put(
+  "/updateCompanyProfile/:companyId",
+  authorization,
+  isAdmin,
+  updateCompanyProfile
+);
 
 export default router;

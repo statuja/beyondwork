@@ -10,6 +10,7 @@ export const createCompany = async (req, res) => {
   }
 };
 
+
 export const viewCompanyProfile = async (req, res) => {
   //res.json(req.user);
 };
@@ -40,3 +41,6 @@ export const updateCompanyProfile = async (req, res) => {
     res.json({ error: error.message });
   }
 };
+
+
+
