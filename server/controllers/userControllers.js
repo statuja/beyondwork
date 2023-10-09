@@ -48,8 +48,7 @@ export const loginUser = async (req, res) => {
       sameSite: "none",
       secure: true,
     });
-    console.log(token);
-    console.log(res.cookie());
+
     res.json({ user: user, token: token });
   } catch (error) {
     res.json(error.message);
