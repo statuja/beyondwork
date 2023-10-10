@@ -1,7 +1,13 @@
 import express from "express";
 import Company from "../models/Company.js";
 import { check, validationResult } from "express-validator";
-import { createCompany } from "../controllers/companyControllers.js";
+import {
+  createCompany,
+  viewCompanyProfile,
+  updateCompanyProfile,
+} from "../controllers/companyControllers.js";
+import authorization from "../middleware/authorization.js";
+import isAdmin from "../middleware/adminAuthorization.js";
 
 const router = express.Router();
 
@@ -28,10 +34,18 @@ router.post(
     if (error.isEmpty()) {
       next();
     } else {
-      res.send({ error: error.array()});
+      res.send({ error: error.array() });
     }
   },
   createCompany
+);
+
+router.get("/viewCompanyProfile", authorization, viewCompanyProfile);
+router.put(
+  "/updateCompanyProfile",
+  authorization,
+  isAdmin,
+  updateCompanyProfile
 );
 
 export default router;
