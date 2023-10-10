@@ -34,7 +34,7 @@ router.post(
     if (error.isEmpty()) {
       next();
     } else {
-      res.send({ error: error.array() });
+      res.status(400).send({ error: error.array() });
     }
   },
   createCompany

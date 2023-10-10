@@ -22,6 +22,23 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const createDefaultAdmin = async (req, res) => {
+  try {
+    const newUser = await User.create({
+      userContact: {
+        email: req.body.defaultAdminEmail,
+      },
+      userFullName: "Full Name",
+      userJobTitle: "Job Title",
+      userDepartment: "Dept",
+      adminRole: true,
+      userPassword: "admin1234",
+    });
+    res.json(newUser);
+  } catch (error) {
+    res.json(error);
+  }
+};
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
