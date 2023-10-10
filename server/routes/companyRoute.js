@@ -42,7 +42,7 @@ router.post(
 
 router.get("/viewCompanyProfile", authorization, viewCompanyProfile);
 router.put(
-  "/updateCompanyProfile/:companyId",
+  "/updateCompanyProfile",
   authorization,
   isAdmin,
   updateCompanyProfile
