@@ -25,6 +25,7 @@ const companySchema = new Schema(
     numberOfEmployees: String,
     companyAddress: { type: addressSchema, required: true },
     companyContact: { type: contactSchema, required: true },
+    defaulAdminEmail: String,
   },
   { versionKey: false }
 );
