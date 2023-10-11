@@ -13,6 +13,7 @@ export const CompanyRegistration = () => {
   const companyEmailRef = useRef();
   const defaultAdminEmail = useRef();
 
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -31,8 +32,9 @@ export const CompanyRegistration = () => {
         email: companyEmailRef.current.value,
         phoneNumber: phoneRef.current.value,
       },
+      defaultAdminEmail: defaultAdminEmail.current.value,
     };
-    fetch("http://localhost:5000/company/create", {
+    fetch("http://localhost:5001/company/create", {
       method: "POST",
       body: JSON.stringify(company),
       headers: {
@@ -46,6 +48,9 @@ export const CompanyRegistration = () => {
         console.log(data);
         if (data.error) {
           setError(data.error[1].msg);
+        } else {
+          setMessage(`You successfully register your company. here is your Admin email ${company.defaultAdminEmail} and your temporary password: admin1234
+        please change your logging password and update your details.`);
         }
       })
       .catch((err) => {
@@ -91,7 +96,7 @@ export const CompanyRegistration = () => {
           ref={defaultAdminEmail}
         />
         <button type="submit">Register</button>
-        {error && <div>Error: {error}</div>}{" "}
+        {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
         {/* Display error message if there is an error */}
       </form>
     </div>
