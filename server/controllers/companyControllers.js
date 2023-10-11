@@ -6,9 +6,8 @@ export const createCompany = async (req, res) => {
     const newCompany = await Company.create(req.body);
     const defaultAdminUser = createDefaultAdmin(
       newCompany._id,
-      newCompany.defaultAdminEmail
+      newCompany.defaultAdminEmail,
     );
-    console.log("Admin user: " + defaultAdminUser.userPassword);
     res.json(newCompany);
   } catch (error) {
     res.json(error);
