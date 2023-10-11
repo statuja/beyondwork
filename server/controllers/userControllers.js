@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 dotenv.config();
 
 const SALT_ROUNDS = 9;
+const defaultPass = process.env.DEFAULT_ADMIN_PASSWORD 
 
 export const createUser = async (req, res) => {
   try {
@@ -23,20 +24,27 @@ export const createUser = async (req, res) => {
 };
 
 export const createDefaultAdmin = async (companyId, adminEmail) => {
-  console.log("create user beginning");
-  const newUser = await User.create({
-    userContact: {
-      email: adminEmail,
-    },
-    userFullName: "Full Name",
-    userJobTitle: "Job Title",
-    userDepartment: "Dept",
-    adminRole: true,
-    userPassword: "admin1234",
-    userCompany: companyId,
-  });
-  console.log("create user end");
-  return newUser;
+  try {
+    const userPassword = defaultPass;
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(userPassword, salt);
+    // userPassword = hashedPassword;
+    console.log(hashedPassword);
+    const newUser = await User.create({
+      userContact: {
+        email: adminEmail,
+      },
+      userFullName: "Full Name",
+      userJobTitle: "Job Title",
+      userDepartment: "Dept",
+      adminRole: true,
+      userPassword: hashedPassword,
+      userCompany: companyId,
+    });
+    return newUser;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const loginUser = async (req, res) => {
