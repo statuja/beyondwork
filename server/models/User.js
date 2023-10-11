@@ -12,7 +12,7 @@ const addressSchema = new Schema(
 
 const contactSchema = new Schema(
   {
-    phoneNumber: { type: String, unique: true },
+    //phoneNumber: { type: String, default: "+123456789" },
     email: { type: String, required: true, unique: true },
   },
   { _id: false }

@@ -20,9 +20,10 @@ Hello from Berlin!
 "address": "Dusseldorferdtr. 1"
 },
 "companyContact": {
-"phoneNumber": "+123456789",
-"email": "dci@gmail.com"
-}  
+"phoneNumber": "+12345678913",
+"email": "dcicompany13@gmail.com"
+},
+"defaultAdminEmail": "admindci13@gmail.com"
 }
 
 {
@@ -60,15 +61,15 @@ PORT = 5000
 MONGO_DB_LINK = mongodb+srv://admin:girlspower2023@beyondwork.996i5lj.mongodb.net/beyondwork
 SECRET_KEY = who can guess the secret code?
 
-to look at: 
-  try {
-    const companyId = req.params.userCompany;
-    const updatedCompanyData = req.body;
-    const updatedCompany = await Company.findByIdAndUpdate(
-      companyId,
-      updatedCompanyData,
-      { new: true }
-    );
+to look at:
+try {
+const companyId = req.params.userCompany;
+const updatedCompanyData = req.body;
+const updatedCompany = await Company.findByIdAndUpdate(
+companyId,
+updatedCompanyData,
+{ new: true }
+);
 
     if (!updatedCompany) {
       return res.status(404).json({ message: "Company not found" });
@@ -78,7 +79,8 @@ to look at:
       message: "Company information updated successfully",
       updatedCompany,
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
+
+} catch (error) {
+console.error(error);
+res.status(500).json({ message: "Server error" });
+}
