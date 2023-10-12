@@ -1,0 +1,74 @@
+.register {
+  height: 100vh;
+  background-color: #f5f5dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .left {
+    flex: 1;
+    background: linear-gradient(
+        rgba(242, 243, 224, 0.876),
+        rgba(225, 225, 218, 0.448)
+      ),
+      url(../../images/Hands.png) center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    .logo {
+      height: auto;
+      width: 400px;
+    }
+    h1 {
+      font-size: 50px;
+      line-height: 50px;
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+  .right {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      color: #555;
+      font-size: 30px;
+    }
+    form {
+      width: 70%;
+      background-color: #ffb000;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      padding: 30px;
+      input {
+        border: none;
+        border-radius: 6px;
+        background-color: #f5f5dc;
+        width: 70%;
+        padding: 10px 10px;
+      }
+      .button {
+        width: 50%;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        background-color: #f5f5dc;
+        font-weight: bold;
+
+        cursor: pointer;
+      }
+    }
+  }
+}
