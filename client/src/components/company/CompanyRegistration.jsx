@@ -5,10 +5,31 @@ import { useForm } from 'react-hook-form';
 export const CompanyRegistration = () => {
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
   const onSubmit = data => {
+    const newData = {
+      companyName: data.companyName,
+      companyType: data.companyType,
+      numberOfEmployees: data.numberOfEmployees,
+      companyAddress: {
+        address: data.address,
+        city: data.city,
+        zipCode: data.zipCode,
+        country: data.country,
+      },
+      companyContact: {
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+      },
+      defaultAdminEmail: data.defaultAdminEmail,
+    }
+    console.log(newData)
     fetch("http://localhost:5000/company/create", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(newData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -17,7 +38,7 @@ export const CompanyRegistration = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         if (data.error) {
           setError(data.error[1].msg);
           
@@ -30,36 +51,29 @@ export const CompanyRegistration = () => {
         setError(err.msg);
        
       });
-    console.log(data)
   };
   console.log(errors);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-
-  
-    
-
-
+ 
       return (
         <div>
           <h1>Register your company </h1>
        
           <form onSubmit={handleSubmit(onSubmit)}>
-          <input type="text" placeholder="Company Name" {...register("Company Name", {required: true})} />
-          <input type="text" placeholder="Company Type " {...register("Company Type ", {required: true})} />
-          <select {...register("Number of Employees")}>
+          <input type="text" placeholder="Company Name" {...register("companyName", {required: true})} />
+          <input type="text" placeholder="Company Type " {...register("companyType", {required: true})} />
+          <select {...register("numberOfEmployees")}>
             <option value="<50">0-50</option>
             <option value="51-100">51-100</option>
             <option value="101-500">101-500</option>
             <option value=">500">more than 500</option>
           </select>
-          <input type="text" placeholder="Street, Building, Office(if applicable) No" {...register("Street, Building, Office(if applicable) No", {required: true})} />
-          <input type="text" placeholder="Zip Code" {...register("Zip Code", {required: true})} />
-          <input type="text" placeholder="City" {...register} />
-          <input type="text" placeholder="Country" {...register} />
-          <input type="text" placeholder="Phone Number" {...register("Phone Number")} />
-          <input type="text" placeholder="Company E-mail Address" {...register("Company E-mail Address" )} />
-          <input type="email" placeholder="Admin E-mail Address" {...register("Admin E-mail Address" )} />
+          <input type="text" placeholder="Street, Building, Office(if applicable) No" {...register("address", {required: true})} />
+          <input type="text" placeholder="ZipCode" {...register("zipCode", {required: true})} />
+          <input type="text" placeholder="City" {...register("city")}/>
+          <input type="text" placeholder="Country" {...register("country")} />
+          <input type="text" placeholder="Phone Number" {...register("phoneNumber")} />
+          <input type="email" placeholder="Company E-mail Address" {...register("email" )} />
+          <input type="email" placeholder="Admin E-mail Address" {...register("defaultAdminEmail" )} />
     
           <input type="submit" />
          
