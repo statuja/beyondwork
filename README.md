@@ -152,3 +152,21 @@ defaultAdminEmail: defaultAdminEmail.current.value,
           placeholder="Admin E-mail Address"
           ref={defaultAdminEmail}
         /> */}
+
+createUser:
+{
+"userFullName": "nina banina",
+"userJobTitle": "HR manager",
+"userDepartment": "HR",
+"userAddress": {
+"zipCode": "123456",
+"country": "Germany",
+"city": "Berlin",
+"address": "Dusseldorferdtr. 1"
+},
+"userContact": {
+"email": "ninanina@gmail.com"
+},
+"userPassword": "nina1234",
+"adminRole": "false"
+}
