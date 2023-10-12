@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Belanosima&family=Montserrat:wght@100&display=swap');
+
+.footer {
+    background-color: #004225;
+    color: #F5F5DC;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+
+    .left {
+        flex: 1;
+        text-align: left;
+    }
+
+    .right {
+        display: flex;
+        gap: 5px;
+
+        a {
+            text-decoration: none;
+
+            img {
+                max-width: 20px;
+                fill: #F5F5DC;
+            }
+        }
+    }
+
+    @media (min-width: 768px) {
+        width: 100%;
+        padding: 10px 10px;
+
+        .right {
+            gap: 10px;
+            min-width: 50px;
+
+        }
+    }
+}
