@@ -54,15 +54,16 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({ "userContact.email": email });
 
     if (!user) {
-      throw new Error("This E-mail is not valid. Please, try again.");
-      return;
+      //throw new Error("This E-mail is not valid. Please, try again.");
+      return res.json({ error: "This E-mail is not valid. Please, try again." });
     }
 
     const passwordCheck = bcrypt.compareSync(password, user.userPassword);
 
     if (!passwordCheck) {
-      throw new Error("This Password is not valid. Please, try again.");
-      return;
+      //throw new Error("This Password is not valid. Please, try again.");
+      return res.json({ error: "This Password is not valid. Please, try again." });
+
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
