@@ -1,10 +1,14 @@
 import "./App.css";
-import { CompanyRegistration } from "./components/company/CompanyRegistration";
+import React from "react";
+import { BrowserRouter as Route, Routes } from "react-router-dom";
+import { CompanyRegistration } from "./components/CompanyRegistration/CompanyRegistration";
 
 function App() {
   return (
     <div className="App">
-      <CompanyRegistration />
+      <Routes>
+        <Route path="/" element={<CompanyRegistration />} />
+      </Routes>
     </div>
   );
 }
