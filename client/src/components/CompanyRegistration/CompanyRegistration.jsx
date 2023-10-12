@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./CompanyRegistration.scss";
-import logo from '../../images/Logo_green.png';
+import logo from '../../images/Logo_green.png
+import Login from "../Login/Login";
+
 
 export const CompanyRegistration = () => {
   const {
@@ -47,9 +49,9 @@ export const CompanyRegistration = () => {
         return res.json();
       })
       .then((data) => {
-        //console.log(data);
+        console.log(data);
         if (data.error) {
-          setError(data.error[1].msg);
+          setError(data.error[0].msg);
         } else {
           setMessage(`You successfully register your company. here is your Admin email ${data.defaultAdminEmail} and your temporary password: admin1234
         please change your logging password and update your details.`);
@@ -73,7 +75,6 @@ export const CompanyRegistration = () => {
         </div>
         <div className="right">
           <h1>Register your company </h1>
-
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
@@ -122,8 +123,8 @@ export const CompanyRegistration = () => {
             {error && <div>Error: {error}</div>}{" "}
             {message && <div>{message}</div>}
           </form>
+               <Login/>
         </div>
-      
-    </div>
+        </div>     
   );
 };
