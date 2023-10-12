@@ -5,9 +5,10 @@ import jwt from "jsonwebtoken";
 dotenv.config();
 
 const SALT_ROUNDS = 9;
-const defaultPass = process.env.DEFAULT_ADMIN_PASSWORD 
+const defaultPass = process.env.DEFAULT_ADMIN_PASSWORD;
 
 export const createUser = async (req, res) => {
+  console.log("start");
   try {
     const { userPassword } = req.body;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
@@ -21,6 +22,7 @@ export const createUser = async (req, res) => {
   } catch (error) {
     res.json(error);
   }
+  console.log("end");
 };
 
 export const createDefaultAdmin = async (companyId, adminEmail) => {

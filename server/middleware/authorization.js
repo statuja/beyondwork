@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const authorization = async (req, res, next) => {
+  console.log("start authorization");
   try {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
