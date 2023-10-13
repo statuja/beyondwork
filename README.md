@@ -158,6 +158,7 @@ createUser:
 "userFullName": "nina banina",
 "userJobTitle": "HR manager",
 "userDepartment": "HR",
+"userCompany: "6527dff70135469c98bfd413",
 "userAddress": {
 "zipCode": "123456",
 "country": "Germany",

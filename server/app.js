@@ -8,9 +8,20 @@ import userRoute from "./routes/userRoute.js";
 dotenv.config();
 
 const app = express();
-app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "vercel server" //change when we deploy
+      : "http://localhost:3000",
+  credentials: true,
+  preflightContinue: true,
+  optionsSuccessStatus: 200,
+};
+console.log(`corsoption: ${corsOptions.origin}`);
+app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(express.json());
 
 //Routes
 
