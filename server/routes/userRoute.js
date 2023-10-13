@@ -48,7 +48,7 @@ router.post(
       res.send({ error: error.array() });
     }
   },
-  isAdmin,
+
   createUser
 );
 

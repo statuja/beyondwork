@@ -5,9 +5,10 @@ import jwt from "jsonwebtoken";
 dotenv.config();
 
 const SALT_ROUNDS = 9;
-const defaultPass = process.env.DEFAULT_ADMIN_PASSWORD 
+const defaultPass = process.env.DEFAULT_ADMIN_PASSWORD;
 
 export const createUser = async (req, res) => {
+  console.log("start");
   try {
     const { userPassword } = req.body;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
@@ -16,11 +17,13 @@ export const createUser = async (req, res) => {
     const newUser = await User.create({
       ...req.body,
       userPassword: hashedPassword,
+      // userCompany: 
     });
     res.json(newUser);
   } catch (error) {
     res.json(error);
   }
+  console.log("end");
 };
 
 export const createDefaultAdmin = async (companyId, adminEmail) => {
@@ -50,28 +53,37 @@ export const createDefaultAdmin = async (companyId, adminEmail) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const user = await User.findOne({ "userContact.email": email });
-
     if (!user) {
-      throw new Error("This E-mail is not valid. Please, try again.");
-      return;
+      //throw new Error("This E-mail is not valid. Please, try again.");
+      return res.json({
+        error: "This E-mail is not valid. Please, try again.",
+      });
     }
-
     const passwordCheck = bcrypt.compareSync(password, user.userPassword);
-
     if (!passwordCheck) {
-      throw new Error("This Password is not valid. Please, try again.");
-      return;
+      //throw new Error("This Password is not valid. Please, try again.");
+      return res.json({
+        error: "This Password is not valid. Please, try again.",
+      });
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "1hour",
+      expiresIn: "1h",
     });
+    console.log(`token: ${token}`);
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   sameSite: "none",
+    //   secure: true,
+    // });
+
     res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
+      // httpOnly: true,
+      // secure: process.env.NODE_ENV === "production" ? true : false, // the cookie will be sent only over HTTPS in production
+      // secure: false,
+      // sameSite: "lax",
+      // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
 
     res.json({ user: user, token: token });
