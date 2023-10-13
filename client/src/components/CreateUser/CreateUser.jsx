@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 
-export const UserRegistration = () => {
+export const UserRegistration = (props) => {
   const {
     register,
     handleSubmit,
@@ -14,6 +14,7 @@ export const UserRegistration = () => {
 
   const onSubmit = (data) => {
     const newData = {
+      userCompany: props.newData.userCompany, //need to link this to the logged in user's company ID
       userFullName: data.userFullName,
       userJobTitle: data.userJobTitle,
       userDepartment: data.userDepartment,
@@ -30,28 +31,25 @@ export const UserRegistration = () => {
       adminRole: data.adminRole,
     };
     console.log("test", newData);
-    fetch(
-      "http://localhost:5000/user/create",
-      {
-        method: "POST",
-        body: JSON.stringify(newData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    fetch("http://localhost:5000/user/create", {
+      method: "POST",
+      body: JSON.stringify(newData),
+      headers: {
+        "Content-Type": "application/json",
       },
-      reset()
-    )
+    })
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        //console.log(data);
+        console.log(data);
         if (data.error) {
           setError(data.error[1].msg);
         } else {
           setMessage(
             `You have successfully registered ${data.userFullName}. please, continue and add another employee to the system.`
           );
+          reset();
         }
       })
       .catch((err) => {
@@ -107,10 +105,18 @@ export const UserRegistration = () => {
             maxLength: 30,
           })}
         />
-        <select {...register("adminRole")}>
+        {/* <select {...register("adminRole")}>
           <option value="No">Not an Admin</option>
           <option value="Yes">Admin</option>
-        </select>
+        </select> */}
+        {/* <label>Is this user an admin?</label>
+        <input {...register("adminRole")} type="radio" value="Yes" />
+        <input
+          {...register("adminRole")}
+          type="radio"
+          value=" No"
+          defaultChecked
+        /> */}
         <input type="submit" />
         {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
       </form>
