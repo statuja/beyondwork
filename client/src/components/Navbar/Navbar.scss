@@ -6,30 +6,32 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 10px 0px;
+  padding: 10px 10px;
   position: fixed;
-  width: 100%;
-  height: max-content;
+    height: 100px;
+width: 100%;
   top: 0;
-  z-index: 100;
 
   .left,
   .right {
     a {
       margin: 0 15px;
-      font-size: 18px;
+      font-size: 16px;
       color: #3D3A3A;
       text-decoration: none;
     }
   }
 
   .center {
-    height: 200px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
       max-width: 120px;
       max-height: 400px;
-      
+
     }
 
     a {
@@ -45,5 +47,13 @@
     .center {
       display: none;
     }
+
+    .left,
+    .right {
+      a {
+        font-size: 18px;
+      }
+    }
+
   }
 }

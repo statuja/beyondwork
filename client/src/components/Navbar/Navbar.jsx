@@ -10,7 +10,7 @@ function Navbar() {
         <Link to="/about">About us</Link>
       </div>
       <div className="center">
-        <Link to="/">
+        <Link to="/about">
           <img src={logo} alt="BeyondWork Logo" />
         </Link>
       </div>

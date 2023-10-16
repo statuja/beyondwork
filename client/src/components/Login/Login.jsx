@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { UserRegistration } from "../CreateUser/CreateUser";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { userCompany, setUserCompany } = useContext(MyContext);
+  const { setUserCompany } = useContext(MyContext);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -34,38 +32,28 @@ const Login = () => {
         credentials: "include",
       });
 
-      const data = await response.json();
-      console.log("Login data:)", data);
+      const responseData = await response.json();
       setMessage(`You successfully logged in.`);
-      setUserCompany(data.user.userCompany);
+      setUserCompany(responseData.user.userCompany);
       navigate("/user/create");
-
-      // const profileResponse = await fetch(
-      //   "http://localhost:5000/user/myProfile",
-      //   {
-      //     method: "GET", // or 'GET', 'PUT', etc.
-      //     credentials: "include", // include credentials (cookies)
-      //   }
-      // );
-
-      // const profileData = await profileResponse.json();
-      // console.log("profileData", profileData);
     } catch (error) {
-      console.log("Fetch error:", error.message);
-      setError(error.msg);
+      console.log("Fetch error:", error);
+      setError(error);
     }
   };
-  // console.log(errors);
+  console.log(errors);
 
   return (
     <div>
       <h1>Login here </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
           placeholder="Your email"
           {...register("email", { required: true })}
         />
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           placeholder="Your password"
@@ -76,7 +64,6 @@ const Login = () => {
         {message && (
           <div>
             {message}
-            {/* <UserRegistration /> */}
           </div>
         )}
       </form>
