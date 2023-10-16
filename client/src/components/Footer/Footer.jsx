@@ -1,22 +1,37 @@
 import React from "react";
 import "./Footer.scss";
-import fbicon from "../../images/icons/fb-icon.svg";
-import inicon from "../../images/icons/in-icon.svg";
-import igicon from "../../images/icons/ig-icon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faLinkedinIn,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 function Footer() {
   return (
     <div className="footer">
       <div className="left">All rights reserved</div>
       <div className="right">
-        <a href="#">
-          <img src={fbicon} alt="Facebook" />
+        <a
+          href="https://www.facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faFacebookF} />
         </a>
-        <a href="#">
-          <img src={inicon} alt="LinkedIn" />
+        <a
+          href="https://www.linkedin.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faLinkedinIn} />
         </a>
-        <a href="#">
-          <img src={igicon} alt="Instagram" />
+        <a
+          href="https://www.instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faInstagram} />
         </a>
       </div>
     </div>

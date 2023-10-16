@@ -3,12 +3,12 @@
 .footer {
     background-color: #004225;
     color: #F5F5DC;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 15px 20px;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
@@ -20,26 +20,24 @@
 
     .right {
         display: flex;
-        gap: 5px;
+        gap: 10px;
 
         a {
-            text-decoration: none;
-
-            img {
-                max-width: 20px;
-                fill: #F5F5DC;
-            }
+            color: #F5F5DC;
         }
     }
 
     @media (min-width: 768px) {
-        width: 100%;
-        padding: 10px 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+
+        .left {
+            text-align: left;
+        }
 
         .right {
-            gap: 10px;
-            min-width: 50px;
-
+            gap: 20px;
+            min-width: 120px;
         }
     }
 }

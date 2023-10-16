@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./CompanyRegistration.scss";
 import logo from "../../images/Logo_green.png";
-import Login from "../Login/Login";
 
 export const CompanyRegistration = () => {
   const {
@@ -15,59 +14,53 @@ export const CompanyRegistration = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const onSubmit = (data) => {
-    const newData = {
-      companyName: data.companyName,
-      companyType: data.companyType,
-      numberOfEmployees: data.numberOfEmployees,
-      companyAddress: {
-        address: data.address,
-        city: data.city,
-        zipCode: data.zipCode,
-        country: data.country,
-      },
-      companyContact: {
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-      },
-      defaultAdminEmail: data.defaultAdminEmail,
-    };
-    //console.log(newData);
-    fetch(
-      "http://localhost:5000/company/create",
-      {
+  const onSubmit = async (data) => {
+    try {
+      const newData = {
+        companyName: data.companyName,
+        companyType: data.companyType,
+        numberOfEmployees: data.numberOfEmployees,
+        companyAddress: {
+          address: data.address,
+          city: data.city,
+          zipCode: data.zipCode,
+          country: data.country,
+        },
+        companyContact: {
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+        },
+        defaultAdminEmail: data.defaultAdminEmail,
+      };
+
+      const response = await fetch("http://localhost:5000/company/create", {
         method: "POST",
-        body: JSON.stringify(newData),
         headers: {
           "Content-Type": "application/json",
         },
-      }
-      // reset()
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        if (data.error) {
-          setError(data.error[0].msg);
-        } else {
-          setMessage(`You successfully register your company. here is your Admin email ${data.defaultAdminEmail} and your temporary password: admin1234
-        please change your logging password and update your details.`);
-          reset();
-        }
-      })
-      .catch((err) => {
-        setError(err.msg);
+        body: JSON.stringify(newData),
       });
-  };
-  // console.log(errors);
 
+      const responseData = await response.json();
+      if (response.ok) {
+        setMessage(
+          `You have successfully registered your company. Here is your Admin email ${responseData.defaultAdminEmail} and your temporary password: admin1234. Please change your login password and update your details.`
+        );
+        reset();
+      } else {
+        setError(responseData.error[0].msg);
+      }
+    } catch (error) {
+      setError(
+        "An error occurred while processing your request. Please try again later."
+      );
+    }
+  };
   return (
     <div className="register">
       <div className="left">
         <div className="logo">
-          <img src={logo} alt="Logo in Green" />
+          <img src={logo} alt="BeyondWork Logo" />{" "}
         </div>
         <h1>Company registration</h1>
         <p>
@@ -75,46 +68,59 @@ export const CompanyRegistration = () => {
         </p>
       </div>
       <div className="right">
-        <h1>Register your company </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="companyName">Company Name:</label>
           <input
             type="text"
             placeholder="Company Name"
             {...register("companyName", { required: true })}
           />
+          <label htmlFor="companyType">Company Type:</label>
           <input
             type="text"
             placeholder="Company Type "
             {...register("companyType", { required: true })}
           />
+          <label htmlFor="numberOfEmployees">Number of Employees:</label>
           <select {...register("numberOfEmployees")}>
             <option value="<50">0-50</option>
             <option value="51-100">51-100</option>
             <option value="101-500">101-500</option>
             <option value=">500">more than 500</option>
           </select>
+          <p>Company Address</p>
+          <label htmlFor="address">
+            Street, Building, Office (if applicable) Number
+          </label>
           <input
             type="text"
             placeholder="Street, Building, Office(if applicable) No"
             {...register("address", { required: true })}
           />
+          <label htmlFor="zipCode">Zip Code:</label>
           <input
             type="text"
             placeholder="ZipCode"
             {...register("zipCode", { required: true })}
           />
+          <label htmlFor="city">City:</label>
           <input type="text" placeholder="City" {...register("city")} />
+          <label htmlFor="country">Country:</label>{" "}
           <input type="text" placeholder="Country" {...register("country")} />
+          <p>Company Contact Details</p>
+          <label htmlFor="phoneNumber">Phone Number:</label>
           <input
             type="text"
             placeholder="Phone Number"
             {...register("phoneNumber")}
           />
+          <label htmlFor="email">Company E-mail:</label>
           <input
             type="email"
             placeholder="Company E-mail Address"
             {...register("email")}
           />
+          <label htmlFor="defaultAdminEmail">Admin E-mail Address:</label>
           <input
             type="email"
             placeholder="Admin E-mail Address"
@@ -123,7 +129,6 @@ export const CompanyRegistration = () => {
           <input type="submit" className="button" />
           {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
         </form>
-        <Login />
       </div>
     </div>
   );

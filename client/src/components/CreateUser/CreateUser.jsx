@@ -14,7 +14,7 @@ export const UserRegistration = () => {
   const [error, setError] = useState("");
   const { userCompany } = useContext(MyContext);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const newData = {
       userCompany: userCompany,
       userFullName: data.userFullName,
@@ -32,32 +32,30 @@ export const UserRegistration = () => {
       userPassword: data.userPassword,
       adminRole: data.adminRole,
     };
-    console.log("test", newData);
-
-    fetch("http://localhost:5000/user/create", {
-      method: "POST",
-      body: JSON.stringify(newData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.error) {
-          setError(data.error[1].msg);
-        } else {
-          setMessage(
-            `You have successfully registered ${newData.userFullName}. please, continue and add another employee to the system.`
-          );
-          reset();
-        }
-      })
-      .catch((err) => {
-        setError(err.msg);
+    try {
+      const response = await fetch("http://localhost:5000/user/create", {
+        method: "POST",
+        body: JSON.stringify(newData),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+      const responseData = await response.json();
+      if (response.ok) {
+        setMessage(
+          `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
+        );
+        reset();
+      } else {
+        setError(responseData.error[0].msg);
+      }
+    } catch (error) {
+      setError(
+        "An error occurred while processing your request. Please try again later."
+      );
+    }
   };
+
   console.log(errors);
 
   return (
@@ -66,38 +64,49 @@ export const UserRegistration = () => {
       <p>Here, you can register all the employees in your team:</p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="userFullName">Employee Full Name:</label>
         <input
           type="text"
           placeholder="Employee full Name"
           {...register("userFullName", { required: true })}
         />
+        <label htmlFor="userJobTitle">Job Title:</label>
         <input
           type="text"
           placeholder="Role in the company"
           {...register("userJobTitle", { required: true })}
         />
+        <label htmlFor="userDepartment">Department:</label>
         <input
           type="text"
           placeholder="Department"
           {...register("userDepartment", { required: true })}
         />
+        <label htmlFor="address">
+          Street, Building, Office (if applicable) Number
+        </label>
         <input
           type="text"
           placeholder="Street"
           {...register("address", { required: true })}
         />
+        <label htmlFor="zipCode">Zip Code:</label>
         <input
           type="text"
           placeholder="ZipCode"
           {...register("zipCode", { required: true })}
         />
+        <label htmlFor="city">City:</label>
         <input type="text" placeholder="City" {...register("city")} />
+        <label htmlFor="country">Country:</label>
         <input type="text" placeholder="Country" {...register("country")} />
+        <label htmlFor="email">E-mail:</label>
         <input
           type="email"
           placeholder="Employee E-mail Address"
           {...register("email")}
         />
+        <label htmlFor="password">Temporary Password:</label>
         <input
           type="password"
           placeholder="Employee temporary Password"
@@ -120,7 +129,8 @@ export const UserRegistration = () => {
           defaultChecked
         /> */}
         <input type="submit" />
-        {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
+        {error && <div>Error: {error}</div>}
+        {message && <div>{message}</div>}{" "}
       </form>
     </div>
   );
