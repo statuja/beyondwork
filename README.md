@@ -59,7 +59,9 @@ Hello from Berlin!
 .env file:
 PORT = 5000
 MONGO_DB_LINK = mongodb+srv://admin:girlspower2023@beyondwork.996i5lj.mongodb.net/beyondwork
-SECRET_KEY = who can guess the secret code?
+SECRET_KEY = whocanguessthesecretcode
+DEFAULT_ADMIN_PASSWORD = admin1234
+
 
 to look at:
 try {

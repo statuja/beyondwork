@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import MyContext from "../../context/MyContext";
 
-export const UserRegistration = (props) => {
+export const UserRegistration = () => {
   const {
     register,
     handleSubmit,
@@ -11,10 +12,11 @@ export const UserRegistration = (props) => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const { userCompany } = useContext(MyContext);
 
   const onSubmit = (data) => {
     const newData = {
-      userCompany: props.newData.userCompany, //need to link this to the logged in user's company ID
+      userCompany: userCompany,
       userFullName: data.userFullName,
       userJobTitle: data.userJobTitle,
       userDepartment: data.userDepartment,
@@ -31,6 +33,7 @@ export const UserRegistration = (props) => {
       adminRole: data.adminRole,
     };
     console.log("test", newData);
+
     fetch("http://localhost:5000/user/create", {
       method: "POST",
       body: JSON.stringify(newData),
@@ -42,12 +45,11 @@ export const UserRegistration = (props) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.error) {
           setError(data.error[1].msg);
         } else {
           setMessage(
-            `You have successfully registered ${data.userFullName}. please, continue and add another employee to the system.`
+            `You have successfully registered ${newData.userFullName}. please, continue and add another employee to the system.`
           );
           reset();
         }
