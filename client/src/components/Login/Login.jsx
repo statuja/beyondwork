@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UserRegistration } from "../CreateUser/CreateUser";
+import MyContext from "../../context/MyContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [newData, setNewData] = useState({});
+  const navigate = useNavigate();
+  const { userCompany, setUserCompany } = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -15,53 +18,11 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  // const onSubmit = (data) => {
-  //   const newData = {
-  //     email: data.email,
-  //     password: data.password,
-  //   };
-  //   console.log(newData);
-  //   fetch(
-  //     "http://localhost:5000/user/login",
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(newData),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //     // reset()
-  //   )
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (data.error) {
-  //         setError(data.error);
-  //       } else {
-  //         setMessage(`You successfully logged in.`);
-  //       }
-  //     })
-  //     .then(() =>
-  //       fetch("http://localhost:5000/user/myProfile", {
-  //         method: "GET", // or 'GET', 'PUT', etc.
-  //         credentials: "include", // include credentials (cookies)
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => console.log(`responses, ${data}`))
-  //     )
-  //     .catch((err) => {
-  //       setError(err.msg);
-  //     });
-  // };
   const onSubmit = async (data) => {
     const newDataObject = {
       email: data.email,
       password: data.password,
     };
-    setNewData(newDataObject)
-    console.log(newDataObject);
 
     try {
       const response = await fetch("http://localhost:5000/user/login", {
@@ -70,22 +31,25 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
 
       const data = await response.json();
       console.log("Login data:)", data);
       setMessage(`You successfully logged in.`);
+      setUserCompany(data.user.userCompany);
+      navigate("/user/create");
 
-      const profileResponse = await fetch(
-        "http://localhost:5000/user/myProfile",
-        {
-          method: "GET", // or 'GET', 'PUT', etc.
-          credentials: "include", // include credentials (cookies)
-        }
-      );
+      // const profileResponse = await fetch(
+      //   "http://localhost:5000/user/myProfile",
+      //   {
+      //     method: "GET", // or 'GET', 'PUT', etc.
+      //     credentials: "include", // include credentials (cookies)
+      //   }
+      // );
 
-      const profileData = await profileResponse.json();
-      console.log("profileData", profileData);
+      // const profileData = await profileResponse.json();
+      // console.log("profileData", profileData);
     } catch (error) {
       console.log("Fetch error:", error.message);
       setError(error.msg);
@@ -112,7 +76,7 @@ const Login = () => {
         {message && (
           <div>
             {message}
-            <UserRegistration userData={newData}/>
+            {/* <UserRegistration /> */}
           </div>
         )}
       </form>
