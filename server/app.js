@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import companyRoute from "./routes/companyRoute.js";
 import userRoute from "./routes/userRoute.js";
+import postRoute from "./routes/postRoute.js"
 dotenv.config();
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(express.json());
 
 app.use("/company", companyRoute);
 app.use("/user", userRoute);
+app.use("/post", postRoute)
 
 app.post("/server/test", (req, res) => {
   console.log(req.body);
