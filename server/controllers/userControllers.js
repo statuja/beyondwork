@@ -23,7 +23,7 @@ export const createUser = async (req, res) => {
 
     res.json(newUser);
   } catch (error) {
-    res.json(error);
+    res.json(error.message);
   }
 
   console.log("end");
