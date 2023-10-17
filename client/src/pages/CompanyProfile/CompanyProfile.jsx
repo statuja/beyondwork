@@ -1,5 +1,5 @@
 import React from 'react'
-import "./CompanyProfile.sass"
+import "./CompanyProfile.scss"
 
 const CompanyProfile = () => {
   return (

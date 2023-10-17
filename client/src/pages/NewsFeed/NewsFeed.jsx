@@ -1,4 +1,4 @@
-import "./NewsFeed.sass"
+import "./NewsFeed.scss"
 const Home = () => {
   return (
     <div className="home">

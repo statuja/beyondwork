@@ -9,6 +9,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./App.scss";
 
 function App() {
   const Layout = () => {
