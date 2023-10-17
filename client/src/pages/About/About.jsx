@@ -1,4 +1,4 @@
-import "./About.sass"
+import "./About.scss"
 import logo1 from "../../images/avatar1.png";
 import logo2 from "../../images/avatar2.png";
 import logo3 from "../../images/avatar3.png";

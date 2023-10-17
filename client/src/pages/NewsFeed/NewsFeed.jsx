@@ -1,5 +1,7 @@
-import "./NewsFeed.sass";
+
+import "./NewsFeed.scss"
 import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <div className="home">

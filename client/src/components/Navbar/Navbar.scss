@@ -1,40 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Belanosima&display=swap");
 
 .navbar {
-  font-family: 'Belanosima', sans-serif;
-  background-color: #F5F5DC;
+  font-family: "Belanosima", sans-serif;
+  font-size: 12px;
+  background-color: #f5f5dc;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding: 10px 10px;
-  position: fixed;
-    height: 100px;
-width: 100%;
+  position: sticky;
+  height: 50px;
+  width: 100%;
   top: 0;
+  z-index: 999;
 
   .left,
   .right {
     a {
       margin: 0 15px;
-      font-size: 16px;
-      color: #3D3A3A;
-      text-decoration: none;
-    }
-  }
-
-  .center {
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      max-width: 120px;
-      max-height: 400px;
-
-    }
-
-    a {
+      
+      color: #3d3a3a;
       text-decoration: none;
     }
   }
@@ -44,16 +29,11 @@ width: 100%;
     padding: 10px 10px;
     justify-content: right;
 
-    .center {
-      display: none;
-    }
-
     .left,
     .right {
       a {
-        font-size: 18px;
+        font-size: 14px;
       }
     }
-
   }
 }

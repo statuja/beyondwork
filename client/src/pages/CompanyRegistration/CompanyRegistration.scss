@@ -1,12 +1,12 @@
 .register {
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f5f5dc;
   
   .left {
-    height: 80vh;
+    height: 100%;
     flex: 1;
     gap: 40px;
     padding: 50px;
@@ -30,14 +30,12 @@
       width: 80%;
       font-size: 35px;
       line-height: 40px;
-      /* font-family: Belanosima, sans-serif; */
     }
-    
   }
   .right {
-    height: 80vh;
+    height: 100%;
     flex: 1;
-    gap: 30px;
+    gap: 15px;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -47,37 +45,57 @@
       font-size: 20px;
     }
     form {
-      width: 70%;
+      width: 80%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 25px;
+      gap: 15px;
       padding: 30px;
       background-color: #ffb000;
       border-radius: 10px;
-     
+
       input {
-        width: 65%;
-        padding: 10px 10px;
+        width: 90%;
+        padding: 8px 8px;
         border: none;
         outline: none;
         border-radius: 6px;
         background-color: #f5f5dc;
-        transition: transform 0.2s;
+        //transition: transform 0.3s ease-in;
         &:hover{
           transform: scale(1.03); 
           /* width: 68%;  */
         }
       }
-      select {
-        border: none;
-        outline: none;
-        border-radius: 6px;
-        background-color: #f5f5dc;
-        width: 30%;
-        padding: 10px 10px;
+      label{
+        width: 90%;
+        font-size: 14px;
       }
+      .wrapper{
+        width: 90%;
+        display: flex;
+        justify-content:space-around;
+        align-items: center;
+        gap:15px;
+
+        .selection{
+          width: 90%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          select {
+            border: none;
+            outline: none;
+            border-radius: 6px;
+            background-color: #f5f5dc;
+            width: 100%;
+            padding: 10px 10px;
+          }
+        }
+
+      }
+
       .button {
         width: 30%;
         padding: 10px;
@@ -86,6 +104,7 @@
         background-color: #f5f5dc;
         font-weight: bold;
         cursor: pointer;
+        //transition: transform 0.3s;
         &:hover{
           transform: scale(1.03); 
           width: 32%;
@@ -121,10 +140,14 @@
         input{
           width: 90%;
         }
-        select{
-          width: 50%
-
+        label{
+          display: none;
         }
+        .wrapper{
+          flex-direction: column;
+          width: 100%;
+        }
+       
       }
     }
   }

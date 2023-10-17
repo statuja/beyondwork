@@ -9,11 +9,8 @@ function Navbar() {
       <div className="left">
         <Link to="/about">About us</Link>
       </div>
-      <div className="center">
-        <Link to="/about">
-          <img src={logo} alt="BeyondWork Logo" />
-        </Link>
-      </div>
+      
+     
       <div className="right">
         <Link to="/contact">Contact</Link>
       </div>

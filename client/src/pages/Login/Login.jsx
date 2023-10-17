@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
 import "./Login.scss";
 
+
 const Login = () => {
   const navigate = useNavigate();
   const { setUserCompany } = useContext(MyContext);
