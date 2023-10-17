@@ -37,7 +37,7 @@ const Login = () => {
       const responseData = await response.json();
       setMessage(`You successfully logged in.`);
       setUserCompany(responseData.user.userCompany);
-      navigate("/user/create");
+      navigate("/newsfeed");
     } catch (error) {
       console.log("Fetch error:", error);
       setError(error);
