@@ -3,6 +3,7 @@ import Contact from "./pages/Contact/Contact";
 import { CompanyRegistration } from "./pages/CompanyRegistration/CompanyRegistration";
 import Login from "./pages/Login/Login";
 import { UserRegistration } from "./pages/CreateUser/CreateUser";
+import { ThankYou } from "./pages/ThankYou/ThankYou";
 import NewsFeed from "./pages/NewsFeed/NewsFeed";
 import CompanyProfile from "./pages/CompanyProfile/CompanyProfile";
 import UserProfile from "./pages/UserProfile/UserProfile";
@@ -40,6 +41,10 @@ function App() {
           element: <CompanyRegistration />,
         },
         {
+          path: "/company/thankyou",
+          element: <ThankYou />,
+        },
+        {
           path: "/user/login",
           element: <Login />,
         },
@@ -55,7 +60,7 @@ function App() {
       element: <NewsFeed />,
     },
     {
-      path: "/company/profile/:id",
+      path: "/company/profile",
       element: <CompanyProfile />,
     },
     {

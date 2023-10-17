@@ -138,3 +138,35 @@ export const deleteUser = async (req, res) => {
     res.json(error);
   }
 };
+
+export const savePost = async (req, res) => {
+  try {
+    const usersId = req.user._id;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      usersId,
+      {
+        $push: { savedPosts: req.body.postId },
+      },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
+export const getSavedPosts = async (req, res) => {
+  try {
+    const usersId = req.user._id;
+
+    const savedPosts = await User.findById(usersId)
+      .select("savedPosts")
+      .populate("savedPosts");
+
+    res.json(savedPosts);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
