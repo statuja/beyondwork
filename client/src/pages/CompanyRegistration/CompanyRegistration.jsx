@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./CompanyRegistration.scss";
 import logo from "../../images/Logo_green.png";
-
+import { useNavigate } from "react-router-dom";
+import MyContext from "../../context/MyContext";
 
 export const CompanyRegistration = () => {
+  const navigate = useNavigate();
+  const { setAdminEmail, setCompanyName } = useContext(MyContext);
+
   const {
     register,
     handleSubmit,
@@ -44,6 +48,9 @@ export const CompanyRegistration = () => {
 
       const responseData = await response.json();
       if (response.ok) {
+        setAdminEmail(responseData.defaultAdminEmail);
+        setCompanyName(responseData.companyName);
+        navigate("/company/thankyou");
         setMessage(
           `You have successfully registered your company. Here is your Admin email ${responseData.defaultAdminEmail} and your temporary password: admin1234. Please change your login password and update your details.`
         );
@@ -57,6 +64,7 @@ export const CompanyRegistration = () => {
       );
     }
   };
+  console.log(errors);
   return (
     <div className="register">
       <div className="left">
@@ -64,7 +72,6 @@ export const CompanyRegistration = () => {
           <img src={logo} alt="BeyondWork Logo" />{" "}
         </div>
         <h1>Register your company and start your journey with us!</h1>
-       
       </div>
       <div className="right">
         <h2>Please fill in the fields below</h2>
@@ -83,7 +90,6 @@ export const CompanyRegistration = () => {
           />
           <label htmlFor="numberOfEmployees">Number of Employees:</label>
           <select {...register("numberOfEmployees")}>
-
             <option value="<50">0-50</option>
             <option value="51-100">51-100</option>
             <option value="101-500">101-500</option>
