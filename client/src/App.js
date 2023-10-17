@@ -3,6 +3,7 @@ import Contact from "./pages/Contact/Contact";
 import { CompanyRegistration } from "./pages/CompanyRegistration/CompanyRegistration";
 import Login from "./pages/Login/Login";
 import { UserRegistration } from "./pages/CreateUser/CreateUser";
+import { ThankYou } from "./pages/ThankYou/ThankYou";
 import NewsFeed from "./pages/NewsFeed/NewsFeed";
 import CompanyProfile from "./pages/CompanyProfile/CompanyProfile";
 import UserProfile from "./pages/UserProfile/UserProfile";
@@ -37,6 +38,10 @@ function App() {
         {
           path: "/company/create",
           element: <CompanyRegistration />,
+        },
+        {
+          path: "/company/thankyou",
+          element: <ThankYou />,
         },
         {
           path: "/user/login",
