@@ -6,7 +6,10 @@ const MyProvider = ({ children }) => {
   const [userCompany, setUserCompany] = useState("");
   const [adminEmail, setAdminEmail] = useState("your admin email");
   const [companyName, setCompanyName] = useState("your company");
-
+  const [companyData, setCompanyData] = useState(null);
+  const updateCompanyData = (newData) => {
+    setCompanyData(newData);
+  };
   return (
     <MyContext.Provider
       value={{
@@ -16,6 +19,8 @@ const MyProvider = ({ children }) => {
         setAdminEmail,
         companyName,
         setCompanyName,
+        companyData,
+        updateCompanyData,
       }}
     >
       {children}

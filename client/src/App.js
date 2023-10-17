@@ -59,7 +59,7 @@ function App() {
       element: <NewsFeed />,
     },
     {
-      path: "/company/profile/:id",
+      path: "/company/profile",
       element: <CompanyProfile />,
     },
     {
