@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./CompanyRegistration.scss";
 import logo from "../../images/Logo_green.png";
@@ -19,6 +19,7 @@ export const CompanyRegistration = () => {
 
   // const [message, setMessage] = useState("");
   // const [error, setError] = useState("");
+  const [er, setEr] = useState("");
 
   const onSubmit = async (data) => {
     try {
@@ -66,6 +67,12 @@ export const CompanyRegistration = () => {
     }
   };
   console.log(errors);
+  useEffect(() => {
+    if (Object.keys(errors).length !== 0) {
+      console.log("Errors:", errors);
+      setEr("All fields are required");
+    }
+  }, [errors]);
   return (
     <div className="register">
       <div className="left">
@@ -83,12 +90,12 @@ export const CompanyRegistration = () => {
             placeholder="Company Name"
             {...register("companyName", { required: "This is required." })}
           />
-          <ErrorMessage errors={errors} name="singleErrorInput" />
+          {/* <ErrorMessage errors={errors} name="singleErrorInput" />
           <ErrorMessage
             errors={errors}
             name="singleErrorInput"
             render={({ message }) => <p>{message}</p>}
-          />
+          /> */}
           <div className="wrapper">
             <div className="selection">
               <label htmlFor="companyType">Industry:</label>
