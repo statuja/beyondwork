@@ -1,19 +1,19 @@
 import React from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
-import icon from "../../images/small_icon_green.png"
-
+import icon from "../../images/small_icon_green.png";
 
 function Navbar() {
   return (
     <div className="navbar">
       <div className="left">
-      <Link to="/user/login">
-        <img src={icon} alt="small-icon"/>
-      </Link>
+        <Link to="/user/login">
+          <img src={icon} alt="small-icon" />
+        </Link>
+     
       </div>
       <div className="right">
-      <Link to="/about">About us</Link>
+        <Link to="/about">About us</Link>
         <Link to="/contact">Contact</Link>
       </div>
     </div>

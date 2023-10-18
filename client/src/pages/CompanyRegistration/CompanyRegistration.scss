@@ -5,6 +5,7 @@
   align-items: center;
   background-color: #f5f5dc;
   color: rgb(55, 55, 55);
+
   .left {
     height: 100%;
     flex: 1;
@@ -77,12 +78,8 @@
         //transition: transform 0.3s ease-in;
         &:hover {
           transform: scale(1.03);
-          /* width: 68%;  */
 
-          //width: 92%; 
         }
-
-
       }
 
       label {
@@ -126,6 +123,10 @@
           //width: 32%;
           background-color: #ffcf9d;
         }
+      }
+
+      .error {
+        color: red;
       }
     }
   }
@@ -238,29 +239,7 @@
             width: 27%;
           }
         }
-
       }
-
-      /* form {
-        width: 80%;
-        padding: 30px;
-        
-        label {
-          display: none;
-        }
-        
-          flex-direction: column;
-          .selection{
-            width: 80%;
-          }
-        }
-        .button {
-          width: 40%;
-          &:hover {
-            width: 42%;
-          }
-        }
-      }  */
     }
   }
 }

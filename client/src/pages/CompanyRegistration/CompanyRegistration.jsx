@@ -4,7 +4,6 @@ import "./CompanyRegistration.scss";
 import logo from "../../images/Logo_green.png";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
-import { ErrorMessage } from "@hookform/error-message";
 
 export const CompanyRegistration = () => {
   const navigate = useNavigate();
@@ -17,8 +16,6 @@ export const CompanyRegistration = () => {
     formState: { errors },
   } = useForm();
 
-  // const [message, setMessage] = useState("");
-  // const [error, setError] = useState("");
   const [er, setEr] = useState("");
 
   const onSubmit = async (data) => {
@@ -53,26 +50,21 @@ export const CompanyRegistration = () => {
         setAdminEmail(responseData.defaultAdminEmail);
         setCompanyName(responseData.companyName);
         navigate("/company/thankyou");
-        // setMessage(
-        //   `You have successfully registered your company. Here is your Admin email ${responseData.defaultAdminEmail} and your temporary password: admin1234. Please change your login password and update your details.`
-        // );
         reset();
       } else {
-        // setError(responseData.error[0].msg);
       }
     } catch (error) {
-      // setError(
-      //   // "An error occurred while processing your request. Please try again later."
-      // );
+      console.log(error);
     }
   };
   console.log(errors);
   useEffect(() => {
     if (Object.keys(errors).length !== 0) {
       console.log("Errors:", errors);
-      setEr("All fields are required");
+      setEr("All fields with * are required");
     }
   }, [errors]);
+
   return (
     <div className="register">
       <div className="left">
@@ -82,23 +74,18 @@ export const CompanyRegistration = () => {
         <h1>Register your company and start your journey with us!</h1>
       </div>
       <div className="right">
-        <h2>Please fill in the fields below</h2>
+        <h2>Please fill in all the fields below</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="companyName">Company Name:</label>
+          <label htmlFor="companyName">* Company Name:</label>
           <input
             type="text"
             placeholder="Company Name"
             {...register("companyName", { required: "This is required." })}
           />
-          {/* <ErrorMessage errors={errors} name="singleErrorInput" />
-          <ErrorMessage
-            errors={errors}
-            name="singleErrorInput"
-            render={({ message }) => <p>{message}</p>}
-          /> */}
+
           <div className="wrapper">
             <div className="selection">
-              <label htmlFor="companyType">Industry:</label>
+              <label htmlFor="companyType">* Industry:</label>
               <select
                 {...register("companyType", { required: "This is required." })}
               >
@@ -133,7 +120,7 @@ export const CompanyRegistration = () => {
               </select>
             </div>
             <div className="selection">
-              <label htmlFor="numberOfEmployees">Number of Employees:</label>
+              <label htmlFor="numberOfEmployees">* Number of Employees:</label>
               <select {...register("numberOfEmployees", { required: true })}>
                 <option value="<50">0-50</option>
                 <option value="51-100">51-100</option>
@@ -142,15 +129,8 @@ export const CompanyRegistration = () => {
               </select>
             </div>
           </div>
-          <label htmlFor="address">Company Address:</label>
-          <div className="wrapper"> 
-          <input
-            type="text"
-            placeholder="Street, Building, Office No."
-            {...register("address")}
-          />
-          <input type="text" placeholder="ZipCode" {...register("zipCode")} />
-          </div>
+          <label htmlFor="address">* Company Address:</label>
+
           <div className="wrapper">
             <input
               type="text"
@@ -176,30 +156,28 @@ export const CompanyRegistration = () => {
               {...register("country", { required: true })}
             />
           </div>
-          <div className="wrapper"> 
-          <input type="text" placeholder="City" {...register("city")} />
-          <input type="text" placeholder="Country" {...register("country")} />
-          </div>
-          <label htmlFor="phoneNumber">Contact Number:</label>
+
+          <label htmlFor="phoneNumber">* Contact Number:</label>
           <input
             type="text"
             placeholder="Phone Number"
             {...register("phoneNumber", { required: true })}
           />
-          <label htmlFor="email">Company E-mail Address:</label>
+          <label htmlFor="email">* Company E-mail Address:</label>
           <input
             type="email"
             placeholder="Company E-mail Address"
             {...register("email", { required: true })}
           />
-          <label htmlFor="defaultAdminEmail">Admin E-mail Address:</label>
+          <label htmlFor="defaultAdminEmail">* Admin E-mail Address:</label>
           <input
             type="email"
             placeholder="Admin E-mail Address"
             {...register("defaultAdminEmail", { required: true })}
           />
           <input type="submit" className="button" />
-          {/* {error && <div>Error: {error}</div>} {message && <div>{message}</div>} */}
+
+          {er && <div className="error"> {er}</div>}
         </form>
       </div>
     </div>
