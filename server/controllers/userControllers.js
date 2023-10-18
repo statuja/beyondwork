@@ -34,7 +34,6 @@ export const createDefaultAdmin = async (companyId, adminEmail) => {
     const userPassword = defaultPass;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(userPassword, salt);
-    // userPassword = hashedPassword;
     console.log(hashedPassword);
     const newUser = await User.create({
       userContact: {
@@ -58,14 +57,15 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ "userContact.email": email });
     if (!user) {
-      return res.json({
-        error: "This E-mail is not valid. Please, try again.",
+      return res.status(400).json({
+        error:
+          "The email is not associated with any account. Please check the email and try again.",
       });
     }
     const passwordCheck = bcrypt.compareSync(password, user.userPassword);
     if (!passwordCheck) {
-      return res.json({
-        error: "This Password is not valid. Please, try again.",
+      return res.status(400).json({
+        error: "The password you entered is incorrect. Please try again.",
       });
     }
 
@@ -79,10 +79,10 @@ export const loginUser = async (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
 
-    res.json({ user: user, token: token });
+    res.status(200).json({ user: user, token: token });
     console.log(user.userCompany);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ error: error.message });
   }
 };
 

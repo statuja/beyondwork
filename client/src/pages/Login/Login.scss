@@ -44,13 +44,21 @@
         padding: 50px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        background-image: url(../../images/Young_people.png) ;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: contain;
+
+        p {
+            width: 70%;
+        }
 
         .signUp {
             display: flex;
-            justify-content: space-between;
-            gap: 30px;
+            justify-content: flex-end;
+            align-items: baseline;
 
             .button {
                 padding: 10px;
@@ -59,14 +67,8 @@
                 background-color: #ffb000;
                 font-weight: bold;
                 cursor: pointer;
-
-
             }
 
-        }
-
-        h2 {
-            font-size: 20px;
         }
 
         form {
@@ -95,17 +97,9 @@
                 }
             }
 
-            select {
-                border: none;
-                outline: none;
-                border-radius: 6px;
-                background-color: #f5f5dc;
-                width: 30%;
-                padding: 10px 10px;
-            }
-
-
         }
+
+
     }
 }
 
