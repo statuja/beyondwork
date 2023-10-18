@@ -128,8 +128,7 @@ export const CompanyRegistration = () => {
             </div>
           </div>
           <label htmlFor="address">Company Address:</label>
-          <div className="wrapper">
-            
+          <div className="wrapper"> 
           <input
             type="text"
             placeholder="Street, Building, Office No."
@@ -137,11 +136,10 @@ export const CompanyRegistration = () => {
           />
           <input type="text" placeholder="ZipCode" {...register("zipCode")} />
           </div>
-          <div className="wrapper"> <input type="text" placeholder="City" {...register("city")} />
-          <input type="text" placeholder="Country" {...register("country")} /></div>
-         
-         
-          
+          <div className="wrapper"> 
+          <input type="text" placeholder="City" {...register("city")} />
+          <input type="text" placeholder="Country" {...register("country")} />
+          </div>
           <label htmlFor="phoneNumber">Contact Number:</label>
           <input
             type="text"
