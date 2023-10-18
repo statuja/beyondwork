@@ -6,11 +6,12 @@ export const createCompany = async (req, res) => {
     const newCompany = await Company.create(req.body);
     const defaultAdminUser = createDefaultAdmin(
       newCompany._id,
-      newCompany.defaultAdminEmail,
+      newCompany.defaultAdminEmail
     );
-    res.json(newCompany);
+    res.status(201).json(newCompany); // Use 201 for successful creation
   } catch (error) {
-    res.json(error);
+    console.error("Error creating company:", error); // Log the error for debugging
+    res.status(500).json({ error: "Internal Server Error" }); // Send a structured error response
   }
 };
 

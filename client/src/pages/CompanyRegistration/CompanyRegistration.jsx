@@ -4,6 +4,7 @@ import "./CompanyRegistration.scss";
 import logo from "../../images/Logo_green.png";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
+import { ErrorMessage } from "@hookform/error-message";
 
 export const CompanyRegistration = () => {
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ export const CompanyRegistration = () => {
     formState: { errors },
   } = useForm();
 
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
     try {
@@ -51,17 +52,17 @@ export const CompanyRegistration = () => {
         setAdminEmail(responseData.defaultAdminEmail);
         setCompanyName(responseData.companyName);
         navigate("/company/thankyou");
-        setMessage(
-          `You have successfully registered your company. Here is your Admin email ${responseData.defaultAdminEmail} and your temporary password: admin1234. Please change your login password and update your details.`
-        );
+        // setMessage(
+        //   `You have successfully registered your company. Here is your Admin email ${responseData.defaultAdminEmail} and your temporary password: admin1234. Please change your login password and update your details.`
+        // );
         reset();
       } else {
-        setError(responseData.error[0].msg);
+        // setError(responseData.error[0].msg);
       }
     } catch (error) {
-      setError(
-        "An error occurred while processing your request. Please try again later."
-      );
+      // setError(
+      //   // "An error occurred while processing your request. Please try again later."
+      // );
     }
   };
   console.log(errors);
@@ -72,7 +73,6 @@ export const CompanyRegistration = () => {
           <img src={logo} alt="BeyondWork Logo" />{" "}
         </div>
         <h1>Register your company and start your journey with us!</h1>
-       
       </div>
       <div className="right">
         <h2>Please fill in the fields below</h2>
@@ -81,12 +81,20 @@ export const CompanyRegistration = () => {
           <input
             type="text"
             placeholder="Company Name"
-            {...register("companyName", { required: true })}
+            {...register("companyName", { required: "This is required." })}
+          />
+          <ErrorMessage errors={errors} name="singleErrorInput" />
+          <ErrorMessage
+            errors={errors}
+            name="singleErrorInput"
+            render={({ message }) => <p>{message}</p>}
           />
           <div className="wrapper">
             <div className="selection">
               <label htmlFor="companyType">Industry:</label>
-              <select {...register("companyType", { required: true })}>
+              <select
+                {...register("companyType", { required: "This is required." })}
+              >
                 <option value="Agriculture">Agriculture</option>
                 <option value="Building materials">Building materials</option>
                 <option value="Chemicals">Chemicals</option>
@@ -119,7 +127,7 @@ export const CompanyRegistration = () => {
             </div>
             <div className="selection">
               <label htmlFor="numberOfEmployees">Number of Employees:</label>
-              <select {...register("numberOfEmployees")}>
+              <select {...register("numberOfEmployees", { required: true })}>
                 <option value="<50">0-50</option>
                 <option value="51-100">51-100</option>
                 <option value="101-500">101-500</option>
@@ -129,39 +137,50 @@ export const CompanyRegistration = () => {
           </div>
           <label htmlFor="address">Company Address:</label>
           <div className="wrapper">
-            
-          <input
-            type="text"
-            placeholder="Street, Building, Office No."
-            {...register("address")}
-          />
-          <input type="text" placeholder="ZipCode" {...register("zipCode")} />
+            <input
+              type="text"
+              placeholder="Street, Building, Office No."
+              {...register("address", { required: true })}
+            />
+            <input
+              type="text"
+              placeholder="ZipCode"
+              {...register("zipCode", { required: true })}
+            />
           </div>
-          <div className="wrapper"> <input type="text" placeholder="City" {...register("city")} />
-          <input type="text" placeholder="Country" {...register("country")} /></div>
-         
-         
-          
+          <div className="wrapper">
+            {" "}
+            <input
+              type="text"
+              placeholder="City"
+              {...register("city", { required: true })}
+            />
+            <input
+              type="text"
+              placeholder="Country"
+              {...register("country", { required: true })}
+            />
+          </div>
           <label htmlFor="phoneNumber">Contact Number:</label>
           <input
             type="text"
             placeholder="Phone Number"
-            {...register("phoneNumber")}
+            {...register("phoneNumber", { required: true })}
           />
           <label htmlFor="email">Company E-mail Address:</label>
           <input
             type="email"
             placeholder="Company E-mail Address"
-            {...register("email")}
+            {...register("email", { required: true })}
           />
           <label htmlFor="defaultAdminEmail">Admin E-mail Address:</label>
           <input
             type="email"
             placeholder="Admin E-mail Address"
-            {...register("defaultAdminEmail")}
+            {...register("defaultAdminEmail", { required: true })}
           />
           <input type="submit" className="button" />
-          {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
+          {/* {error && <div>Error: {error}</div>} {message && <div>{message}</div>} */}
         </form>
       </div>
     </div>

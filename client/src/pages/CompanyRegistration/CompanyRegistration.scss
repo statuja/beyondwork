@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   background-color: #f5f5dc;
-  
+
   .left {
     height: 100%;
     flex: 1;
@@ -18,20 +18,23 @@
       url(../../images/Hands.png) center;
     background-size: cover;
     background-repeat: no-repeat;
-   
+
     .logo {
       width: 60%;
       height: auto;
+
       img {
         width: 100%;
       }
     }
+
     h1 {
       width: 80%;
       font-size: 35px;
       line-height: 40px;
     }
   }
+
   .right {
     height: 100%;
     flex: 1;
@@ -41,9 +44,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     h2 {
       font-size: 20px;
     }
+
     form {
       width: 80%;
       display: flex;
@@ -55,6 +60,8 @@
       background-color: #ffb000;
       border-radius: 10px;
 
+
+
       input {
         width: 90%;
         padding: 8px 8px;
@@ -62,28 +69,34 @@
         outline: none;
         border-radius: 6px;
         background-color: #f5f5dc;
+
         //transition: transform 0.3s ease-in;
-        &:hover{
-          transform: scale(1.03); 
+        &:hover {
+          transform: scale(1.03);
           /* width: 68%;  */
         }
+
+      
       }
-      label{
+
+      label {
         width: 90%;
         font-size: 14px;
       }
-      .wrapper{
+
+      .wrapper {
         width: 90%;
         display: flex;
-        justify-content:space-around;
+        justify-content: space-around;
         align-items: center;
-        gap:15px;
+        gap: 15px;
 
-        .selection{
+        .selection {
           width: 90%;
           display: flex;
           justify-content: space-between;
           align-items: center;
+
           select {
             border: none;
             outline: none;
@@ -104,9 +117,10 @@
         background-color: #f5f5dc;
         font-weight: bold;
         cursor: pointer;
+
         //transition: transform 0.3s;
-        &:hover{
-          transform: scale(1.03); 
+        &:hover {
+          transform: scale(1.03);
           width: 32%;
           background-color: #FFCF9D;
         }
@@ -117,37 +131,43 @@
 
 @media (max-width: 425px) {
   .register {
-    flex-direction: column; 
-    .left{
-      height: auto; 
+    flex-direction: column;
+
+    .left {
+      height: auto;
       width: 100%;
-      padding: 20px; 
-      .logo{
+      padding: 20px;
+
+      .logo {
         height: auto;
       }
     }
+
     .right {
       height: auto;
-      width: 100%; 
-      padding: 20px; 
+      width: 100%;
+      padding: 20px;
 
-      h2{
+      h2 {
         font-size: 16px;
       }
 
       form {
-        width: 100%; 
-        input{
+        width: 100%;
+
+        input {
           width: 90%;
         }
-        label{
+
+        label {
           display: none;
         }
-        .wrapper{
+
+        .wrapper {
           flex-direction: column;
           width: 100%;
         }
-       
+
       }
     }
   }
@@ -155,31 +175,35 @@
 
 @media (min-width: 426px) and (max-width:1024px) {
   .register {
-    flex-direction: column; 
-    .left{
-      height: auto; 
+    flex-direction: column;
+
+    .left {
+      height: auto;
       width: 100%;
-      padding: 20px; 
-      .logo{
+      padding: 20px;
+
+      .logo {
         height: auto;
       }
     }
+
     .right {
       height: auto;
-      width: 100%; 
-      padding: 20px; 
+      width: 100%;
+      padding: 20px;
 
-      h2{
+      h2 {
         font-size: 18px;
       }
 
       form {
-        width: 80%; 
-        input{
+        width: 80%;
+
+        input {
           width: 80%;
         }
-      
-        
+
+
       }
     }
   }

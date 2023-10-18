@@ -44,8 +44,16 @@
     padding: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    background-image: url(../../images/Young_people.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+
+    .thankMsg {
+      width: 70%;
+    }
 
     h1 {
       display: none;

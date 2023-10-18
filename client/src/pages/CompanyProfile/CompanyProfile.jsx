@@ -10,17 +10,24 @@ const CompanyProfile = () => {
     const fetchCompanyDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/company/viewCompanyProfile/${userCompany}`
+          `http://localhost:5000/company/viewCompanyProfile/:${userCompany}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
         );
+
         const data = await response.json();
         setCompany(data);
-        console.log(company);
       } catch (error) {
         console.error("Error fetching company details", error);
       }
     };
     fetchCompanyDetails();
-  }, [userCompany]);
+  }, [userCompany, company]);
   return (
     <div className="companyProfile">
       <h1>Company Profile</h1>

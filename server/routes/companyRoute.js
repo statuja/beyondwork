@@ -14,14 +14,15 @@ const router = express.Router();
 const validation = [
   check("companyContact.email")
     .notEmpty()
+    .withMessage("E-mail is required.")
     .isEmail()
     .withMessage(
-      "E-mail is not valid, please provide a correct e-mail address (example: name@companyxyz.abc)"
+      "Please provide a valid email address (e.g., name@companyxyz.abc)"
     )
     .custom(async (value) => {
       const company = await Company.findOne({ "companyContact.email": value });
       if (company) {
-        throw new Error("The e-mail you provided is already in use.");
+        throw new Error("This email is already in use.");
       }
     }),
 ];
@@ -40,7 +41,11 @@ router.post(
   createCompany
 );
 
-router.get("/viewCompanyProfile", authorization, viewCompanyProfile);
+router.get(
+  "/viewCompanyProfile/:userCompany",
+  authorization,
+  viewCompanyProfile
+);
 router.put(
   "/updateCompanyProfile",
   authorization,

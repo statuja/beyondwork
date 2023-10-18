@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
 import "./Login.scss";
 
-
 const Login = () => {
   const navigate = useNavigate();
   const { setUserCompany } = useContext(MyContext);
@@ -16,7 +15,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
@@ -35,13 +33,17 @@ const Login = () => {
         credentials: "include",
       });
 
-      const responseData = await response.json();
-      setMessage(`You successfully logged in.`);
-      setUserCompany(responseData.user.userCompany);
-      navigate("/newsfeed");
+      if (response.ok) {
+        const responseData = await response.json();
+        setUserCompany(responseData.user.userCompany);
+        navigate("/newsfeed");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error); // Set the error message from the server
+      }
     } catch (error) {
       console.log("Fetch error:", error);
-      setError(error);
+      setError("An error occurred during login."); // Generic error message
     }
   };
   console.log(errors);
@@ -56,13 +58,15 @@ const Login = () => {
           Welcome to Beyond Work, the digital haven where work and play
           converge.
         </h1>
+      </div>
+      <div className="right">
+        {" "}
         <p>
           We understand that work is just one facet of a fulfilling life, and
           that's why we've created this space - to foster a vibrant, engaging,
           and well-rounded employee community.
         </p>
-      </div>
-      <div className="right">
+        {/* <h1>Login</h1>{" "} */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="email">Email:</label>
           <input
@@ -77,7 +81,7 @@ const Login = () => {
             {...register("password", { required: true })}
           />
           <input type="submit" value="Login" />
-          {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
+          {typeof error === "string" && error && <div>Error: {error}</div>}{" "}
         </form>
         <div className="signUp">
           <p>Your company is not on BeyondWork yet?</p>{" "}

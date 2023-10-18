@@ -1,7 +1,6 @@
 import React from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
-import logo from "../../images/Logo_green.png";
 
 function Navbar() {
   return (
@@ -9,8 +8,6 @@ function Navbar() {
       <div className="left">
         <Link to="/about">About us</Link>
       </div>
-      
-     
       <div className="right">
         <Link to="/contact">Contact</Link>
       </div>
