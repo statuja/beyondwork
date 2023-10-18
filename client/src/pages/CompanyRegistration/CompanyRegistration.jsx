@@ -143,6 +143,14 @@ export const CompanyRegistration = () => {
             </div>
           </div>
           <label htmlFor="address">Company Address:</label>
+          <div className="wrapper"> 
+          <input
+            type="text"
+            placeholder="Street, Building, Office No."
+            {...register("address")}
+          />
+          <input type="text" placeholder="ZipCode" {...register("zipCode")} />
+          </div>
           <div className="wrapper">
             <input
               type="text"
@@ -167,6 +175,10 @@ export const CompanyRegistration = () => {
               placeholder="Country"
               {...register("country", { required: true })}
             />
+          </div>
+          <div className="wrapper"> 
+          <input type="text" placeholder="City" {...register("city")} />
+          <input type="text" placeholder="Country" {...register("country")} />
           </div>
           <label htmlFor="phoneNumber">Contact Number:</label>
           <input
