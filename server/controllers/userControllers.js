@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         error:
-          "The email is not associated with any account. Please check the email and try again.",
+          "The email is not associated with any account. Please try again.",
       });
     }
     const passwordCheck = bcrypt.compareSync(password, user.userPassword);

@@ -10,14 +10,14 @@ export const ThankYou = () => {
   const navigate = useNavigate();
   const { adminEmail } = useContext(MyContext);
   const { companyName } = useContext(MyContext);
-  const { userCompany, setUserCompany } = useContext(MyContext);
+  const { setUserCompany } = useContext(MyContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
   const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
@@ -41,31 +41,28 @@ export const ThankYou = () => {
         navigate("/company/profile");
       } else {
         const errorData = await response.json();
-        setError(errorData.error); // Set the error message from the server
+        setError(errorData.error);
       }
     } catch (error) {
       console.log("Fetch error:", error);
-      setError("An error occurred during login."); // Generic error message
+      setError("An error occurred during login.");
     }
   };
   console.log(errors);
   return (
     <div className="thankyou">
       <div className="left">
-        <div className="logo">
-          <img src={logo} alt="BeyondWork Logo" />{" "}
+        <img src={logo} alt="BeyondWork Logo" />
+        <div className="textContainer">
+          <h1>Thank you for registering your company with BeyondWork!</h1>
         </div>
-        <h1>Thank you for registering your company with BeyondWork!</h1>
       </div>
       <div className="right">
         <div className="thankMsg">
           <p>You have successfully registered your company.</p>
-          <p>Now you can login and start registering employees in your team.</p>
           <p>
-            Here is your Admin email <b>{adminEmail}</b> and your temporary
-            password:
-            <b> admin1234</b>.
-            <br /> <i>Please make sure to change your password! </i>
+            Now you can login your Admin email: <b>{adminEmail}</b> and your
+            temporary password:<b> admin1234</b>.
           </p>
         </div>{" "}
         <h2>Login to {companyName} admin account</h2>
@@ -83,8 +80,9 @@ export const ThankYou = () => {
             {...register("password", { required: true })}
           />
           <input type="submit" value="Login" />
-          {error && <div>Error: {error}</div>} {message && <div>{message}</div>}
+          {error && <div> {error}</div>} {message && <div>{message}</div>}
         </form>
+        <div className="bg-container"></div>
       </div>
     </div>
   );
