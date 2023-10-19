@@ -13,6 +13,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.scss";
 import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
+import GetAllPosts from "./components/posts/GetAllPosts";
 
 function App() {
   const Layout = () => {
@@ -64,6 +65,10 @@ function App() {
     {
       path: "/create/post",
       element: <CreateNewPost />,
+    },
+    {
+      path: "/all/post",
+      element: <GetAllPosts />,
     },
     {
       path: "/company/profile",

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import MyContext from "./MyContext";
 
@@ -8,6 +7,7 @@ const MyProvider = ({ children }) => {
   const [companyName, setCompanyName] = useState("your company");
   const [companyData, setCompanyData] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -33,6 +33,23 @@ const MyProvider = ({ children }) => {
     getUser();
   }, []);
 
+  useEffect(() => {
+    const getallPosts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/post/all", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+        setPosts(response);
+      } catch (error) {
+        setPosts(null);
+      }
+    };
+    getallPosts();
+  }, []);
 
   return (
     <MyContext.Provider
