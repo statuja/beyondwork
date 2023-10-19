@@ -12,6 +12,7 @@ import Footer from "./components/Footer/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.scss";
 import CreateNewPost from "./components/posts/CreateNewPost";
+import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 
 function App() {
@@ -76,6 +77,10 @@ function App() {
     {
       path: "/user/profile/:id",
       element: <UserProfile />,
+    },
+    {
+      path: "/allusers",
+      element: <AllUsers />,
     },
   ]);
   return (

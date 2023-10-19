@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
-//import axios from "axios";
 
 const CreateNewPost = () => {
   const { userData } = useContext(MyContext);

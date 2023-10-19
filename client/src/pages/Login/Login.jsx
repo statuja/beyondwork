@@ -38,16 +38,15 @@ const Login = () => {
       if (response.ok) {
         const responseData = await response.json();
         setUserData(responseData.user);
-
         navigate("/create/post");
       } else {
         const errorData = await response.json();
         setError(errorData.error);
-        setError(errorData.error); 
+        setError(errorData.error);
       }
     } catch (error) {
       console.log("Fetch error:", error);
-      setError("An error occurred during login."); 
+      setError("An error occurred during login.");
     }
   };
   console.log(errors);

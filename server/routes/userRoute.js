@@ -56,7 +56,7 @@ router.post(
 
 router.post("/login", loginUser);
 router.get("/logout", logout);
-router.get("/allUsers", authorization, allUsers);
+router.get("/allUsers/:companyId", authorization, allUsers);
 router.get("/myProfile", authorization, getMyProfile);
 router.put("/updateMyProfile", authorization, updateMyProfile);
 router.get("/getUserProfile/:id", authorization, getUserProfile);

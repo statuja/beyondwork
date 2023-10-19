@@ -11,14 +11,14 @@ export const ThankYou = () => {
   const navigate = useNavigate();
   const { adminEmail } = useContext(MyContext);
   const { companyName } = useContext(MyContext);
-  const { setUserCompany } = useContext(MyContext);
+  const { setUserData } = useContext(MyContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [message] = useState("");
   const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
@@ -38,7 +38,7 @@ export const ThankYou = () => {
       });
       if (response.ok) {
         const responseData = await response.json();
-        setUserCompany(responseData.user.userCompany);
+        setUserData(responseData.user);
         navigate("/company/profile");
       } else {
         const errorData = await response.json();
@@ -82,7 +82,7 @@ export const ThankYou = () => {
               {...register("password", { required: true })}
             />
             <input type="submit" value="Login" />
-            {error && <div> {error}</div>} {message && <div>{message}</div>}
+            {error && <div> {error}</div>}
           </form>
         </div>
         <img src={people} alt="People connected" />

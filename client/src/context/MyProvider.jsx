@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import MyContext from "./MyContext";
 
 const MyProvider = ({ children }) => {
+
   const [adminEmail, setAdminEmail] = useState("your admin email");
   const [companyName, setCompanyName] = useState("your company");
   const [companyData, setCompanyData] = useState(null);
@@ -22,7 +23,9 @@ const MyProvider = ({ children }) => {
           },
           credentials: "include",
         });
-        setUserData(response);
+            const data = await response.json();
+
+        setUserData(data);
       } catch (error) {
         setUserData(null);
       }
