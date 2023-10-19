@@ -44,81 +44,88 @@
     .right {
         height: 100vh;
         flex: 1;
-        gap: 30px;
-        padding: 50px;
-        padding-top: 200px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
 
-        .bg-container {
-            width: 100%;
-            height: 200px;
-            background-image: url(../../images/Young_people.png);
-            background-repeat: no-repeat;
-            background-position: bottom;
-            background-size: cover;
+        img {
+            // width: 100%;
+            max-width: 100%;
+            height: auto;
         }
 
-        h2 {
-            font-size: 22px;
-        }
-
-        form {
-            width: 60%;
-            gap: 15px;
-            padding: 30px;
+        .right-top {
+            height: fit-content;
             display: flex;
+            flex: auto;
+            gap: 40px;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
-            background-color: #ffb000;
-            border-radius: 10px;
 
 
-            label {
-                font-size: 14px;
-                text-align: left;
+            h2 {
+                font-size: 22px;
             }
 
-            input {
-                width: 90%;
-                padding: 10px 10px;
-                border: none;
-                outline: none;
-                border-radius: 6px;
-                background-color: #f5f5dc;
-                // transition: transform 0.2s;
-
-                &:hover {
-                    transform: scale(1.03);
-                }
-            }
-
-            .error {
-                color: red;
-            }
-
-
-        }
-
-        .signUp {
-            display: flex;
-            justify-content: flex-end;
-            // align-items: center;
-            width: 60%;
-            padding: 0 20px;
-
-            .button {
-                padding: 10px;
-                border: none;
-                border-radius: 6px;
+            form {
+                width: 70%;
+                gap: 15px;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
                 background-color: #ffb000;
-                font-weight: bold;
-                cursor: pointer;
-                width: 150px;
+                border-radius: 10px;
+
+                label {
+                    font-size: 14px;
+                    text-align: left;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 10px 10px;
+                    border: none;
+                    outline: none;
+                    border-radius: 6px;
+                    background-color: #f5f5dc;
+                    // transition: transform 0.2s;
+
+                    &:hover {
+                        transform: scale(1.03);
+                    }
+                }
+
+                .error {
+                    color: red;
+                }
+
+
+            }
+
+            .signUp {
+                display: flex;
+                justify-content: flex-end;
+                // align-items: center;
+                width: 60%;
+                padding: 0 20px;
+
+                .button {
+                    padding: 10px;
+                    border: none;
+                    border-radius: 6px;
+                    background-color: #ffb000;
+                    font-weight: bold;
+                    cursor: pointer;
+                    width: 150px;
+                }
+
             }
 
         }
+
     }
 }
 
@@ -153,41 +160,49 @@
         .right {
             padding: 30px;
 
-            h2 {
-                font-size: 14px;
+            img {
+                max-width: 100%;
+                height: auto;
             }
 
-            form {
-                width: 80%;
-                padding: 20px;
-                margin-bottom: 40px;
-
-                label {
-                    display: none;
+            .right-top {
+                h2 {
+                    font-size: 14px;
                 }
 
-            }
+                form {
+                    width: 80%;
+                    padding: 20px;
+                    margin-bottom: 40px;
 
-            .signUp {
-                display: flex;
-                justify-content: flex-end;
-                // align-items: center;
-                width: 90%;
-                padding: 0 15px;
+                    label {
+                        display: none;
+                    }
 
-                .button {
-                    padding: 5px;
-                    border: none;
-                    border-radius: 6px;
-                    background-color: #ffb000;
-                    font-weight: bold;
-                    cursor: pointer;
-                    width: 150px;
                 }
+
+                .signUp {
+                    display: flex;
+                    justify-content: flex-end;
+                    // align-items: center;
+                    width: 90%;
+                    padding: 0 15px;
+
+                    .button {
+                        padding: 5px;
+                        border: none;
+                        border-radius: 6px;
+                        background-color: #ffb000;
+                        font-weight: bold;
+                        cursor: pointer;
+                        width: 150px;
+                    }
+
+                }
+
 
             }
         }
-
     }
 }
 

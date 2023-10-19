@@ -5,6 +5,7 @@ import MyContext from "../../context/MyContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import people from "../../images/Young_people.png";
 
 export const ThankYou = () => {
   const navigate = useNavigate();
@@ -58,31 +59,33 @@ export const ThankYou = () => {
         </div>
       </div>
       <div className="right">
-        <div className="thankMsg">
-          <p>You have successfully registered your company.</p>
-          <p>
-            Now you can login your Admin email: <b>{adminEmail}</b> and your
-            temporary password:<b> admin1234</b>.
-          </p>
-        </div>{" "}
-        <h2>Login to {companyName} admin account</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            placeholder="Your email"
-            {...register("email", { required: true })}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            placeholder="Your password"
-            {...register("password", { required: true })}
-          />
-          <input type="submit" value="Login" />
-          {error && <div> {error}</div>} {message && <div>{message}</div>}
-        </form>
-        <div className="bg-container"></div>
+        <div className="right-top">
+          <div className="thankMsg">
+            <p>You have successfully registered your company.</p>
+            <p>
+              Now you can login your Admin email: <b>{adminEmail}</b> and your
+              temporary password:<b> admin1234</b>.
+            </p>
+          </div>
+          <h2>Login to {companyName} admin account</h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              placeholder="Your email"
+              {...register("email", { required: true })}
+            />
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              placeholder="Your password"
+              {...register("password", { required: true })}
+            />
+            <input type="submit" value="Login" />
+            {error && <div> {error}</div>} {message && <div>{message}</div>}
+          </form>
+        </div>
+        <img src={people} alt="People connected" />
       </div>
     </div>
   );
