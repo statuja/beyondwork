@@ -29,6 +29,7 @@ const userSchema = new Schema(
     userPassword: { type: String, required: true },
     adminRole: { type: Boolean, default: false },
     userImage: String,
+    savedPosts : [{type : Schema.Types.ObjectId , ref : "Post"}]
   },
   { versionKey: false }
 );

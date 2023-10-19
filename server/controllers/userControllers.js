@@ -17,12 +17,15 @@ export const createUser = async (req, res) => {
     const newUser = await User.create({
       ...req.body,
       userPassword: hashedPassword,
-      // userCompany: 
     });
+    console.log(companyID);
+    console.log(newUser);
+
     res.json(newUser);
   } catch (error) {
-    res.json(error);
+    res.json(error.message);
   }
+
   console.log("end");
 };
 
@@ -31,7 +34,6 @@ export const createDefaultAdmin = async (companyId, adminEmail) => {
     const userPassword = defaultPass;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(userPassword, salt);
-    // userPassword = hashedPassword;
     console.log(hashedPassword);
     const newUser = await User.create({
       userContact: {
@@ -55,16 +57,15 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ "userContact.email": email });
     if (!user) {
-      //throw new Error("This E-mail is not valid. Please, try again.");
-      return res.json({
-        error: "This E-mail is not valid. Please, try again.",
+      return res.status(400).json({
+        error:
+          "The email is not associated with any account. Please check the email and try again.",
       });
     }
     const passwordCheck = bcrypt.compareSync(password, user.userPassword);
     if (!passwordCheck) {
-      //throw new Error("This Password is not valid. Please, try again.");
-      return res.json({
-        error: "This Password is not valid. Please, try again.",
+      return res.status(400).json({
+        error: "The password you entered is incorrect. Please try again.",
       });
     }
 
@@ -72,23 +73,16 @@ export const loginUser = async (req, res) => {
       expiresIn: "1h",
     });
     console.log(`token: ${token}`);
-    // res.cookie("token", token, {
-    //   httpOnly: true,
-    //   sameSite: "none",
-    //   secure: true,
-    // });
-
     res.cookie("token", token, {
-      // httpOnly: true,
-      // secure: process.env.NODE_ENV === "production" ? true : false, // the cookie will be sent only over HTTPS in production
-      // secure: false,
-      // sameSite: "lax",
-      // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     });
 
-    res.json({ user: user, token: token });
+    res.status(200).json({ user: user, token: token });
+    console.log(user.userCompany);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -142,5 +136,37 @@ export const deleteUser = async (req, res) => {
     return res.json({ message: "User deleted successfully" });
   } catch (error) {
     res.json(error);
+  }
+};
+
+export const savePost = async (req, res) => {
+  try {
+    const usersId = req.user._id;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      usersId,
+      {
+        $push: { savedPosts: req.body.postId },
+      },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
+export const getSavedPosts = async (req, res) => {
+  try {
+    const usersId = req.user._id;
+
+    const savedPosts = await User.findById(usersId)
+      .select("savedPosts")
+      .populate("savedPosts");
+
+    res.json(savedPosts);
+  } catch (error) {
+    res.json(error.message);
   }
 };

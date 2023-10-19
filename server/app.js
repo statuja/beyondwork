@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import companyRoute from "./routes/companyRoute.js";
 import userRoute from "./routes/userRoute.js";
+import postRoute from "./routes/postRoute.js";
 dotenv.config();
 
 const app = express();
@@ -13,7 +14,7 @@ const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
       ? "vercel server" //change when we deploy
-      : "http://localhost:3000",
+      : "http://localhost:3001",
   credentials: true,
   preflightContinue: true,
   optionsSuccessStatus: 200,
@@ -27,6 +28,7 @@ app.use(express.json());
 
 app.use("/company", companyRoute);
 app.use("/user", userRoute);
+app.use("/post", postRoute);
 
 app.post("/server/test", (req, res) => {
   console.log(req.body);

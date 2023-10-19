@@ -1,22 +1,76 @@
-import "./App.css";
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { CompanyRegistration } from "./components/CompanyRegistration/CompanyRegistration";
+import About from "./pages/About/About";
+import Contact from "./pages/Contact/Contact";
+import { CompanyRegistration } from "./pages/CompanyRegistration/CompanyRegistration";
+import Login from "./pages/Login/Login";
+import { UserRegistration } from "./pages/CreateUser/CreateUser";
+import { ThankYou } from "./pages/ThankYou/ThankYou";
+import NewsFeed from "./pages/NewsFeed/NewsFeed";
+import CompanyProfile from "./pages/CompanyProfile/CompanyProfile";
+import UserProfile from "./pages/UserProfile/UserProfile";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { UserRegistration } from "./components/CreateUser/CreateUser";
-import Login from "./components/Login/Login";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./App.scss";
 
 function App() {
+  const Layout = () => {
+    return (
+      <div>
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </div>
+    );
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+        {
+          path: "/company/create",
+          element: <CompanyRegistration />,
+        },
+        {
+          path: "/company/thankyou",
+          element: <ThankYou />,
+        },
+        {
+          path: "/user/login",
+          element: <Login />,
+        },
+        {
+          path: "/user/create",
+          element: <UserRegistration />,
+        },
+      ],
+    },
+
+    {
+      path: "/newsfeed",
+      element: <NewsFeed />,
+    },
+    {
+      path: "/company/profile",
+      element: <CompanyProfile />,
+    },
+    {
+      path: "/user/profile/:id",
+      element: <UserProfile />,
+    },
+  ]);
   return (
-    <div className="App">
-      {/* <Navbar /> */}
-      <Routes>
-        <Route path="/" element={<CompanyRegistration />} />
-        <Route path="/user/create" element={<UserRegistration />} />
-        <Route path="/user/login" element={<Login />} />
-      </Routes>
-      {/* <Footer/> */}
+    <div>
+      <RouterProvider router={router} />
     </div>
   );
 }
