@@ -1,20 +1,32 @@
 import "./About.scss"
-import logo1 from "../../images/avatar1.png";
+import logo from "../../images/Logo_green.png";
+import logo1 from "../../images/marwah.png";
 import logo2 from "../../images/avatar2.png";
-import logo3 from "../../images/avatar3.png";
-import logo4 from "../../images/avatar4.jpg";
+import logo3 from "../../images/elena.jpg";
+import logo4 from "../../images/netta.png";
 
 function About() {
   return (
+
     <div>
-      <h1>About Beyond Work</h1>
-      <h2>
-        Welcome to Beyond Work, the digital haven where work and play converge.
-        We understand that work is just one facet of a fulfilling life, and
-        that's why we've created this space - to foster a vibrant, engaging, and
-        well-rounded employee community.
-      </h2>
-      <h3>Our Mission</h3>
+
+
+    <div className="about">
+      <div className="left">
+        <div className="logo">
+          <img src={logo} alt="BeyondWork Logo" />{" "}
+        </div>
+        <h1>About Beyond Work</h1>
+        <h2>
+          Welcome to Beyond Work, the digital haven where work and play converge.
+          We understand that work is just one facet of a fulfilling life, and
+          that's why we've created this space - to foster a vibrant, engaging, and
+          well-rounded employee community.
+        </h2>
+      </div>
+
+    <div className="right">
+    <h3>Our Mission</h3>
       <p>
         At Beyond Work, our mission is to strengthen workplace bonds, spark
         creativity, and promote a healthy work-life balance. We believe that
@@ -58,6 +70,9 @@ function About() {
           </p>
         </li>
       </ul>
+    </div>
+    </div>
+
       <h3>Who We Are</h3>
       <p>
         Beyond Work is more than just a website; it's a community driven by our
@@ -170,7 +185,9 @@ function About() {
         reach out to our talented team. We're here to make Beyond Work the best
         it can be for you!
       </p>
-    </div>
+
+      </div>
+
   );
 }
 
