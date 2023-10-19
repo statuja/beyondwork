@@ -8,7 +8,8 @@ import "./Login.scss";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserCompany } = useContext(MyContext);
+  const { setUserData } = useContext(MyContext);
+
   const {
     register,
     handleSubmit,
@@ -24,7 +25,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5001/user/login", {
+      const response = await fetch("http://localhost:5000/user/login", {
         method: "POST",
         body: JSON.stringify(newDataObject),
         headers: {
@@ -35,15 +36,16 @@ const Login = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        setUserCompany(responseData.user.userCompany);
-        navigate("/newsfeed");
+        setUserData(responseData.user);
+
+        navigate("/create/post");
       } else {
         const errorData = await response.json();
-        setError(errorData.error); // Set the error message from the server
+        setError(errorData.error);
       }
     } catch (error) {
       console.log("Fetch error:", error);
-      setError("An error occurred during login."); // Generic error message
+      setError("An error occurred during login.");
     }
   };
   console.log(errors);
