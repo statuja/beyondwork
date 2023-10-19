@@ -1,0 +1,39 @@
+.about {
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5dc;
+    color: rgb(55, 55, 55);
+  
+    .left {
+      height: 100%;
+      flex: 1;
+      gap: 150px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(#f5f5dceb, #f5f5dc9d),
+        url(../../images/Hands.png) center;
+      background-size: cover;
+      background-repeat: no-repeat;
+  
+      .logo {
+        width: 45%;
+        height: auto;
+  
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+  
+      h1 {
+        width: 65%;
+        font-size: 35px;
+        line-height: 40px;
+      }
+    }
+}  

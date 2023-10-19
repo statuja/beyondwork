@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import MyContext from "../../context/MyContext";
+import { Link } from "react-router-dom";
 //import axios from "axios";
 
 const CreateNewPost = () => {
+  const { userData } = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -16,15 +19,18 @@ const CreateNewPost = () => {
   const onSubmit = async (data) => {
     const newData = {
       content: data.content,
+      createdBy: userData._id,
+      company: userData.userCompany,
       //  image: data.image,
     };
     try {
-      const response = await fetch("http://localhost:5001/post/create", {
+      const response = await fetch("http://localhost:5000/post/create", {
         method: "POST",
         body: JSON.stringify(newData),
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
       const responseData = await response.json();
       if (response.ok) {
@@ -47,7 +53,7 @@ const CreateNewPost = () => {
           {...register("content", { required: true, maxLength: 100 })}
         />
         <input type="submit" />
-
+        <Link to="/user/create">create new User</Link>
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
       </form>
