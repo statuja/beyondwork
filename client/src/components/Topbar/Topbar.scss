@@ -1,0 +1,128 @@
+.topbarContainer {
+  height: 50px;
+  width: 100%;
+  background-color: #004225;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  .left {
+    flex: 3;
+    .logo {
+      cursor: pointer;
+      a{
+        text-decoration: none;
+      }
+      h3{
+        font-size: 24px;
+        margin-left: 20px;
+        font-weight: bold;
+        color: #f5f5dc;
+        cursor: pointer;
+      }
+      img{
+        width: 50px;
+        margin: 0 15px;
+
+      }
+    }
+   
+  }
+
+  .center {
+    margin-right: 15px ;
+    flex: 5;
+    .searchbar {
+      width: 100%;
+      height: 30px;
+      background-color: #f5f5dc;
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      .searchIcon {
+        font-size: 20px;
+        margin-left: 10px;
+      }
+      input {
+        margin: 5px;
+        border: none;
+        width: 70%;
+        background-color: #f5f5dc;
+      }
+      input:focus {
+        outline: none;
+      }
+    }
+  }
+  .right {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    color: #f5f5dc;
+    padding: 0 10px;
+    .icons {
+      display: flex;
+      width: 70%;
+      justify-content: flex-end;
+      align-items: center;
+      .iconItem {
+        margin-right: 15px;
+        cursor: pointer;
+        position: relative;
+        span {
+          width: 15px;
+          height: 15px;
+          background-color: #ffb000;
+          border-radius: 50%;
+          color: #004225;
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+        }
+      }
+    }
+    img {
+      border: 2px solid #f5f5dc;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 768px)  {
+  .topbarContainer {
+  .left{
+    .logo{
+      h3{
+        display: none;
+      }
+    }
+  }
+  }
+}
+@media (min-width: 769px)  {
+  .topbarContainer {
+  .left{
+    .logo{
+      img{
+        display: none;
+      }
+    }
+  }
+  }
+}
+
+
+
+
+
+

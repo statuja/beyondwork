@@ -6,7 +6,7 @@ import { UserRegistration } from "./pages/CreateUser/CreateUser";
 import { ThankYou } from "./pages/ThankYou/ThankYou";
 import NewsFeed from "./pages/NewsFeed/NewsFeed";
 import CompanyProfile from "./pages/CompanyProfile/CompanyProfile";
-import UserProfile from "./pages/UserProfile/UserProfile";
+import MyProfile from "./pages/UserProfile/MyProfile";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -64,8 +64,8 @@ function App() {
       element: <CompanyProfile />,
     },
     {
-      path: "/user/profile/:id",
-      element: <UserProfile />,
+      path: "/user/profile",
+      element: <MyProfile />,
     },
   ]);
   return (
