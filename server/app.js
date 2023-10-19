@@ -14,7 +14,7 @@ const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
       ? "vercel server" //change when we deploy
-      : "http://localhost:3001",
+      : "http://localhost:3000",
   credentials: true,
   preflightContinue: true,
   optionsSuccessStatus: 200,

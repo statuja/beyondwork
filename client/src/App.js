@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.scss";
+import CreateNewPost from "./components/posts/CreateNewPost";
 
 function App() {
   const Layout = () => {
@@ -58,6 +59,10 @@ function App() {
     {
       path: "/newsfeed",
       element: <NewsFeed />,
+    },
+    {
+      path: "/create/post",
+      element: <CreateNewPost />,
     },
     {
       path: "/company/profile",

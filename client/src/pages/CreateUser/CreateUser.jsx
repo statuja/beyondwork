@@ -13,11 +13,11 @@ export const UserRegistration = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const { userCompany } = useContext(MyContext);
+  const { userData } = useContext(MyContext);
 
   const onSubmit = async (data) => {
     const newData = {
-      userCompany: userCompany,
+      userCompany: userData.userCompany,
       userFullName: data.userFullName,
       userJobTitle: data.userJobTitle,
       userDepartment: data.userDepartment,
@@ -40,6 +40,7 @@ export const UserRegistration = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
       const responseData = await response.json();
       if (response.ok) {
