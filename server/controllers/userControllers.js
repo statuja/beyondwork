@@ -87,11 +87,14 @@ export const loginUser = async (req, res) => {
 };
 
 export const allUsers = async (req, res) => {
+  const { companyId } = req.params;
   try {
-    const users = await User.find().populate("userCompany");
-    res.json(users);
+    const users = await User.find({ userCompany: companyId }).populate(
+      "userCompany"
+    );
+    res.status(200).json(users);
   } catch (error) {
-    res.json(error);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
