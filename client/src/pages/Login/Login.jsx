@@ -51,22 +51,20 @@ const Login = () => {
   return (
     <div className="login">
       <div className="left">
-        <div className="logo">
-          <img src={logo} alt="BeyondWork Logo" />
+        <img src={logo} alt="BeyondWork Logo" />
+        <div className="textContainer">
+          {" "}
+          <h1>Welcome to BeyondWork!</h1>
+          <p>The digital haven where work and play converge.</p>
+          <p>
+            We understand that work is just one facet of a fulfilling life, and
+            that's why we've created this space - to foster a vibrant, engaging,
+            and well-rounded employee community.
+          </p>
         </div>
-        <h1>
-          Welcome to Beyond Work, the digital haven where work and play
-          converge.
-        </h1>
       </div>
       <div className="right">
-        {" "}
-        <p>
-          We understand that work is just one facet of a fulfilling life, and
-          that's why we've created this space - to foster a vibrant, engaging,
-          and well-rounded employee community.
-        </p>
-        {/* <h1>Login</h1>{" "} */}
+        <h2>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="email">Email:</label>
           <input
@@ -81,7 +79,9 @@ const Login = () => {
             {...register("password", { required: true })}
           />
           <input type="submit" value="Login" />
-          {typeof error === "string" && error && <div>Error: {error}</div>}{" "}
+          {typeof error === "string" && error && (
+            <div className="error">{error}</div>
+          )}{" "}
         </form>
         <div className="signUp">
           <p>Your company is not on BeyondWork yet?</p>{" "}
@@ -94,6 +94,7 @@ const Login = () => {
             Sign up
           </button>
         </div>
+        <div className="bg-container"></div>
       </div>
     </div>
   );
