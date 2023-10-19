@@ -29,11 +29,9 @@ function About() {
     <h3>Our Mission</h3>
       <p>
         At Beyond Work, our mission is to strengthen workplace bonds, spark
-        creativity, and promote a healthy work-life balance. We believe that
-        when employees are encouraged to connect, collaborate, and explore
-        shared interests beyond the office, the result is a more motivated,
-        inspired, and satisfied workforce.
+        creativity, and promote a healthy work-life balance.
       </p>
+      <br></br>
       <h3>What We Offer</h3>
       <ul>
         <li>

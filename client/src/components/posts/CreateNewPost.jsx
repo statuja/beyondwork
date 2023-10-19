@@ -8,7 +8,6 @@ const CreateNewPost = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
