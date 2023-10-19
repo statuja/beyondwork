@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import React, { useContext, useState } from "react";
 import MyContext from "../../context/MyContext";
-import "./CreateUser.scss"
+import "./CreateUser.scss";
 
 export const UserRegistration = () => {
   const {
