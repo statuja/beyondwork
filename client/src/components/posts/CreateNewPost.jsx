@@ -4,7 +4,7 @@ import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
 
 const CreateNewPost = () => {
-  const { userData } = useContext(MyContext);
+  const { userData, posts, setPosts } = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -31,8 +31,10 @@ const CreateNewPost = () => {
         credentials: "include",
       });
       const responseData = await response.json();
+      console.log("CREATE NEW POST: responseData:", responseData);
       if (response.ok) {
         setMessage(`You post has been successfully published.`);
+        setPosts([responseData, ...posts]);
       } else {
         setError(responseData.error[0].msg);
       }
@@ -42,7 +44,7 @@ const CreateNewPost = () => {
       );
     }
   };
-
+  console.log("check", posts);
   return (
     <div>
       <h2>Create a New Post</h2>

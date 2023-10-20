@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import MyContext from "../../context/MyContext";
 
 const GetAllPosts = () => {
-  const [allPosts, setAllPosts] = useState([]);
+  const { userData, posts, setPosts } = useContext(MyContext);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -17,7 +18,8 @@ const GetAllPosts = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          setAllPosts(data);
+          // console.log("GETALLPOSTS data: ", data);
+          setPosts(data);
         } else {
           setError("Failed to fetch posts. Please try again later.");
         }
@@ -37,7 +39,7 @@ const GetAllPosts = () => {
         {error ? (
           <div>Error: {error}</div>
         ) : (
-          allPosts.map((item) => (
+          posts?.map((item) => (
             <div key={item._id} className="postCard">
               <Link to={`/post/${item._id}`}></Link>
               <p>{item.content}</p>
