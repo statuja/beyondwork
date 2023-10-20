@@ -54,7 +54,9 @@ const Login = () => {
   return (
     <div className="login">
       <div className="left">
-        <img src={logo} alt="BeyondWork Logo" />
+        <div className="logo">
+          <img src={logo} alt="BeyondWork Logo" />
+        </div>
         <div className="textContainer">
           <h1>Welcome to BeyondWork!</h1>
           <p>The digital haven where work and play converge.</p>
@@ -81,7 +83,7 @@ const Login = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login" className="button" />
             {typeof error === "string" && error && (
               <div className="error">{error}</div>
             )}

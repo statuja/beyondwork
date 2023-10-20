@@ -53,7 +53,9 @@ export const ThankYou = () => {
   return (
     <div className="thankyou">
       <div className="left">
-        <img src={logo} alt="BeyondWork Logo" />
+        <div className="logo">
+          <img src={logo} alt="BeyondWork Logo" />
+        </div>{" "}
         <div className="textContainer">
           <h1>Thank you for registering your company with BeyondWork!</h1>
         </div>
@@ -81,7 +83,7 @@ export const ThankYou = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login" className="button" />
             {error && <div> {error}</div>}
           </form>
         </div>

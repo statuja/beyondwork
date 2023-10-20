@@ -9,8 +9,6 @@ function About() {
   return (
 
     <div>
-
-
     <div className="above">
       <div className="left">
         <div className="logo">
