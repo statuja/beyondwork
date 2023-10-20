@@ -10,12 +10,12 @@ import {
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function Contact() {
-  const emailAddress = "info.beyondwork@gmail.com";
-
   return (
     <div className="contact">
       <div className="left">
-        <img src={logo} alt="BeyondWork Logo" />
+        <div className="logo">
+          <img src={logo} alt="BeyondWork Logo" />
+        </div>
         <div className="textContainer">
           <h1>Welcome to BeyondWork!</h1>
           <p>The digital haven where work and play converge.</p>
@@ -52,7 +52,7 @@ function Contact() {
             </div>
           </a>
           <a
-            href="https://www.facebook.com"
+            href="https://www.linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,14 +60,13 @@ function Contact() {
               <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
 
               <p>Connect</p>
-            </div>{" "}
+            </div>
           </a>
           <a
             href="https://www.facebook.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {" "}
             <div class="card">
               <FontAwesomeIcon icon={faFacebookF} size="lg" />
 

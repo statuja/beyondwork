@@ -7,7 +7,7 @@
   color: rgb(55, 55, 55);
 
   .left {
-    height: 100vh;
+    height: 100%;
     flex: 1;
     gap: 150px;
     padding: 30px;
@@ -20,25 +20,36 @@
     background-size: cover;
     background-repeat: no-repeat;
 
-    .img {
+    .logo {
       width: 45%;
       height: auto;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
 
     h1 {
+      width: 65%;
       font-size: 35px;
       line-height: 40px;
+      text-align: center;
+      font-family: 'Belanosima', sans-serif;
+      font-weight: 400;
     }
 
   }
 
   .right {
-    height: 100vh;
+    height: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 50px;
+    padding-bottom: 0 !important;
 
     img {
       // width: 100%;
@@ -97,7 +108,6 @@
         }
 
         .button {
-          width: 30%;
           padding: 10px;
           border: none;
           border-radius: 6px;
@@ -107,7 +117,6 @@
 
           &:hover {
             transform: scale(1.03);
-            width: 32%;
             background-color: #FFCF9D;
           }
         }
