@@ -32,6 +32,10 @@ function App() {
       element: <Layout />,
       children: [
         {
+          path: "/",
+          element: <Login />,
+        },
+        {
           path: "/about",
           element: <About />,
         },
