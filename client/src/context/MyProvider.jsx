@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import MyContext from "./MyContext";
 
 const MyProvider = ({ children }) => {
-
   const [adminEmail, setAdminEmail] = useState("your admin email");
   const [companyName, setCompanyName] = useState("your company");
   const [companyData, setCompanyData] = useState(null);
@@ -23,7 +22,7 @@ const MyProvider = ({ children }) => {
           },
           credentials: "include",
         });
-            const data = await response.json();
+        const data = await response.json();
 
         setUserData(data);
       } catch (error) {
@@ -31,24 +30,6 @@ const MyProvider = ({ children }) => {
       }
     };
     getUser();
-  }, []);
-
-  useEffect(() => {
-    const getallPosts = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/post/all", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
-        setPosts(response);
-      } catch (error) {
-        setPosts(null);
-      }
-    };
-    getallPosts();
   }, []);
 
   return (
@@ -62,6 +43,8 @@ const MyProvider = ({ children }) => {
         updateCompanyData,
         userData,
         setUserData,
+        posts,
+        setPosts,
       }}
     >
       {children}

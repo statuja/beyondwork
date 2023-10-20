@@ -12,7 +12,9 @@ export const createPost = async (req, res) => {
       ...req.body,
       createdBy: userId,
       company: companyId,
-    });
+    }).then((item) =>
+      item.populate({ path: "createdBy", select: "userFullName userImage" })
+    );
 
     res.json(newPost);
   } catch (error) {
@@ -23,7 +25,12 @@ export const createPost = async (req, res) => {
 export const getAllPosts = async (req, res) => {
   try {
     const companyId = req.user.userCompany;
-    const posts = await Post.find({ company: companyId }).populate("createdBy");
+    const posts = await Post.find({ company: companyId })
+      .populate({
+        path: "createdBy",
+        select: "userFullName userImage",
+      })
+      .sort("-_id");
     // console.log(posts);
     res.json(posts);
   } catch (error) {
