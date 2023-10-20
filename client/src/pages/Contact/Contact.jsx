@@ -1,116 +1,84 @@
-import React, { useState } from "react";
+import React from "react";
+import logo from "../../images/Logo_green.png";
+import "./Contact.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faLinkedinIn,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    inquiry: "",
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
   return (
-    <div className="form-container">
-      <div className="contact-form">
-        <h3 className="TEXT">How to contact Us</h3>
+    <div className="contact">
+      <div className="left">
+        <div className="logo">
+          <img src={logo} alt="BeyondWork Logo" />
+        </div>
+        <div className="textContainer">
+          <h1>Welcome to BeyondWork!</h1>
+          <p>The digital haven where work and play converge.</p>
+        </div>
+      </div>
+      <div className="right">
+        <h2>Contact us</h2>
         <p>
-          We're here to assist you. Feel free to reach out to us with any
-          questions, feedback, or inquiries you may have.
+          If you have any questions about our product, or need support please
+          feel free to contact us!
         </p>
-        <p>
-          If you have any questions about our product, feel free to contact us
-          here: <b>beyondwork@gmail.com</b>, or fill in the form on this page.
-        </p>
-        <p>We are also available on the main social media platforms:</p>
-        <div>
-          {" "}
+
+        <div className="wrapper">
           <a
-            href="https://www.facebook.com"
+            href="mailto:info.beyondwork@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FontAwesomeIcon icon={faFacebookF} />
-          </a>
-          <a
-            href="https://www.linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon icon={faLinkedinIn} />
+            <div class="card">
+              <FontAwesomeIcon icon={faEnvelope} size="lg" />
+
+              <p>Write</p>
+            </div>
           </a>
           <a
             href="https://www.instagram.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FontAwesomeIcon icon={faInstagram} />
+            <div class="card">
+              <FontAwesomeIcon icon={faInstagram} size="lg" />
+
+              <p>Follow</p>
+            </div>
+          </a>
+          <a
+            href="https://www.linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="card">
+              <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
+
+              <p>Connect</p>
+            </div>
+          </a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="card">
+              <FontAwesomeIcon icon={faFacebookF} size="lg" />
+
+              <p>Befriend</p>
+            </div>
           </a>
         </div>
-        <form action="info.beyondwork@gmail.com" method="POST">
-          <div className="form-first-section">
-            <label>
-              <input
-                className="name"
-                type="text"
-                name="name"
-                placeholder="First and Last Name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              <input
-                className="email"
-                type="email"
-                name="email"
-                placeholder="Your E-mail"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className="form-row">
-            <label>
-              <input
-                className="tel"
-                type="tel"
-                name="phoneNumber"
-                placeholder="Your Phone number"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <label>
-            <textarea
-              label="your inquiry"
-              name="inquiry"
-              placeholder="write your text here"
-              rows="10"
-              cols="50"
-              value={formData.moreDetails}
-              onChange={handleChange}
-            ></textarea>
-          </label>
-          <br />
-
-          <button type="submit">Send</button>
-        </form>
+        <p className="last">
+          We’re happy to listen and answer to your inquiries and suggestions.
+          Your opinion matters!
+        </p>
       </div>
-      <p>
-        We`re happy to listen and answer to your inquiries and suggestions. Your
-        opinion matters!
-      </p>
     </div>
   );
 }

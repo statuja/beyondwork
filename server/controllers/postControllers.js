@@ -1,42 +1,51 @@
 import Post from "../models/Post.js";
 
 export const createPost = async (req, res) => {
-    try {
-      const userId = req.user._id;
+  try {
+    const userId = req.user._id;
 
-      const companyId = req.user.userCompany;
-  
-      //const image = faker.image.url();
-  
-      const newPost = await Post.create({ ...req.body, createdBy: userId, company: companyId});
-  
-      res.json(newPost);
-    } catch (error) {
-      res.json(error.message);
-    }
-  };
+    const companyId = req.user.userCompany;
+
+    //const image = faker.image.url();
+
+    const newPost = await Post.create({
+      ...req.body,
+      createdBy: userId,
+      company: companyId,
+    }).then((item) =>
+      item.populate({ path: "createdBy", select: "userFullName userImage" })
+    );
+
+    res.json(newPost);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
 
 export const getAllPosts = async (req, res) => {
-try {
-
-    const companyId = req.user.userCompany
-
-    const posts = await Post.find({company: companyId}).populate("createdBy");
-
+  try {
+    const companyId = req.user.userCompany;
+    const posts = await Post.find({ company: companyId })
+      .populate({
+        path: "createdBy",
+        select: "userFullName userImage",
+      })
+      .sort("-_id");
+    // console.log(posts);
     res.json(posts);
-} catch (error) {
+  } catch (error) {
     res.json(error.message);
-}
+  }
 };
 
 export const getUserPosts = async (req, res) => {
-    try {
-      const userId = req.params.id;
-  
-      const posts = await Post.find({ createdBy: userId }).populate("createdBy");
-  
-      res.json(posts);
-    } catch (error) {
-      res.json(error.message);
-    }
-  };
+  try {
+    const userId = req.params.id;
+
+    const posts = await Post.find({ createdBy: userId }).populate("createdBy");
+
+    res.json(posts);
+  } catch (error) {
+    res.json(error.message);
+  }
+};

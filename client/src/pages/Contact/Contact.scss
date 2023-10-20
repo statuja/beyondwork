@@ -1,0 +1,156 @@
+.contact {
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5dc;
+    color: rgb(55, 55, 55);
+
+    .left {
+        height: 100%;
+        flex: 1;
+        gap: 150px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(#f5f5dceb, #f5f5dc9d),
+            url(../../images/Hands.png) center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        .logo {
+            width: 45%;
+            height: auto;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        h1 {
+            width: 65%;
+            font-size: 35px;
+            line-height: 40px;
+            text-align: center;
+            font-family: 'Belanosima', sans-serif;
+            font-weight: 400;
+        }
+    }
+
+    .right {
+        width: 100%;
+        flex: 1;
+        gap: 30px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+            font-size: 22px;
+            font-family: 'Belanosima', sans-serif;
+            font-weight: 400;
+        }
+
+        .last {
+            margin-bottom: 30px;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        a {
+            color: rgb(55, 55, 55);
+            text-decoration: none;
+        }
+
+        .card {
+            padding: 20px;
+            text-align: center;
+            background-color: #ffb000;
+            border-radius: 10px;
+            line-height: 30px;
+        }
+
+
+    }
+}
+
+@media (max-width: 425px) {
+    .contact {
+        height: 100%;
+        flex-direction: column;
+
+        .left {
+            gap: 20px;
+            background-image: none;
+
+            img {
+                width: 80%;
+            }
+
+            h1 {
+                width: 85%;
+                font-size: 20px;
+                line-height: 24px;
+                text-align: center;
+            }
+        }
+
+        .right {
+            padding: 30px;
+
+            h2 {
+                font-size: 14px;
+            }
+
+            .wrapper {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+
+
+        }
+    }
+}
+
+@media (min-width: 426px) and (max-width: 1024px) {
+    .contact {
+        height: 100%;
+        flex-direction: column;
+
+        .left {
+            gap: 20px;
+            background-image: none;
+
+            img {
+                width: 80%;
+            }
+
+            h1 {
+                width: 85%;
+                font-size: 20px;
+                line-height: 24px;
+                text-align: center;
+            }
+        }
+
+        .right {
+            padding: 20px;
+
+            h2 {
+                font-size: 14px;
+            }
+
+        }
+    }
+}

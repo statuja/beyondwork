@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
+import people from "../../images/Young_people.png";
 import "./Login.scss";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserCompany } = useContext(MyContext);
+  const { setUserData } = useContext(MyContext);
+
   const {
     register,
     handleSubmit,
@@ -24,7 +26,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5001/user/login", {
+      const response = await fetch("http://localhost:5000/user/login", {
         method: "POST",
         body: JSON.stringify(newDataObject),
         headers: {
@@ -35,15 +37,16 @@ const Login = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        setUserCompany(responseData.user.userCompany);
-        navigate("/newsfeed");
+        setUserData(responseData.user);
+        navigate("/create/post");
       } else {
         const errorData = await response.json();
-        setError(errorData.error); // Set the error message from the server
+        setError(errorData.error);
+        setError(errorData.error);
       }
     } catch (error) {
       console.log("Fetch error:", error);
-      setError("An error occurred during login."); // Generic error message
+      setError("An error occurred during login.");
     }
   };
   console.log(errors);
@@ -54,46 +57,50 @@ const Login = () => {
         <div className="logo">
           <img src={logo} alt="BeyondWork Logo" />
         </div>
-        <h1>
-          Welcome to Beyond Work, the digital haven where work and play
-          converge.
-        </h1>
+        <div className="textContainer">
+          <h1>Welcome to BeyondWork!</h1>
+          <p>The digital haven where work and play converge.</p>
+          <p>
+            We understand that work is just one facet of a fulfilling life, and
+            that's why we've created this space - to foster a vibrant, engaging,
+            and well-rounded employee community.
+          </p>
+        </div>
       </div>
       <div className="right">
-        {" "}
-        <p>
-          We understand that work is just one facet of a fulfilling life, and
-          that's why we've created this space - to foster a vibrant, engaging,
-          and well-rounded employee community.
-        </p>
-        {/* <h1>Login</h1>{" "} */}
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            placeholder="Your email"
-            {...register("email", { required: true })}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            placeholder="Your password"
-            {...register("password", { required: true })}
-          />
-          <input type="submit" value="Login" />
-          {typeof error === "string" && error && <div>Error: {error}</div>}{" "}
-        </form>
-        <div className="signUp">
-          <p>Your company is not on BeyondWork yet?</p>{" "}
-          <button
-            onClick={() => {
-              navigate("/company/create");
-            }}
-            className="button"
-          >
-            Sign up
-          </button>
+        <div className="right-top">
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              placeholder="Your email"
+              {...register("email", { required: true })}
+            />
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              placeholder="Your password"
+              {...register("password", { required: true })}
+            />
+            <input type="submit" value="Login" className="button" />
+            {typeof error === "string" && error && (
+              <div className="error">{error}</div>
+            )}
+          </form>
+          <div className="signUp">
+            <p>Your company is not on BeyondWork yet?</p>
+            <button
+              onClick={() => {
+                navigate("/company/create");
+              }}
+              className="button"
+            >
+              Sign up
+            </button>
+          </div>
         </div>
+        <img src={people} alt="People connected" />
       </div>
     </div>
   );

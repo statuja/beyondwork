@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         error:
-          "The email is not associated with any account. Please check the email and try again.",
+          "The email is not associated with any account. Please try again.",
       });
     }
     const passwordCheck = bcrypt.compareSync(password, user.userPassword);
@@ -87,11 +87,14 @@ export const loginUser = async (req, res) => {
 };
 
 export const allUsers = async (req, res) => {
+  const { companyId } = req.params;
   try {
-    const users = await User.find().populate("userCompany");
-    res.json(users);
+    const users = await User.find({ userCompany: companyId }).populate(
+      "userCompany"
+    );
+    res.status(200).json(users);
   } catch (error) {
-    res.json(error);
+    res.status(500).json({ error: "Server error" });
   }
 };
 

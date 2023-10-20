@@ -3,14 +3,15 @@ import "./CompanyProfile.scss";
 import MyContext from "../../context/MyContext";
 
 const CompanyProfile = () => {
-  const { userCompany } = useContext(MyContext);
+  const { userData } = useContext(MyContext);
   const [company, setCompany] = useState({});
+  const companyID = userData && userData.userCompany;
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/company/viewCompanyProfile/:${userCompany}`,
+          `http://localhost:5000/company/viewCompanyProfile/${companyID}`,
           {
             method: "GET",
             headers: {
@@ -27,7 +28,7 @@ const CompanyProfile = () => {
       }
     };
     fetchCompanyDetails();
-  }, [userCompany, company]);
+  }, [companyID, company]);
   return (
     <div className="companyProfile">
       <h1>Company Profile</h1>
