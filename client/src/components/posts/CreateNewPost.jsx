@@ -1,7 +1,7 @@
+import "./CreateNewPost.scss";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
-import { Link } from "react-router-dom";
 
 const CreateNewPost = () => {
   const { userData, posts, setPosts } = useContext(MyContext);
@@ -13,6 +13,7 @@ const CreateNewPost = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
 
   const onSubmit = async (data) => {
     const newData = {
@@ -44,18 +45,27 @@ const CreateNewPost = () => {
       );
     }
   };
+
+  
+
   console.log("check", posts);
   return (
-    <div>
-      <h2>Create a New Post</h2>
+    <div className="create-new-post">
+      <h4>Create a New Post...</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
           {...register("content", { required: true, maxLength: 100 })}
         />
+
         <input type="submit" />
-        <Link to="/user/create">create new User</Link>
+        {error && <div className="error">Error: {error}</div>}
+        {message && <div className="message">{message}</div>}
+
+        <input type="submit" value="Post" />
+
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
+
       </form>
     </div>
   );
