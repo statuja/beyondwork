@@ -8,7 +8,7 @@ import logo4 from "../../images/netta.png";
 function About() {
   return (
 
-    <div>
+    <div className="about">
     <div className="above">
       <div className="left">
         <div className="logo">

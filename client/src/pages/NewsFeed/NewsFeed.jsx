@@ -4,6 +4,7 @@ import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 import CreateNewPost from "../../components/posts/CreateNewPost";
 import GetAllPosts from "../../components/posts/GetAllPosts";
+import Menu from "../../components/Menu/Menu";
 //import Footer from "./components/Footer/Footer";
 import Topbar from "../../components/Topbar/Topbar";
 
@@ -12,6 +13,16 @@ const Home = () => {
 
   return (
     <div className="home">
+
+      <h1>Newsfeed</h1>
+      <Link to="/company/profile">view company profile</Link>
+      <CreateNewPost />
+      <GetAllPosts />
+
+    <div>
+      <Menu/>
+    </div>
+
       <Topbar />
       <div className="newsfeed">
         <h1>Newsfeed</h1>
