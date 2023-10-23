@@ -145,6 +145,7 @@ export const deleteUser = async (req, res) => {
 export const savePost = async (req, res) => {
   try {
     const usersId = req.user._id;
+    const postId = req.params;
 
     const updatedUser = await User.findByIdAndUpdate(
       usersId,
@@ -164,12 +165,17 @@ export const getSavedPosts = async (req, res) => {
   try {
     const usersId = req.user._id;
 
-    const savedPosts = await User.findById(usersId)
-      .select("savedPosts")
-      .populate("savedPosts");
+    const user = await User.findById(usersId).populate("savedPosts");
+    if (!user) {
+      return res.status(404).json({ message: "User not found." }); // Handle the case where the user is not found
+    }
 
-    res.json(savedPosts);
+    if (!Array.isArray(user.savedPosts)) {
+      return res.status(400).json({ message: "Saved posts is not an array." }); // Handle the case where savedPosts is not an array
+    }
+
+    res.json(user.savedPosts);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ message: error.message }); // Handle other errors
   }
 };

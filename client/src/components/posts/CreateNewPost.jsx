@@ -14,6 +14,7 @@ const CreateNewPost = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+
   const onSubmit = async (data) => {
     const newData = {
       content: data.content,
@@ -44,6 +45,9 @@ const CreateNewPost = () => {
       );
     }
   };
+
+  
+
   console.log("check", posts);
   return (
     <div className="create-new-post">
@@ -52,9 +56,16 @@ const CreateNewPost = () => {
         <textarea
           {...register("content", { required: true, maxLength: 100 })}
         />
+
         <input type="submit" />
         {error && <div className="error">Error: {error}</div>}
         {message && <div className="message">{message}</div>}
+
+        <input type="submit" value="Post" />
+
+        {error && <div>Error: {error}</div>}
+        {message && <div>{message}</div>}
+
       </form>
     </div>
   );
