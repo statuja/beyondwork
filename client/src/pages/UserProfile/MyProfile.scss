@@ -1,6 +1,6 @@
 .profile {
   display: flex;
-  .right {
+  .left {
     flex: 9;
     .cover {
       height: 350px;
@@ -24,27 +24,92 @@
         border: 3px solid white;
       }
     }
-    .info {
+    .top {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      .header {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        .infoName {
+        gap: 20px;
+        .name {
           font-size: 24px;
         }
-        .infoDesc {
+        .desc {
           font-weight: 300;
         }
       }
-  }
-  .rightBottom {
-    display: flex;
-  }
+      
+        button {
+          width: 100px;
+          height: 30px;
+         
+          border-radius: 6px;
+          background-color: #ffb000;
+          font-weight: bold;
+          cursor: pointer;
+          
+  
+          //transition: transform 0.3s;
+          &:hover {
+            transform: scale(1.03);
+            //width: 32%;
+            background-color: #ffcf9d;
+          }
+        }
+      
+    }
+    .title{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
+.infoSec{
+  margin-bottom: 30px;
+}
 
+.leftbarInfoItem{
+  margin-bottom: 10px;
+}
 
+.leftbarInfoKey{
+  font-weight: 500;
+  margin-right: 15px;
+  color: #555;
+}
 
+.leftbarInfoValue{
+  font-weight: 300;
+}
+
+.leftbarFollowings{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.leftbarFollowing{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.leftbarFollowingImg{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+  }
+
+}
 
 
 
