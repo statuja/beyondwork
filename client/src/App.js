@@ -14,6 +14,7 @@ import "./App.scss";
 import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
+import SavedPosts from "./components/posts/SavedPosts";
 
 function App() {
   const Layout = () => {
@@ -73,6 +74,10 @@ function App() {
     {
       path: "/all/post",
       element: <GetAllPosts />,
+    },
+    {
+      path: "/savedposts",
+      element: <SavedPosts />,
     },
     {
       path: "/company/profile",
