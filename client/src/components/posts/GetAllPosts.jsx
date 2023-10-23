@@ -1,3 +1,4 @@
+import "./GetAllPostCards.scss";
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
@@ -57,23 +58,25 @@ const GetAllPosts = () => {
     <>
       <h2 className="posts-title">All Posts</h2>
       <div className="post-Container">
-        {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>}
-        {posts?.map((item) => (
-          <div key={item._id} className="postCard">
-            <Link to={`/post/${item._id}`}></Link>
-            <p>{item.content}</p>
-            <h3>
-              created by :
-              <Link to={`/user/${item.createdBy._id}`}>
-                {item.createdBy.userFullName}
-              </Link>
-            </h3>
-            <p>Created on: {item.createdOn}</p>
-            <p>{item.company}</p>
-            <button onClick={() => onSavePost(item._id)}>Save Post</button>
-          </div>
-        ))}
+
+        {error ? (
+          <div>Error: {error}</div>
+        ) : (
+          posts?.map((item) => (
+            <div key={item._id} className="postCard">
+              <h3>
+                created by :
+                <Link to={`/user/${item.createdBy._id}`}>
+                  {item.createdBy.userFullName}
+                </Link>
+              </h3>
+              <p>{item.company}</p>
+              <Link to={`/post/${item._id}`}></Link>
+              <p>{item.content}</p>
+            </div>
+          ))
+        )}
+
       </div>
     </>
   );
