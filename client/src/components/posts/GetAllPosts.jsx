@@ -56,7 +56,6 @@ const GetAllPosts = () => {
   };
   return (
     <>
-      <h2 className="posts-title">All Posts</h2>
       <div className="post-Container">
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
