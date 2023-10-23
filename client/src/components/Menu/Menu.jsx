@@ -4,6 +4,7 @@ import "./menu.scss"
 import { Link } from "react-router-dom";
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined';
@@ -19,6 +20,9 @@ const Menu = () => {
         <ul className='menu'>
             <li>
             <Link to="/user/profile"> <AccountCircleOutlinedIcon className='icon'/> My Profile</Link>
+            </li>
+            <li>
+            <Link to="/company/profile"> <ApartmentOutlinedIcon className='icon'/> Company Profile</Link>
             </li>
             <li>
             <Link to="/user/create"> <PersonAddAltOutlinedIcon className='icon'/> Add New User</Link>
