@@ -61,7 +61,7 @@ router.get("/myProfile", authorization, getMyProfile);
 router.put("/updateMyProfile", authorization, updateMyProfile);
 router.get("/getUserProfile/:id", authorization, getUserProfile);
 router.delete("/deleteUser/:userId", authorization, isAdmin, deleteUser);
-router.post("/savePost", authorization, savePost);
+router.post("/savePost/:postId", authorization, savePost);
 router.get("/savedPosts", authorization, getSavedPosts);
 
 export default router;

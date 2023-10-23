@@ -24,6 +24,15 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 
+// Handle preflight requests
+app.options("*", cors(corsOptions));
+// Set up the necessary headers in the preflight response
+app.options("/user/savePost", cors(corsOptions), (req, res) => {
+  res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.set("Access-Control-Allow-Methods", "POST");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.status(200).send();
+});
 //Routes
 
 app.use("/company", companyRoute);
