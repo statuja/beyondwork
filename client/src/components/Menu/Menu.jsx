@@ -24,11 +24,11 @@ const Menu = () => {
             <Link to="/user/create"> <PersonAddAltOutlinedIcon className='icon'/> Add New User</Link>
             </li>
             <li>
-            <Link to="">
+            <Link to="/savedposts">
             <BookmarkBorderOutlinedIcon className='icon'/> Saved Posts</Link>
             </li>
             <li>
-            <Link to=""> 
+            <Link to="allusers"> 
             <Groups2OutlinedIcon className='icon'/> Your Team</Link>
             </li>
             <li>

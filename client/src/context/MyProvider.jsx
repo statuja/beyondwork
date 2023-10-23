@@ -5,7 +5,7 @@ const MyProvider = ({ children }) => {
   const [adminEmail, setAdminEmail] = useState("your admin email");
   const [companyName, setCompanyName] = useState("your company");
   const [companyData, setCompanyData] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState("");
   const [posts, setPosts] = useState([]);
 
   const updateCompanyData = (newData) => {

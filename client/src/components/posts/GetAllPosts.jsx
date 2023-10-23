@@ -55,7 +55,7 @@ const GetAllPosts = () => {
     }
   };
   return (
-  <>
+    <>
       <h2 className="posts-title">All Posts</h2>
       <div className="post-Container">
         {error && <div>Error: {error}</div>}
@@ -63,15 +63,15 @@ const GetAllPosts = () => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
-            <p>{item.content}</p>
+
             <h3>
               created by :
               <Link to={`/user/${item.createdBy._id}`}>
                 {item.createdBy.userFullName}
-              </Link>
+              </Link>{" "}
+              <p>{item.content}</p>
             </h3>
             <p>Created on: {item.createdOn}</p>
-            <p>{item.company}</p>
             <button onClick={() => onSavePost(item._id)}>Save Post</button>
           </div>
         ))}
