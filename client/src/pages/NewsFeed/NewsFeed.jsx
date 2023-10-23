@@ -3,6 +3,7 @@ import "./NewsFeed.scss";
 import { Link } from "react-router-dom";
 import CreateNewPost from "../../components/posts/CreateNewPost";
 import GetAllPosts from "../../components/posts/GetAllPosts";
+import Menu from "../../components/Menu/Menu";
 
 const Home = () => {
   return (
@@ -11,6 +12,8 @@ const Home = () => {
       <Link to="/company/profile">view company profile</Link>
       <CreateNewPost />
       <GetAllPosts />
+
+      <Menu/>
     </div>
   );
 };
