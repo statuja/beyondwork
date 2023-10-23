@@ -38,7 +38,7 @@ const Login = () => {
       if (response.ok) {
         const responseData = await response.json();
         setUserData(responseData.user);
-        navigate("/create/post");
+        navigate("/newsfeed");
       } else {
         const errorData = await response.json();
         setError(errorData.error);

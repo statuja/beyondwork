@@ -1,3 +1,4 @@
+import "./GetAllPostCards.scss";
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
@@ -41,8 +42,6 @@ const GetAllPosts = () => {
         ) : (
           posts?.map((item) => (
             <div key={item._id} className="postCard">
-              <Link to={`/post/${item._id}`}></Link>
-              <p>{item.content}</p>
               <h3>
                 created by :
                 <Link to={`/user/${item.createdBy._id}`}>
@@ -50,6 +49,8 @@ const GetAllPosts = () => {
                 </Link>
               </h3>
               <p>{item.company}</p>
+              <Link to={`/post/${item._id}`}></Link>
+              <p>{item.content}</p>
             </div>
           ))
         )}
