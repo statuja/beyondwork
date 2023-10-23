@@ -42,7 +42,7 @@ app.use("/post", postRoute);
 app.post("/server/test", (req, res) => {
   console.log(req.body);
   res.json("Yes server is connected with client now!");
-});
+}); //do we need this part?
 
 mongoose
   .connect(process.env.MONGO_DB_LINK)

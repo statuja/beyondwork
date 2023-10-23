@@ -13,19 +13,16 @@ export const createUser = async (req, res) => {
     const { userPassword } = req.body;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(userPassword, salt);
-    req.body.userPassword = hashedPassword;
+    req.body.userPassword = hashedPassword; // replace the userPassword field in the req.body with the hashed password before creating the new user. This approach modifies the req.body object to include the hashed password.
     const newUser = await User.create({
       ...req.body,
-      userPassword: hashedPassword,
-    });
-    console.log(companyID);
+      userPassword: hashedPassword, //directly include the userPassword: hashedPassword field when creating the new user. This approach does not modify the req.body object and includes the hashed password directly in the User.create call.
+    }); // lines 17 and 19 achieve the same result
     console.log(newUser);
-
     res.json(newUser);
   } catch (error) {
     res.json(error.message);
   }
-
   console.log("end");
 };
 
