@@ -51,7 +51,7 @@ const CreateNewPost = () => {
       <h4>Create a New Post...</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register("content", { required: true, maxLength: 100 })}
+          {...register("content", { required: true, maxLength: 500 })}
         />
 
         <input type="submit" />
