@@ -15,6 +15,7 @@ import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 import SavedPosts from "./components/posts/SavedPosts";
+import { UpdateCompanyProfile } from "./pages/CompanyProfile/EditCompanyProfile";
 
 function App() {
   const Layout = () => {
@@ -56,13 +57,12 @@ function App() {
           path: "/user/login",
           element: <Login />,
         },
-        {
-          path: "/user/create",
-          element: <UserRegistration />,
-        },
       ],
     },
-
+    {
+      path: "/user/create",
+      element: <UserRegistration />,
+    },
     {
       path: "/newsfeed",
       element: <NewsFeed />,
@@ -82,6 +82,10 @@ function App() {
     {
       path: "/company/profile",
       element: <CompanyProfile />,
+    },
+    {
+      path: "/updateCompanyProfile",
+      element: <UpdateCompanyProfile />,
     },
     {
       path: "/user/profile",
