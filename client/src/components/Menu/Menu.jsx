@@ -1,8 +1,7 @@
-import React from 'react'
-import "./menu.scss"
+import React from "react";
+import "./menu.scss";
 
 import { Link } from "react-router-dom";
-
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
@@ -32,7 +31,7 @@ const Menu = () => {
             <BookmarkBorderOutlinedIcon className='icon'/> Saved Posts</Link>
             </li>
             <li>
-            <Link to="allusers"> 
+            <Link to="/allusers"> 
             <Groups2OutlinedIcon className='icon'/> Your Team</Link>
             </li>
             <li>
@@ -56,7 +55,7 @@ const Menu = () => {
             </li>
         </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
