@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import React, { useContext, useState } from "react";
 import MyContext from "../../context/MyContext";
+import Topbar from "../../components/Topbar/Topbar";
+import Footer from "../../components/Footer/Footer";
+import Menu from "../../components/Menu/Menu";
 import "./CreateUser.scss";
 
 export const UserRegistration = () => {
@@ -61,68 +64,72 @@ export const UserRegistration = () => {
   console.log(errors);
 
   return (
-    <div>
-      <h3>Hello Admin!</h3>
-      <p>Here, you can register all the employees in your team:</p>
+    <>
+      {" "}
+      <Topbar />
+      <div className="main-container">
+        <div className="addUser">
+          <h3>Hello Admin!</h3>
+          <p>Here, you can register all the employees in your team:</p>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="userFullName">Employee Full Name:</label>
-        <input
-          type="text"
-          placeholder="Employee full Name"
-          {...register("userFullName", { required: true })}
-        />
-        <label htmlFor="userJobTitle">Job Title:</label>
-        <input
-          type="text"
-          placeholder="Role in the company"
-          {...register("userJobTitle", { required: true })}
-        />
-        <label htmlFor="userDepartment">Department:</label>
-        <input
-          type="text"
-          placeholder="Department"
-          {...register("userDepartment", { required: true })}
-        />
-        <label htmlFor="address">
-          Street, Building, Office (if applicable) Number
-        </label>
-        <input
-          type="text"
-          placeholder="Street"
-          {...register("address", { required: true })}
-        />
-        <label htmlFor="zipCode">Zip Code:</label>
-        <input
-          type="text"
-          placeholder="ZipCode"
-          {...register("zipCode", { required: true })}
-        />
-        <label htmlFor="city">City:</label>
-        <input type="text" placeholder="City" {...register("city")} />
-        <label htmlFor="country">Country:</label>
-        <input type="text" placeholder="Country" {...register("country")} />
-        <label htmlFor="email">E-mail:</label>
-        <input
-          type="email"
-          placeholder="Employee E-mail Address"
-          {...register("email")}
-        />
-        <label htmlFor="password">Temporary Password:</label>
-        <input
-          type="password"
-          placeholder="Employee temporary Password"
-          {...register("userPassword", {
-            required: true,
-            min: 8,
-            maxLength: 30,
-          })}
-        />
-        {/* <select {...register("adminRole")}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="userFullName">Employee Full Name:</label>
+            <input
+              type="text"
+              placeholder="Employee full Name"
+              {...register("userFullName", { required: true })}
+            />
+            <label htmlFor="userJobTitle">Job Title:</label>
+            <input
+              type="text"
+              placeholder="Role in the company"
+              {...register("userJobTitle", { required: true })}
+            />
+            <label htmlFor="userDepartment">Department:</label>
+            <input
+              type="text"
+              placeholder="Department"
+              {...register("userDepartment", { required: true })}
+            />
+            <label htmlFor="address">
+              Street, Building, Office (if applicable) Number
+            </label>
+            <input
+              type="text"
+              placeholder="Street"
+              {...register("address", { required: true })}
+            />
+            <label htmlFor="zipCode">Zip Code:</label>
+            <input
+              type="text"
+              placeholder="ZipCode"
+              {...register("zipCode", { required: true })}
+            />
+            <label htmlFor="city">City:</label>
+            <input type="text" placeholder="City" {...register("city")} />
+            <label htmlFor="country">Country:</label>
+            <input type="text" placeholder="Country" {...register("country")} />
+            <label htmlFor="email">E-mail:</label>
+            <input
+              type="email"
+              placeholder="Employee E-mail Address"
+              {...register("email")}
+            />
+            <label htmlFor="password">Temporary Password:</label>
+            <input
+              type="password"
+              placeholder="Employee temporary Password"
+              {...register("userPassword", {
+                required: true,
+                min: 8,
+                maxLength: 30,
+              })}
+            />
+            {/* <select {...register("adminRole")}>
           <option value="No">Not an Admin</option>
           <option value="Yes">Admin</option>
         </select> */}
-        {/* <label>Is this user an admin?</label>
+            {/* <label>Is this user an admin?</label>
         <input {...register("adminRole")} type="radio" value="Yes" />
         <input
           {...register("adminRole")}
@@ -130,10 +137,16 @@ export const UserRegistration = () => {
           value=" No"
           defaultChecked
         /> */}
-        <input type="submit" />
-        {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>}{" "}
-      </form>
-    </div>
+            <input type="submit" />
+            {error && <div>Error: {error}</div>}
+            {message && <div>{message}</div>}{" "}
+          </form>
+        </div>
+        <div className="leftmenu">
+          <Menu />
+        </div>
+      </div>{" "}
+      <Footer />
+    </>
   );
 };

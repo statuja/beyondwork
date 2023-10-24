@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Topbar from "../../components/Topbar/Topbar";
+import Footer from "../../components/Footer/Footer";
+import Menu from "../../components/Menu/Menu";
+import "./SavedPosts.scss";
 
 const SavedPosts = () => {
   const [savedPosts, setSavedPosts] = useState([]);
@@ -36,16 +40,25 @@ const SavedPosts = () => {
     return <div>No saved posts yet.</div>;
   }
   return (
-    <div>
-      <h2>Saved Posts</h2>
-      {savedPosts?.map((post) => (
-        <div key={post._id}>
-          <p>Post content: {post.content}</p>
-          <p>By {post.createdBy}</p>
-          <p>Created on {post.createdOn}</p>
+    <>
+      <Topbar />
+      <div className="main-container">
+        <div className="savedPosts">
+          <h2>Saved Posts</h2>
+          {savedPosts?.map((post) => (
+            <div className="post-card" key={post._id}>
+              <p>Post content: {post.content}</p>
+              <p>By {post.createdBy}</p>
+              <p>Created on {post.createdOn}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+        <div className="leftmenu">
+          <Menu />
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 
