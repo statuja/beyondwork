@@ -10,7 +10,6 @@
     justify-content: center;
     position: fixed;
     right: 80px;
-
   }
 
   .newsfeed {
@@ -21,31 +20,26 @@
     justify-content: center;
     padding: 20px;
     padding-right: 300px;
-
-    @media screen and (max-width: 768px) {
-      width: 100%;
-      /* Adjust the width for smaller screens */
-    }
-  }
-
-  h1 {
-    font-size: 24px;
-    /* Center the text horizontally */
-
-    @media screen and (max-width: 768px) {
-      font-size: 20px;
-      /* Adjust font size for smaller screens */
-    }
   }
 
   p {
-    margin: 10px 0;
-    /* Center the text horizontally */
+    padding: 5px;
+  }
+}
 
-    @media screen and (max-width: 768px) {
-      margin: 8px 0;
-      /* Adjust margin for smaller screens */
+@media only screen and (max-width: 768px) {
+  .home {
+    .newsfeed {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-right: 0;
+      flex: 1;
+    }
+    .leftmenu {
+      display: none;
     }
   }
-
 }
