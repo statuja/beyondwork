@@ -9,7 +9,7 @@ const GetAllPosts = () => {
   const {userData} = useContext(MyContext)
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [editPostOn, setEditPostOn] = useState(false)
+  const [editPostId, setEditPostId] = useState(null);
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -85,8 +85,14 @@ const GetAllPosts = () => {
   }
 
   const handleOnEditPostOn = (postId) => {
-    setEditPostOn(true)
-    return editPostOn
+    setEditPostId(postId);
+  }
+
+  const renderEditPostComponent = (postId) => {
+    if (editPostId === postId) {
+      return <EditPost postId={postId} onCancel={() => setEditPostId(null)} />;
+    }
+    return null;
   }
 
   return (
@@ -109,7 +115,7 @@ const GetAllPosts = () => {
             <button onClick={() => onSavePost(item._id)}>Save Post</button>
             {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
             {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
-            {editPostOn === true && <EditPost/>}
+            {renderEditPostComponent(item._id)}
           </div>
         ))}
       </div>
