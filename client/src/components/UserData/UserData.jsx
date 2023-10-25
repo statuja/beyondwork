@@ -4,15 +4,15 @@ const UserData = ({ isMe, user }) => {
   if (isMe) {
     return (
       <div className="userDataWrapper">
-          <div className="top">
-            <div className="header">
-              <h4>{user.userFullName}</h4>
-              <span>
-                Hello my friends! Lorem ipsum, dolor sit amet consectetur
-                adipisicing elit. Tempora, voluptatum!
-              </span>
-            </div>
+        <div className="top">
+          <div className="header">
+            <h4>{user.userFullName}</h4>
+            <span>
+              Hello my friends! Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempora, voluptatum!
+            </span>
           </div>
+        </div>
         <div className="info">
           <h4>User information</h4>
           <button>Edit Profile</button>
@@ -27,7 +27,7 @@ const UserData = ({ isMe, user }) => {
             </div>
             <div className="infoItem">
               <span className="infoKey">Address:</span>
-              {/* <span className="infoValue">{user.userAddress.address}</span> */}
+              <span className="infoValue">{user.userAddress.address}</span>
             </div>
             <div className="infoItem">
               <span className="infoKey">ZipCode:</span>
@@ -35,7 +35,7 @@ const UserData = ({ isMe, user }) => {
             </div>
             <div className="infoItem">
               <span className="infoKey">City:</span>
-             {/*  <span className="infoValue">{user.userAddress.city}</span> */}
+              <span className="infoValue">{user.userAddress.city}</span>
             </div>
             <div className="infoItem">
               <span className="infoKey">Country:</span>
@@ -64,15 +64,15 @@ const UserData = ({ isMe, user }) => {
   } else {
     return (
       <div className="userDataWrapper">
-          <div className="top">
-            <div className="header">
-              <h4>{user.userFullName}</h4>
-              <span>
-                Hello my friends! Lorem ipsum, dolor sit amet consectetur
-                adipisicing elit. Tempora, voluptatum!
-              </span>
-            </div>
+        <div className="top">
+          <div className="header">
+            <h4>Name: {user.userFullName}</h4>
+            <span>
+              Hello my friends! Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempora, voluptatum!
+            </span>
           </div>
+        </div>
         <div className="info">
           <h4>User information</h4>
           <div className="infoSec">
@@ -87,11 +87,11 @@ const UserData = ({ isMe, user }) => {
 
             <div className="infoItem">
               <span className="infoKey">City:</span>
-              <span className="infoValue">{user.userAddress.city}</span>
+              <span className="infoValue">{user.city}</span>
             </div>
             <div className="infoItem">
               <span className="infoKey">Country:</span>
-              <span className="infoValue">{user.userAddress.country}</span>
+              <span className="infoValue">{user.country}</span>
             </div>
             <div className="infoItem">
               <span className="infoKey">Date of Birth:</span>

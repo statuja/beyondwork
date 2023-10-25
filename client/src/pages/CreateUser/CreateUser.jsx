@@ -65,8 +65,6 @@ export const UserRegistration = () => {
 
   return (
     <>
-      {" "}
-      <Topbar />
       <div className="main-container">
         <div className="addUser">
           <h3>Hello Admin!</h3>
@@ -139,14 +137,10 @@ export const UserRegistration = () => {
         /> */}
             <input type="submit" />
             {error && <div>Error: {error}</div>}
-            {message && <div>{message}</div>}{" "}
+            {message && <div>{message}</div>}
           </form>
         </div>
-        <div className="leftmenu">
-          <Menu />
-        </div>
-      </div>{" "}
-      <Footer />
+      </div>
     </>
   );
 };

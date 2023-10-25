@@ -50,6 +50,7 @@ function AllUsers() {
             <div className="user-image-placeholder"></div>
             <div className="user-details">
               <p>Name: {user.userFullName}</p>
+
               <p>Job Title: {user.userJobTitle}</p>
               <p>Department: {user.userDepartment}</p>
               <p>Email: {user.userContact.email}</p>

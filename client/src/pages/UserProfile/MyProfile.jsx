@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import UserData from "../../components/UserData/UserData";
-import Topbar from "../../components/Topbar/Topbar";
 import profileCover from "../../images/profile_cover.jpg";
 import profileAvatar from "../../images/profile_avatar.jpg";
 import MyContext from "../../context/MyContext";
-import "./MyProfile.scss"
+import "./MyProfile.scss";
 
 const UserProfile = () => {
   const { userData } = useContext(MyContext);
@@ -31,13 +30,15 @@ const UserProfile = () => {
               credentials: "include",
             }
           );
-      
+
           if (response.ok) {
             const data = await response.json();
             return data;
           } else {
             // Handle non-200 HTTP response, e.g., user not found or other errors
-            throw new Error(`Failed to fetch user data. Status: ${response.status}`);
+            throw new Error(
+              `Failed to fetch user data. Status: ${response.status}`
+            );
           }
         } catch (error) {
           // Handle network errors or any other unexpected issues
@@ -58,14 +59,13 @@ const UserProfile = () => {
 
   return (
     <>
-     topbar
       <div className="profile">
         <div className="left">
           <div className="cover">
             <img className="coverImg" src={profileCover} alt="cover" />
             <img className="userImg" src={profileAvatar} alt="avatar" />
           </div>
-        
+
           <div className="bottom">
             {loading ? (
               <p>Loading...</p>
@@ -82,5 +82,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
-

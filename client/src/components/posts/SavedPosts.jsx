@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Topbar from "../../components/Topbar/Topbar";
-import Footer from "../../components/Footer/Footer";
-import Menu from "../../components/Menu/Menu";
 import "./SavedPosts.scss";
 
 const SavedPosts = () => {
@@ -41,7 +38,6 @@ const SavedPosts = () => {
   }
   return (
     <>
-      <Topbar />
       <div className="main-container">
         <div className="savedPosts">
           <h2>Saved Posts</h2>
@@ -53,11 +49,7 @@ const SavedPosts = () => {
             </div>
           ))}
         </div>
-        <div className="leftmenu">
-          <Menu />
-        </div>
       </div>
-      <Footer />
     </>
   );
 };

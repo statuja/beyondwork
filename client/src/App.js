@@ -24,7 +24,6 @@ import MyContext from "./context/MyContext";
 function App() {
   const { userData } = useContext(MyContext);
   const Layout = () => {
-
     if (!userData._id) {
       return (
         <div>
@@ -103,7 +102,7 @@ function App() {
           element: <EditCompanyProfile />,
         },
         {
-          path: "/user/profile/:id",
+          path: "/user/profile/me",
           element: <MyProfile />,
         },
         {
