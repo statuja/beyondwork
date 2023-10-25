@@ -15,11 +15,11 @@ import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 import SavedPosts from "./components/posts/SavedPosts";
+import EditCompanyProfile from "./pages/CompanyProfile/EditCompanyProfile";
 import Topbar from "./components/Topbar/Topbar";
 import Menu from "./components/Menu/Menu";
 import { useContext } from "react";
 import MyContext from "./context/MyContext";
-import { UpdateCompanyProfile } from "./pages/CompanyProfile/EditCompanyProfile";
 
 
 function App() {
@@ -98,6 +98,10 @@ function App() {
           element: <CompanyProfile />,
         },
         {
+      path: "/updateCompanyProfile",
+      element: <EditCompanyProfile />,
+    },
+        {
           path: "/user/profile/:id",
           element: <MyProfile />,
         },
@@ -106,7 +110,7 @@ function App() {
           element: <AllUsers />,
         },
       ],
-    },
+
   ]);
 
   return (

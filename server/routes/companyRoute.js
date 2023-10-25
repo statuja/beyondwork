@@ -8,6 +8,7 @@ import {
 } from "../controllers/companyControllers.js";
 import authorization from "../middleware/authorization.js";
 import isAdmin from "../middleware/adminAuthorization.js";
+import multer from "multer";
 
 const router = express.Router();
 
@@ -26,6 +27,19 @@ const validation = [
       }
     }),
 ];
+
+//logo upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./client/public/uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const logoUpload = multer({ storage: storage });
+//
 
 router.post(
   "/create",
@@ -47,9 +61,9 @@ router.get(
   viewCompanyProfile
 );
 router.put(
-  "/updateCompanyProfile",
+  "/updateCompanyProfile/:userCompany",
   authorization,
-  isAdmin,
+  logoUpload.single("companyLogo"),
   updateCompanyProfile
 );
 
