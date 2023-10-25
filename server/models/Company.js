@@ -26,6 +26,7 @@ const companySchema = new Schema(
     companyAddress: { type: addressSchema, required: true },
     companyContact: { type: contactSchema, required: true },
     defaultAdminEmail: String, // unique?
+    companyLogo: String,
   },
   { versionKey: false }
 );

@@ -15,7 +15,7 @@ import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 import SavedPosts from "./components/posts/SavedPosts";
-import { UpdateCompanyProfile } from "./pages/CompanyProfile/EditCompanyProfile";
+import EditCompanyProfile from "./pages/CompanyProfile/EditCompanyProfile";
 
 function App() {
   const Layout = () => {
@@ -85,7 +85,7 @@ function App() {
     },
     {
       path: "/updateCompanyProfile",
-      element: <UpdateCompanyProfile />,
+      element: <EditCompanyProfile />,
     },
     {
       path: "/user/profile",
