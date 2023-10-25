@@ -54,22 +54,64 @@ export const deletePost = async (req, res) => {
   try {
     const postId = req.body.postId;
 
-    const post = await Post.findOneAndDelete({_id: postId})
+    const post = await Post.findOneAndDelete({ _id: postId });
 
-    res.json(post)
+    res.json(post);
   } catch (error) {
     res.json(error.message);
   }
-}
+};
 
 export const editPost = async (req, res) => {
   try {
     const postId = req.body.postId;
 
-    const post = await Post.findOneAndUpdate({ _id: postId}, {content: req.body})
+    const post = await Post.findOneAndUpdate(
+      { _id: postId },
+      { content: req.body }
+    );
 
-    res.json(post)
+    res.json(post);
   } catch (error) {
     res.json(error.message);
   }
-}
+};
+
+export const likePost = async (req, res) => {
+  try {
+    const { postId, userId } = req.params;
+    console.log(req.params);
+    let postQuery = await Post.findById(postId);
+    if (postQuery) {
+      const userCheck = postQuery.likedBy.includes(userId);
+      console.log(userCheck);
+      if (!userCheck) {
+        const doc = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $push: { likedBy: userId }, $inc: { like: 1 } },
+          { new: true }
+        );
+        if (doc) {
+          res.json(doc);
+        } else {
+          res.status(404).json({ message: "Post not found" });
+        }
+      } else {
+        const doc2 = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $pull: { likedBy: userId }, $inc: { like: -1 } },
+          { new: true }
+        );
+        if (doc2) {
+          res.json(doc2);
+        } else {
+          res.status(404).json({ message: "Post not found" });
+        }
+      }
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "An error occurred while liking the post." });
+  }
+};

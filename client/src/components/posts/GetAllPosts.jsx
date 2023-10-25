@@ -5,11 +5,13 @@ import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
 
 const GetAllPosts = () => {
+
   const [posts, setPosts] = useState([]);
   const {userData} = useContext(MyContext)
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
+
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -76,17 +78,56 @@ const GetAllPosts = () => {
 
       if (response.ok) {
         setMessage("Post has been successfully deleted.");
-        setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
+        setPosts((prevPosts) =>
+          prevPosts.filter((post) => post._id !== postId)
+        );
       } else {
         setError("Failed to delete the post.");
       }
     } catch (error) {
       setError("An error occurred while deleting the post.");
     }
-  }
+  };
 
+  const handleLikePost = async (postId) => {
+    console.log(postId);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/post/like/${postId}/${userData._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      console.log(response.ok);
+
+      if (response.ok) {
+        const updatedPost = await response.json();
+
+        setPosts((prevPosts) =>
+          prevPosts.map((post) => (post._id === postId ? updatedPost : post))
+        );
+      } else {
+        const errorData = await response.json();
+        console.error("Error liking post:", errorData.message);
+        setError("Failed to like the post.");
+      }
+    } catch (error) {
+      console.error("An error occurred while liking the post:", error);
+      setError("An error occurred while liking the post.");
+    }
+  };
+
+  // const handleOnEditPostOn = (postId) => {
+  //   setEditPostOn(true);
+  //   return editPostOn;
+  // };
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
+
   }
 
   const renderEditPostComponent = (postId) => {
@@ -95,7 +136,6 @@ const GetAllPosts = () => {
     }
     return null;
   }
-
   return (
     <>
       <div className="post-Container">
@@ -109,14 +149,21 @@ const GetAllPosts = () => {
               created by :
               <Link to={`/user/${item.createdBy._id}`}>
                 {item.createdBy.userFullName}
-              </Link>{" "}
+              </Link>
               <p>{item.content}</p>
             </h3>
             <p>Created on: {item.createdOn}</p>
             <button onClick={() => onSavePost(item._id)}>Save Post</button>
+
+            {/* Like button and count */}
+            <button onClick={() => handleLikePost(item._id)}>Like</button>
+            <span>
+              <b>{item.like} Likes</b>
+            </span>
             {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
             {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
             {renderEditPostComponent(item._id)}
+
           </div>
         ))}
       </div>

@@ -7,6 +7,8 @@ const postSchema = new Schema(
     createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
     company: { type: Schema.Types.ObjectId, ref: "Company", required: true },
     createdOn: { type: Date, default: Date.now },
+    likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    like: { type: Number, default: 0 },
   },
   { versionKey: false }
 );
