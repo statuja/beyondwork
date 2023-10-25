@@ -12,6 +12,17 @@
     right: 10px;
   }
 
+
+
+  h1 {
+    font-size: 24px;
+    /* Center the text horizontally */
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+      /* Adjust font size for smaller screens */
+    }
+
   .newsfeed {
     display: flex;
     flex: 5;
@@ -20,6 +31,7 @@
     justify-content: center;
     padding: 20px;
     padding-right: 300px;
+
   }
 
   p {
