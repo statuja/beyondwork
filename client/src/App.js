@@ -21,11 +21,10 @@ import Menu from "./components/Menu/Menu";
 import { useContext } from "react";
 import MyContext from "./context/MyContext";
 
-
 function App() {
   const { userData } = useContext(MyContext);
   const Layout = () => {
-    if (!userData) {
+    if (!userData._id) {
       return (
         <div>
           <Navbar />
@@ -99,9 +98,9 @@ function App() {
           element: <CompanyProfile />,
         },
         {
-      path: "/updateCompanyProfile",
-      element: <EditCompanyProfile />,
-    },
+          path: "/updateCompanyProfile",
+          element: <EditCompanyProfile />,
+        },
         {
           path: "/user/profile/:id",
           element: <MyProfile />,
@@ -111,7 +110,7 @@ function App() {
           element: <AllUsers />,
         },
       ],
-    }
+    },
   ]);
 
   return (
