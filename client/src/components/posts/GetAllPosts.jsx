@@ -5,7 +5,7 @@ import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
 
 const GetAllPosts = () => {
-  const { posts, setPosts } = useContext(MyContext);
+  const [posts, setPosts] = useState([]);
   const {userData} = useContext(MyContext)
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -24,6 +24,7 @@ const GetAllPosts = () => {
         if (response.ok) {
           const data = await response.json();
           setPosts(data);
+
         } else {
           setError("Failed to fetch posts. Please try again later.");
         }
@@ -90,7 +91,7 @@ const GetAllPosts = () => {
 
   const renderEditPostComponent = (postId) => {
     if (editPostId === postId) {
-      return <EditPost postId={postId} onCancel={() => setEditPostId(null)} />;
+      return <EditPost postId={postId}/>;
     }
     return null;
   }

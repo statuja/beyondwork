@@ -12,16 +12,10 @@
     right: 10px;
   }
 
-
-
   h1 {
     font-size: 24px;
     /* Center the text horizontally */
-
-    @media screen and (max-width: 768px) {
-      font-size: 20px;
-      /* Adjust font size for smaller screens */
-    }
+  }
 
   .newsfeed {
     display: flex;
@@ -41,6 +35,7 @@
 
 @media only screen and (max-width: 768px) {
   .home {
+    font-size: 20px;
     .newsfeed {
       width: 100%;
       display: flex;

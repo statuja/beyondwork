@@ -44,6 +44,7 @@ function App() {
       );
     }
   };
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -110,7 +111,7 @@ function App() {
           element: <AllUsers />,
         },
       ],
-
+    }
   ]);
 
   return (

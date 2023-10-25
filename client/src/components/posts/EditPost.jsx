@@ -4,8 +4,8 @@ const EditPost = () => {
   return (
     <div>
         <form>
-            <label for="content"></label>
-            <input type='textarea' id="content" name="content"></input>
+            <label htmlFor="content">Your post:</label>
+            <input type='textarea' id="content"></input>
             <input type='submit'></input>
         </form>
     </div>
