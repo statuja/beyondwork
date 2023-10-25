@@ -16,16 +16,32 @@ import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 import SavedPosts from "./components/posts/SavedPosts";
 import { UpdateCompanyProfile } from "./pages/CompanyProfile/EditCompanyProfile";
+import Topbar from "./components/Topbar/Topbar";
+import Menu from "./components/Menu/Menu";
+import { useContext } from "react";
+import MyContext from "./context/MyContext";
 
 function App() {
+  const { userData } = useContext(MyContext);
   const Layout = () => {
-    return (
-      <div>
-        <Navbar />
-        <Outlet />
-        <Footer />
-      </div>
-    );
+    if (!userData) {
+      return (
+        <div>
+          <Navbar />
+          <Outlet />
+          <Footer />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Topbar />
+          <Menu />
+          <Outlet />
+          <Footer />
+        </div>
+      );
+    }
   };
 
   const router = createBrowserRouter([
@@ -71,6 +87,7 @@ function App() {
       path: "/create/post",
       element: <CreateNewPost />,
     },
+
     {
       path: "/all/post",
       element: <GetAllPosts />,
