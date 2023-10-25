@@ -2,11 +2,14 @@ import "./GetAllPostCards.scss";
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
+import EditPost from "./EditPost";
 
 const GetAllPosts = () => {
   const { posts, setPosts } = useContext(MyContext);
-  const [error, setError] = useState(null);
+  const {userData} = useContext(MyContext)
+  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [editPostOn, setEditPostOn] = useState(false)
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -32,6 +35,7 @@ const GetAllPosts = () => {
     };
     getAllPosts();
   }, []);
+
   const onSavePost = async (postId) => {
     try {
       const response = await fetch(
@@ -54,9 +58,39 @@ const GetAllPosts = () => {
       setError("An error occurred while saving the post.");
     }
   };
+
+  const handleOnDelete = async (postId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/post/delete/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ postId: postId }),
+        }
+      );
+
+      if (response.ok) {
+        setMessage("Post has been successfully deleted.");
+        setPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
+      } else {
+        setError("Failed to delete the post.");
+      }
+    } catch (error) {
+      setError("An error occurred while deleting the post.");
+    }
+  }
+
+  const handleOnEditPostOn = (postId) => {
+    setEditPostOn(true)
+    return editPostOn
+  }
+
   return (
     <>
-      <h2 className="posts-title">All Posts</h2>
       <div className="post-Container">
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
@@ -73,6 +107,9 @@ const GetAllPosts = () => {
             </h3>
             <p>Created on: {item.createdOn}</p>
             <button onClick={() => onSavePost(item._id)}>Save Post</button>
+            {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
+            {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
+            {editPostOn === true && <EditPost/>}
           </div>
         ))}
       </div>

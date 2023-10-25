@@ -17,7 +17,6 @@ const Home = () => {
       <div className="home">
         <div className="newsfeed">
           <h1>Newsfeed</h1>
-          <Link to="/company/profile">view company profile</Link>
           <CreateNewPost />
           <p>
             Hello <b>{userData.userFullName}</b>, here is the latest feeds from

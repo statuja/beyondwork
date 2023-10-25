@@ -19,6 +19,8 @@ import Topbar from "./components/Topbar/Topbar";
 import Menu from "./components/Menu/Menu";
 import { useContext } from "react";
 import MyContext from "./context/MyContext";
+import { UpdateCompanyProfile } from "./pages/CompanyProfile/EditCompanyProfile";
+
 
 function App() {
   const { userData } = useContext(MyContext);
@@ -42,7 +44,6 @@ function App() {
       );
     }
   };
-
   const router = createBrowserRouter([
     {
       path: "/",

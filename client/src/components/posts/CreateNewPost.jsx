@@ -31,9 +31,9 @@ const CreateNewPost = () => {
         credentials: "include",
       });
       const responseData = await response.json();
-      console.log("CREATE NEW POST: responseData:", responseData);
+      //console.log("CREATE NEW POST: responseData:", responseData);
       if (response.ok) {
-        setMessage(`You post has been successfully published.`);
+        setMessage(`Your post has been successfully published.`);
         setPosts([responseData, ...posts]);
       } else {
         setError(responseData.error[0].msg);
@@ -45,13 +45,13 @@ const CreateNewPost = () => {
     }
   };
 
-  console.log("check", posts);
+  //console.log("check", posts);
   return (
     <div className="create-new-post">
       <h4>Create a New Post...</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register("content", { required: true, maxLength: 100 })}
+          {...register("content", { required: true, maxLength: 500 })}
         />
 
         <input type="submit" />

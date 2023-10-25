@@ -49,3 +49,27 @@ export const getUserPosts = async (req, res) => {
     res.json(error.message);
   }
 };
+
+export const deletePost = async (req, res) => {
+  try {
+    const postId = req.body.postId;
+
+    const post = await Post.findOneAndDelete({_id: postId})
+
+    res.json(post)
+  } catch (error) {
+    res.json(error.message);
+  }
+}
+
+export const editPost = async (req, res) => {
+  try {
+    const postId = req.body.postId;
+
+    const post = await Post.findOneAndUpdate({ _id: postId}, {content: req.body})
+
+    res.json(post)
+  } catch (error) {
+    res.json(error.message);
+  }
+}

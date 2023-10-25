@@ -10,7 +10,6 @@
 
 .postCard {
   background: #f5f5dc;
-  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   width: 100%;
@@ -38,7 +37,5 @@
     &:hover {
       text-decoration: underline;
     }
-  }
-  @media screen and (max-width: 884px) {
   }
 }

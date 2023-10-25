@@ -42,7 +42,9 @@ export default function Topbar() {
             <span>1</span>
           </div>
         </div>
+        <Link to="/user/profile">
         <img src={profileAvatar} alt="" />
+        </Link>
       </div>
     </div>
   );
