@@ -44,26 +44,6 @@ app.use("/user", userRoute);
 app.use("/post", postRoute);
 app.use(express.static("public"));
 
-// image upload
-// const storage = multer.diskStorage({
-//   destination: function (req, file, callback) {
-//     callback(null, "public/images");
-//   },
-//   filename: function (req, file, callback) {
-//     callback(null, Date.now() + file.originalname);
-//   },
-// });
-
-// const upload = multer({
-//   storage: storage,
-// });
-// app.use(express.static("/public"));
-
-// app.post("/file/upload", upload.single("file"), (req, res) => {
-//   Company.create({ logo: req.file.filename })
-//     .then((result) => res.json(result))
-//     .catch((err) => console.log(err));
-// });
 
 mongoose
   .connect(process.env.MONGO_DB_LINK)

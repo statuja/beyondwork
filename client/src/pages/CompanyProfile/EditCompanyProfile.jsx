@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import MyContext from "../../context/MyContext";
+import "./CompanyProfile.scss";
+import { useNavigate } from "react-router-dom";
 
 const EditCompanyProfile = () => {
+  const navigate = useNavigate();
   const { userData } = useContext(MyContext);
   const companyID = userData.userCompany;
-
   const [companyData, setCompanyData] = useState({
     companyName: "",
     companyType: "",
@@ -69,7 +71,7 @@ const EditCompanyProfile = () => {
 
       if (response.ok) {
         const data = await response.json();
-
+        navigate("/company/profile");
         console.log("Company profile updated:", data);
       } else {
         console.error("Error updating company profile");
@@ -80,42 +82,55 @@ const EditCompanyProfile = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="companyName"
-          placeholder="Company Name"
-          value={companyData.companyName}
-          onChange={(e) =>
-            setCompanyData({ ...companyData, companyName: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          name="companyType"
-          placeholder="Company Type"
-          value={companyData.companyType}
-          onChange={(e) =>
-            setCompanyData({ ...companyData, companyType: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          name="numberOfEmployees"
-          placeholder="Number of Employees"
-          value={companyData.numberOfEmployees}
-          onChange={(e) =>
-            setCompanyData({
-              ...companyData,
-              numberOfEmployees: e.target.value,
-            })
-          }
-        />
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        <button type="submit">Update Profile</button>
-      </form>
-    </div>
+    <>
+      <div className="profile-main-container">
+        <div className="companyProfile">
+          <h1>Company Profile</h1>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="companyName"
+                placeholder="Company Name"
+                value={companyData.companyName}
+                onChange={(e) =>
+                  setCompanyData({
+                    ...companyData,
+                    companyName: e.target.value,
+                  })
+                }
+              />
+              <input
+                type="text"
+                name="companyType"
+                placeholder="Company Type"
+                value={companyData.companyType}
+                onChange={(e) =>
+                  setCompanyData({
+                    ...companyData,
+                    companyType: e.target.value,
+                  })
+                }
+              />
+              <input
+                type="text"
+                name="numberOfEmployees"
+                placeholder="Number of Employees"
+                value={companyData.numberOfEmployees}
+                onChange={(e) =>
+                  setCompanyData({
+                    ...companyData,
+                    numberOfEmployees: e.target.value,
+                  })
+                }
+              />
+              <input type="file" accept="image/*" onChange={handleFileChange} />
+              <button type="submit">Update Profile</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

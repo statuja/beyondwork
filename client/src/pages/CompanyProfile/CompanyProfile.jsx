@@ -1,16 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CompanyProfile.scss";
 import MyContext from "../../context/MyContext";
-import Topbar from "../../components/Topbar/Topbar";
-import Footer from "../../components/Footer/Footer";
-import Menu from "../../components/Menu/Menu";
 import { Link } from "react-router-dom";
 
 const CompanyProfile = () => {
   const { userData } = useContext(MyContext);
   const [company, setCompany] = useState({});
   const companyID = userData.userCompany;
-
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
@@ -37,13 +33,15 @@ const CompanyProfile = () => {
 
   return (
     <>
-      <Topbar />
       <div className="profile-main-container">
         <div className="companyProfile">
           <h1>Company Profile</h1>
           <h5>Logo:</h5>
           {company.companyLogo ? (
-            <img src={company.companyLogo} alt="Company Logo" />
+            <img
+              src={`http://localhost:5000/public/uploads/${company.companyLogo}`}
+              alt="Company Logo"
+            />
           ) : (
             <p>No logo available</p>
           )}
@@ -112,11 +110,7 @@ const CompanyProfile = () => {
             Edit Company Profile
           </Link>
         </div>
-        <div className="leftmenu">
-          <Menu />
-        </div>
       </div>
-      <Footer />
     </>
   );
 };
