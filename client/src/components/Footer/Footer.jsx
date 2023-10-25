@@ -10,7 +10,7 @@ import {
 function Footer() {
   return (
     <div className="footer">
-      <div className="left"> Copyright © 2023, Girls Power GbmH</div>
+      <div className="left"> Copyright © 2023, Girls Power GmbH</div>
       <div className="right">
         <a
           href="https://www.facebook.com"

@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <>
-      <Topbar />
+   
       <div className="home">
         <div className="newsfeed">
           <h1>Newsfeed</h1>
@@ -26,10 +26,10 @@ const Home = () => {
           <GetAllPosts />
         </div>
         <div className="leftmenu">
-          <Menu />
+        
         </div>
       </div>
-      <Footer />
+    
     </>
   );
 };

@@ -15,16 +15,32 @@ import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 import SavedPosts from "./components/posts/SavedPosts";
+import Topbar from "./components/Topbar/Topbar";
+import Menu from "./components/Menu/Menu";
+import { useContext } from "react";
+import MyContext from "./context/MyContext";
 
 function App() {
+  const { userData } = useContext(MyContext);
   const Layout = () => {
-    return (
-      <div>
-        <Navbar />
-        <Outlet />
-        <Footer />
-      </div>
-    );
+    if (!userData) {
+      return (
+        <div>
+          <Navbar />
+          <Outlet />
+          <Footer />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Topbar />
+          <Menu />
+          <Outlet />
+          <Footer />
+        </div>
+      );
+    }
   };
 
   const router = createBrowserRouter([
@@ -60,38 +76,38 @@ function App() {
           path: "/user/create",
           element: <UserRegistration />,
         },
+        {
+          path: "/newsfeed",
+          element: <NewsFeed />,
+        },
+        {
+          path: "/create/post",
+          element: <CreateNewPost />,
+        },
+        {
+          path: "/all/post",
+          element: <GetAllPosts />,
+        },
+        {
+          path: "/savedposts",
+          element: <SavedPosts />,
+        },
+        {
+          path: "/company/profile",
+          element: <CompanyProfile />,
+        },
+        {
+          path: "/user/profile/:id",
+          element: <MyProfile />,
+        },
+        {
+          path: "/allusers",
+          element: <AllUsers />,
+        },
       ],
     },
-
-    {
-      path: "/newsfeed",
-      element: <NewsFeed />,
-    },
-    {
-      path: "/create/post",
-      element: <CreateNewPost />,
-    },
-    {
-      path: "/all/post",
-      element: <GetAllPosts />,
-    },
-    {
-      path: "/savedposts",
-      element: <SavedPosts />,
-    },
-    {
-      path: "/company/profile",
-      element: <CompanyProfile />,
-    },
-    {
-      path: "/user/profile",
-      element: <MyProfile />,
-    },
-    {
-      path: "/allusers",
-      element: <AllUsers />,
-    },
   ]);
+
   return (
     <div>
       <RouterProvider router={router} />
