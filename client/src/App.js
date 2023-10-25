@@ -15,7 +15,7 @@ import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
 import SavedPosts from "./components/posts/SavedPosts";
-import { UpdateCompanyProfile } from "./pages/CompanyProfile/EditCompanyProfile";
+import EditCompanyProfile from "./pages/CompanyProfile/EditCompanyProfile";
 import Topbar from "./components/Topbar/Topbar";
 import Menu from "./components/Menu/Menu";
 import { useContext } from "react";
@@ -24,7 +24,8 @@ import MyContext from "./context/MyContext";
 function App() {
   const { userData } = useContext(MyContext);
   const Layout = () => {
-    if (!userData) {
+
+    if (!userData._id) {
       return (
         <div>
           <Navbar />
@@ -73,46 +74,46 @@ function App() {
           path: "/user/login",
           element: <Login />,
         },
+        {
+          path: "/user/create",
+          element: <UserRegistration />,
+        },
+        {
+          path: "/newsfeed",
+          element: <NewsFeed />,
+        },
+        {
+          path: "/create/post",
+          element: <CreateNewPost />,
+        },
+        {
+          path: "/all/post",
+          element: <GetAllPosts />,
+        },
+        {
+          path: "/savedposts",
+          element: <SavedPosts />,
+        },
+        {
+          path: "/company/profile",
+          element: <CompanyProfile />,
+        },
+        {
+          path: "/updateCompanyProfile",
+          element: <EditCompanyProfile />,
+        },
+        {
+          path: "/user/profile/:id",
+          element: <MyProfile />,
+        },
+        {
+          path: "/allusers",
+          element: <AllUsers />,
+        },
       ],
     },
-    {
-      path: "/user/create",
-      element: <UserRegistration />,
-    },
-    {
-      path: "/newsfeed",
-      element: <NewsFeed />,
-    },
-    {
-      path: "/create/post",
-      element: <CreateNewPost />,
-    },
-
-    {
-      path: "/all/post",
-      element: <GetAllPosts />,
-    },
-    {
-      path: "/savedposts",
-      element: <SavedPosts />,
-    },
-    {
-      path: "/company/profile",
-      element: <CompanyProfile />,
-    },
-    {
-      path: "/updateCompanyProfile",
-      element: <UpdateCompanyProfile />,
-    },
-    {
-      path: "/user/profile",
-      element: <MyProfile />,
-    },
-    {
-      path: "/allusers",
-      element: <AllUsers />,
-    },
   ]);
+
   return (
     <div>
       <RouterProvider router={router} />

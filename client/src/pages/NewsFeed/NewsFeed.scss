@@ -9,7 +9,12 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    right: 80px;
+    right: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+    /* Center the text horizontally */
   }
 
   .newsfeed {
@@ -29,6 +34,8 @@
 
 @media only screen and (max-width: 768px) {
   .home {
+    font-size: 20px;
+
     .newsfeed {
       width: 100%;
       display: flex;
@@ -38,6 +45,7 @@
       padding-right: 0;
       flex: 1;
     }
+
     .leftmenu {
       display: none;
     }

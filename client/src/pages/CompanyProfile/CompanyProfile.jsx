@@ -1,15 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CompanyProfile.scss";
 import MyContext from "../../context/MyContext";
-import Topbar from "../../components/Topbar/Topbar";
-import Footer from "../../components/Footer/Footer";
-import Menu from "../../components/Menu/Menu";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CompanyProfile = () => {
   const { userData } = useContext(MyContext);
   const [company, setCompany] = useState({});
-  const companyID = userData && userData.userCompany;
+  const companyID = userData.userCompany;
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
@@ -36,10 +33,18 @@ const CompanyProfile = () => {
 
   return (
     <>
-      <Topbar />
       <div className="profile-main-container">
         <div className="companyProfile">
           <h1>Company Profile</h1>
+          <h5>Logo:</h5>
+          {company.companyLogo ? (
+            <img
+              src={`http://localhost:5000/public/uploads/${company.companyLogo}`}
+              alt="Company Logo"
+            />
+          ) : (
+            <p>No logo available</p>
+          )}
           <div className="cards">
             <div className="card-wrapper">
               <h3>Company Details</h3>
@@ -94,7 +99,7 @@ const CompanyProfile = () => {
               </div>
             </div>
           </div>
-          {/* <Link
+          <Link
             to={{
               pathname: "/updateCompanyProfile",
               state: {
@@ -103,13 +108,9 @@ const CompanyProfile = () => {
             }}
           >
             Edit Company Profile
-          </Link> */}
-        </div>
-        <div className="leftmenu">
-          <Menu />
+          </Link>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

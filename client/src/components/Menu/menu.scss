@@ -1,12 +1,17 @@
 .menu {
-  background-color: #f7f7e3;
-  margin-left: 20px;
-  border: 2px solid #ffb000;
-  width: 350px;
-  text-align: left;
-  border-radius: 15px;
-  font-size: 20px;
-  width: 300px;
+
+    flex: 3;
+    background-color: #f7f7e3;
+    margin-left: 20px;
+    border: 2px solid #ffb000;
+    width: 350px;
+    text-align: left;
+    border-radius: 15px;
+    font-size: 20px;
+    width: 300px;
+    right: 10px;
+    position: fixed;
+
 
   li {
     width: 100%;

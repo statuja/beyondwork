@@ -5,13 +5,13 @@ import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
 
 const GetAllPosts = () => {
-  const { posts, setPosts } = useContext(MyContext);
-  const { userData } = useContext(MyContext);
+
+  const [posts, setPosts] = useState([]);
+  const {userData} = useContext(MyContext)
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  //const [editPostOn, setEditPostOn] = useState(false);
   const [editPostId, setEditPostId] = useState(null);
-  // const [like, setLike] = useState(0);
+
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -26,6 +26,7 @@ const GetAllPosts = () => {
         if (response.ok) {
           const data = await response.json();
           setPosts(data);
+
         } else {
           setError("Failed to fetch posts. Please try again later.");
         }
@@ -126,14 +127,15 @@ const GetAllPosts = () => {
   // };
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
-  };
+
+  }
+
   const renderEditPostComponent = (postId) => {
     if (editPostId === postId) {
-      return <EditPost postId={postId} />;
+      return <EditPost postId={postId}/>;
     }
     return null;
-  };
-
+  }
   return (
     <>
       <div className="post-Container">
@@ -152,27 +154,16 @@ const GetAllPosts = () => {
             </h3>
             <p>Created on: {item.createdOn}</p>
             <button onClick={() => onSavePost(item._id)}>Save Post</button>
-            {userData._id === item.createdBy._id && (
-              <button onClick={() => handleOnDelete(item._id)}>
-                Delete Post
-              </button>
-            )}
-            {userData._id === item.createdBy._id && (
-              <button onClick={() => handleOnEditPostOn(item._id)}>
-                Edit Post
-              </button>
-            )}
-            {renderEditPostComponent(item._id)}
-            {/* {userData._id === item.createdBy._id && (
-              <button onClick={() => handleOnEditPostOn(item._id)}>
-                Edit Post
-              </button>
-            )} */}
+
             {/* Like button and count */}
             <button onClick={() => handleLikePost(item._id)}>Like</button>
             <span>
               <b>{item.like} Likes</b>
             </span>
+            {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
+            {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
+            {renderEditPostComponent(item._id)}
+
           </div>
         ))}
       </div>
