@@ -1,6 +1,20 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.content {
+  background-color: rgba(245, 245, 220, 0.286);
+  display: flex;
+
+  .menuCont {
+    flex: 2.5;
+    margin-top: 10px;
+  }
+  .contentCont {
+    flex: 9.5;
+    margin: 30px;
+  }
 }

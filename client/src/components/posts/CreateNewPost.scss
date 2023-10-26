@@ -1,19 +1,26 @@
 .create-new-post {
-  max-width: 500px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   padding: 20px;
   width: 80%;
+  background: #f5f5dc;
+  border-radius: 15px;
+  h4{
+    font-size: 20px;
+  }
 
   form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 
     textarea {
-      padding: 10px;
-      border: 1px solid #0e0e0e;
+      padding: 20px;
+      outline: none;
+    border: none;
       border-radius: 5px;
-      background-color: #f5f5dc;
+      background-color: rgba(251, 251, 246, 0.784);
       width: 100%;
       height: 150px;
     }

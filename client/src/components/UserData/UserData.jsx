@@ -1,10 +1,10 @@
-import React from "react";
+import "./UserData.scss";
 
 const UserData = ({ isMe, user }) => {
   if (isMe) {
     return (
-      <div className="userDataWrapper">
-        <div className="top">
+      <>
+        <div className="profileLeft">
           <div className="header">
             <h4>{user.userFullName}</h4>
             <span>
@@ -12,10 +12,10 @@ const UserData = ({ isMe, user }) => {
               adipisicing elit. Tempora, voluptatum!
             </span>
           </div>
-        </div>
+        
         <div className="info">
-          <h4>User information</h4>
-          <button>Edit Profile</button>
+         
+          
           <div className="infoSec">
             <div className="infoItem">
               <span className="infoKey">JobTitle:</span>
@@ -51,7 +51,7 @@ const UserData = ({ isMe, user }) => {
             </div>
             <div className="infoItem">
               <span className="infoKey">Password:</span>
-              <span className="infoValue">{user.userPassword}</span>
+              <span className="infoValue">*********</span>
             </div>
             <div className="infoItem">
               <span className="infoKey">Date of Birth:</span>
@@ -59,7 +59,8 @@ const UserData = ({ isMe, user }) => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </>
     );
   } else {
     return (

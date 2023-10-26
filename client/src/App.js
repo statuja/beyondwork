@@ -36,8 +36,14 @@ function App() {
       return (
         <div>
           <Topbar />
-          <Menu />
-          <Outlet />
+          <div className="content">
+            <div className="contentCont">
+              <Outlet />
+            </div>
+            <div className="menuCont">
+              <Menu />
+            </div>
+          </div>
           <Footer />
         </div>
       );
@@ -102,7 +108,7 @@ function App() {
           element: <EditCompanyProfile />,
         },
         {
-          path: "/user/profile/me",
+          path: "/user/profile/:id",
           element: <MyProfile />,
         },
         {
