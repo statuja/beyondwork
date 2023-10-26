@@ -18,7 +18,7 @@ const EditCompanyProfile = () => {
     const fetchCompanyData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/company/viewCompanyProfile/${userData.userCompany}`,
+          `http://localhost:5000/company/viewCompanyProfile/${companyID}`,
           {
             method: "GET",
             headers: {
@@ -54,16 +54,17 @@ const EditCompanyProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+
     formData.append("companyName", companyData.companyName);
+    formData.append("CompanyID", companyData.companyID);
     formData.append("companyType", companyData.companyType);
     formData.append("numberOfEmployees", companyData.numberOfEmployees);
     formData.append("companyLogo", companyData.companyLogo);
-
     try {
       const response = await fetch(
         `http://localhost:5000/company/updateCompanyProfile/${companyID}`,
         {
-          method: "PUT",
+          method: "POST",
           body: formData,
           credentials: "include",
         }
