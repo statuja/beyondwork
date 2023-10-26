@@ -7,15 +7,15 @@
 
 .content {
   background-color: rgba(245, 245, 220, 0.247);
- 
+
   display: flex;
 
   .menuCont {
-    flex: 2.5;
+    flex: 2;
     margin-top: 30px;
   }
   .contentCont {
-    flex: 9.5;
+    flex: 10;
     margin: 30px;
   }
 }
