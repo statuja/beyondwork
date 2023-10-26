@@ -55,7 +55,7 @@ const Menu = () => {
           </Link>
         </li>
         <li>
-          <Link to="/company/profile">
+          <Link to="/newsfeed">
             <NewspaperIcon className="icon" /> News Feed
           </Link>
         </li>

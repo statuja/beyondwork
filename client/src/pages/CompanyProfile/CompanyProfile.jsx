@@ -36,7 +36,6 @@ const CompanyProfile = () => {
       <div className="profile-main-container">
         <div className="companyProfile">
           <h1>Company Profile</h1>
-          <h5>Logo:</h5>
           {company.companyLogo ? (
             <img
               style={{ width: "200px" }}
