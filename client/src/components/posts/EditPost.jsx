@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-const EditPost = ({postId}) => {
 
-  const [postContent, setPostContent] = useState("")
+const EditPost = ({ postId }) => {
+  const [postContent, setPostContent] = useState("");
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -33,10 +33,10 @@ const EditPost = ({postId}) => {
   }, [postId]);
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData()
-    formData.append("content", postContent.content)
+    const formData = new FormData();
+    formData.append("content", postContent.content);
 
     try {
       const response = await fetch(
@@ -57,24 +57,21 @@ const EditPost = ({postId}) => {
     } catch (error) {
       console.error("Error updating post:", error);
     }
-  }
+  };
 
   return (
     <div>
-
-        <form onSubmit={handleOnSubmit}>
-            <label htmlFor="content">Your post:</label>
-            <input 
-              type='textarea' 
-              id="content" 
-              value={postContent}
-              onChange={(e) => {
-                setPostContent({postContent: e.target.value})
-              }}></input>
-            <input type='submit'></input>
-        </form>
+      <form onSubmit={handleOnSubmit}>
+        <label htmlFor="content">Your post:</label>
+        <textarea
+          id="content"
+          value={postContent}
+          onChange={(e) => setPostContent(e.target.value)} // Corrected how postContent is set
+        ></textarea>
+        <input type="submit"></input>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditPost
+export default EditPost;
