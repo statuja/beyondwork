@@ -76,14 +76,18 @@ export const deletePost = async (req, res) => {
 
 export const editPost = async (req, res) => {
   try {
-    const postId = req.body.postId;
-    const updatedPostContent = {...req.body}
+    const postId = req.params.postId;
+    const newContent = req.body.content
 
-    const updatedPost = await Post.findOneAndUpdate(
-      { _id: postId },
-      updatedPostContent
+    //console.log(newContent);
+
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      {content: newContent},
+      {new: true}
     );
 
+    //console.log(updatedPost);
     res.json(updatedPost);
   } catch (error) {
     res.json(error.message);
