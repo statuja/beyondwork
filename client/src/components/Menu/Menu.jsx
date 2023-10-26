@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 //import FeedIcon from '@mui/icons-material/Feed';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
@@ -94,7 +94,6 @@ const Menu = () => {
           <LogoutOutlinedIcon className="icon" /> Logout
         </li>
       </ul>
-   
   );
 };
 

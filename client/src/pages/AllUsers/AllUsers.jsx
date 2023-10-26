@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import "./AllUsers.scss";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 function AllUsers() {
   const { userData } = useContext(MyContext);
@@ -40,7 +41,11 @@ function AllUsers() {
     }
   }, [userData]);
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="user-cards-container">
+        <div className="error-message">Error: {error}</div>
+      </div>
+    );
   }
   return (
     <div className="user-cards-container">
@@ -48,14 +53,24 @@ function AllUsers() {
       <div className="user-cards">
         {users.map((user) => (
           <div key={user._id} className="user-card">
+            <MailOutlineIcon className="icon" />
             <div className="user-image-placeholder"></div>
             <div className="user-details">
-              <Link to={`/user/profile/${user._id}`}>
-                <p>Name: {user.userFullName}</p>
-              </Link>
-              <p>Job Title: {user.userJobTitle}</p>
-              <p>Department: {user.userDepartment}</p>
-              <p>Email: {user.userContact.email}</p>
+              <p>
+                <b>Name: </b>
+                <Link to={`/user/profile/${user._id}`}>
+                  {user.userFullName}
+                </Link>{" "}
+              </p>
+              <p>
+                <b>Job Title:</b> {user.userJobTitle}
+              </p>
+              <p>
+                <b>Department:</b> {user.userDepartment}
+              </p>
+              <p>
+                <b>Email:</b> {user.userContact.email}
+              </p>
             </div>
           </div>
         ))}
