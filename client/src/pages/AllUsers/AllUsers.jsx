@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import "./AllUsers.scss";
 
@@ -49,8 +50,9 @@ function AllUsers() {
           <div key={user._id} className="user-card">
             <div className="user-image-placeholder"></div>
             <div className="user-details">
-              <p>Name: {user.userFullName}</p>
-
+              <Link to={`/user/profile/${user._id}`}>
+                <p>Name: {user.userFullName}</p>
+              </Link>
               <p>Job Title: {user.userJobTitle}</p>
               <p>Department: {user.userDepartment}</p>
               <p>Email: {user.userContact.email}</p>

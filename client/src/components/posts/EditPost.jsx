@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
 
-  const [postContent, setPostContent] = useState("")
+  const [postContent, setPostContent] = useState("");
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -33,7 +33,7 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
   }, [postId]);
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const response = await fetch(
@@ -63,7 +63,7 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
     } catch (error) {
       console.error("Error updating post:", error);
     }
-  }
+  };
 
   return (
     <div>
@@ -78,7 +78,7 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
             <input type='submit'></input>
         </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditPost
+export default EditPost;
