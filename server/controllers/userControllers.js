@@ -103,24 +103,80 @@ export const logout = async (req, res) => {
 export const getMyProfile = async (req, res) => {
   res.json(req.user);
 };
+// export const getMyProfile = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.user._id);
+//     const { userImage, coverImage, ...rest } = user._doc;
+//     const userData = {
+//       ...rest,
+//       userImage: userImage,
+//       coverImage: coverImage,
+//     };
+//     res.json(userData);
+//   } catch (error) {
+//     res.json(error.message);
+//   }
+// };
+
+// export const updateMyProfile = async (req, res) => {
+//   try {
+//     const updatedUserData = { ...req.body };
+//     const userImage = req.file;
+//     if (userImage) {
+//       updatedUserData.userImage = userImage.filename;
+//     }
+//     const updatedUser = await User.findByIdAndUpdate(
+//       req.user._id,
+//       updatedUserData
+//     );
+//     console.log(updatedUser);
+//     res.json("updated");
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 export const updateMyProfile = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+    const userId = req.params.userId;
+    const updatedUserData = { ...req.body };
+    const userImage = req.files["userImage"] ? req.files["userImage"][0] : null;
+    const coverImage = req.files["coverImage"]
+      ? req.files["coverImage"][0]
+      : null;
+    if (userImage) {
+      updatedUserData.userImage = userImage.filename;
+    }
+    if (coverImage) {
+      updatedUserData.coverImage = coverImage.filename;
+    }
+    const updatedUser = await User.findByIdAndUpdate(userId, updatedUserData, {
       new: true,
     });
 
+    if (updatedUser) {
+      console.log("Updated User:", updatedUser);
+    } else {
+      console.log("User with ID not found or no changes were made.");
+    }
+
     res.json(updatedUser);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ error: error.message });
   }
 };
 
 export const getUserProfile = async (req, res) => {
   try {
     const selectedUser = await User.findById(req.params.id);
-
-    res.json(selectedUser);
+    const { userImage, coverImage, ...rest } = selectedUser._doc;
+    const userData = {
+      ...rest,
+      userImage: userImage,
+      coverImage: coverImage,
+    };
+    res.json(userData);
+    console.log(userData);
   } catch (error) {
     res.json(error.message);
   }
