@@ -3,8 +3,8 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
-  width: 80%;
-  background: #f5f5dc;
+  width: 90%;
+  background-color: #e7e7a38e;
   border-radius: 15px;
   h4{
     font-size: 20px;
@@ -18,11 +18,11 @@
     textarea {
       padding: 20px;
       outline: none;
-    border: none;
+      border: none;
       border-radius: 5px;
       background-color: rgba(251, 251, 246, 0.784);
       width: 100%;
-      height: 150px;
+      height: 120px;
     }
 
     input[type="submit"] {
