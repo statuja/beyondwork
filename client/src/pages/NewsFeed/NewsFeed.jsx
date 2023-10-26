@@ -13,12 +13,12 @@ const Home = () => {
      
         <div className="newsfeed">
           <h1>News feed</h1>
-          <CreateNewPost />
+          <CreateNewPost />  
           <p>
             Hello <b>{userData.userFullName}</b>, here is the latest news from
             your colleagues
           </p>
-          <GetAllPosts />
+            <GetAllPosts />  
         </div>
         
     

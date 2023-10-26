@@ -3,81 +3,104 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  padding: 20px;
-  width: 90%;
   justify-content: center;
   gap: 30px;
+  width: 90%;
   border-radius: 15px;
   background-color: #e7e7a38e;
-}
+  padding: 30px 0;
 
-.postCard {
-  background-color: rgba(251, 251, 246, 0.784);
-  border-radius: 5px;
-  padding: 10px;
-  width: 100%;
-  /* box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1); */
-  box-shadow: 
-  6px 6px 10px 0 rgba(92, 91, 91, 0.25),
-  -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
-  color: #004225;
-  transition: background-color 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 
-    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.3),
-    inset 6px 6px 10px 0 rgba(92, 91, 91, 0.25); 
-  }
-
-  p {
-    margin: 0;
-  }
-
-  h3 {
-    margin-top: 10px;
-  }
-
-  a {
-    text-decoration: none;
-    color: black;
-
-    &:hover {
-      text-decoration: underline;
+  .postCard {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 20px;
+    width: 90%;
+   background-color: rgba(251, 251, 246, 0.784); 
+    border-radius: 6px;
+    /* box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1); */
+   
+    a {
+      text-decoration: none;
+      color: black;
+      &:hover {
+        text-decoration: underline;
+      }
     }
-  }
 
-  #date {
-    float: right;
-    font-size: 14px;
-  }
-  .icon {
-    margin: 0 10px;
-    padding: 5px;
-    font-size: 40px;
+    .post-owner,
+    .post-content,
+    .post-footer {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .post-owner {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        font-size: 20px;
+      }
+      #date {
+        font-size: 14px;
+        text-align: end;
+      }
+    }
+
+    .post-content {
+      font-size: 22px;
+     border: 1px solid rgba(128, 128, 128, 0.22);
+      height: 150px;
+      border-radius: 6px;
+      box-shadow: 6px 6px 10px 0 rgba(92, 91, 91, 0.25),
+      -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
     color: #004225;
-    transition: all 0.3s;
-
-    &:hover {
-      color: #ffb000;
-      font-size: 42px;
-      font-weight: bold;
-      transform: scale(1.1);
+    transition: background-color 0.3s;
+   
+   
     }
-  }
-  .post-content,
-  .post-owner-name {
-    padding: 10px;
-  }
-  .post-owner-name {
-    font-family: "Belanosima", sans-serif;
-      font-weight: 400;
-  }
 
-  .post-footer {
-    margin: 5px;
-  }
-  .post-edit-delete-save {
-    float: right;
+    .icon {
+      gap: 10px;
+      padding: 5px;
+      font-size: 30px;
+      color: #004225;
+      transition: all 0.3s;
+      cursor: pointer;
+      &:hover {
+        color: #ffb000;
+        font-weight: bold;
+        transform: scale(1.03);
+      }
+    }
+
+    .post-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      
+      .left{
+       
+        display: flex;
+        gap: 10px;
+        .likes{
+          display: flex;
+          align-items: center;
+          gap: 10px
+        }
+      }
+      .right{
+        display: flex;
+        gap: 10px;
+        
+      }
+    }
   }
 }

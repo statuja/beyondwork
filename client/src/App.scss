@@ -7,15 +7,42 @@
 
 .content {
   background-color: rgba(245, 245, 220, 0.247);
-
+  padding-top: 30px;
+  padding-bottom: 40px;
   display: flex;
 
   .menuCont {
     flex: 2;
-    margin-top: 30px;
   }
   .contentCont {
     flex: 10;
-    margin: 30px;
+  }
+}
+
+@media screen and (max-width: 798px) {
+  .content {
+    padding: 20px 0;
+    .menuCont {
+      display: none;
+    }
+    .contentCont {
+      flex: 9;
+    }
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .content {
+    .menuCont {
+      flex: 2.5;
+    }
+    .contentCont {
+      flex: 9.5;
+    }
+  }
+}
+@media screen and (max-width: 425px) {
+  .content {
+    width: 100%;
   }
 }
