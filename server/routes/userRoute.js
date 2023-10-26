@@ -15,6 +15,7 @@ import {
 } from "../controllers/userControllers.js";
 import authorization from "../middleware/authorization.js";
 import isAdmin from "../middleware/adminAuthorization.js";
+import multer from "multer";
 
 const router = express.Router();
 
@@ -54,11 +55,31 @@ router.post(
   createUser
 );
 
+//user image upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/user/uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 router.post("/login", loginUser);
 router.get("/logout", logout);
 router.get("/allUsers/:companyId", authorization, allUsers);
 router.get("/myProfile", authorization, getMyProfile);
-router.put("/updateMyProfile", authorization, updateMyProfile);
+router.put(
+  "/updateMyProfile/:userId",
+  authorization,
+  upload.fields([
+    { name: "userImage", maxCount: 1 },
+    { name: "coverImage", maxCount: 1 },
+  ]),
+  updateMyProfile
+);
 router.get("/getUserProfile/:id", authorization, getUserProfile);
 router.delete("/deleteUser/:userId", authorization, isAdmin, deleteUser);
 router.post("/savePost/:postId", authorization, savePost);

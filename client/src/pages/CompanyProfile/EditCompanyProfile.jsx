@@ -34,7 +34,7 @@ const EditCompanyProfile = () => {
             companyName: data.companyName,
             companyType: data.companyType,
             numberOfEmployees: data.numberOfEmployees,
-            companyLogo: data.companyLogo, // Assuming the company logo URL is received from the backend
+            companyLogo: data.companyLogo, 
           });
         } else {
           console.error("Failed to fetch company data");

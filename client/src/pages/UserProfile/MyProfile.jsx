@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UserData from "../../components/UserData/UserData";
-import profileCover from "../../images/profile_cover.jpg";
-import profileAvatar from "../../images/profile_avatar.jpg";
 import MyContext from "../../context/MyContext";
 import "./MyProfile.scss";
 
@@ -33,34 +31,40 @@ const UserProfile = () => {
 
           if (response.ok) {
             const data = await response.json();
-            return data;
+            setUser(data); // Set the user data including images
+            setLoading(false);
           } else {
             throw new Error(
               `Failed to fetch user data. Status: ${response.status}`
             );
           }
         } catch (error) {
-          throw new Error(`Error fetching user data: ${error.message}`);
+          console.error("Error fetching user details", error);
+          setLoading(false);
         }
       };
       fetchUserDataById(id)
-        .then((data) => {
-          setUser(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user details", error);
-          setLoading(false);
-        });
     }
   }, [id, userData]);
-
+  console.log(userData);
   return (
     <>
       <div className="profile">
         <div className="cover">
-          <img className="coverImg" src={profileCover} alt="cover" />
-          <img className="userImg" src={profileAvatar} alt="avatar" />
+          {user && user.coverImage && (
+            <img
+              className="coverImg"
+              src={`http://localhost:5000/user/uploads/${user.coverImage}`}
+              alt="coverImage"
+            />
+          )}
+          {user && user.userImage && (
+            <img
+              className="userImg"
+              src={`http://localhost:5000/user/uploads/${user.userImage}`}
+              alt="userImage"
+            />
+          )}
         </div>
 
         <div className="bottom">
@@ -74,7 +78,7 @@ const UserProfile = () => {
             )}
           </div>
           <div className="right">
-          <button>Edit Profile</button>
+            <Link to="/user/editmyprofile">Edit My Profile</Link>
           </div>
         </div>
       </div>
