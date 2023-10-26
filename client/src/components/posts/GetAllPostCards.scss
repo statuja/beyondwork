@@ -12,7 +12,7 @@
 }
 
 .postCard {
-  background-color: #fafaf8;
+  background-color: rgba(251, 251, 246, 0.784);
   border-radius: 5px;
   padding: 10px;
   width: 100%;
@@ -68,6 +68,10 @@
   .post-content,
   .post-owner-name {
     padding: 10px;
+  }
+  .post-owner-name {
+    font-family: "Belanosima", sans-serif;
+      font-weight: 400;
   }
 
   .post-footer {

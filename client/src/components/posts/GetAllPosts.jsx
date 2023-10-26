@@ -180,6 +180,9 @@ const GetAllPosts = () => {
                   <CommentIcon className="icon" />
                 </span>
               </div>
+
+              {renderEditPostComponent(item._id)}
+
               <div className="post-edit-delete-save">
                 <span title="Save this post">
                   <BookmarkBorderIcon
@@ -205,14 +208,6 @@ const GetAllPosts = () => {
                 )}
               </div>
             </span>
-
-
-            
-            {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
-            {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
-            {renderEditPostComponent(item._id)}
-            
-
             <hr />
             <span className="likes">{item.like} Likes</span>
           </div>

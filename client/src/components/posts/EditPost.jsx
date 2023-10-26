@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./EditPost.scss"
 
 const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
 
@@ -53,7 +54,6 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
       if (response.ok) {
         const data = await response.json();
         data.content = postContent
-        alert("Your post has been updated.")
         setShowEditForm(false)
         getAllPosts()
         //console.log("Post updated:", data, postContent);
@@ -66,9 +66,9 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
   };
 
   return (
-    <div>
+    <div className="edit-post-wrapper">
         <form onSubmit={handleOnSubmit}>
-            <label htmlFor="content">Your post:</label>
+            <label htmlFor="content">Edit your post here:</label>
             <textarea 
               name="content" 
               value={postContent}
