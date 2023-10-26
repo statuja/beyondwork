@@ -26,15 +26,15 @@ function App() {
   const Layout = () => {
     if (!userData._id) {
       return (
-        <div>
+        <>
           <Navbar />
           <Outlet />
           <Footer />
-        </div>
+        </>
       );
     } else {
       return (
-        <div>
+        <>
           <Topbar />
           <div className="content">
             <div className="contentCont">
@@ -45,7 +45,7 @@ function App() {
             </div>
           </div>
           <Footer />
-        </div>
+        </>
       );
     }
   };

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
 import "./menu.scss";
-
 import { Link, useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
+//import FeedIcon from '@mui/icons-material/Feed';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 const Menu = () => {
@@ -55,6 +55,11 @@ const Menu = () => {
           </Link>
         </li>
         <li>
+          <Link to="/company/profile">
+            <NewspaperIcon className="icon" /> News Feed
+          </Link>
+        </li>
+        <li>
           <Link to="/user/create">
             <PersonAddAltOutlinedIcon className="icon" /> Add New User
           </Link>
@@ -84,9 +89,7 @@ const Menu = () => {
             <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
           </Link>
         </li>
-        <li>
-          <DarkModeOutlinedIcon className="icon" /> Dark Mode
-        </li>
+        
         <li onClick={handleOnClick}>
           <LogoutOutlinedIcon className="icon" /> Logout
         </li>
