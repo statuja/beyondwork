@@ -31,29 +31,29 @@ const validation = [
 //logo upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "/public/uploads");
+    cb(null, "public/uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, Date.now() + file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
 
-router.post(
-  "./public/uploads",
-  upload.single("companyLogo"),
-  (req, res, next) => {
-    const file = req.file;
-    if (!file) {
-      const error = new Error("Please upload a file");
-      error.httpStatusCode = 400;
-      return next(error);
-    }
-    // Handle success
-    res.send(file);
-  }
-);
+// router.post(
+//   "/public/uploads",
+//   upload.single("companyLogo"),
+//   (req, res, next) => {
+//     const file = req.file;
+//     if (!file) {
+//       const error = new Error("Please upload a file");
+//       error.httpStatusCode = 400;
+//       return next(error);
+//     }
+//     // Handle success
+//     res.send(file);
+//   }
+// );
 //
 
 router.post(
@@ -75,7 +75,7 @@ router.get(
   authorization,
   viewCompanyProfile
 );
-router.put(
+router.post(
   "/updateCompanyProfile/:userCompany",
   authorization,
   upload.single("companyLogo"),

@@ -34,15 +34,15 @@ export const updateCompanyProfile = async (req, res) => {
     const updatedCompanyData = { ...req.body };
     const logo = req.file;
     if (logo) {
-      updateCompanyProfile.companyLogo = logo.path;
+      updatedCompanyData.companyLogo = logo.filename;
     }
+    console.log(updatedCompanyData);
     const updatedCompany = await Company.findByIdAndUpdate(
       req.user.userCompany,
-      updatedCompanyData,
-      { new: true }
+      updatedCompanyData
     );
-
-    res.json(updatedCompany);
+    console.log(updatedCompany);
+    res.json("updated");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

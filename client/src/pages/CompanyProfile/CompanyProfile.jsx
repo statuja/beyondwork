@@ -29,7 +29,7 @@ const CompanyProfile = () => {
       }
     };
     fetchCompanyDetails();
-  }, [companyID, company]);
+  }, [companyID]);
 
   return (
     <>
@@ -39,7 +39,8 @@ const CompanyProfile = () => {
           <h5>Logo:</h5>
           {company.companyLogo ? (
             <img
-              src={`http://localhost:5000/public/uploads/${company.companyLogo}`}
+              style={{ width: "200px" }}
+              src={`http://localhost:5000/uploads/${company.companyLogo}`}
               alt="Company Logo"
             />
           ) : (

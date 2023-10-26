@@ -6,7 +6,6 @@ import cookieParser from "cookie-parser";
 import companyRoute from "./routes/companyRoute.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
-
 dotenv.config();
 
 const app = express();
@@ -41,12 +40,10 @@ app.options("*", cors(corsOptions));
 // });
 
 //Routes
-
+app.use(express.static("public"));
 app.use("/company", companyRoute);
 app.use("/user", userRoute);
 app.use("/post", postRoute);
-app.use(express.static("public"));
-
 
 mongoose
   .connect(process.env.MONGO_DB_LINK)
