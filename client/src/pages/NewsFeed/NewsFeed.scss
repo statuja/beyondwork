@@ -1,10 +1,15 @@
 .newsfeed {
+ 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 30px;
   border-radius: 15px;
+  padding: 20px;
+  
+ 
+  
   h1 {
     font-size: 34px;
   }
@@ -16,7 +21,6 @@
 @media only screen and (max-width: 768px) {
   .home {
     font-size: 20px;
-
     .newsfeed {
       width: 100%;
       display: flex;
