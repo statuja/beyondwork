@@ -4,6 +4,7 @@ import {
   deletePost,
   editPost,
   getAllPosts,
+  getOnePost,
   getUserPosts,
   likePost,
 } from "../controllers/postControllers.js";
@@ -16,6 +17,8 @@ router.post("/create", authorization, createPost);
 router.get("/all", authorization, getAllPosts);
 
 router.get("/getUsersPosts/:id", authorization, getUserPosts);
+
+router.get("/getOne/:postId", authorization, getOnePost);
 
 router.delete("/delete/:postId", authorization, deletePost);
 
