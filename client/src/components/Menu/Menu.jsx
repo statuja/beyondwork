@@ -41,7 +41,7 @@ const Menu = () => {
     }
   };
   return (
-    <div>
+   
       <ul className="menu">
         <li>
           <Link to="/user/profile/me">
@@ -91,7 +91,7 @@ const Menu = () => {
           <LogoutOutlinedIcon className="icon" /> Logout
         </li>
       </ul>
-    </div>
+   
   );
 };
 

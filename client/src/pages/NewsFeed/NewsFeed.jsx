@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
    
-      <div className="home">
+     
         <div className="newsfeed">
           <h1>Newsfeed</h1>
           <CreateNewPost />
@@ -20,10 +20,7 @@ const Home = () => {
           </p>
           <GetAllPosts />
         </div>
-        <div className="leftmenu">
         
-        </div>
-      </div>
     
     </>
   );

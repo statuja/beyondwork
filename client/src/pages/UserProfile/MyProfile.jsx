@@ -35,13 +35,11 @@ const UserProfile = () => {
             const data = await response.json();
             return data;
           } else {
-            // Handle non-200 HTTP response, e.g., user not found or other errors
             throw new Error(
               `Failed to fetch user data. Status: ${response.status}`
             );
           }
         } catch (error) {
-          // Handle network errors or any other unexpected issues
           throw new Error(`Error fetching user data: ${error.message}`);
         }
       };
@@ -60,13 +58,13 @@ const UserProfile = () => {
   return (
     <>
       <div className="profile">
-        <div className="left">
-          <div className="cover">
-            <img className="coverImg" src={profileCover} alt="cover" />
-            <img className="userImg" src={profileAvatar} alt="avatar" />
-          </div>
+        <div className="cover">
+          <img className="coverImg" src={profileCover} alt="cover" />
+          <img className="userImg" src={profileAvatar} alt="avatar" />
+        </div>
 
-          <div className="bottom">
+        <div className="bottom">
+          <div className="left">
             {loading ? (
               <p>Loading...</p>
             ) : user ? (
@@ -74,6 +72,9 @@ const UserProfile = () => {
             ) : (
               <p>User not found</p>
             )}
+          </div>
+          <div className="right">
+          <button>Edit Profile</button>
           </div>
         </div>
       </div>
