@@ -3,15 +3,18 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import CommentIcon from "@mui/icons-material/Comment";
 
 const GetAllPosts = () => {
-
   const [posts, setPosts] = useState([]);
-  const {userData} = useContext(MyContext)
+  const { userData } = useContext(MyContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
-
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -26,7 +29,6 @@ const GetAllPosts = () => {
         if (response.ok) {
           const data = await response.json();
           setPosts(data);
-
         } else {
           setError("Failed to fetch posts. Please try again later.");
         }
@@ -121,21 +123,30 @@ const GetAllPosts = () => {
     }
   };
 
-  // const handleOnEditPostOn = (postId) => {
-  //   setEditPostOn(true);
-  //   return editPostOn;
-  // };
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
-
-  }
+  };
 
   const renderEditPostComponent = (postId) => {
     if (editPostId === postId) {
-      return <EditPost postId={postId}/>;
+      return <EditPost postId={postId} />;
     }
     return null;
-  }
+  };
+
+  const formatDateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedDate = `${day}.${month}.${year}`;
+    const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+
+    return `${formattedDate} at ${formattedTime}`;
+  };
+
   return (
     <>
       <div className="post-Container">
@@ -144,26 +155,45 @@ const GetAllPosts = () => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
-
-            <h3>
-              created by :
+            <h3 className="post-owner-name">
               <Link to={`/user/${item.createdBy._id}`}>
                 {item.createdBy.userFullName}
-              </Link>
-              <p>{item.content}</p>
+              </Link>{" "}
             </h3>
-            <p>Created on: {item.createdOn}</p>
-            <button onClick={() => onSavePost(item._id)}>Save Post</button>
-
-            {/* Like button and count */}
-            <button onClick={() => handleLikePost(item._id)}>Like</button>
-            <span>
-              <b>{item.like} Likes</b>
+            <p className="post-content">{item.content}</p>
+            <span className="post-footer">
+              <p id="date">{formatDateTime(item.createdOn)}</p>
+              <div className="likesAndComments">
+                {/* Like button and count */}
+                <ThumbUpOffAltIcon
+                  className="icon"
+                  onClick={() => handleLikePost(item._id)}
+                />
+                <CommentIcon className="icon" />
+              </div>
+              <div className="post-edit-delete-save">
+                <BookmarkBorderIcon
+                  className="icon"
+                  onClick={() => onSavePost(item._id)}
+                />
+                {userData._id === item.createdBy._id && (
+                  <DeleteIcon
+                    className="icon"
+                    onClick={() => handleOnDelete(item._id)}
+                  />
+                )}
+                {userData._id === item.createdBy._id && (
+                  <EditIcon
+                    className="icon"
+                    onClick={() => handleOnEditPostOn(item._id)}
+                  />
+                )}
+                {renderEditPostComponent(item._id)}
+              </div>
             </span>
-            {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
-            {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
-            {renderEditPostComponent(item._id)}
 
+            <hr />
+            <span className="likes">{item.like} Likes</span>
           </div>
         ))}
       </div>
