@@ -8,6 +8,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
+//import ReactTooltip from "react-tooltip";
 
 const GetAllPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -39,7 +40,7 @@ const GetAllPosts = () => {
       }
     };
     getAllPosts();
-  }, []);
+  }, [posts]);
 
   const onSavePost = async (postId) => {
     try {
@@ -165,33 +166,41 @@ const GetAllPosts = () => {
               <p id="date">{formatDateTime(item.createdOn)}</p>
               <div className="likesAndComments">
                 {/* Like button and count */}
-                <ThumbUpOffAltIcon
-                  className="icon"
-                  onClick={() => handleLikePost(item._id)}
-                />
-                <CommentIcon className="icon" />
+                <span title="Like this post">
+                  <ThumbUpOffAltIcon
+                    className="icon"
+                    onClick={() => handleLikePost(item._id)}
+                  />
+                </span>
+                <span title="Comment on this post">
+                  <CommentIcon className="icon" />
+                </span>
               </div>
               <div className="post-edit-delete-save">
-                <BookmarkBorderIcon
-                  className="icon"
-                  onClick={() => onSavePost(item._id)}
-                />
-                {userData._id === item.createdBy._id && (
-                  <DeleteIcon
+                <span title="Save this post">
+                  <BookmarkBorderIcon
                     className="icon"
-                    onClick={() => handleOnDelete(item._id)}
+                    onClick={() => onSavePost(item._id)}
                   />
+                </span>
+                {userData._id === item.createdBy._id && (
+                  <span title="Delete this post">
+                    <DeleteIcon
+                      className="icon"
+                      onClick={() => handleOnDelete(item._id)}
+                    />
+                  </span>
                 )}
                 {userData._id === item.createdBy._id && (
-                  <EditIcon
-                    className="icon"
-                    onClick={() => handleOnEditPostOn(item._id)}
-                  />
+                  <span title="Edit this post">
+                    <EditIcon
+                      className="icon"
+                      onClick={() => handleOnEditPostOn(item._id)}
+                    />
+                  </span>
                 )}
-                {renderEditPostComponent(item._id)}
               </div>
             </span>
-
             <hr />
             <span className="likes">{item.like} Likes</span>
           </div>
