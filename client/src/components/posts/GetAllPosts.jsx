@@ -15,29 +15,32 @@ const GetAllPosts = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
+  const [showEditForm, setShowEditForm] = useState(false)
+
+  const getAllPosts = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/post/all", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setPosts(data);
+
+      } else {
+        setError("Failed to fetch posts. Please try again later.");
+      }
+    } catch (error) {
+      setError(
+        "An error occurred while fetching posts. Please try again later."
+      );
+    }
+  };
 
   useEffect(() => {
-    const getAllPosts = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/post/all", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setPosts(data);
-        } else {
-          setError("Failed to fetch posts. Please try again later.");
-        }
-      } catch (error) {
-        setError(
-          "An error occurred while fetching posts. Please try again later."
-        );
-      }
-    };
     getAllPosts();
   }, []);
 
@@ -125,11 +128,12 @@ const GetAllPosts = () => {
 
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
-  };
+    setShowEditForm(true)
+  }
 
   const renderEditPostComponent = (postId) => {
-    if (editPostId === postId) {
-      return <EditPost postId={postId} />;
+    if (editPostId === postId && showEditForm) {
+      return <EditPost postId={postId} getAllPosts={getAllPosts} setShowEditForm={setShowEditForm}/>;
     }
     return null;
   };
@@ -191,7 +195,11 @@ const GetAllPosts = () => {
                 {renderEditPostComponent(item._id)}
               </div>
             </span>
-
+            
+            {userData._id === item.createdBy._id && <button onClick={() => handleOnDelete(item._id)}> Delete Post</button>}
+            {userData._id === item.createdBy._id && <button onClick={() => handleOnEditPostOn(item._id)}> Edit Post</button>}
+            {renderEditPostComponent(item._id)}
+            
             <hr />
             <span className="likes">{item.like} Likes</span>
           </div>

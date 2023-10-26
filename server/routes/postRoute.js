@@ -24,8 +24,6 @@ router.delete("/delete/:postId", authorization, deletePost);
 
 router.put("/edit/:postId", authorization, editPost);
 
-//router.get("/getOne/:id" , getOnePost);
-
 router.post("/like/:postId/:userId", authorization, likePost);
 
 export default router;

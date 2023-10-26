@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const EditPost = ({ postId }) => {
+const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
+
   const [postContent, setPostContent] = useState("");
 
   useEffect(() => {
@@ -20,7 +21,6 @@ const EditPost = ({ postId }) => {
         if (response.ok) {
           const data = await response.json();
           setPostContent(data.content);
-          console.log(postContent);
         } else {
           console.error("Failed to fetch post data");
         }
@@ -35,22 +35,28 @@ const EditPost = ({ postId }) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("content", postContent.content);
-
     try {
       const response = await fetch(
         `http://localhost:5000/post/edit/${postId}`,
         {
           method: "PUT",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({content: postContent}),
           credentials: "include",
         }
       );
 
+      //console.log(formData);
+
       if (response.ok) {
         const data = await response.json();
-        console.log("Post updated:", data);
+        data.content = postContent
+        alert("Your post has been updated.")
+        setShowEditForm(false)
+        getAllPosts()
+        //console.log("Post updated:", data, postContent);
       } else {
         console.error("Error updating post");
       }
@@ -61,15 +67,16 @@ const EditPost = ({ postId }) => {
 
   return (
     <div>
-      <form onSubmit={handleOnSubmit}>
-        <label htmlFor="content">Your post:</label>
-        <textarea
-          id="content"
-          value={postContent}
-          onChange={(e) => setPostContent(e.target.value)} // Corrected how postContent is set
-        ></textarea>
-        <input type="submit"></input>
-      </form>
+        <form onSubmit={handleOnSubmit}>
+            <label htmlFor="content">Your post:</label>
+            <textarea 
+              name="content" 
+              value={postContent}
+              onChange={(e) => {
+                setPostContent(e.target.value)
+              }}></textarea>
+            <input type='submit'></input>
+        </form>
     </div>
   );
 };
