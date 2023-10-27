@@ -166,6 +166,20 @@ const GetAllPosts = () => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
+
+            <p id="date">{formatDateTime(item.createdOn)}</p>
+            <h3 className="post-owner-name">
+              <Link to={`/user/${item.createdBy._id}`}>
+                {item.createdBy.userFullName}
+              </Link>{" "}
+            </h3>
+            <p className="post-content">{item.content}</p>
+            <span className="post-footer">
+              <div className="likesAndComments">
+                {/* Like button and count */}
+                <span title="Like this post">
+                  <ThumbUpOffAltIcon
+
             <div className="post-owner">
               <h3>
                 <Link to={`/user/${item.createdBy._id}`}>
@@ -181,6 +195,7 @@ const GetAllPosts = () => {
                 
                   <CommentIcon className="icon" />
                   <BookmarkBorderIcon
+
                     className="icon"
                     onClick={() => onSavePost(item._id)}
                   />
