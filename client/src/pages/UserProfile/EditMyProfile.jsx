@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
+import "./MyProfile.scss";
 
 function EditMyProfile() {
-  const { userData } = useContext(MyContext);
+  const { userData, setUserData } = useContext(MyContext);
   const navigate = useNavigate();
   const userId = userData._id;
   const [user, setUser] = useState(null);
@@ -86,24 +87,23 @@ function EditMyProfile() {
     setFormData(updatedFormData);
   };
 
- const handleImageChange = (e) => {
-   const targetName = e.target.name;
-   if (e.target.files && e.target.files.length > 0) {
-     const file = e.target.files[0];
-     if (targetName === "userImage") {
-       setFormData((prevData) => ({
-         ...prevData,
-         userImage: file,
-       }));
-     } else if (targetName === "coverImage") {
-       setFormData((prevData) => ({
-         ...prevData,
-         coverImage: file,
-       }));
-     }
-   }
- };
-
+  const handleImageChange = (e) => {
+    const targetName = e.target.name;
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (targetName === "userImage") {
+        setFormData((prevData) => ({
+          ...prevData,
+          userImage: file,
+        }));
+      } else if (targetName === "coverImage") {
+        setFormData((prevData) => ({
+          ...prevData,
+          coverImage: file,
+        }));
+      }
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,6 +136,14 @@ function EditMyProfile() {
 
       if (response.ok) {
         const data = await response.json();
+
+        if (data.success === false) {
+          alert("Server error");
+          setUserData({});
+          return navigate("/");
+        }
+
+        setUserData({ ...data });
         console.log("profile updated:", data);
         navigate("/user/profile/me");
       } else {
@@ -148,121 +156,145 @@ function EditMyProfile() {
 
   return (
     <>
-      <div className="userProfile">
-        <h1>Edit Profile</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="userFullName"
-            value={formData.userFullName}
-            onChange={handleInputChange}
-            placeholder="Full Name"
-          />
-          <input
-            type="text"
-            name="userJobTitle"
-            value={formData.userJobTitle}
-            onChange={handleInputChange}
-            placeholder="Job Title"
-          />
-          <input
-            type="text"
-            name="userDepartment"
-            value={formData.userDepartment}
-            onChange={handleInputChange}
-            placeholder="Department"
-          />
-          <input
-            type="text"
-            name="userAddress.address"
-            value={
-              formData.userAddress.address && formData.userAddress.address
-                ? formData.userAddress.address
-                : ""
-            }
-            onChange={handleInputChange}
-            placeholder="Address"
-          />
-          <input
-            type="text"
-            name="userAddress.city"
-            value={
-              formData.userAddress.city && formData.userAddress.city
-                ? formData.userAddress.city
-                : ""
-            }
-            onChange={handleInputChange}
-            placeholder="city"
-          />
-          <input
-            type="text"
-            name="userAddress.country"
-            value={
-              formData.userAddress.country && formData.userAddress.country
-                ? formData.userAddress.country
-                : ""
-            }
-            onChange={handleInputChange}
-            placeholder="country"
-          />
-          <input
-            type="text"
-            name="userAddress.zipCode"
-            value={
-              formData.userAddress.zipCode && formData.userAddress.zipCode
-                ? formData.userAddress.zipCode
-                : ""
-            }
-            onChange={handleInputChange}
-            placeholder="zipCode"
-          />
-          <input
-            type="date"
-            name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleInputChange}
-            placeholder="DateOfBirth"
-          />
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            placeholder="description"
-          />
-          <input
-            type="email"
-            name="userContact.email"
-            value={formData.userContact?.email || ""}
-            onChange={handleInputChange}
-            placeholder="E-mail"
-          />
-          <input
-            type="password"
-            name="userPassword"
-            value={
-              formData.userPassword && formData.userPassword
-                ? formData.userPassword
-                : ""
-            }
-            onChange={handleInputChange}
-            placeholder="Password"
-          />
-          <label htmlFor="userImage">Avatar</label>
-          <input
-            type="file"
-            name="userImage"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          <input
-            type="file"
-            name="coverImage"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          {/* Add other input fields as needed */}
-          <button type="submit">Save Changes</button>
-        </form>
+      <div className="profile">
+        <div className="cover">
+          {user && user.coverImage && (
+            <img
+              className="coverImg"
+              src={`http://localhost:5000/user/uploads/${user.coverImage}`}
+              alt="coverImage"
+            />
+          )}
+          {user && user.userImage && (
+            <img
+              className="userImg"
+              src={`http://localhost:5000/user/uploads/${user.userImage}`}
+              alt="userImage"
+            />
+          )}
+          <div>
+            <label htmlFor="coverImage">Change Cover Image</label>
+            <input
+              type="file"
+              name="coverImage"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="userImage">Change Avatar</label>
+
+            <input
+              type="file"
+              name="userImage"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
+        </div>
+        <div className="bottom">
+          <div className="left">
+            <h1>Edit Profile</h1>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="userFullName"
+                value={formData.userFullName}
+                onChange={handleInputChange}
+                placeholder="Full Name"
+              />
+              <input
+                type="text"
+                name="userJobTitle"
+                value={formData.userJobTitle}
+                onChange={handleInputChange}
+                placeholder="Job Title"
+              />
+              <input
+                type="text"
+                name="userDepartment"
+                value={formData.userDepartment}
+                onChange={handleInputChange}
+                placeholder="Department"
+              />
+              <input
+                type="text"
+                name="userAddress.address"
+                value={
+                  formData.userAddress.address && formData.userAddress.address
+                    ? formData.userAddress.address
+                    : ""
+                }
+                onChange={handleInputChange}
+                placeholder="Address"
+              />
+              <input
+                type="text"
+                name="userAddress.city"
+                value={
+                  formData.userAddress.city && formData.userAddress.city
+                    ? formData.userAddress.city
+                    : ""
+                }
+                onChange={handleInputChange}
+                placeholder="city"
+              />
+              <input
+                type="text"
+                name="userAddress.country"
+                value={
+                  formData.userAddress.country && formData.userAddress.country
+                    ? formData.userAddress.country
+                    : ""
+                }
+                onChange={handleInputChange}
+                placeholder="country"
+              />
+              <input
+                type="text"
+                name="userAddress.zipCode"
+                value={
+                  formData.userAddress.zipCode && formData.userAddress.zipCode
+                    ? formData.userAddress.zipCode
+                    : ""
+                }
+                onChange={handleInputChange}
+                placeholder="zipCode"
+              />
+              <input
+                type="date"
+                name="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={handleInputChange}
+                placeholder="DateOfBirth"
+              />
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="description"
+              />
+              <input
+                type="email"
+                name="userContact.email"
+                value={formData.userContact?.email || ""}
+                onChange={handleInputChange}
+                placeholder="E-mail"
+              />
+              <input
+                type="password"
+                name="userPassword"
+                value={
+                  formData.userPassword && formData.userPassword
+                    ? formData.userPassword
+                    : ""
+                }
+                onChange={handleInputChange}
+                placeholder="Password"
+              />
+
+              <button type="submit">Save Changes</button>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -66,8 +66,7 @@ const UserData = ({ isMe, user }) => {
           <div className="header">
             <h4>Name: {user.userFullName}</h4>
             <span>
-              Hello my friends! Lorem ipsum, dolor sit amet consectetur
-              adipisicing elit. Tempora, voluptatum!
+              {user.description}
             </span>
           </div>
         </div>

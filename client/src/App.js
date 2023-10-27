@@ -22,107 +22,154 @@ import { useContext } from "react";
 import MyContext from "./context/MyContext";
 import EditMyProfile from "./pages/UserProfile/EditMyProfile";
 
+// function App() {
+//   const { userData } = useContext(MyContext);
+//   const Layout = () => {
+//     if (!userData?._id) {
+//       return (
+//         <>
+//           <Navbar />
+//           <Outlet />
+//           <Footer />
+//         </>
+//       );
+//     } else {
+//       return (
+//         <>
+//           <Topbar />
+//           <div className="content">
+//             <div className="contentCont">
+//               <Outlet />
+//             </div>
+//             <div className="menuCont">
+//               <Menu />
+//             </div>
+//           </div>
+//           <Footer />
+//         </>
+//       );
+//     }
+//   };
+
+//   const router = createBrowserRouter([
+//     {
+//       path: "/",
+//       element: <Layout />,
+//       children: [
+//         {
+//           path: "/",
+//           element: <Login />,
+//         },
+//         {
+//           path: "/about",
+//           element: <About />,
+//         },
+//         {
+//           path: "/contact",
+//           element: <Contact />,
+//         },
+//         {
+//           path: "/company/create",
+//           element: <CompanyRegistration />,
+//         },
+//         {
+//           path: "/company/thankyou",
+//           element: <ThankYou />,
+//         },
+//         {
+//           path: "/user/login",
+//           element: <Login />,
+//         },
+//         {
+//           path: "/user/create",
+//           element: <UserRegistration />,
+//         },
+//         {
+//           path: "/newsfeed",
+//           element: <NewsFeed />,
+//         },
+//         {
+//           path: "/create/post",
+//           element: <CreateNewPost />,
+//         },
+//         {
+//           path: "/all/post",
+//           element: <GetAllPosts />,
+//         },
+//         {
+//           path: "/savedposts",
+//           element: <SavedPosts />,
+//         },
+//         {
+//           path: "/company/profile",
+//           element: <CompanyProfile />,
+//         },
+//         {
+//           path: "/updateCompanyProfile",
+//           element: <EditCompanyProfile />,
+//         },
+//         {
+//           path: "/user/profile/:id",
+//           element: <MyProfile />,
+//         },
+//         {
+//           path: "/user/editmyprofile",
+//           element: <EditMyProfile />,
+//         },
+//         {
+//           path: "/allusers",
+//           element: <AllUsers />,
+//         },
+//       ],
+//     },
+//   ]);
+
+//   return (
+//     <div>
+//       <RouterProvider router={router} />
+//     </div>
+//   );
+// }
+
+// export default App;
+
 function App() {
   const { userData } = useContext(MyContext);
-  const Layout = () => {
-    if (!userData._id) {
-      return (
-        <>
-          <Navbar />
-          <Outlet />
-          <Footer />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Topbar />
-          <div className="content">
-            <div className="contentCont">
-              <Outlet />
-            </div>
-            <div className="menuCont">
-              <Menu />
-            </div>
-          </div>
-          <Footer />
-        </>
-      );
-    }
-  };
 
-  const router = createBrowserRouter([
+  const routes = [
+    // Login Layout Routes
     {
       path: "/",
-      element: <Layout />,
+      element: <LoginLayout />,
       children: [
-        {
-          path: "/",
-          element: <Login />,
-        },
-        {
-          path: "/about",
-          element: <About />,
-        },
-        {
-          path: "/contact",
-          element: <Contact />,
-        },
-        {
-          path: "/company/create",
-          element: <CompanyRegistration />,
-        },
-        {
-          path: "/company/thankyou",
-          element: <ThankYou />,
-        },
-        {
-          path: "/user/login",
-          element: <Login />,
-        },
-        {
-          path: "/user/create",
-          element: <UserRegistration />,
-        },
-        {
-          path: "/newsfeed",
-          element: <NewsFeed />,
-        },
-        {
-          path: "/create/post",
-          element: <CreateNewPost />,
-        },
-        {
-          path: "/all/post",
-          element: <GetAllPosts />,
-        },
-        {
-          path: "/savedposts",
-          element: <SavedPosts />,
-        },
-        {
-          path: "/company/profile",
-          element: <CompanyProfile />,
-        },
-        {
-          path: "/updateCompanyProfile",
-          element: <EditCompanyProfile />,
-        },
-        {
-          path: "/user/profile/:id",
-          element: <MyProfile />,
-        },
-        {
-          path: "/user/editmyprofile",
-          element: <EditMyProfile />,
-        },
-        {
-          path: "/allusers",
-          element: <AllUsers />,
-        },
+        { path: "/", element: <Login /> },
+        { path: "/about", element: <About /> },
+        { path: "/contact", element: <Contact /> },
+        { path: "/company/create", element: <CompanyRegistration /> },
+        { path: "/company/thankyou", element: <ThankYou /> },
+        { path: "/user/login", element: <Login /> },
       ],
     },
-  ]);
+    // Main Layout Routes
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        { path: "/user/create", element: <UserRegistration /> },
+        { path: "/newsfeed", element: <NewsFeed /> },
+        { path: "/create/post", element: <CreateNewPost /> },
+        { path: "/all/post", element: <GetAllPosts /> },
+        { path: "/savedposts", element: <SavedPosts /> },
+        { path: "/company/profile", element: <CompanyProfile /> },
+        { path: "/updateCompanyProfile", element: <EditCompanyProfile /> },
+        { path: "/user/profile/:id", element: <MyProfile /> },
+        { path: "/user/editmyprofile", element: <EditMyProfile /> },
+        { path: "/allusers", element: <AllUsers /> },
+      ],
+    },
+  ];
+
+  const router = createBrowserRouter(routes);
 
   return (
     <div>
@@ -132,3 +179,26 @@ function App() {
 }
 
 export default App;
+
+const LoginLayout = () => (
+  <>
+    <Navbar />
+    <Outlet />
+    <Footer />
+  </>
+);
+
+const MainLayout = () => (
+  <>
+    <Topbar />
+    <div className="content">
+      <div className="contentCont">
+        <Outlet />
+      </div>
+      <div className="menuCont">
+        <Menu />
+      </div>
+    </div>
+    <Footer />
+  </>
+);

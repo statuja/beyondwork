@@ -39,6 +39,7 @@
     color: #004225;
     transition: all 0.3s;
     align-self: flex-end;
+
     &:hover {
       color: #ffb000;
       cursor: pointer;
@@ -52,11 +53,13 @@
     background-color: #004225;
     margin-right: 20px;
     cursor: pointer;
+
   }
 
   .user-details {
     display: flex;
     flex-direction: column;
+
     p {
       margin: 5px 0;
       font-size: 16px;

@@ -43,7 +43,7 @@ const UserProfile = () => {
           setLoading(false);
         }
       };
-      fetchUserDataById(id)
+      fetchUserDataById(id);
     }
   }, [id, userData]);
   console.log(userData);
@@ -72,14 +72,15 @@ const UserProfile = () => {
             {loading ? (
               <p>Loading...</p>
             ) : user ? (
-              <UserData isMe={id === "me"} user={user} />
+              <UserData isMe={id === "me"} user={userData} />
             ) : (
               <p>User not found</p>
             )}
+            <div>
+              <Link to="/user/editmyprofile">Edit My Profile</Link>
+            </div>
           </div>
-          <div className="right">
-            <Link to="/user/editmyprofile">Edit My Profile</Link>
-          </div>
+          <div className="right"></div>
         </div>
       </div>
     </>

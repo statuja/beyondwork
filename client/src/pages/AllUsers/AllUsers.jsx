@@ -54,7 +54,15 @@ function AllUsers() {
         {users.map((user) => (
           <div key={user._id} className="user-card">
             <MailOutlineIcon className="icon" />
-            <div className="user-image-placeholder"></div>
+            <div className="user-image-placeholder">
+              {user && user.userImage && (
+                <img
+                  className="user-image-placeholder"
+                  src={`http://localhost:5000/user/uploads/${user.userImage}`}
+                  alt="userImage"
+                />
+              )}
+            </div>
             <div className="user-details">
               <p>
                 <b>Name: </b>
