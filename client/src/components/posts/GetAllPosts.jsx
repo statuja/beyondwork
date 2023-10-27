@@ -113,9 +113,15 @@ const GetAllPosts = () => {
       if (response.ok) {
         const updatedPost = await response.json();
 
-        setPosts((prevPosts) =>
-          prevPosts.map((post) => (post._id === postId ? updatedPost : post))
-        );
+        const oldPosts = [...posts]
+
+        const idx = oldPosts.findIndex(item => item._id === postId)
+        oldPosts[idx] = updatedPost
+
+        setPosts([...oldPosts])
+        // setPosts((prevPosts) =>
+        //   prevPosts?.map((post) => (post._id === postId ? updatedPost : post))
+        // );
       } else {
         const errorData = await response.json();
         console.error("Error liking post:", errorData.message);

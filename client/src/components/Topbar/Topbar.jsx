@@ -5,26 +5,28 @@ import SearchIcon from "@mui/icons-material/Search";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import profileAvatar from "../../images/profile_avatar.jpg";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import MyContext from "../../context/MyContext";
 
 export default function Topbar() {
+  const { userData } = useContext(MyContext);
   //const isMobile = window.innerWidth <= 768;
   return (
     <div className="topbarContainer">
       <div className="left">
         <span className="logo">
-         {/*  {isMobile ? (
+          {/*  {isMobile ? (
              <img src={iconMobile} alt="" />
           ) : (
             <h3>BeyondWork</h3>
           )} */}
-           <Link to="/newsfeed">
-           <img src={iconMobile} alt="" />
-          <h3>BeyondWork</h3>
-           </Link>
+          <Link to="/newsfeed">
+            <img src={iconMobile} alt="" />
+            <h3>BeyondWork</h3>
+          </Link>
         </span>
-          <DarkModeOutlinedIcon className="icon" /> 
+        <DarkModeOutlinedIcon className="icon" />
       </div>
       <div className="center">
         <div className="searchbar">
@@ -43,8 +45,14 @@ export default function Topbar() {
             <span>1</span>
           </div>
         </div>
-        <Link to="/user/profile">
-        <img src={profileAvatar} alt="" />
+        <Link to="/user/profile/me">
+          {userData && userData.userImage && (
+            <img
+              className="user-image-placeholder"
+              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
+              alt="userImage"
+            />
+          )}
         </Link>
       </div>
     </div>
