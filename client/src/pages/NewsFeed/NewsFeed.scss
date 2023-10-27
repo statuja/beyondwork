@@ -1,22 +1,19 @@
 .newsfeed {
- 
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 30px;
   border-radius: 15px;
-  padding: 20px;
-  
- 
-  
+  padding: 20px 0;
   h1 {
-    font-size: 34px;
+    font-size: 40px;
     font-family: "Belanosima", sans-serif;
     font-weight: 400;
   }
   p {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 
@@ -24,13 +21,13 @@
   .home {
     font-size: 20px;
     .newsfeed {
-      width: 100%;
+     
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding-right: 0;
-      flex: 1;
+     
     }
   }
 }

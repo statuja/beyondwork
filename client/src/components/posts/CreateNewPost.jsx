@@ -53,7 +53,6 @@ const CreateNewPost = () => {
         <textarea
           {...register("content", { required: true, maxLength: 500 })}
         />
-
         <input type="submit" />
         {error && <div className="error">Error: {error}</div>}
         {message && <div className="message">{message}</div>}

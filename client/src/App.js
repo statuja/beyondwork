@@ -20,6 +20,7 @@ import Topbar from "./components/Topbar/Topbar";
 import Menu from "./components/Menu/Menu";
 import { useContext } from "react";
 import MyContext from "./context/MyContext";
+import EditMyProfile from "./pages/UserProfile/EditMyProfile";
 
 function App() {
   const { userData } = useContext(MyContext);
@@ -110,6 +111,10 @@ function App() {
         {
           path: "/user/profile/:id",
           element: <MyProfile />,
+        },
+        {
+          path: "/user/editmyprofile",
+          element: <EditMyProfile />,
         },
         {
           path: "/allusers",

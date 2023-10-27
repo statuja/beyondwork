@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./EditPost.scss"
+//import "./EditPost.scss"
 
 const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
 

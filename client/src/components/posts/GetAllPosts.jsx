@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -16,7 +17,7 @@ const GetAllPosts = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
-  const [showEditForm, setShowEditForm] = useState(false)
+  const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
     try {
@@ -30,7 +31,6 @@ const GetAllPosts = () => {
       if (response.ok) {
         const data = await response.json();
         setPosts(data);
-
       } else {
         setError("Failed to fetch posts. Please try again later.");
       }
@@ -129,12 +129,18 @@ const GetAllPosts = () => {
 
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
-    setShowEditForm(true)
-  }
+    setShowEditForm(true);
+  };
 
   const renderEditPostComponent = (postId) => {
     if (editPostId === postId && showEditForm) {
-      return <EditPost postId={postId} getAllPosts={getAllPosts} setShowEditForm={setShowEditForm}/>;
+      return (
+        <EditPost
+          postId={postId}
+          getAllPosts={getAllPosts}
+          setShowEditForm={setShowEditForm}
+        />
+      );
     }
     return null;
   };
@@ -160,6 +166,7 @@ const GetAllPosts = () => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
+
             <p id="date">{formatDateTime(item.createdOn)}</p>
             <h3 className="post-owner-name">
               <Link to={`/user/${item.createdBy._id}`}>
@@ -172,44 +179,57 @@ const GetAllPosts = () => {
                 {/* Like button and count */}
                 <span title="Like this post">
                   <ThumbUpOffAltIcon
-                    className="icon"
-                    onClick={() => handleLikePost(item._id)}
-                  />
-                </span>
-                <span title="Comment on this post">
+
+            <div className="post-owner">
+              <h3>
+                <Link to={`/user/${item.createdBy._id}`}>
+                  {item.createdBy.userFullName}
+                </Link>{" "}
+              </h3>
+
+              <div id="date">{formatDateTime(item.createdOn)}</div>
+            </div>
+            <div className="post-content">{item.content}</div>
+            <div className="post-footer">
+              <div className="left">
+                
                   <CommentIcon className="icon" />
-                </span>
+                  <BookmarkBorderIcon
+
+                    className="icon"
+                    onClick={() => onSavePost(item._id)}
+                  />
+                  <ThumbUpOffAltIcon
+                  className="icon"
+                  onClick={() => handleLikePost(item._id)}
+                />
+                <div className="likes">
+                  <div>{item.like}</div>
+                  <div>like people it</div>
+                </div>
               </div>
 
               {renderEditPostComponent(item._id)}
 
-              <div className="post-edit-delete-save">
-                <span title="Save this post">
-                  <BookmarkBorderIcon
-                    className="icon"
-                    onClick={() => onSavePost(item._id)}
-                  />
-                </span>
+              <div className="right">
                 {userData._id === item.createdBy._id && (
-                  <span title="Delete this post">
+                 
                     <DeleteIcon
                       className="icon"
                       onClick={() => handleOnDelete(item._id)}
                     />
-                  </span>
+               
                 )}
                 {userData._id === item.createdBy._id && (
-                  <span title="Edit this post">
+                
                     <EditIcon
                       className="icon"
                       onClick={() => handleOnEditPostOn(item._id)}
                     />
-                  </span>
+               
                 )}
               </div>
-            </span>
-            <hr />
-            <span className="likes">{item.like} Likes</span>
+            </div>
           </div>
         ))}
       </div>
