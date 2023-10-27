@@ -160,6 +160,7 @@ const GetAllPosts = () => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
+            <p id="date">{formatDateTime(item.createdOn)}</p>
             <h3 className="post-owner-name">
               <Link to={`/user/${item.createdBy._id}`}>
                 {item.createdBy.userFullName}
@@ -167,7 +168,6 @@ const GetAllPosts = () => {
             </h3>
             <p className="post-content">{item.content}</p>
             <span className="post-footer">
-              <p id="date">{formatDateTime(item.createdOn)}</p>
               <div className="likesAndComments">
                 {/* Like button and count */}
                 <span title="Like this post">
