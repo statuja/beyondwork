@@ -190,7 +190,7 @@ const GetAllPosts = () => {
                 />
                 <div className="likes">
                   <div>{item.like}</div>
-                  <div>like people it</div>
+                  <div>people like it</div>
                 </div>
               </div>
 
