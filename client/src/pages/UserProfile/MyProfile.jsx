@@ -17,7 +17,7 @@ const UserProfile = () => {
       setUser(userData); // If it's the user's own profile
       setLoading(false);
     } else {
-      // Fetch user data by ID 
+      // Fetch user data by ID
       const fetchUserDataById = async (userId) => {
         try {
           const response = await fetch(
@@ -33,7 +33,11 @@ const UserProfile = () => {
 
           if (response.ok) {
             const data = await response.json();
-            console.log(data)
+            if (data.success === false) {
+              alert("Session expired, please login again!");
+              setUser({});
+              return navigate("/");
+            }
             setUser(data); // Set the user data including images
             // if (data.success === false) {
             //   alert("Server error");
@@ -42,12 +46,10 @@ const UserProfile = () => {
             // }
             setLoading(false);
           } else {
-            throw new Error(
-              `Failed to fetch user data. Status: ${response.status}`
-            );
+            console.error("Error updating profile:", response.statusText);
           }
         } catch (error) {
-          console.error("Error fetching user details", error);
+          console.error("Error fetching company details", error);
           setLoading(false);
         }
       };
@@ -55,8 +57,6 @@ const UserProfile = () => {
     }
   }, [id, userData]);
   //console.log(userData);
-
-   
 
   return (
     <>
@@ -87,7 +87,6 @@ const UserProfile = () => {
             ) : (
               <p>User not found</p>
             )}
-           
           </div>
           <div className="right"></div>
         </div>

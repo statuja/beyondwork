@@ -75,16 +75,20 @@
                 display: flex;
                 justify-content: center;
                 align-items: flex-start;
-                /* Aligns the items to the start of the flex container */
                 gap: 20px;
 
                 h5 {
                     font-weight: bold;
-
                 }
 
                 h5,
-                p,
+                p {
+                    height: 50px;
+                    font-size: 14px;
+                    align-self: center;
+                }
+
+
                 input,
                 .labels,
                 .data {
@@ -96,13 +100,15 @@
                     border-radius: 5px;
                     padding: 5px;
                     border: 1px solid #ffb000;
+                    height: 35px;
                 }
 
                 .labels,
                 .data {
                     display: flex;
                     flex-direction: column;
-                    justify-content: flex-start;
+                    justify-content: space-between;
+
                 }
             }
         }
@@ -116,6 +122,11 @@
         h1 {
             font-size: 24px;
         }
+
+        // .bottom {
+        //     width: 80%;
+        // }
+
         .cards-container {
             flex-direction: column;
             width: auto;
@@ -124,10 +135,7 @@
                 width: 100%;
 
                 .flex-wrapper {
-                    display: flex;
-                        // flex-direction: column;
-                        // justify-content: center;
-                        // align-items: flex-start;
+                    justify-content: space-around;
 
                     h5,
                     p,

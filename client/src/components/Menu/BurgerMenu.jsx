@@ -18,7 +18,7 @@ import MyContext from "../../context/MyContext";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { setUserData } = useContext(MyContext);
+  const { userData, setUserData } = useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -62,11 +62,13 @@ const Menu = () => {
           <NewspaperIcon className="icon" /> News Feed
         </Link>
       </li>
-      <li>
-        <Link to="/user/create">
-          <PersonAddAltOutlinedIcon className="icon" /> Add New User
-        </Link>
-      </li>
+      {userData.adminRole ? (
+        <li>
+          <Link to="/user/create">
+            <PersonAddAltOutlinedIcon className="icon" /> Add New User
+          </Link>
+        </li>
+      ) : null}
       <li>
         <Link to="/savedposts">
           <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts

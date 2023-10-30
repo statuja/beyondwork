@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
 import React, { useContext, useState } from "react";
 import MyContext from "../../context/MyContext";
-import Topbar from "../../components/Topbar/Topbar";
-import Footer from "../../components/Footer/Footer";
-import Menu from "../../components/Menu/Menu";
+import { useNavigate } from "react-router-dom";
 import "./CreateUser.scss";
 
 export const UserRegistration = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -45,23 +44,24 @@ export const UserRegistration = () => {
         },
         credentials: "include",
       });
-      const responseData = await response.json();
       if (response.ok) {
+        const data = await response.json();
+        if (data.success === false) {
+          alert("Session expired, please login again!");
+          reset();
+          return navigate("/");
+        }
         setMessage(
           `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
         );
         reset();
       } else {
-        setError(responseData.error[0].msg);
+        console.error("Error updating profile:", response.statusText);
       }
     } catch (error) {
-      setError(
-        "An error occurred while processing your request. Please try again later."
-      );
+      console.error("Error fetching company details", error);
     }
   };
-
-  console.log(errors);
 
   return (
     <>
