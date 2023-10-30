@@ -29,6 +29,7 @@ function AllUsers() {
 
         if (Array.isArray(data)) {
           setUsers(data);
+          console.log(users);
         } else {
           throw new Error("Invalid data format");
         }
@@ -69,7 +70,7 @@ function AllUsers() {
                   <b>Name: </b>
                   <Link to={`/user/profile/${user._id}`}>
                     {user.userFullName}
-                  </Link>{" "}
+                  </Link>
                 </p>
                 <p>
                   <b>Job Title:</b> {user.userJobTitle}

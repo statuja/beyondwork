@@ -127,6 +127,10 @@ const EditCompanyProfile = () => {
     navigate("/company/profile");
   };
 
+  const handleClick = () => {
+    document.getElementById("fileInput").click();
+  };
+
   return (
     <div className="companyProfile">
       <h1>Edit Company Profile</h1>
@@ -139,106 +143,114 @@ const EditCompanyProfile = () => {
       ) : (
         <p>No logo available</p>
       )}
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        onChange={handleFileChange}
+        style={{ display: "none" }}
+      />
+      <button type="button" onClick={handleClick}>
+        Upload a new logo
+      </button>
       <div className="bottom">
         <form className="cards-container" onSubmit={handleSubmit}>
           <div className="card">
-            <h3>Edit Company Details</h3>
+            <h3>Company Details</h3>
             <div className="flex-wrapper">
-              <h5>Company Name:</h5>
-              <input
-                type="text"
-                name="companyName"
-                placeholder="Company Name"
-                value={companyData.companyName}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-wrapper">
-              <h5> Company Type:</h5>
-              <input
-                type="text"
-                name="companyType"
-                placeholder="Company Type"
-                value={companyData.companyType}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-wrapper">
-              <h5> Number of Employees:</h5>
-              <input
-                type="text"
-                name="numberOfEmployees"
-                placeholder="Number of Employees"
-                value={companyData.numberOfEmployees}
-                onChange={handleInputChange}
-              />
+              <div className="labels">
+                <h5>Company Name:</h5> <h5> Company Type:</h5>
+                <h5> Number of Employees:</h5>
+              </div>
+              <div className="data">
+                <input
+                  type="text"
+                  name="companyName"
+                  placeholder="Company Name"
+                  value={companyData.companyName}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="companyType"
+                  placeholder="Company Type"
+                  value={companyData.companyType}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="numberOfEmployees"
+                  placeholder="Number of Employees"
+                  value={companyData.numberOfEmployees}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
           </div>
           <div className="card">
-            <h3>Address</h3>
+            <h3>Company Address</h3>
             <div className="flex-wrapper">
-              <h5> Address:</h5>
-              <input
-                type="text"
-                name="companyAddress.address"
-                placeholder="Address"
-                value={companyData.companyAddress.address}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-wrapper">
-              <h5> City:</h5>
-              <input
-                type="text"
-                name="companyAddress.city"
-                placeholder="city"
-                value={companyData.companyAddress.city}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-wrapper">
-              <h5> Zip Code:</h5>
-              <input
-                type="text"
-                name="companyAddress.zipCode"
-                placeholder="zipCode"
-                value={companyData.companyAddress.zipCode}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-wrapper">
-              <h5>Country:</h5>
-              <input
-                type="text"
-                name="companyAddress.country"
-                placeholder="country"
-                value={companyData.companyAddress.country}
-                onChange={handleInputChange}
-              />
+              <div className="labels">
+                <h5> Address:</h5>
+                <h5> City:</h5>
+                <h5> Zip Code:</h5>
+                <h5>Country:</h5>
+              </div>
+              <div className="data">
+                <input
+                  type="text"
+                  name="companyAddress.address"
+                  placeholder="Address"
+                  value={companyData.companyAddress.address}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="companyAddress.city"
+                  placeholder="city"
+                  value={companyData.companyAddress.city}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="companyAddress.zipCode"
+                  placeholder="zipCode"
+                  value={companyData.companyAddress.zipCode}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="companyAddress.country"
+                  placeholder="country"
+                  value={companyData.companyAddress.country}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
           </div>
           <div className="card">
             <h3>Contact Details</h3>
             <div className="flex-wrapper">
-              <h5> Email: </h5>
-              <input
-                type="email"
-                name="companyContact.email"
-                placeholder="email"
-                value={companyData.companyContact.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-wrapper">
-              <h5> Phone Number:</h5>
-              <input
-                type="text"
-                name="companyContact.phoneNumber"
-                placeholder="phone Number"
-                value={companyData.companyContact.phoneNumber}
-                onChange={handleInputChange}
-              />
+              <div className="labels">
+                <h5> Email: </h5>
+                <h5> Phone Number:</h5>
+              </div>
+              <div className="data">
+                <input
+                  type="email"
+                  name="companyContact.email"
+                  placeholder="email"
+                  value={companyData.companyContact.email}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="companyContact.phoneNumber"
+                  placeholder="phone Number"
+                  value={companyData.companyContact.phoneNumber}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
           </div>
         </form>
