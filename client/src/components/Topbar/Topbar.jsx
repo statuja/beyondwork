@@ -5,11 +5,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MyContext from "../../context/MyContext";
+import BurgerMenu from "../Menu/BurgerMenu"
 
 export default function Topbar() {
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const { userData } = useContext(MyContext);
   //const isMobile = window.innerWidth <= 768;
   return (
@@ -26,7 +29,7 @@ export default function Topbar() {
             <h3>BeyondWork</h3>
           </Link>
         </span>
-        <DarkModeOutlinedIcon className="icon" />
+        
       </div>
       <div className="center">
         <div className="searchbar">
@@ -37,14 +40,13 @@ export default function Topbar() {
       <div className="right">
         <div className="icons">
           <div className="iconItem">
-            <ChatIcon />
-            <span>2</span>
-          </div>
-          <div className="iconItem">
             <NotificationsIcon />
             <span>1</span>
           </div>
-        </div>
+          <div className="iconItem">
+          <DarkModeOutlinedIcon className="icon" />
+          </div>
+          
         <Link to="/user/profile/me">
           {userData && userData.userImage && (
             <img
@@ -54,7 +56,14 @@ export default function Topbar() {
             />
           )}
         </Link>
+        </div>
+        <div id="burger-menu-icon" className="iconItem">
+            <MenuIcon onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}/>
+          </div>
+
       </div>
+
+      {isBurgerMenuOpen && <BurgerMenu />}
     </div>
   );
 }

@@ -96,6 +96,10 @@
         }
       }
     }
+    #burger-menu-icon {
+      display: none;  
+      margin-right: 10px;
+    }
     
     img {
       border: 2px solid #f5f5dc;
@@ -120,6 +124,10 @@
           display: none;
         }
       }
+    }
+
+    #burger-menu-icon {
+      display: block !important;
     }
   }
 }
