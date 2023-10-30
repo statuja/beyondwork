@@ -1,5 +1,4 @@
 .newsfeed {
-  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,13 +20,11 @@
   .home {
     font-size: 20px;
     .newsfeed {
-     
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding-right: 0;
-     
     }
   }
 }

@@ -16,13 +16,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     padding: 20px;
     width: 90%;
-   background-color: rgba(251, 251, 246, 0.784); 
+    background-color: rgba(251, 251, 246, 0.784);
     border-radius: 6px;
     /* box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1); */
-   
+
     a {
       text-decoration: none;
       color: black;
@@ -55,15 +55,13 @@
 
     .post-content {
       font-size: 22px;
-     border: 1px solid rgba(128, 128, 128, 0.22);
+      border: 1px solid rgba(128, 128, 128, 0.22);
       height: 150px;
       border-radius: 6px;
       box-shadow: 6px 6px 10px 0 rgba(92, 91, 91, 0.25),
-      -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
-    color: #004225;
-    transition: background-color 0.3s;
-   
-   
+        -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
+      color: #004225;
+      transition: background-color 0.3s;
     }
 
     .icon {
@@ -84,22 +82,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
 
-      
-      .left{
-       
+      .likesAndComments {
+        width: 100%;
+      }
+
+      .left {
         display: flex;
         gap: 10px;
-        .likes{
+        .likes {
           display: flex;
           align-items: center;
-          gap: 10px
+          gap: 10px;
         }
       }
-      .right{
+      .right {
         display: flex;
         gap: 10px;
-        
+        float: right;
       }
     }
   }

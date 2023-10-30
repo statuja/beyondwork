@@ -1,97 +1,46 @@
 .main-container {
-    background-color: rgba(245, 245, 220, 0.57);
-    display: flex;
-    // height: 92vh;
-    justify-content: center;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  border-radius: 15px;
+  padding: 20px;
 
-    .leftmenu {
-        flex: 3;
-        display: flex;
-        height: 100vh;
-        align-items: center;
-        position: fixed;
-        right: 80px;
-    }
+  .wrapper {
+    background-color: #e7e7a38e;
+    padding: 20px;
+    margin: 20px;
+    width: 90%;
+    border-radius: 15px;
+  }
+  h1 {
+    font-size: 40px;
+    font-family: "Belanosima", sans-serif;
+    font-weight: 400;
+  }
+}
 
-    .savedPosts {
-        display: flex;
-        flex: 5;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 20px;
-        padding-right: 300px;
+.savedPosts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
-        .post-card {
-            background: #f5f5dc;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            color: #000;
-            transition: background 0.3s;
-            cursor: pointer;
+h2 {
+  margin: 30px;
+  font-size: 1.5rem;
+}
 
-            &:hover {
-                background: #ffb000;
+.post-card {
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
 
-            }
-
-            p {
-                margin: 5px;
-            }
-
-            h3 {
-                margin-top: 10px;
-            }
-
-            a {
-                text-decoration: none;
-                color: black;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            @media screen and (max-width: 884px) {}
-        }
-    }
-
-    h1 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    h3 {
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-
-
-    @media screen and (max-width: 768px) {
-        h1 {
-            font-size: 20px;
-        }
-
-        p {
-            margin: 8px 0;
-            font-size: 14px;
-        }
-
-        .savedPosts {
-            padding: 20px;
-            width: 100%;
-            padding: 0;
-
-        }
-
-        .leftmenu {
-            display: none;
-        }
-
-
-
-    }
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(251, 251, 246, 0.784);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
 }

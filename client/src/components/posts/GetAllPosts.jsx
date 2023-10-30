@@ -113,12 +113,12 @@ const GetAllPosts = () => {
       if (response.ok) {
         const updatedPost = await response.json();
 
-        const oldPosts = [...posts]
+        const oldPosts = [...posts];
 
-        const idx = oldPosts.findIndex(item => item._id === postId)
-        oldPosts[idx] = updatedPost
+        const idx = oldPosts.findIndex((item) => item._id === postId);
+        oldPosts[idx] = updatedPost;
 
-        setPosts([...oldPosts])
+        setPosts([...oldPosts]);
         // setPosts((prevPosts) =>
         //   prevPosts?.map((post) => (post._id === postId ? updatedPost : post))
         // );
@@ -160,7 +160,6 @@ const GetAllPosts = () => {
     const minutes = date.getMinutes();
     const formattedDate = `${day}.${month}.${year}`;
     const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
-
     return `${formattedDate} at ${formattedTime}`;
   };
 
@@ -172,70 +171,62 @@ const GetAllPosts = () => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
-
-            <p id="date">{formatDateTime(item.createdOn)}</p>
-            <h3 className="post-owner-name">
-              <Link to={`/user/${item.createdBy._id}`}>
-                {item.createdBy.userFullName}
-              </Link>{" "}
-            </h3>
-            <p className="post-content">{item.content}</p>
-            <span className="post-footer">
-              <div className="likesAndComments">
-                {/* Like button and count */}
-                <span title="Like this post">
-                  <ThumbUpOffAltIcon
-
             <div className="post-owner">
               <h3>
                 <Link to={`/user/${item.createdBy._id}`}>
                   {item.createdBy.userFullName}
-                </Link>{" "}
+                </Link>
               </h3>
 
               <div id="date">{formatDateTime(item.createdOn)}</div>
             </div>
-            <div className="post-content">{item.content}</div>
-            <div className="post-footer">
-              <div className="left">
-                
-                  <CommentIcon className="icon" />
-                  <BookmarkBorderIcon
+            <p className="post-content">{item.content}</p>
+            <span className="post-footer">
+              <div className="likesAndComments">
+                <div className="left">
+                  <span title="Comment">
+                    <CommentIcon className="icon" />
+                  </span>
+                  <span title="Like">
+                    <ThumbUpOffAltIcon
+                      className="icon"
+                      onClick={() => handleLikePost(item._id)}
+                    />
+                  </span>
+                  <div className="likes">
+                    <div>{item.like}</div>
+                    <div> people liked it</div>
+                  </div>
+                </div>
 
-                    className="icon"
-                    onClick={() => onSavePost(item._id)}
-                  />
-                  <ThumbUpOffAltIcon
-                  className="icon"
-                  onClick={() => handleLikePost(item._id)}
-                />
-                <div className="likes">
-                  <div>{item.like}</div>
-                  <div>like people it</div>
+                {renderEditPostComponent(item._id)}
+
+                <div className="right">
+                  <span title="Save this post">
+                    <BookmarkBorderIcon
+                      className="icon"
+                      onClick={() => onSavePost(item._id)}
+                    />
+                  </span>
+                  {userData._id === item.createdBy._id && (
+                    <span title="Delete this post">
+                      <DeleteIcon
+                        className="icon"
+                        onClick={() => handleOnDelete(item._id)}
+                      />
+                    </span>
+                  )}
+                  {userData._id === item.createdBy._id && (
+                    <span title="Edit this post">
+                      <EditIcon
+                        className="icon"
+                        onClick={() => handleOnEditPostOn(item._id)}
+                      />
+                    </span>
+                  )}
                 </div>
               </div>
-
-              {renderEditPostComponent(item._id)}
-
-              <div className="right">
-                {userData._id === item.createdBy._id && (
-                 
-                    <DeleteIcon
-                      className="icon"
-                      onClick={() => handleOnDelete(item._id)}
-                    />
-               
-                )}
-                {userData._id === item.createdBy._id && (
-                
-                    <EditIcon
-                      className="icon"
-                      onClick={() => handleOnEditPostOn(item._id)}
-                    />
-               
-                )}
-              </div>
-            </div>
+            </span>
           </div>
         ))}
       </div>

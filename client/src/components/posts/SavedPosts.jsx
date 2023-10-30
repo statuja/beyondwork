@@ -36,18 +36,33 @@ const SavedPosts = () => {
   if (savedPosts.length === 0) {
     return <div>No saved posts yet.</div>;
   }
+
+  const formatDateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedDate = `${day}.${month}.${year}`;
+    const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+    return `${formattedDate} at ${formattedTime}`;
+  };
+
   return (
     <>
       <div className="main-container">
-        <div className="savedPosts">
-          <h2>Saved Posts</h2>
-          {savedPosts?.map((post) => (
-            <div className="post-card" key={post._id}>
-              <p>Post content: {post.content}</p>
-              <p>By {post.createdBy}</p>
-              <p>Created on {post.createdOn}</p>
-            </div>
-          ))}
+        <h1>Saved Posts</h1>
+        <div className="wrapper">
+          <div className="savedPosts">
+            {savedPosts?.map((post) => (
+              <div className="post-card" key={post._id}>
+                <p>Post content: {post.content}</p>
+                <p>By {post.createdBy}</p>
+                <p>Created on {formatDateTime(post.createdOn)}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
