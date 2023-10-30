@@ -185,6 +185,12 @@ const GetAllPosts = () => {
             <span className="post-footer">
               <div className="likesAndComments">
                 <div className="left">
+                <span title="Save this post">
+                    <BookmarkBorderIcon
+                      className="icon"
+                      onClick={() => onSavePost(item._id)}
+                    />
+                  </span>
                   <span title="Comment">
                     <CommentIcon className="icon" />
                   </span>
@@ -202,22 +208,10 @@ const GetAllPosts = () => {
                 </div>
 
                 {renderEditPostComponent(item._id)}
-
+                </div>
                 <div className="right">
-                  <span title="Save this post">
-                    <BookmarkBorderIcon
-                      className="icon"
-                      onClick={() => onSavePost(item._id)}
-                    />
-                  </span>
-                  {userData._id === item.createdBy._id && (
-                    <span title="Delete this post">
-                      <DeleteIcon
-                        className="icon"
-                        onClick={() => handleOnDelete(item._id)}
-                      />
-                    </span>
-                  )}
+                 
+                 
                   {userData._id === item.createdBy._id && (
                     <span title="Edit this post">
                       <EditIcon
@@ -226,8 +220,16 @@ const GetAllPosts = () => {
                       />
                     </span>
                   )}
+                   {userData._id === item.createdBy._id && (
+                    <span title="Delete this post">
+                      <DeleteIcon
+                        className="icon"
+                        onClick={() => handleOnDelete(item._id)}
+                      />
+                    </span>
+                  )}
                 </div>
-              </div>
+             
             </span>
           </div>
         ))}

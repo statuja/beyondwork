@@ -145,7 +145,7 @@ function EditMyProfile() {
 
         setUserData({ ...data });
         console.log("profile updated:", data);
-        navigate("/user/profile/me");
+        navigate(`/user/profile/${userData._id}`);
       } else {
         console.error("Error updating profile:", response.statusText);
       }

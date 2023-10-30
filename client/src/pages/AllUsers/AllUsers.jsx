@@ -56,20 +56,21 @@ function AllUsers() {
             <div key={user._id} className="user-card">
               <MailOutlineIcon className="icon" />
               <div className="user-image-placeholder">
-                {user && user.userImage && (
+                 <Link to={`/user/profile/${user._id}`}>{user && user.userImage && (
                   <img
                     className="user-image-placeholder"
                     src={`http://localhost:5000/user/uploads/${user.userImage}`}
                     alt="userImage"
                   />
                 )}
+                  </Link>{" "}
               </div>
               <div className="user-details">
                 <p>
                   <b>Name: </b>
-                  <Link to={`/user/profile/${user._id}`}>
+                
                     {user.userFullName}
-                  </Link>{" "}
+                 
                 </p>
                 <p>
                   <b>Job Title:</b> {user.userJobTitle}
