@@ -1,6 +1,8 @@
 import "./UserData.scss";
+import { Link } from "react-router-dom";
 
 const UserData = ({ isMe, user }) => {
+  console.log("isme", isMe)
   if (isMe) {
     return (
       <>
@@ -54,6 +56,9 @@ const UserData = ({ isMe, user }) => {
                 <span className="infoKey">Date of Birth:</span>
                 <span className="infoValue">{user.dateOfBirth}</span>
               </div>
+              <div>
+              <Link to="/user/editmyprofile">Edit My Profile</Link>
+            </div>
              </div>
           </div>
         </div>

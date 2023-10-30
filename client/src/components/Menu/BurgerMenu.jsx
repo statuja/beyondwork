@@ -1,4 +1,4 @@
-import "./menu.scss";
+import "./BurgerMenu.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -15,11 +15,10 @@ import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlin
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
-import UserData from "../UserData/UserData";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { userData, setUserData } = useContext(MyContext);
+  const { setUserData } = useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -47,9 +46,9 @@ const Menu = () => {
     }
   };
   return (
-    <ul className="menu">
+    <ul className="burgerMenu">
       <li>
-        <Link to={`/user/profile/${userData._id}`}>
+        <Link to="/user/profile/me">
           <AccountCircleOutlinedIcon className="icon" /> My Profile
         </Link>
       </li>

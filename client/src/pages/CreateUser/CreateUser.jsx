@@ -66,10 +66,9 @@ export const UserRegistration = () => {
   return (
     <>
       <div className="main-container">
+        <h3>Hello Admin!</h3>
+        <p>Here, you can register all the employees in your team:</p>
         <div className="addUser">
-          <h3>Hello Admin!</h3>
-          <p>Here, you can register all the employees in your team:</p>
-
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="userFullName">Employee Full Name:</label>
             <input
@@ -135,7 +134,7 @@ export const UserRegistration = () => {
           value=" No"
           defaultChecked
         /> */}
-            <input type="submit" />
+            <input type="submit" className="button" />
             {error && <div>Error: {error}</div>}
             {message && <div>{message}</div>}
           </form>

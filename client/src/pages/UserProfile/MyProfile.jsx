@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import UserData from "../../components/UserData/UserData";
 import MyContext from "../../context/MyContext";
+//import GetAllPosts from "../../components/posts/GetAllPosts";
 import "./MyProfile.scss";
 
 const UserProfile = () => {
@@ -12,11 +13,11 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (id === "me") {
+    if (id === userData._id) {
       setUser(userData); // If it's the user's own profile
       setLoading(false);
     } else {
-      // Fetch user data by ID (you need to define the fetching logic)
+      // Fetch user data by ID 
       const fetchUserDataById = async (userId) => {
         try {
           const response = await fetch(
@@ -32,6 +33,7 @@ const UserProfile = () => {
 
           if (response.ok) {
             const data = await response.json();
+            console.log(data)
             setUser(data); // Set the user data including images
             // if (data.success === false) {
             //   alert("Server error");
@@ -52,7 +54,10 @@ const UserProfile = () => {
       fetchUserDataById(id);
     }
   }, [id, userData]);
-  console.log(userData);
+  //console.log(userData);
+
+   
+
   return (
     <>
       <div className="profile">
@@ -78,13 +83,11 @@ const UserProfile = () => {
             {loading ? (
               <p>Loading...</p>
             ) : user ? (
-              <UserData isMe={id === "me"} user={userData} />
+              <UserData isMe={id === userData._id} user={user} />
             ) : (
               <p>User not found</p>
             )}
-            <div>
-              <Link to="/user/editmyprofile">Edit My Profile</Link>
-            </div>
+           
           </div>
           <div className="right"></div>
         </div>
