@@ -25,7 +25,7 @@ const CompanyProfile = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.success === false) {
-            alert("Server error");
+            alert("Session expired, please login again!");
             setCompany({});
             return navigate("/");
           }
@@ -109,16 +109,18 @@ const CompanyProfile = () => {
           </div>
         </div>
       </div>
-      <Link
-        to={{
-          pathname: "/updateCompanyProfile",
-          state: {
-            company: company,
-          },
-        }}
-      >
-        Edit Company Profile
-      </Link>
+      {userData.adminRole ? (
+        <Link
+          to={{
+            pathname: "/updateCompanyProfile",
+            state: {
+              company: company,
+            },
+          }}
+        >
+          Edit Company Profile
+        </Link>
+      ) : null}
     </div>
   );
 };

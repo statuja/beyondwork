@@ -30,7 +30,7 @@ const userSchema = new Schema(
     adminRole: { type: Boolean, default: false },
     userImage: String,
     coverImage: String,
-    savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post", unique: true }],
     description: String,
     dateOfBirth: Date,
   },

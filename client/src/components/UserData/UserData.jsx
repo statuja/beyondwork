@@ -2,7 +2,7 @@ import "./UserData.scss";
 import { Link } from "react-router-dom";
 
 const UserData = ({ isMe, user }) => {
- 
+
   if (isMe) {
     return (
       <>
@@ -57,9 +57,9 @@ const UserData = ({ isMe, user }) => {
                 <span className="infoValue">{user.dateOfBirth}</span>
               </div>
               <div>
-              <Link to="/user/editmyprofile">Edit My Profile</Link>
+                <Link to="/user/editmyprofile">Edit My Profile</Link>
+              </div>
             </div>
-             </div>
           </div>
         </div>
       </>
@@ -70,9 +70,7 @@ const UserData = ({ isMe, user }) => {
         <div className="top">
           <div className="header">
             <h4>Name: {user.userFullName}</h4>
-            <span>
-              {user.description}
-            </span>
+            <span>{user.description}</span>
           </div>
         </div>
         <div className="info">
@@ -97,7 +95,7 @@ const UserData = ({ isMe, user }) => {
             </div>
             <div className="infoItem">
               <span className="infoKey">Date of Birth:</span>
-              <span className="infoValue">12.12.1990</span>
+              <span className="infoValue">{user.dateOfBirth}</span>
             </div>
           </div>
         </div>

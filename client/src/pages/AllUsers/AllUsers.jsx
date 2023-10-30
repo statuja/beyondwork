@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import "./AllUsers.scss";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 function AllUsers() {
+  const navigate = useNavigate();
   const { userData } = useContext(MyContext);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -25,11 +26,17 @@ function AllUsers() {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        const data = await response.json();
-
-        if (Array.isArray(data)) {
-          setUsers(data);
-          console.log(users);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success === false) {
+            alert("Session expired, please login again!");
+            setUsers({});
+            return navigate("/");
+          }
+          if (Array.isArray(data)) {
+            setUsers(data);
+            console.log(users);
+          }
         } else {
           throw new Error("Invalid data format");
         }
@@ -56,21 +63,23 @@ function AllUsers() {
           {users.map((user) => (
             <div key={user._id} className="user-card">
               <MailOutlineIcon className="icon" />
-              <div className="user-image-placeholder">
-                 <Link to={`/user/profile/${user._id}`}>{user && user.userImage && (
-                  <img
-                    className="user-image-placeholder"
-                    src={`http://localhost:5000/user/uploads/${user.userImage}`}
-                    alt="userImage"
-                  />
-                )}
-                  </Link>{" "}
-              </div>
+              <Link to={`/user/profile/${user._id}`}>
+                {" "}
+                <div className="user-image-placeholder">
+                  {user && user.userImage && (
+                    <img
+                      className="user-image-placeholder"
+                      src={`http://localhost:5000/user/uploads/${user.userImage}`}
+                      alt="userImage"
+                    />
+                  )}
+                </div>{" "}
+              </Link>
               <div className="user-details">
                 <p>
                   <b>Name: </b>
-                
-                    {user.userFullName}
+
+                  {user.userFullName}
                 </p>
                 <p>
                   <b>Job Title:</b> {user.userJobTitle}

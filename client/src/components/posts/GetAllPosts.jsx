@@ -1,6 +1,6 @@
 import "./GetAllPostCards.scss";
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
@@ -11,7 +11,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
-const GetAllPosts = ({userPosts}) => {
+
+const GetAllPosts = ({userPosts}) => { //Irina's change
+  const navigate = useNavigate(); //Marwah's change?
   const [posts, setPosts] = useState([]);
   const { userData } = useContext(MyContext);
   const [error, setError] = useState("");
@@ -36,14 +38,17 @@ const GetAllPosts = ({userPosts}) => {
       });
       if (response.ok) {
         const data = await response.json();
+        if (data.success === false) {
+          alert("Session expired, please login again!");
+          setPosts({});
+          return navigate("/");
+        }
         setPosts(data);
       } else {
-        setError("Failed to fetch posts. Please try again later.");
+        console.error("Error updating profile:", response.statusText);
       }
     } catch (error) {
-      setError(
-        "An error occurred while fetching posts. Please try again later."
-      );
+      console.error("Error fetching company details", error);
     }
   };
   useEffect(() => {
@@ -191,7 +196,7 @@ const GetAllPosts = ({userPosts}) => {
             <span className="post-footer">
               <div className="likesAndComments">
                 <div className="left">
-                <span title="Save this post">
+                  <span title="Save this post">
                     <BookmarkBorderIcon
                       className="icon"
                       onClick={() => onSavePost(item._id)}
@@ -210,32 +215,28 @@ const GetAllPosts = ({userPosts}) => {
                     <div>{item.like}</div>
                     <div> people liked it</div>
                   </div>
-
                 </div>
 
                 {renderEditPostComponent(item._id)}
-                </div>
-                <div className="right">
-                 
-                 
-                  {userData._id === item.createdBy._id && (
-                    <span title="Edit this post">
-                      <EditIcon
-                        className="icon"
-                        onClick={() => handleOnEditPostOn(item._id)}
-                      />
-                    </span>
-                  )}
-                   {userData._id === item.createdBy._id && (
-                    <span title="Delete this post">
-                      <DeleteIcon
-                        className="icon"
-                        onClick={() => handleOnDelete(item._id)}
-                      />
-                    </span>
-                  )}
-                </div>
-             
+              </div>
+              <div className="right">
+                {userData._id === item.createdBy._id && (
+                  <span title="Edit this post">
+                    <EditIcon
+                      className="icon"
+                      onClick={() => handleOnEditPostOn(item._id)}
+                    />
+                  </span>
+                )}
+                {userData._id === item.createdBy._id && (
+                  <span title="Delete this post">
+                    <DeleteIcon
+                      className="icon"
+                      onClick={() => handleOnDelete(item._id)}
+                    />
+                  </span>
+                )}
+              </div>
             </span>
           </div>
         ))}

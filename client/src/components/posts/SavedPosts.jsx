@@ -17,6 +17,7 @@ const SavedPosts = () => {
         });
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setSavedPosts(data);
         } else {
           setError("Failed to fetch saved posts. Please try again later.");
@@ -52,15 +53,26 @@ const SavedPosts = () => {
   return (
     <>
       <div className="main-container">
-        <h1>Saved Posts</h1>
+        <h1>Your Saved Posts</h1>
         <div className="wrapper">
           <div className="savedPosts">
             {savedPosts?.map((post) => (
-              <div className="post-card" key={post._id}>
-                <p>Post content: {post.content}</p>
-                <p>By {post.createdBy}</p>
-                <p>Created on {formatDateTime(post.createdOn)}</p>
-              </div>
+              <>
+                {post && (
+                  <div className="post-card" key={post._id}>
+                    <div className="post-content">
+                      <p className="postBy">
+                        <b>{post.createdBy.userFullName}</b>
+                      </p>
+                      <p className="text">{post.content}</p>
+                    </div>
+                    <span className="date-and-likes">
+                      <div>{post.like} people liked it</div>
+                      <p>Created on {formatDateTime(post.createdOn)}</p>
+                    </span>
+                  </div>
+                )}
+              </>
             ))}
           </div>
         </div>
