@@ -180,6 +180,7 @@ const GetAllPosts = () => {
 
               <div id="date">{formatDateTime(item.createdOn)}</div>
             </div>
+
             <p className="post-content">{item.content}</p>
             <span className="post-footer">
               <div className="likesAndComments">
@@ -197,6 +198,7 @@ const GetAllPosts = () => {
                     <div>{item.like}</div>
                     <div> people liked it</div>
                   </div>
+
                 </div>
 
                 {renderEditPostComponent(item._id)}
