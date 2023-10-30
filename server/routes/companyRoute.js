@@ -75,6 +75,7 @@ router.get(
   authorization,
   viewCompanyProfile
 );
+
 router.post(
   "/updateCompanyProfile/:userCompany",
   authorization,
