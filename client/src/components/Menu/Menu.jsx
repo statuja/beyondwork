@@ -15,10 +15,11 @@ import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlin
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
+import UserData from "../UserData/UserData";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { setUserData } = useContext(MyContext);
+  const { userData, setUserData } = useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -48,7 +49,7 @@ const Menu = () => {
   return (
     <ul className="menu">
       <li>
-        <Link to="/user/profile/me">
+        <Link to={`/user/profile/${userData._id}`}>
           <AccountCircleOutlinedIcon className="icon" /> My Profile
         </Link>
       </li>
