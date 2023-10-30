@@ -48,40 +48,42 @@ function AllUsers() {
     );
   }
   return (
-    <div className="user-cards-container">
-      <h2>User List</h2>
-      <div className="user-cards">
-        {users.map((user) => (
-          <div key={user._id} className="user-card">
-            <MailOutlineIcon className="icon" />
-            <div className="user-image-placeholder">
-              {user && user.userImage && (
-                <img
-                  className="user-image-placeholder"
-                  src={`http://localhost:5000/user/uploads/${user.userImage}`}
-                  alt="userImage"
-                />
-              )}
+    <div className="wrapper">
+      <h1>User List</h1>
+      <div className="user-cards-container">
+        <div className="user-cards">
+          {users.map((user) => (
+            <div key={user._id} className="user-card">
+              <MailOutlineIcon className="icon" />
+              <div className="user-image-placeholder">
+                {user && user.userImage && (
+                  <img
+                    className="user-image-placeholder"
+                    src={`http://localhost:5000/user/uploads/${user.userImage}`}
+                    alt="userImage"
+                  />
+                )}
+              </div>
+              <div className="user-details">
+                <p>
+                  <b>Name: </b>
+                  <Link to={`/user/profile/${user._id}`}>
+                    {user.userFullName}
+                  </Link>{" "}
+                </p>
+                <p>
+                  <b>Job Title:</b> {user.userJobTitle}
+                </p>
+                <p>
+                  <b>Department:</b> {user.userDepartment}
+                </p>
+                <p>
+                  <b>Email:</b> {user.userContact.email}
+                </p>
+              </div>
             </div>
-            <div className="user-details">
-              <p>
-                <b>Name: </b>
-                <Link to={`/user/profile/${user._id}`}>
-                  {user.userFullName}
-                </Link>{" "}
-              </p>
-              <p>
-                <b>Job Title:</b> {user.userJobTitle}
-              </p>
-              <p>
-                <b>Department:</b> {user.userDepartment}
-              </p>
-              <p>
-                <b>Email:</b> {user.userContact.email}
-              </p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

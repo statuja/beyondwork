@@ -8,6 +8,7 @@ const CreateNewPost = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -33,8 +34,9 @@ const CreateNewPost = () => {
       const responseData = await response.json();
       //console.log("CREATE NEW POST: responseData:", responseData);
       if (response.ok) {
-        setMessage(`Your post has been successfully published.`);
+        //setMessage(`Your post has been successfully published.`);
         setPosts([responseData, ...posts]);
+        reset();
       } else {
         setError(responseData.error[0].msg);
       }
