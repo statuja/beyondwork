@@ -11,7 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
-const GetAllPosts = () => {
+const GetAllPosts = ({userPosts}) => {
   const [posts, setPosts] = useState([]);
   const { userData } = useContext(MyContext);
   const [error, setError] = useState("");
@@ -20,6 +20,12 @@ const GetAllPosts = () => {
   const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
+    
+    if (userPosts){
+      setPosts(userPosts)
+      return
+    }
+   
     try {
       const response = await fetch("http://localhost:5000/post/all", {
         method: "GET",
@@ -42,7 +48,7 @@ const GetAllPosts = () => {
   };
   useEffect(() => {
     getAllPosts();
-  }, [posts]);
+  }, [userPosts]);
 
   const onSavePost = async (postId) => {
     try {
@@ -167,6 +173,7 @@ const GetAllPosts = () => {
       <div className="post-Container">
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
+      
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>

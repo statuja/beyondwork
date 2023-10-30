@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import UserData from "../../components/UserData/UserData";
 import MyContext from "../../context/MyContext";
-//import GetAllPosts from "../../components/posts/GetAllPosts";
+import GetAllPosts from "../../components/posts/GetAllPosts";
 import "./MyProfile.scss";
 
 const UserProfile = () => {
@@ -11,6 +11,8 @@ const UserProfile = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userPosts, setUserPosts] = useState([]); // State variable for user's posts
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (id === userData._id) {
@@ -55,6 +57,36 @@ const UserProfile = () => {
     }
   }, [id, userData]);
   //console.log(userData);
+  useEffect(() => {
+    // Fetch the user's posts and update the state variable
+    const fetchAllPosts = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/post/getUsersPosts/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setUserPosts(data); // Update the user's posts
+        } else {
+          setError("Failed to fetch user's posts.");
+        }
+      } catch (error) {
+        setError("An error occurred while fetching user's posts.");
+      }
+      
+    };
+
+    // Fetch user's posts when the component mounts or when the user's ID changes
+    fetchAllPosts();
+  }, [userData]);
+  
 
    
 
@@ -89,8 +121,12 @@ const UserProfile = () => {
             )}
            
           </div>
-          <div className="right"></div>
+          <div className="right">
+            {/* Display user's posts */}
+            <GetAllPosts userPosts={userPosts} /> 
+          </div>
         </div>
+        
       </div>
     </>
   );
