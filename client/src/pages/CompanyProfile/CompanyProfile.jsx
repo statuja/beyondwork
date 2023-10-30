@@ -42,7 +42,6 @@ const CompanyProfile = () => {
 
   return (
     <div className="companyProfile">
-      {" "}
       <h1>Company Profile</h1>
       {company.companyLogo ? (
         <img
@@ -58,47 +57,54 @@ const CompanyProfile = () => {
           <div className="card">
             <h3>Company Details</h3>
             <div className="flex-wrapper">
-              <h5>Company Name:</h5>
-              <p>{company.companyName}</p>
-            </div>
-            <div className="flex-wrapper">
-              <h5> Company Type:</h5> <p>{company.companyType}</p>{" "}
-            </div>
-            <div className="flex-wrapper">
-              <h5> Number of Employees:</h5>
-              <p> {company.numberOfEmployees}</p>
+              <div className="labels">
+                <h5>Company Name:</h5>
+                <h5> Company Type:</h5>
+                <h5> Number of Employees:</h5>
+              </div>
+              <div className="data">
+                <p>{company.companyName}</p>
+                <p>{company.companyType}</p>
+                <p> {company.numberOfEmployees}</p>
+              </div>
             </div>
           </div>
           <div className="card">
-            <h3>Address</h3>
+            <h3>Company Address</h3>
             <div className="flex-wrapper">
-              <h5> Address:</h5>
-              <p>{company.companyAddress && company.companyAddress.address}</p>
-            </div>
-            <div className="flex-wrapper">
-              <h5> City:</h5>
-              <p>{company.companyAddress && company.companyAddress.city}</p>
-            </div>
-            <div className="flex-wrapper">
-              <h5> Zip Code:</h5>
-              <p>{company.companyAddress && company.companyAddress.zipCode}</p>
-            </div>
-            <div className="flex-wrapper">
-              <h5>Country:</h5>
-              <p>{company.companyAddress && company.companyAddress.country}</p>
+              <div className="labels">
+                <h5> Address:</h5>
+                <h5> City:</h5>
+                <h5> Zip Code:</h5>
+                <h5>Country:</h5>
+              </div>
+              <div className="data">
+                <p>
+                  {company.companyAddress && company.companyAddress.address}
+                </p>
+                <p>{company.companyAddress && company.companyAddress.city}</p>
+                <p>
+                  {company.companyAddress && company.companyAddress.zipCode}
+                </p>
+                <p>
+                  {company.companyAddress && company.companyAddress.country}
+                </p>
+              </div>
             </div>
           </div>
           <div className="card">
             <h3>Contact Details</h3>
             <div className="flex-wrapper">
-              <h5> Email: </h5>
-              <p>{company.companyContact && company.companyContact.email}</p>
-            </div>
-            <div className="flex-wrapper">
-              <h5> Phone Number:</h5>
-              <p>
-                {company.companyContact && company.companyContact.phoneNumber}
-              </p>
+              <div className="labels">
+                <h5> Email: </h5>
+                <h5> Phone Number:</h5>
+              </div>
+              <div className="data">
+                <p>{company.companyContact && company.companyContact.email}</p>{" "}
+                <p>
+                  {company.companyContact && company.companyContact.phoneNumber}
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -40,7 +40,6 @@ const GetAllPosts = () => {
       );
     }
   };
-
   useEffect(() => {
     getAllPosts();
   }, [posts]);
