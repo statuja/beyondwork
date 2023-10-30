@@ -42,7 +42,9 @@ export const getUserPosts = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    const posts = await Post.find({ createdBy: userId }).populate("createdBy");
+    const posts = await Post.find({ createdBy: userId })
+      .populate("createdBy")
+      .sort("-_id");
 
     res.json(posts);
   } catch (error) {
@@ -77,14 +79,14 @@ export const deletePost = async (req, res) => {
 export const editPost = async (req, res) => {
   try {
     const postId = req.params.postId;
-    const newContent = req.body.content
+    const newContent = req.body.content;
 
     //console.log(newContent);
 
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
-      {content: newContent},
-      {new: true}
+      { content: newContent },
+      { new: true }
     );
 
     //console.log(updatedPost);

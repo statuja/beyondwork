@@ -2,7 +2,7 @@ import "./UserData.scss";
 import { Link } from "react-router-dom";
 
 const UserData = ({ isMe, user }) => {
-  console.log("isme", isMe);
+
   if (isMe) {
     return (
       <>
