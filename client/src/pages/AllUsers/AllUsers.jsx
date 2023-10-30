@@ -49,8 +49,8 @@ function AllUsers() {
   }
   return (
     <div className="wrapper">
-      <h1>User List</h1>
       <div className="user-cards-container">
+        <h1>Your Colleagues</h1>
         <div className="user-cards">
           {users.map((user) => (
             <div key={user._id} className="user-card">
