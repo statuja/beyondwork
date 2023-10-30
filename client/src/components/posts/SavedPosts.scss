@@ -2,9 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  //height: 100vh;
   border-radius: 15px;
   padding: 20px;
+
+  h1 {
+    font-size: 40px;
+    font-family: "Belanosima", sans-serif;
+    font-weight: 400;
+  }
 
   .wrapper {
     background-color: #e7e7a38e;
@@ -12,34 +18,77 @@
     margin: 20px;
     width: 90%;
     border-radius: 15px;
+    height: 100vh;
+
+    .savedPosts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+
+      .post-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 10px;
+        box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1);
+        background-color: rgba(251, 251, 246, 0.784);
+        border-radius: 6px;
+
+        .post-content {
+          flex: 1;
+
+          .text,
+          .postBy {
+            display: flex;
+          }
+        }
+
+        .date-and-likes {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          font-size: 10px;
+
+          p {
+            font-size: 10px;
+          }
+        }
+      }
+    }
   }
-  h1 {
-    font-size: 40px;
-    font-family: "Belanosima", sans-serif;
-    font-weight: 400;
+}
+@media (max-width: 1024px) {
+  .main-container {
+    flex-wrap: wrap;
+    flex-direction: row;
+    // margin: 50px 0 50px 0;
+    h1 {
+      font-size: 30px;
+    }
+    .wrapper {
+      width: 100%;
+
+      .savedPosts {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        width: 100%;
+        margin: 50px 0 50px 0;
+
+        .post-card {
+          width: 100%;
+          padding: 10px; // Adjust the padding to control card height
+          margin: 10px 0;
+
+          .date-and-likes {
+            font-size: 10px;
+            padding: 0;
+          }
+        }
+      }
+    }
   }
-}
-
-.savedPosts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-h2 {
-  margin: 30px;
-  font-size: 1.5rem;
-}
-
-.post-card {
-  gap: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1);
-  background-color: rgba(251, 251, 246, 0.784);
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
 }
