@@ -43,6 +43,11 @@ function EditMyProfile() {
 
         if (response.ok) {
           const data = await response.json();
+          if (data.success === false) {
+            alert("Session expired, please login again!");
+            setUserData({});
+            return navigate("/");
+          }
           const formattedDate = new Date(data.dateOfBirth)
             .toISOString()
             .split("T")[0];
@@ -51,12 +56,10 @@ function EditMyProfile() {
           setFormData({ ...data, dateOfBirth: formattedDate });
           setLoading(false);
         } else {
-          throw new Error(
-            `Failed to fetch user data. Status: ${response.status}`
-          );
+          console.error("Error updating profile:", response.statusText);
         }
       } catch (error) {
-        throw new Error(`Error fetching user data: ${error.message}`);
+        console.error("Error fetching company details", error);
       }
     };
     fetchMyProfile()

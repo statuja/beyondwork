@@ -42,7 +42,6 @@ const Login = () => {
       } else {
         const errorData = await response.json();
         setError(errorData.error);
-        setError(errorData.error);
       }
     } catch (error) {
       console.log("Fetch error:", error);

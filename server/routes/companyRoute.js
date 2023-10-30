@@ -79,6 +79,7 @@ router.get(
 router.post(
   "/updateCompanyProfile/:userCompany",
   authorization,
+  isAdmin,
   upload.single("companyLogo"),
   updateCompanyProfile
 );

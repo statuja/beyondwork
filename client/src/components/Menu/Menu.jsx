@@ -1,6 +1,5 @@
 import "./menu.scss";
 import { Link, useNavigate } from "react-router-dom";
-
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 //import FeedIcon from '@mui/icons-material/Feed';
@@ -11,11 +10,11 @@ import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
-
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 import UserData from "../UserData/UserData";
+import { Hidden } from "@mui/material";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -63,11 +62,15 @@ const Menu = () => {
           <NewspaperIcon className="icon" /> News Feed
         </Link>
       </li>
-      <li>
-        <Link to="/user/create">
-          <PersonAddAltOutlinedIcon className="icon" /> Add New User
-        </Link>
-      </li>
+
+      {userData.adminRole ? (
+        <li>
+          <Link to="/user/create">
+            <PersonAddAltOutlinedIcon className="icon" /> Add New User
+          </Link>
+        </li>
+      ) : null}
+
       <li>
         <Link to="/savedposts">
           <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
