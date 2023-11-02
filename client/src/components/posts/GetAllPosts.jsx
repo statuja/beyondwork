@@ -11,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
+
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
   const { userData, posts, setPosts } = useContext(MyContext);
@@ -204,6 +205,7 @@ const GetAllPosts = ({ userPosts }) => {
                 <div id="date">{formatDateTime(item.createdOn)}</div>
               </div>
             </div>
+           
 
             <p className="post-content">{item.content}</p>
             <span className="post-footer">

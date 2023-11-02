@@ -21,6 +21,7 @@ import Menu from "./components/Menu/Menu";
 import { useContext } from "react";
 import MyContext from "./context/MyContext";
 import EditMyProfile from "./pages/UserProfile/EditMyProfile";
+import MarketPlace from "./pages/marketPlace/Marketplace";
 
 // function App() {
 //   const { userData } = useContext(MyContext);
@@ -165,6 +166,7 @@ function App() {
         { path: "/user/profile/:id", element: <MyProfile /> },
         { path: "/user/editmyprofile", element: <EditMyProfile /> },
         { path: "/allusers", element: <AllUsers /> },
+        { path: "/marketplace", element: <MarketPlace /> },
       ],
     },
   ];
