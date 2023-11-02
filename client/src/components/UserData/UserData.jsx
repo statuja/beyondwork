@@ -2,7 +2,17 @@ import "./UserData.scss";
 import { Link } from "react-router-dom";
 
 const UserData = ({ isMe, user }) => {
-  console.log("isme", isMe)
+  //console.log("isme", isMe)
+
+  const formatDateTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    return `${formattedDate}`;
+  };
+
   if (isMe) {
     return (
       <>
@@ -54,13 +64,15 @@ const UserData = ({ isMe, user }) => {
               </div>
               <div className="infoItem">
                 <span className="infoKey">Date of Birth:</span>
-                <span className="infoValue">{user.dateOfBirth}</span>
+                <span className="infoValue">{formatDateTime(user.dateOfBirth)}</span>
               </div>
-              <div>
-              <Link to="/user/editmyprofile">Edit My Profile</Link>
+              <div className="edit-btn">
+              <Link  to="/user/editmyprofile">Edit My Profile</Link>
             </div>
              </div>
+
           </div>
+          
         </div>
       </>
     );
@@ -97,7 +109,7 @@ const UserData = ({ isMe, user }) => {
             </div>
             <div className="infoItem">
               <span className="infoKey">Date of Birth:</span>
-              <span className="infoValue">12.12.1990</span>
+              <span className="infoValue">{formatDateTime(user.dateOfBirth)}</span>
             </div>
           </div>
         </div>

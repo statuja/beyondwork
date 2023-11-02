@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import MyContext from "../../context/MyContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./MyProfile.scss";
+import "./EditMyProfile.scss"
 
 function EditMyProfile() {
   const { userData, setUserData } = useContext(MyContext);
@@ -154,46 +155,74 @@ function EditMyProfile() {
     }
   };
 
+  const handleClickCover = () => {
+    document.getElementById("coverInput").click();
+  };
+
+  const handleClickProfile = () => {
+    document.getElementById("profileInput").click();
+  };
+
+  const handleCancel = () => {
+    navigate(`/user/profile/${userData._id}`);
+  };
+
+
   return (
     <>
       <div className="profile">
+      <h1>Edit Your Profile</h1>
         <div className="cover">
-          {user && user.coverImage && (
+          <div className="user-images">
+          {userData && userData.coverImage && (
             <img
+              style={{ width: "400px" }}
               className="coverImg"
-              src={`http://localhost:5000/user/uploads/${user.coverImage}`}
+              src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
               alt="coverImage"
             />
           )}
-          {user && user.userImage && (
+          {userData && userData.userImage && (
             <img
               className="userImg"
-              src={`http://localhost:5000/user/uploads/${user.userImage}`}
+              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
               alt="userImage"
             />
           )}
-          <div>
-            <label htmlFor="coverImage">Change Cover Image</label>
+          </div>
+          <div className="upload-buttons">
+            <button type="button" onClick={handleClickCover}>
+            Upload a new cover photo
+            </button>
+            {/* <label htmlFor="coverImage">Change Cover Image</label> */}
             <input
               type="file"
               name="coverImage"
               accept="image/*"
+              id="coverInput"
+              style={{ display: "none" }}
               onChange={handleImageChange}
             />
-            <label htmlFor="userImage">Change Avatar</label>
 
+            <button type="button" onClick={handleClickProfile}>
+            Upload a new profile picture
+            </button>
+            {/* <label htmlFor="userImage">Change Avatar</label> */}
             <input
               type="file"
               name="userImage"
               accept="image/*"
+              id="profileInput"
+              style={{ display: "none" }}
               onChange={handleImageChange}
             />
           </div>
         </div>
         <div className="bottom">
-          <div className="left">
-            <h1>Edit Profile</h1>
+
             <form onSubmit={handleSubmit}>
+              <div>
+                <label name="userFullName">Full Name: </label>
               <input
                 type="text"
                 name="userFullName"
@@ -201,6 +230,9 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="Full Name"
               />
+              </div>
+              <div>
+                <label name="userJobTitle">Job Title: </label>
               <input
                 type="text"
                 name="userJobTitle"
@@ -208,6 +240,10 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="Job Title"
               />
+              </div>
+              
+              <div>
+                <label name="userDepartment">Department: </label>
               <input
                 type="text"
                 name="userDepartment"
@@ -215,7 +251,11 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="Department"
               />
-              <input
+              </div>
+              
+              <div>
+                <label name="userAddress.address">Address: </label>
+                <input
                 type="text"
                 name="userAddress.address"
                 value={
@@ -226,6 +266,10 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="Address"
               />
+              </div> 
+              
+              <div>
+                <label name="userAddress.city">City: </label>
               <input
                 type="text"
                 name="userAddress.city"
@@ -237,6 +281,10 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="city"
               />
+              </div>
+              
+              <div>
+              <label name="userAddress.country">Country: </label>
               <input
                 type="text"
                 name="userAddress.country"
@@ -248,6 +296,10 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="country"
               />
+              </div>
+              
+              <div>
+                <label name="userAddress.zipCode">Zipcode: </label>
               <input
                 type="text"
                 name="userAddress.zipCode"
@@ -259,19 +311,32 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="zipCode"
               />
-              <input
+              </div>
+              
+              <div>
+                <label name="dateOfBirth">Date of Birth: </label>
+                <input
                 type="date"
                 name="dateOfBirth"
                 value={formData.dateOfBirth}
                 onChange={handleInputChange}
                 placeholder="DateOfBirth"
               />
-              <textarea
+              </div>
+              
+              <div>
+                <label name="description">Description: </label>
+                <br></br>
+                <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
                 placeholder="description"
               />
+              </div>
+              
+              <div>
+                <label name="userContact.email">Email: </label>
               <input
                 type="email"
                 name="userContact.email"
@@ -279,6 +344,10 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="E-mail"
               />
+              </div>
+
+              <div>
+                <label name="userPassword">Password: </label>
               <input
                 type="password"
                 name="userPassword"
@@ -290,10 +359,13 @@ function EditMyProfile() {
                 onChange={handleInputChange}
                 placeholder="Password"
               />
+              </div>
 
+              <div className="form-buttons">
+              <Link onClick={handleCancel}>Cancel</Link>
               <button type="submit">Save Changes</button>
+              </div>
             </form>
-          </div>
         </div>
       </div>
     </>

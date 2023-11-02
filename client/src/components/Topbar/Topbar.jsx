@@ -47,7 +47,7 @@ export default function Topbar() {
           <DarkModeOutlinedIcon className="icon" />
           </div>
           
-        <Link to="/user/profile/me">
+        <Link to={`/user/profile/${userData._id}`}>
           {userData && userData.userImage && (
             <img
               className="user-image-placeholder"
