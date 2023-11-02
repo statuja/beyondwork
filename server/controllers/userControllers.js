@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import Post from "../models/Post.js";
 dotenv.config();
 
 const SALT_ROUNDS = 9;
@@ -150,6 +151,12 @@ export const updateMyProfile = async (req, res) => {
     if (coverImage) {
       updatedUserData.coverImage = coverImage.filename;
     }
+    // Encrypt the password if it has been updated
+    if (req.body.userPassword) {
+      const salt = await bcrypt.genSalt(SALT_ROUNDS);
+      const hashedPassword = await bcrypt.hash(req.body.userPassword, salt);
+      updatedUserData.userPassword = hashedPassword;
+    }
     const updatedUser = await User.findByIdAndUpdate(userId, updatedUserData, {
       new: true,
     });
@@ -218,16 +225,25 @@ export const getSavedPosts = async (req, res) => {
   try {
     const usersId = req.user._id;
 
-    const user = await User.findById(usersId).populate("savedPosts");
+    const user = await User.findById(usersId);
     if (!user) {
       return res.status(404).json({ message: "User not found." }); // Handle the case where the user is not found
     }
+    const postsId = user.savedPosts;
+    const allPosts = await Post.find({ _id: { $in: postsId } }).populate(
+      "createdBy"
+    );
+    // for (const id of postsId) {
+    //   const post = await Post.findById(id).populate("createdBy");
+    //   allPosts.push(post);
+    // }
 
+    console.log(postsId);
     if (!Array.isArray(user.savedPosts)) {
       return res.status(400).json({ message: "Saved posts is not an array." }); // Handle the case where savedPosts is not an array
     }
 
-    res.json(user.savedPosts);
+    res.json(allPosts);
   } catch (error) {
     res.status(500).json({ message: error.message }); // Handle other errors
   }

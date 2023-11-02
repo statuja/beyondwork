@@ -42,6 +42,8 @@ const validation = [
 
 router.post(
   "/create",
+  authorization,
+  isAdmin,
   validation,
   (req, res, next) => {
     const error = validationResult(req);

@@ -16,7 +16,7 @@ const UserData = ({ isMe, user }) => {
   if (isMe) {
     return (
       <>
-        <div className="profileLeft">
+        <div className="profileLeftCont">
           <div className="header">
             <h4>{user.userFullName}</h4>
             <span>{user.description}</span>
@@ -70,7 +70,6 @@ const UserData = ({ isMe, user }) => {
               <Link  to="/user/editmyprofile">Edit My Profile</Link>
             </div>
              </div>
-
           </div>
           
         </div>
@@ -82,9 +81,7 @@ const UserData = ({ isMe, user }) => {
         <div className="top">
           <div className="header">
             <h4>Name: {user.userFullName}</h4>
-            <span>
-              {user.description}
-            </span>
+            <span>{user.description}</span>
           </div>
         </div>
         <div className="info">

@@ -102,8 +102,8 @@
                     //transition: transform 0.3s;
                     &:hover {
                         transform: scale(1.03);
-                        //width: 32%;
                         background-color: #ffcf9d;
+                        width: 100%;
                     }
                 }
 
@@ -171,12 +171,13 @@
             }
 
             .textContainer {
-                // width: 65%;
+                width: 65%;
 
                 h1 {
                     font-size: 20px;
                     line-height: 24px;
                     margin-bottom: 20px;
+                    text-align: center;
                 }
 
                 p {

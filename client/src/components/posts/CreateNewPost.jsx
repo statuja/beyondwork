@@ -2,8 +2,11 @@ import "./CreateNewPost.scss";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateNewPost = () => {
+  const navigate = useNavigate();
+
   const { userData, posts, setPosts } = useContext(MyContext);
   const {
     register,
@@ -31,23 +34,23 @@ const CreateNewPost = () => {
         },
         credentials: "include",
       });
-      const responseData = await response.json();
-      //console.log("CREATE NEW POST: responseData:", responseData);
       if (response.ok) {
-        //setMessage(`Your post has been successfully published.`);
+        const responseData = await response.json();
+        if (responseData.success === false) {
+          alert("Session expired, please login again!");
+          setPosts({});
+          return navigate("/");
+        }
         setPosts([responseData, ...posts]);
         reset();
       } else {
-        setError(responseData.error[0].msg);
+        setError("Error updating profile:", response.statusText);
       }
     } catch (error) {
-      setError(
-        "An error occurred while processing your request. Please try again later."
-      );
+      console.error("Error fetching company details", error);
     }
   };
 
-  //console.log("check", posts);
   return (
     <div className="create-new-post">
       <h4>Create a New Post...</h4>
