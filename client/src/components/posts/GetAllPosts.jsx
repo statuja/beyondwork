@@ -186,19 +186,23 @@ import CommentIcon from "@mui/icons-material/Comment";
         {message && <div>{message}</div>}
 
         {posts?.map((item) => (
-
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
             <div className="post-owner">
-              <h3>
-                <Link to={`/user/${item.createdBy._id}`}>
-                  {item.createdBy.userFullName}
-                </Link>
-              </h3>
+              <div className="name-container">
+                <h3>
+                  <Link to={`/user/${item.createdBy._id}`}>
+                    {item.createdBy.userFullName}
+                  </Link>
+                </h3>
 
-              <div id="date">{formatDateTime(item.createdOn)}</div>
+                <div id="date">{formatDateTime(item.createdOn)}</div>
+              </div>
               <div className="img-container">
-                <Link to={`/user/profile/${item.createdBy._id}`}>
+                <Link
+                  className="userImg"
+                  to={`/user/profile/${item.createdBy._id}`}
+                >
                   <img
                     className="userImg"
                     src={
