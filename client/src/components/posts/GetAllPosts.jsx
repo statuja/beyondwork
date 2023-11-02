@@ -11,25 +11,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
-
-
-
-
-  const GetAllPosts = ({ userPosts }) => {
-  const navigate = useNavigate(); 
-  // const [posts, setPosts] = useState([]);
-  const { userData , posts, setPosts } = useContext(MyContext);
+const GetAllPosts = ({ userPosts }) => {
+  const navigate = useNavigate();
+  const { userData, posts, setPosts } = useContext(MyContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
-
     try {
-      if (userPosts){
-        setPosts(userPosts)
-        return
+      if (userPosts) {
+        setPosts(userPosts);
+        return;
       }
       const response = await fetch("http://localhost:5000/post/all", {
         method: "GET",
@@ -38,20 +32,18 @@ import CommentIcon from "@mui/icons-material/Comment";
         },
         credentials: "include",
       });
-      console.log("API response received:", response.status); 
+      console.log("API response received:", response.status);
       if (response.ok) {
         const data = await response.json();
         console.log("Data received from the API:", data);
         if (data.success === false) {
           alert("Session expired, please login again!");
-          //setPosts({});
           return navigate("/");
         }
         setPosts(data);
       } else {
         console.error("Error updating profile:", response.statusText);
       }
-   
     } catch (error) {
       console.error("Error fetching company details", error);
     }
@@ -186,18 +178,11 @@ import CommentIcon from "@mui/icons-material/Comment";
         {message && <div>{message}</div>}
 
         {posts?.map((item) => (
-
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
-            <div className="post-owner">
-              <h3>
-                <Link to={`/user/${item.createdBy._id}`}>
-                  {item.createdBy.userFullName}
-                </Link>
-              </h3>
 
-              <div id="date">{formatDateTime(item.createdOn)}</div>
-              <div className="img-container">
+            <div className="post-owner">
+            <div className="img-container">
                 <Link to={`/user/profile/${item.createdBy._id}`}>
                   <img
                     className="userImg"
@@ -209,6 +194,14 @@ import CommentIcon from "@mui/icons-material/Comment";
                     alt="userImage"
                   />
                 </Link>
+              </div>
+              <div className="name">
+                <h3>
+                  <Link to={`/user/${item.createdBy._id}`}>
+                    {item.createdBy.userFullName}
+                  </Link>
+                </h3>
+                <div id="date">{formatDateTime(item.createdOn)}</div>
               </div>
             </div>
 
