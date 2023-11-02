@@ -45,16 +45,17 @@ export default function Topbar() {
           <div className="iconItem">
             <DarkModeOutlinedIcon className="icon" />
           </div>
+          
+        <Link to={`/user/profile/${userData._id}`}>
+          {userData && userData.userImage && (
+            <img
+              className="user-image-placeholder"
+              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
+              alt="userImage"
+            />
+          )}
+        </Link>
 
-          <Link to={`/user/profile/${userData._id}`}>
-            {userData && userData.userImage && (
-              <img
-                className="user-image-placeholder"
-                src={`http://localhost:5000/user/uploads/${userData.userImage}`}
-                alt="userImage"
-              />
-            )}
-          </Link>
         </div>
         <div id="burger-menu-icon" className="iconItem">
           <MenuIcon onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)} />
