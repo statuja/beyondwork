@@ -1,0 +1,130 @@
+.profile {
+
+    .cover {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 30px;
+
+        .user-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding-left: 10px;
+
+            .userImg {
+                position: static;
+                width: 170px;
+                height: 170px;
+                border-radius: 50%;
+                object-fit: cover;
+                left: 150px;
+                right: 0;
+                top: 200px;
+                border: 3px solid white;
+            }
+        }
+
+        .upload-buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            button {
+                background-color: #ffb000;
+                margin-top: 20px;
+                padding: 15px;
+                border-radius: 15px;
+                background-color: #ffb000;
+                text-decoration: none;
+                margin: 10px;
+                border: none;
+                margin-bottom: 20px;
+    
+                    
+                &:hover {
+                    transform: scale(1.03);
+                    background-color: #ffcf9d;
+                }
+    
+                }
+        }
+        
+
+
+
+    }
+
+    .bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        form {
+            border: 1px solid #ffb000;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            //align-items: center;
+            gap: 15px;
+            width: auto;
+            margin-bottom: 80px;
+
+            button, a {
+                width: 150px;
+                background-color: #ffb000;
+                margin-top: 20px;
+                padding: 10px;
+                border-radius: 15px;
+                background-color: #ffb000;
+                text-decoration: none;
+                margin: 10px;
+                border: none;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 18px;
+                color: black;
+    
+                    
+                &:hover {
+                    transform: scale(1.03);
+                    background-color: #ffcf9d;
+                }
+    
+            }
+
+            label {
+                font-weight: 600;
+                margin-right: 20px;
+            }
+
+            input, textarea {
+                width: 90%;
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid #ffb000;
+            }
+
+            .form-buttons {
+                width: 600px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+    .cover {
+        display: flex;
+        flex-direction: column;
+        //border: 1px solid black;
+        height: 500px !important;
+        margin-top: 30px;
+    }
+}

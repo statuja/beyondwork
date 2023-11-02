@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import "./CreateUser.scss";
 
 export const UserRegistration = () => {
+  const defaultImageUrl =
+    "http://localhost:5000/user/uploads/default_avatar.jpeg";
+
   const navigate = useNavigate();
   const {
     register,
@@ -34,6 +37,7 @@ export const UserRegistration = () => {
       },
       userPassword: data.userPassword,
       adminRole: data.adminRole,
+      // userImage: defaultImageUrl,
     };
     try {
       const response = await fetch("http://localhost:5000/user/create", {
