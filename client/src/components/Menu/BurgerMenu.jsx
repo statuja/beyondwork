@@ -48,7 +48,7 @@ const Menu = () => {
   return (
     <ul className="burgerMenu">
       <li>
-        <Link to="/user/profile/me">
+        <Link to={`/user/profile/${userData._id}`}>
           <AccountCircleOutlinedIcon className="icon" /> My Profile
         </Link>
       </li>

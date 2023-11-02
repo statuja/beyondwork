@@ -58,34 +58,37 @@ const UserProfile = () => {
       fetchUserDataById(id);
     }
   }, [id, userData]);
+  
   //console.log(userData);
-  useEffect(() => {
-    // Fetch the user's posts and update the state variable
-    const fetchAllPosts = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5000/post/getUsersPosts/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setUserPosts(data); // Update the user's posts
-        } else {
-          setError("Failed to fetch user's posts.");
-        }
-      } catch (error) {
-        setError("An error occurred while fetching user's posts.");
-      }
-      
-    };
 
-    // Fetch user's posts when the component mounts or when the user's ID changes
+  const fetchAllPosts = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/post/getUsersPosts/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setUserPosts(data); // Update the user's posts
+      } else {
+        setError("Failed to fetch user's posts.");
+      }
+    } catch (error) {
+      setError("An error occurred while fetching user's posts.");
+    }
+    
+  };
+
+
+
+  useEffect(() => {
+    
     fetchAllPosts();
   }, [userData]);
   
@@ -93,7 +96,7 @@ const UserProfile = () => {
   return (
     <>
       <div className="profile">
-        <div className="cover">
+        <div className="profileCover">
           {user && user.coverImage && (
             <img
               className="coverImg"
@@ -110,8 +113,8 @@ const UserProfile = () => {
           )}
         </div>
 
-        <div className="bottom">
-          <div className="left">
+        <div className="profileBottom">
+          <div className="profileLeft">
             {loading ? (
               <p>Loading...</p>
             ) : user ? (
@@ -120,9 +123,10 @@ const UserProfile = () => {
               <p>User not found</p>
             )}
           </div>
-          <div className="right">
+          <div className="profileRight">
+          <h2>My posts</h2>
             {/* Display user's posts */}
-            <GetAllPosts userPosts={userPosts} /> 
+            <GetAllPosts userPosts={userPosts}/> 
           </div>
         </div>
         

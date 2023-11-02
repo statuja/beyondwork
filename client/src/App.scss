@@ -4,11 +4,15 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+body{
+  background-color: rgba(245, 245, 220, 0.247);
+  
+}
 
 .content {
-  background-color: rgba(245, 245, 220, 0.247);
+  min-height: fit-content;
   padding-top: 30px;
-  padding-bottom: 55px;
+  padding-bottom: 50px;
   display: flex;
 
   .menuCont {
@@ -17,6 +21,7 @@
   .contentCont {
     flex: 10;
     padding: 0 20px;
+   
   }
 }
 

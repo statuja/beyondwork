@@ -5,6 +5,7 @@ import "./MyProfile.scss";
 
 function EditMyProfile() {
   const { userData, setUserData } = useContext(MyContext);
+  console.log(userData)
   const navigate = useNavigate();
   const userId = userData._id;
   const [user, setUser] = useState(null);
@@ -29,49 +30,49 @@ function EditMyProfile() {
     userPassword: "",
   });
   const [loading, setLoading] = useState(true);
+console.log(formData)
+   useEffect(() => {
+    // const fetchMyProfile = async () => {
+    //   try {
+    //     const response = await fetch(`http://localhost:5000/user/myProfile`, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       credentials: "include",
+    //     });
 
-  useEffect(() => {
-    const fetchMyProfile = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/user/myProfile`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+    //     if (response.ok) {
+    //       const data = await response.json();
+    //       if (data.success === false) {
+    //         alert("Session expired, please login again!");
+    //         setUserData({});
+    //         return navigate("/");
+    //       }
+    //       const formattedDate = new Date(data.dateOfBirth)
+    //         .toISOString()
+    //         .split("T")[0];
+           setFormData(userData); // Set the fetched data to the formData state
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.success === false) {
-            alert("Session expired, please login again!");
-            setUserData({});
-            return navigate("/");
-          }
-          const formattedDate = new Date(data.dateOfBirth)
-            .toISOString()
-            .split("T")[0];
-          setFormData(data); // Set the fetched data to the formData state
-
-          setFormData({ ...data, dateOfBirth: formattedDate });
-          setLoading(false);
-        } else {
-          console.error("Error updating profile:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching company details", error);
-      }
-    };
-    fetchMyProfile()
-      .then((data) => {
-        setUser(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching user details", error);
-        setLoading(false);
-      });
-  }, []);
+    //       setFormData({ ...data, dateOfBirth: formattedDate });
+    //       setLoading(false);
+    //     } else {
+    //       console.error("Error updating profile:", response.statusText);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error fetching company details", error);
+    //   }
+    // };
+    // fetchMyProfile()
+    //   .then((data) => {
+    //     setUser(data);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching user details", error);
+    //     setLoading(false);
+    //   });
+  }, [userData]); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -161,17 +162,17 @@ function EditMyProfile() {
     <>
       <div className="profile">
         <div className="cover">
-          {user && user.coverImage && (
+          {userData && userData.coverImage && (
             <img
               className="coverImg"
-              src={`http://localhost:5000/user/uploads/${user.coverImage}`}
+              src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
               alt="coverImage"
             />
           )}
-          {user && user.userImage && (
+          {userData && userData.userImage && (
             <img
               className="userImg"
-              src={`http://localhost:5000/user/uploads/${user.userImage}`}
+              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
               alt="userImage"
             />
           )}
@@ -222,7 +223,7 @@ function EditMyProfile() {
                 type="text"
                 name="userAddress.address"
                 value={
-                  formData.userAddress.address && formData.userAddress.address
+                  formData.userAddress?.address && formData.userAddress.address
                     ? formData.userAddress.address
                     : ""
                 }
@@ -233,7 +234,7 @@ function EditMyProfile() {
                 type="text"
                 name="userAddress.city"
                 value={
-                  formData.userAddress.city && formData.userAddress.city
+                  formData.userAddress?.city && formData.userAddress.city
                     ? formData.userAddress.city
                     : ""
                 }
@@ -244,7 +245,7 @@ function EditMyProfile() {
                 type="text"
                 name="userAddress.country"
                 value={
-                  formData.userAddress.country && formData.userAddress.country
+                  formData.userAddress?.country && formData.userAddress.country
                     ? formData.userAddress.country
                     : ""
                 }
@@ -255,7 +256,7 @@ function EditMyProfile() {
                 type="text"
                 name="userAddress.zipCode"
                 value={
-                  formData.userAddress.zipCode && formData.userAddress.zipCode
+                  formData.userAddress?.zipCode && formData.userAddress.zipCode
                     ? formData.userAddress.zipCode
                     : ""
                 }

@@ -11,23 +11,26 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
-const GetAllPosts = ({ userPosts }) => {
-  //Irina's change
-  const navigate = useNavigate(); //Marwah's change?
-  const [posts, setPosts] = useState([]);
-  const { userData } = useContext(MyContext);
+
+
+
+
+  const GetAllPosts = ({ userPosts }) => {
+  const navigate = useNavigate(); 
+  // const [posts, setPosts] = useState([]);
+  const { userData , posts, setPosts } = useContext(MyContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
-    if (userPosts) {
-      setPosts(userPosts);
-      return;
-    }
 
     try {
+      if (userPosts){
+        setPosts(userPosts)
+        return
+      }
       const response = await fetch("http://localhost:5000/post/all", {
         method: "GET",
         headers: {
@@ -35,21 +38,25 @@ const GetAllPosts = ({ userPosts }) => {
         },
         credentials: "include",
       });
+      console.log("API response received:", response.status); 
       if (response.ok) {
         const data = await response.json();
+        console.log("Data received from the API:", data);
         if (data.success === false) {
           alert("Session expired, please login again!");
-          setPosts({});
+          //setPosts({});
           return navigate("/");
         }
         setPosts(data);
       } else {
         console.error("Error updating profile:", response.statusText);
       }
+   
     } catch (error) {
       console.error("Error fetching company details", error);
     }
   };
+
   useEffect(() => {
     getAllPosts();
   }, [userPosts]);
@@ -179,6 +186,7 @@ const GetAllPosts = ({ userPosts }) => {
         {message && <div>{message}</div>}
 
         {posts?.map((item) => (
+
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
             <div className="post-owner">
