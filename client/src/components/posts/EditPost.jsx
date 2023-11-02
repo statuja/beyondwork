@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import MyContext from "../../context/MyContext";
 import "./EditPost.scss"
 
 const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
 
   const [postContent, setPostContent] = useState("");
+  const {posts, setPosts} = useContext(MyContext)
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -55,7 +58,17 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
         const data = await response.json();
         data.content = postContent
         setShowEditForm(false)
-        getAllPosts()
+        console.log(data)
+        const updatedPosts = posts.map((item)=> {
+          if (item._id === data._id){
+            return {...item , content : data.content}
+          } else {
+            return item
+          }
+        })
+        setPosts(updatedPosts)
+        // getAllPosts()
+
         //console.log("Post updated:", data, postContent);
       } else {
         console.error("Error updating post");

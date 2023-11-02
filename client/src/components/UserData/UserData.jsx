@@ -6,7 +6,7 @@ const UserData = ({ isMe, user }) => {
   if (isMe) {
     return (
       <>
-        <div className="profileLeft">
+        <div className="profileLeftCont">
           <div className="header">
             <h4>{user.userFullName}</h4>
             <span>{user.description}</span>

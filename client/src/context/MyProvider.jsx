@@ -23,14 +23,18 @@ const MyProvider = ({ children }) => {
           credentials: "include",
         });
         const data = await response.json();
-
-        setUserData(data);
+        const formattedDate = new Date(data.dateOfBirth)
+        .toISOString()
+        .split("T")[0];
+        setUserData({...data, dateOfBirth: formattedDate});
+        
+       
       } catch (error) {
         setUserData(null);
       }
     };
     getUser();
-  }, []);
+  },[]);
 
   return (
     <MyContext.Provider
