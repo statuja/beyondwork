@@ -85,7 +85,7 @@ const Menu = () => {
         </Link>
       </li>
       <li>
-        <Link to="#">
+        <Link to="/marketplace">
           <StorefrontIcon className="icon" /> Marketplace
         </Link>
       </li>

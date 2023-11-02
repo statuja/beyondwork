@@ -12,19 +12,18 @@ import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
 
-
-
-
   const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate(); 
   // const [posts, setPosts] = useState([]);
   const { userData , posts, setPosts } = useContext(MyContext);
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
+
 
     try {
       if (userPosts){
@@ -59,7 +58,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 
   useEffect(() => {
     getAllPosts();
-  }, [userPosts]);
+  }, [userPosts, posts]);
 
   const onSavePost = async (postId) => {
     try {
