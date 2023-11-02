@@ -12,8 +12,11 @@ import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
 
-const GetAllPosts = ({userPosts , fetchAllPosts}) => { //Irina's change
-  const navigate = useNavigate(); //Marwah's change?
+
+
+
+  const GetAllPosts = ({ userPosts }) => {
+  const navigate = useNavigate(); 
   // const [posts, setPosts] = useState([]);
   const { userData , posts, setPosts } = useContext(MyContext);
   const [error, setError] = useState("");
@@ -22,7 +25,7 @@ const GetAllPosts = ({userPosts , fetchAllPosts}) => { //Irina's change
   const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
-   console.log("getallposts")
+
     try {
       if (userPosts){
         setPosts(userPosts)
@@ -181,8 +184,9 @@ const GetAllPosts = ({userPosts , fetchAllPosts}) => { //Irina's change
       <div className="post-Container">
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
-      
-        {posts ?.map((item) => (
+
+        {posts?.map((item) => (
+
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
             <div className="post-owner">
@@ -193,6 +197,19 @@ const GetAllPosts = ({userPosts , fetchAllPosts}) => { //Irina's change
               </h3>
 
               <div id="date">{formatDateTime(item.createdOn)}</div>
+              <div className="img-container">
+                <Link to={`/user/profile/${item.createdBy._id}`}>
+                  <img
+                    className="userImg"
+                    src={
+                      item.createdBy.userImage
+                        ? `http://localhost:5000/user/uploads/${item.createdBy.userImage}`
+                        : "http://localhost:5000/user/uploads/default_avatar.jpeg"
+                    }
+                    alt="userImage"
+                  />
+                </Link>
+              </div>
             </div>
 
             <p className="post-content">{item.content}</p>

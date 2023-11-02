@@ -151,6 +151,12 @@ export const updateMyProfile = async (req, res) => {
     if (coverImage) {
       updatedUserData.coverImage = coverImage.filename;
     }
+    // Encrypt the password if it has been updated
+    if (req.body.userPassword) {
+      const salt = await bcrypt.genSalt(SALT_ROUNDS);
+      const hashedPassword = await bcrypt.hash(req.body.userPassword, salt);
+      updatedUserData.userPassword = hashedPassword;
+    }
     const updatedUser = await User.findByIdAndUpdate(userId, updatedUserData, {
       new: true,
     });
