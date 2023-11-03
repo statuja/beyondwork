@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 import "./EditPost.scss"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
 
@@ -30,6 +32,7 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
         }
       } catch (error) {
         console.error("Error fetching post data:", error);
+        toast.error('Error fetching post data.')
       }
     };
 
@@ -90,6 +93,18 @@ const EditPost = ({postId, getAllPosts, setShowEditForm}) => {
               }}></textarea>
             <input type='submit'></input>
         </form>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </div>
   );
 };

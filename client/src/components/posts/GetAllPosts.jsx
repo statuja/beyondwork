@@ -10,6 +10,8 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
@@ -41,7 +43,8 @@ const GetAllPosts = ({ userPosts }) => {
         const data = await response.json();
         //console.log("Data received from the API:", data);
         if (data.success === false) {
-          alert("Session expired, please login again!");
+          //alert("Session expired, please login again!");
+        toast.warn('Session expired, please login again!')
           return navigate("/");
         }
         setPosts(data);
@@ -102,10 +105,14 @@ const GetAllPosts = ({ userPosts }) => {
           setSavedPosts(updatedSavedPosts);
         }
       } else {
-        setError("Failed to save or unsave the post.");
+
+        //setError("Failed to save the post.");
+        toast.error('Failed to save the post.')
       }
     } catch (error) {
-      setError("An error occurred while saving or unsaving the post.");
+      //setError("An error occurred while saving the post.");
+      toast.error('An error occurred while saving the post.')
+
     }
   };
 
@@ -126,15 +133,19 @@ const GetAllPosts = ({ userPosts }) => {
       );
 
       if (response.ok) {
-        setMessage("Post has been successfully deleted.");
+        //setMessage("Post has been successfully deleted.");
         setPosts((prevPosts) =>
           prevPosts.filter((post) => post._id !== postId)
         );
+        toast.success('Post has been successfully deleted.')
       } else {
-        setError("Failed to delete the post.");
+        //setError("Failed to delete the post.");
+        toast.error('Failed to delete the post.')
       }
     } catch (error) {
-      setError("An error occurred while deleting the post.");
+      //setError("An error occurred while deleting the post.");
+      toast.error('An error occurred while deleting the post.')
+
     }
   };
 
@@ -172,11 +183,14 @@ const GetAllPosts = ({ userPosts }) => {
       } else {
         const errorData = await response.json();
         console.error("Error liking post:", errorData.message);
-        setError("Failed to like the post.");
+        //setError("Failed to like the post.");
+        toast.error('Failed to like the post.')
+
       }
     } catch (error) {
       console.error("An error occurred while liking the post:", error);
-      setError("An error occurred while liking the post.");
+      //setError("An error occurred while liking the post.");
+      toast.error('An error occurred while liking the post.')
     }
   };
   const handleOnEditPostOn = (postId) => {
@@ -308,6 +322,18 @@ const GetAllPosts = ({ userPosts }) => {
             </div>
           ))}
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </>
   );
 };
