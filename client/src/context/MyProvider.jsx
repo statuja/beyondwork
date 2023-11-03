@@ -65,6 +65,8 @@ const MyProvider = ({ children }) => {
   const [companyData, setCompanyData] = useState(null);
   const [userData, setUserData] = useState("");
   const [posts, setPosts] = useState([]);
+  const [loggedOut, setLoggedOut] = useState(false)
+  const [companyRegistered, setCompanyRegistered] = useState(false)
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -126,6 +128,10 @@ const MyProvider = ({ children }) => {
         setUserData,
         posts,
         setPosts,
+        loggedOut,
+        setLoggedOut,
+        companyRegistered,
+        setCompanyRegistered
         handleLogout,
       }}
     >

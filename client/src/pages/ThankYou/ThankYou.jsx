@@ -4,14 +4,16 @@ import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import people from "../../images/Young_people.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ThankYou = () => {
   const navigate = useNavigate();
   const { adminEmail } = useContext(MyContext);
   const { companyName } = useContext(MyContext);
-  const { setUserData } = useContext(MyContext);
+  const { setUserData, companyRegistered } = useContext(MyContext);
 
   const {
     register,
@@ -49,7 +51,14 @@ export const ThankYou = () => {
       setError("An error occurred during login.");
     }
   };
-  console.log(errors);
+
+  useEffect(() => {
+    if (companyRegistered === true) {
+      toast.success('You successfully registered your company. Please find below your login credentials.');
+    }
+  }, [])
+
+  //console.log(errors);
   return (
     <div className="thankyou">
       <div className="left">
@@ -63,10 +72,14 @@ export const ThankYou = () => {
       <div className="right">
         <div className="right-top">
           <div className="thankMsg">
-            <p>You have successfully registered your company.</p>
+            <br></br>
+            <br></br>
             <p>
-              Now you can login your Admin email: <b>{adminEmail}</b> and your
-              temporary password:<b> admin1234</b>.
+              Here are your login credentials. 
+              <br></br>
+              <br></br>
+              Your admin email: <b>{adminEmail}</b>.
+              Your temporary password:<b> admin1234</b>.
             </p>
           </div>
           <h2>Login to {companyName} admin account</h2>
@@ -89,6 +102,20 @@ export const ThankYou = () => {
         </div>
         <img src={people} alt="People connected" />
       </div>
+
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+
     </div>
   );
 };

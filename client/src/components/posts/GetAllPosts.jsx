@@ -34,10 +34,12 @@ const GetAllPosts = ({ userPosts }) => {
         },
         credentials: "include",
       });
+      
       console.log("API response received:", response.status);
+
       if (response.ok) {
         const data = await response.json();
-        console.log("Data received from the API:", data);
+        //console.log("Data received from the API:", data);
         if (data.success === false) {
           alert("Session expired, please login again!");
           return navigate("/");

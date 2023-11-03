@@ -13,12 +13,10 @@ import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlin
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
-import UserData from "../UserData/UserData";
-import { Hidden } from "@mui/material";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { userData, setUserData } = useContext(MyContext);
+  const { userData, setUserData, setLoggedOut } = useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -33,10 +31,10 @@ const Menu = () => {
       const responseData = await response.json();
 
       if (response.ok) {
+        //alert("You successfully logged out.");
         localStorage.removeItem("userData");
         setUserData({});
-
-        alert("You successfully logged out.");
+        setLoggedOut(true);
         navigate("/");
       } else {
         alert(responseData.error[0].msg);
@@ -48,6 +46,7 @@ const Menu = () => {
     }
   };
   return (
+    <>
     <ul className="menu">
       <li>
         <Link to={`/user/profile/${userData._id}`}>
@@ -103,6 +102,7 @@ const Menu = () => {
         <LogoutOutlinedIcon className="icon" /> Logout
       </li>
     </ul>
+    </>
   );
 };
 
