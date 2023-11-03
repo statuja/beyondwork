@@ -85,8 +85,10 @@ export const UserRegistration = () => {
   return (
     <>
       <div className="main-container">
+        <div>
         <h1>Hello Admin!</h1>
         <p>Here, you can register all the employees in your team:</p>
+        </div>
         <div className="addUser">
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="userFullName">Employee Full Name:</label>
@@ -141,6 +143,11 @@ export const UserRegistration = () => {
                 maxLength: 30,
               })}
             />
+            {/* <label htmlFor="adminRole">Admin role:</label>
+            <label>Admin</label>
+            <input {...register("Admin role:", { required: true })} type="radio" value="Employee" />
+            <label>Employee</label>
+            <input {...register("Admin role:", { required: true })} type="radio" value=" Admin" /> */}
             {/* <select {...register("adminRole")}>
           <option value="No">Not an Admin</option>
           <option value="Yes">Admin</option>

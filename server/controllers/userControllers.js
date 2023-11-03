@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import Post from "../models/Post.js";
+
 dotenv.config();
 
 const SALT_ROUNDS = 9;
