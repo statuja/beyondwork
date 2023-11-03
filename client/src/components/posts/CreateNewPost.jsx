@@ -3,13 +3,14 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateNewPost = () => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts, setSessionExpired } = useContext(MyContext);
+  const { userData, posts, setPosts, setSessionExpired } =
+    useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -41,7 +42,7 @@ const CreateNewPost = () => {
         if (responseData.success === false) {
           //alert("Session expired, please login again!");
           //toast.warn('Session expired, please login again!')
-          setSessionExpired(true)
+          setSessionExpired(true);
           setPosts({});
           return navigate("/");
         }
@@ -49,12 +50,11 @@ const CreateNewPost = () => {
         reset();
       } else {
         //setError("Error updating profile:", response.statusText);
-        toast.error('An error occurred while creating the post.')
-
+        toast.error("An error occurred while creating the post.");
       }
     } catch (error) {
       console.error("Error fetching company details", error);
-      toast.error('An error occurred while creating the post.')
+      toast.error("An error occurred while creating the post.");
     }
   };
 
@@ -76,17 +76,17 @@ const CreateNewPost = () => {
         {message && <div className="message">{message}</div>} */}
       </form>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </div>
   );
 };
