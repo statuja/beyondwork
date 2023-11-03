@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import "./CreateUser.scss";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const UserRegistration = () => {
   const defaultImageUrl =
@@ -55,9 +57,10 @@ export const UserRegistration = () => {
           reset();
           return navigate("/");
         }
-        setMessage(
-          `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
-        );
+        // setMessage(
+        //   `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
+        // );
+        toast.success(`You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`);
         reset();
       } else {
         console.error("Error updating profile:", response.statusText);
@@ -67,10 +70,18 @@ export const UserRegistration = () => {
     }
   };
 
+  useEffect(() => {
+    if (Object.keys(errors).length !== 0) {
+      console.log("Errors:", errors);
+      //setError("All fields are required");
+      toast.error('All fields are required.');
+    }
+  }, [errors]);
+
   return (
     <>
       <div className="main-container">
-        <h3>Hello Admin!</h3>
+        <h1>Hello Admin!</h1>
         <p>Here, you can register all the employees in your team:</p>
         <div className="addUser">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -139,11 +150,25 @@ export const UserRegistration = () => {
           defaultChecked
         /> */}
             <input type="submit" className="button" />
-            {error && <div>Error: {error}</div>}
-            {message && <div>{message}</div>}
+            {/* {message && <div>{message}</div>} */}
           </form>
+          {/* {error && <div>Error: {error}</div>} */}
         </div>
       </div>
+
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
+
     </>
   );
 };
