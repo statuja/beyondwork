@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyProfile.scss";
-import "./EditMyProfile.scss"
+import "./EditMyProfile.scss";
 
 function EditMyProfile() {
   const { userData, setUserData } = useContext(MyContext);
-  console.log(userData)
+  console.log(userData);
   const navigate = useNavigate();
   const userId = userData._id;
   const [user, setUser] = useState(null);
@@ -31,8 +31,8 @@ function EditMyProfile() {
     userPassword: "",
   });
   const [loading, setLoading] = useState(true);
-console.log(formData)
-   useEffect(() => {
+  console.log(formData);
+  useEffect(() => {
     // const fetchMyProfile = async () => {
     //   try {
     //     const response = await fetch(`http://localhost:5000/user/myProfile`, {
@@ -53,7 +53,7 @@ console.log(formData)
     //       const formattedDate = new Date(data.dateOfBirth)
     //         .toISOString()
     //         .split("T")[0];
-           setFormData(userData); // Set the fetched data to the formData state
+    setFormData(userData); // Set the fetched data to the formData state
 
     //       setFormData({ ...data, dateOfBirth: formattedDate });
     //       setLoading(false);
@@ -73,7 +73,7 @@ console.log(formData)
     //     console.error("Error fetching user details", error);
     //     setLoading(false);
     //   });
-  }, [userData]); 
+  }, [userData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -81,12 +81,21 @@ console.log(formData)
 
     if (name.includes(".")) {
       const [nestedKey, nestedField] = name.split(".");
+      if (!updatedFormData[nestedKey]) {
+        updatedFormData[nestedKey] = {}; // Initialize the nested object if it doesn't exist
+      }
       updatedFormData[nestedKey][nestedField] = value;
-    } else if (name.startsWith("userContact")) {
+    } else if (
+      name.startsWith("userContact") ||
+      name.startsWith("userAddress")
+    ) {
       const [parentKey, nestedField] = name.split(".");
+      if (!updatedFormData[parentKey]) {
+        updatedFormData[parentKey] = {}; // Initialize the nested object if it doesn't exist
+      }
       updatedFormData[parentKey][nestedField] = value;
     } else {
-      updatedFormData[name] = value;
+      if (name !== "userPassword") updatedFormData[name] = value;
     }
     console.log(updatedFormData);
     setFormData(updatedFormData);
@@ -112,7 +121,7 @@ console.log(formData)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { savedPosts, ...formDataWithoutSavedPosts } = formData; // Destructure formData to exclude the savedPosts field
+    const { savedPosts, userPassword, ...formDataWithoutSavedPosts } = formData; // Destructure formData to exclude the savedPosts field
     const updatedFormData = new FormData();
     for (const key in formDataWithoutSavedPosts) {
       if (key === "userAddress" || key === "userContact") {
@@ -171,32 +180,31 @@ console.log(formData)
     navigate(`/user/profile/${userData._id}`);
   };
 
-
   return (
     <>
       <div className="profile">
-      <h1>Edit Your Profile</h1>
+        <h1>Edit Your Profile</h1>
         <div className="cover">
           <div className="user-images">
-          {userData && userData.coverImage && (
-            <img
-              style={{ width: "400px" }}
-              className="coverImg"
-              src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
-              alt="coverImage"
-            />
-          )}
-          {userData && userData.userImage && (
-            <img
-              className="userImg"
-              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
-              alt="userImage"
-            />
-          )}
+            {userData && userData.coverImage && (
+              <img
+                style={{ width: "400px" }}
+                className="coverImg"
+                src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
+                alt="coverImage"
+              />
+            )}
+            {userData && userData.userImage && (
+              <img
+                className="userImg"
+                src={`http://localhost:5000/user/uploads/${userData.userImage}`}
+                alt="userImage"
+              />
+            )}
           </div>
           <div className="upload-buttons">
             <button type="button" onClick={handleClickCover}>
-            Upload a new cover photo
+              Upload a new cover photo
             </button>
             {/* <label htmlFor="coverImage">Change Cover Image</label> */}
             <input
@@ -209,7 +217,7 @@ console.log(formData)
             />
 
             <button type="button" onClick={handleClickProfile}>
-            Upload a new profile picture
+              Upload a new profile picture
             </button>
             {/* <label htmlFor="userImage">Change Avatar</label> */}
             <input
@@ -223,10 +231,9 @@ console.log(formData)
           </div>
         </div>
         <div className="bottom">
-
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label name="userFullName">Full Name: </label>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="userFullName">Full Name: </label>
               <input
                 type="text"
                 name="userFullName"
@@ -234,9 +241,9 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="Full Name"
               />
-              </div>
-              <div>
-                <label name="userJobTitle">Job Title: </label>
+            </div>
+            <div>
+              <label htmlFor="userJobTitle">Job Title: </label>
               <input
                 type="text"
                 name="userJobTitle"
@@ -244,10 +251,10 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="Job Title"
               />
-              </div>
-              
-              <div>
-                <label name="userDepartment">Department: </label>
+            </div>
+
+            <div>
+              <label htmlFor="userDepartment">Department: </label>
               <input
                 type="text"
                 name="userDepartment"
@@ -255,11 +262,11 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="Department"
               />
-              </div>
-              
-              <div>
-                <label name="userAddress.address">Address: </label>
-                <input
+            </div>
+
+            <div>
+              <label htmlFor="userAddress.address">Address: </label>
+              <input
                 type="text"
                 name="userAddress.address"
                 value={
@@ -270,10 +277,10 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="Address"
               />
-              </div> 
-              
-              <div>
-                <label name="userAddress.city">City: </label>
+            </div>
+
+            <div>
+              <label htmlFor="userAddress.city">City: </label>
               <input
                 type="text"
                 name="userAddress.city"
@@ -285,25 +292,25 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="city"
               />
-              </div>
-              
-              <div>
-              <label name="userAddress.country">Country: </label>
+            </div>
+
+            <div>
+              <label htmlFor="userAddress.country">Country: </label>
               <input
                 type="text"
                 name="userAddress.country"
                 value={
-                  formData.userAddress?.country && formData.userAddress.country
+                  formData.userAddress?.country && formData.userAddress?.country
                     ? formData.userAddress.country
                     : ""
                 }
                 onChange={handleInputChange}
                 placeholder="country"
               />
-              </div>
-              
-              <div>
-                <label name="userAddress.zipCode">Zipcode: </label>
+            </div>
+
+            <div>
+              <label htmlFor="userAddress.zipCode">Zipcode: </label>
               <input
                 type="text"
                 name="userAddress.zipCode"
@@ -315,32 +322,32 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="zipCode"
               />
-              </div>
-              
-              <div>
-                <label name="dateOfBirth">Date of Birth: </label>
-                <input
+            </div>
+
+            <div>
+              <label htmlFor="dateOfBirth">Date of Birth: </label>
+              <input
                 type="date"
                 name="dateOfBirth"
                 value={formData.dateOfBirth}
                 onChange={handleInputChange}
                 placeholder="DateOfBirth"
               />
-              </div>
-              
-              <div>
-                <label name="description">Description: </label>
-                <br></br>
-                <textarea
+            </div>
+
+            <div>
+              <label htmlFor="description">Description: </label>
+              <br></br>
+              <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
                 placeholder="description"
               />
-              </div>
-              
-              <div>
-                <label name="userContact.email">Email: </label>
+            </div>
+
+            <div>
+              <label htmlFor="userContact.email">Email: </label>
               <input
                 type="email"
                 name="userContact.email"
@@ -348,10 +355,10 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="E-mail"
               />
-              </div>
+            </div>
 
-              <div>
-                <label name="userPassword">Password: </label>
+            <div>
+              <label htmlFor="userPassword">Password: </label>
               <input
                 type="password"
                 name="userPassword"
@@ -363,13 +370,13 @@ console.log(formData)
                 onChange={handleInputChange}
                 placeholder="Password"
               />
-              </div>
+            </div>
 
-              <div className="form-buttons">
+            <div className="form-buttons">
               <Link onClick={handleCancel}>Cancel</Link>
               <button type="submit">Save Changes</button>
-              </div>
-            </form>
+            </div>
+          </form>
         </div>
       </div>
     </>

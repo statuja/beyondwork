@@ -32,6 +32,7 @@ const Menu = () => {
 
       if (response.ok) {
         //alert("You successfully logged out.");
+        localStorage.removeItem("userData");
         setUserData({});
         setLoggedOut(true);
         navigate("/");

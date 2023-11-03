@@ -8,7 +8,14 @@
   border-radius: 15px;
   align-items: center;
   justify-content: center;
-  h4{
+
+  .new-post-header {
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  h4 {
     width: 80%;
     font-size: 24px;
     font-family: "Belanosima", sans-serif;
@@ -28,7 +35,7 @@
       border: none;
       border-radius: 5px;
       background-color: rgba(251, 251, 246, 0.784);
-      height: 150px;
+      min-height: 150px;
       font-size: 20px;
     }
 
@@ -48,6 +55,10 @@
 
       &:hover {
         background: #ffb000;
+      }
+      @media (max-width: 768px) {
+        font-size: 10px;
+        width: 60px;
       }
     }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import UserData from "../../components/UserData/UserData";
 import MyContext from "../../context/MyContext";
 import GetAllPosts from "../../components/posts/GetAllPosts";
