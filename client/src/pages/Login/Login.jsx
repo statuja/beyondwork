@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserData, loggedOut } = useContext(MyContext);
+  const { setUserData, loggedOut, sessionExpired } = useContext(MyContext);
   const [error, setError] = useState("");
 
   const {
@@ -23,6 +23,12 @@ const Login = () => {
   useEffect(() => {
     if (loggedOut === true) {
       toast.warn('You successfully logged out.');
+    }
+  }, [])
+
+  useEffect(() => {
+    if (sessionExpired === true) {
+      toast.warn('Session expired, please login again.')
     }
   }, [])
 

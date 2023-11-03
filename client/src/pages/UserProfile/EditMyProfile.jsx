@@ -3,9 +3,11 @@ import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyProfile.scss";
 import "./EditMyProfile.scss";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditMyProfile() {
-  const { userData, setUserData } = useContext(MyContext);
+  const { userData, setUserData, setSessionExpired } = useContext(MyContext);
   console.log(userData);
   const navigate = useNavigate();
   const userId = userData._id;
@@ -152,7 +154,9 @@ function EditMyProfile() {
         const data = await response.json();
 
         if (data.success === false) {
-          alert("Server error");
+          //alert("Server error");
+          //toast.warn('Session expired, please login again!')
+          setSessionExpired(true)
           setUserData({});
           return navigate("/");
         }
@@ -162,9 +166,12 @@ function EditMyProfile() {
         navigate(`/user/profile/${userData._id}`);
       } else {
         console.error("Error updating profile:", response.statusText);
+        toast.error('Error updating profile.')
+
       }
     } catch (error) {
       console.error("Error updating profile:", error);
+      toast.error('Error updating profile.')
     }
   };
 
@@ -379,6 +386,18 @@ function EditMyProfile() {
           </form>
         </div>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </>
   );
 }

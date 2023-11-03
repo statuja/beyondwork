@@ -15,7 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
-  const { userData, posts, setPosts } = useContext(MyContext);
+
+  const { userData, posts, setPosts, setSessionExpired } = useContext(MyContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
@@ -44,16 +45,19 @@ const GetAllPosts = ({ userPosts }) => {
         //console.log("Data received from the API:", data);
         if (data.success === false) {
           //alert("Session expired, please login again!");
-        toast.warn('Session expired, please login again!')
+        //toast.warn('Session expired, please login again!')
+        setSessionExpired(true)
           return navigate("/");
         }
         setPosts(data);
         // Set saved and liked posts based on user data
       } else {
         console.error("Error updating profile:", response.statusText);
+        toast.error('Failed to fetch posts.')
       }
     } catch (error) {
       console.error("Error fetching company details", error);
+      toast.error('Error fetching posts.')
     }
   };
 
@@ -94,13 +98,15 @@ const GetAllPosts = ({ userPosts }) => {
         }
       );
       if (response.ok) {
+        //setMessage("Post has been saved successfully.");
+
         const responseData = await response.json();
         if (responseData.action === "save") {
-          setMessage("Post has been saved successfully.");
+          //setMessage("Post has been saved successfully.");
           const updatedSavedPosts = [...savedPosts, postId];
           setSavedPosts(updatedSavedPosts);
         } else if (responseData.action === "unsave") {
-          setMessage("Post has been unsaved successfully.");
+          //setMessage("Post has been unsaved successfully.");
           const updatedSavedPosts = savedPosts.filter((id) => id !== postId);
           setSavedPosts(updatedSavedPosts);
         }
@@ -226,8 +232,8 @@ const GetAllPosts = ({ userPosts }) => {
   return (
     <>
       <div className="post-Container">
-        {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>}
+        {/* {error && <div>Error: {error}</div>}
+        {message && <div>{message}</div>} */}
 
         {savedPosts &&
           likedPosts &&

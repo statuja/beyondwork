@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import "./CompanyProfile.scss";
 import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CompanyProfile = () => {
   const navigate = useNavigate();
-  const { userData } = useContext(MyContext);
+  const { userData, setSessionExpired } = useContext(MyContext);
   const [company, setCompany] = useState({});
   const companyID = userData.userCompany;
 
@@ -25,16 +27,20 @@ const CompanyProfile = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.success === false) {
-            alert("Session expired, please login again!");
+            //alert("Session expired, please login again!");
+            //toast.warn('Session expired, please login again!')
+            setSessionExpired(true)
             setCompany({});
             return navigate("/");
           }
           setCompany(data);
         } else {
-          console.error("Error updating profile:", response.statusText);
+          console.error("Error fetching data:", response.statusText);
+        toast.error('Failed to fetch company details.')
         }
       } catch (error) {
         console.error("Error fetching company details", error);
+        toast.error('Error fetching company details.')
       }
     };
     fetchCompanyDetails();
@@ -121,6 +127,18 @@ const CompanyProfile = () => {
           Edit Company Profile
         </Link>
       ) : null}
+        <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    ></ToastContainer>
     </div>
   );
 };
