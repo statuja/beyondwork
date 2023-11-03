@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SavedPosts.scss";
+import { Link } from "react-router-dom";
 
 const SavedPosts = () => {
   const [savedPosts, setSavedPosts] = useState([]);
@@ -61,11 +62,28 @@ const SavedPosts = () => {
                 {post && (
                   <div className="post-card" key={post._id}>
                     <div className="post-content">
-                      <p className="postBy">
-                        <b>{post.createdBy.userFullName}</b>
-                      </p>
+                      <div className="postBy">
+                        <div className="createdBy">
+                          {post.createdBy.userFullName}
+                        </div>
+                        <div className="img-container">
+                          <Link to={`/user/profile/${post.createdBy._id}`}>
+                            <img
+                              className="userImg"
+                              src={
+                                post.createdBy.userImage
+                                  ? `http://localhost:5000/user/uploads/${post.createdBy.userImage}`
+                                  : "http://localhost:5000/user/uploads/default_avatar.jpeg"
+                              }
+                              alt="userImage"
+                            />
+                          </Link>
+                        </div>
+                      </div>
+
                       <p className="text">{post.content}</p>
                     </div>
+
                     <span className="date-and-likes">
                       <div>{post.like} people liked it</div>
                       <p>Created on {formatDateTime(post.createdOn)}</p>
