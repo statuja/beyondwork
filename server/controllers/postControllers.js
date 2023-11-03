@@ -109,7 +109,11 @@ export const likePost = async (req, res) => {
           { _id: postId },
           { $push: { likedBy: userId }, $inc: { like: 1 } },
           { new: true }
-        );
+        )
+        .populate({
+          path: "createdBy",
+          select: "userFullName userImage",
+        });
         if (doc) {
           res.json(doc);
         } else {
@@ -120,7 +124,10 @@ export const likePost = async (req, res) => {
           { _id: postId },
           { $pull: { likedBy: userId }, $inc: { like: -1 } },
           { new: true }
-        );
+        ).populate({
+          path: "createdBy",
+          select: "userFullName userImage",
+        });
         if (doc2) {
           res.json(doc2);
         } else {

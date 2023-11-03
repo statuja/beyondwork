@@ -3,6 +3,8 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateNewPost = () => {
   const navigate = useNavigate();
@@ -37,7 +39,8 @@ const CreateNewPost = () => {
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.success === false) {
-          alert("Session expired, please login again!");
+          //alert("Session expired, please login again!");
+          toast.warn('Session expired, please login again!')
           setPosts({});
           return navigate("/");
         }
@@ -62,6 +65,18 @@ const CreateNewPost = () => {
         {error && <div className="error">Error: {error}</div>}
         {message && <div className="message">{message}</div>}
       </form>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </div>
   );
 };
