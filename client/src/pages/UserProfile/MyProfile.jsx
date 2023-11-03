@@ -4,10 +4,12 @@ import UserData from "../../components/UserData/UserData";
 import MyContext from "../../context/MyContext";
 import GetAllPosts from "../../components/posts/GetAllPosts";
 import "./MyProfile.scss";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userData } = useContext(MyContext);
+  const { userData, setSessionExpired } = useContext(MyContext);
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,7 +38,9 @@ const UserProfile = () => {
           if (response.ok) {
             const data = await response.json();
             if (data.success === false) {
-              alert("Session expired, please login again!");
+              //alert("Session expired, please login again!");
+              //toast.warn('Session expired, please login again!')
+              setSessionExpired(true)
               setUser({});
               return navigate("/");
             }
@@ -48,10 +52,12 @@ const UserProfile = () => {
             // }
             setLoading(false);
           } else {
-            console.error("Error updating profile:", response.statusText);
+            console.error("Error fetching profile:", response.statusText);
+            toast.error('Error fetching profile.')
           }
         } catch (error) {
-          console.error("Error fetching company details", error);
+          console.error("Error fetching profile", error);
+          toast.error('Error fetching profile.')
           setLoading(false);
         }
       };
@@ -77,10 +83,12 @@ const UserProfile = () => {
         const data = await response.json();
         setUserPosts(data); // Update the user's posts
       } else {
-        setError("Failed to fetch user's posts.");
+        //setError("Failed to fetch user's posts.");
+        toast.error("Failed to fetch user's posts.")
       }
     } catch (error) {
-      setError("An error occurred while fetching user's posts.");
+      //setError("An error occurred while fetching user's posts.");
+      toast.error("An error occurred while fetching user's posts.")
     }
     
   };
@@ -131,6 +139,18 @@ const UserProfile = () => {
         </div>
         
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </>
   );
 };

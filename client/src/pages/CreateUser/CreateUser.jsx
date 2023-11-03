@@ -20,7 +20,7 @@ export const UserRegistration = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const { userData } = useContext(MyContext);
+  const { userData, setSessionExpired } = useContext(MyContext);
 
   const onSubmit = async (data) => {
     const newData = {
@@ -53,7 +53,9 @@ export const UserRegistration = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.success === false) {
-          alert("Session expired, please login again!");
+          //alert("Session expired, please login again!");
+          //toast.warn('Session expired, please login again!')
+          setSessionExpired(true)
           reset();
           return navigate("/");
         }
@@ -64,9 +66,11 @@ export const UserRegistration = () => {
         reset();
       } else {
         console.error("Error updating profile:", response.statusText);
+        toast.error('Failed to create profile.')
       }
     } catch (error) {
-      console.error("Error fetching company details", error);
+      console.error("Error creating profile", error);
+      toast.error('Error creating profile')
     }
   };
 

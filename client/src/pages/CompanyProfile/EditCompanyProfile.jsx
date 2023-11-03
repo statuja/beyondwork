@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import MyContext from "../../context/MyContext";
 import "./CompanyProfile.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditCompanyProfile = () => {
   const navigate = useNavigate();
@@ -43,9 +45,12 @@ const EditCompanyProfile = () => {
           setCompanyData(data);
         } else {
           console.error("Failed to fetch company data");
+          toast.error('Failed to fetch company data.')
+
         }
       } catch (error) {
         console.error("Error fetching company data:", error);
+        toast.error('Error fetching company data.')
       }
     };
 
@@ -117,9 +122,11 @@ const EditCompanyProfile = () => {
         console.log("Company profile updated:", data);
       } else {
         console.error("Error updating company profile");
+        toast.error('Error updating company data.')
       }
     } catch (error) {
       console.error("Error updating company profile:", error);
+      toast.error('Failed to update company data.')
     }
   };
 
@@ -259,6 +266,18 @@ const EditCompanyProfile = () => {
         <Link onClick={handleSubmit}>Save Changes</Link>
         <Link onClick={handleCancel}>Cancel</Link>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </div>
   );
 };

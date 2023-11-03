@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import "./AllUsers.scss";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AllUsers() {
   const navigate = useNavigate();
-  const { userData } = useContext(MyContext);
+  const { userData, setSessionExpired } = useContext(MyContext);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
@@ -29,7 +31,9 @@ function AllUsers() {
         if (response.ok) {
           const data = await response.json();
           if (data.success === false) {
-            alert("Session expired, please login again!");
+            //alert("Session expired, please login again!");
+            //toast.warn('Session expired, please login again!')
+            setSessionExpired(true)
             setUsers({});
             return navigate("/");
           }
@@ -38,23 +42,26 @@ function AllUsers() {
             console.log(users);
           }
         } else {
+          toast.error('Invalid data format.')
           throw new Error("Invalid data format");
         }
       } catch (error) {
         setError(error.message);
+        toast.error(error.message)
+
       }
     };
     if (userData) {
       fetchAllUsers();
     }
   }, [userData]);
-  if (error) {
-    return (
-      <div className="user-cards-container">
-        <div className="error-message">Error: {error}</div>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="user-cards-container">
+  //       <div className="error-message">Error: {error}</div>
+  //     </div>
+  //   );
+  // }
   return (
     <div className="wrapper">
       <div className="user-cards-container">
@@ -95,6 +102,18 @@ function AllUsers() {
           ))}
         </div>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </div>
   );
 }

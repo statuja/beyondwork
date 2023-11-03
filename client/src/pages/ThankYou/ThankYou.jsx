@@ -44,11 +44,14 @@ export const ThankYou = () => {
         navigate("/company/profile");
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
+        //setError(errorData.error);
+        toast.error(errorData.error);
+
       }
     } catch (error) {
       console.log("Fetch error:", error);
-      setError("An error occurred during login.");
+      //setError("An error occurred during login.");
+      toast.error("An error occurred during login.");
     }
   };
 
@@ -104,17 +107,17 @@ export const ThankYou = () => {
       </div>
 
       <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
 
     </div>
   );

@@ -67,6 +67,7 @@ const MyProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [loggedOut, setLoggedOut] = useState(false)
   const [companyRegistered, setCompanyRegistered] = useState(false)
+  const [sessionExpired, setSessionExpired] = useState(false)
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -132,7 +133,9 @@ const MyProvider = ({ children }) => {
         setLoggedOut,
         companyRegistered,
         setCompanyRegistered,
-        handleLogout
+        handleLogout,
+        sessionExpired,
+        setSessionExpired
       }}
     >
       {children}

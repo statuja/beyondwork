@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts } = useContext(MyContext);
+  const { userData, posts, setPosts, setSessionExpired } = useContext(MyContext);
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -42,15 +42,18 @@ const GetAllPosts = ({ userPosts }) => {
         //console.log("Data received from the API:", data);
         if (data.success === false) {
           //alert("Session expired, please login again!");
-        toast.warn('Session expired, please login again!')
+        //toast.warn('Session expired, please login again!')
+        setSessionExpired(true)
           return navigate("/");
         }
         setPosts(data);
       } else {
         console.error("Error updating profile:", response.statusText);
+        toast.error('Failed to fetch posts.')
       }
     } catch (error) {
       console.error("Error fetching company details", error);
+      toast.error('Error fetching posts.')
     }
   };
 
@@ -72,7 +75,7 @@ const GetAllPosts = ({ userPosts }) => {
         }
       );
       if (response.ok) {
-        setMessage("Post has been saved successfully.");
+        //setMessage("Post has been saved successfully.");
       } else {
         //setError("Failed to save the post.");
         toast.error('Failed to save the post.')
@@ -189,8 +192,8 @@ const GetAllPosts = ({ userPosts }) => {
   return (
     <>
       <div className="post-Container">
-        {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>}
+        {/* {error && <div>Error: {error}</div>}
+        {message && <div>{message}</div>} */}
 
         {posts?.map((item) => (
           <div key={item._id} className="postCard">

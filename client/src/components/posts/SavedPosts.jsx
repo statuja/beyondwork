@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./SavedPosts.scss";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SavedPosts = () => {
   const [savedPosts, setSavedPosts] = useState([]);
@@ -20,17 +22,21 @@ const SavedPosts = () => {
           console.log(data);
           setSavedPosts(data);
         } else {
-          setError("Failed to fetch saved posts. Please try again later.");
+          //setError("Failed to fetch saved posts. Please try again later.");
+          toast.error('Failed to fetch saved posts. Please try again later.')
+
         }
       } catch (error) {
-        setError("An error occurred while fetching saved posts.");
+        //setError("An error occurred while fetching saved posts.");
+        toast.error('An error occurred while fetching saved posts.')
+
       }
     };
     fetchSavedPosts();
   }, []);
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
   if (!Array.isArray(savedPosts)) {
     return <div>Unable to fetch saved posts.</div>;
   }
@@ -77,6 +83,18 @@ const SavedPosts = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </>
   );
 };

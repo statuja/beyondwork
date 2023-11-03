@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const CreateNewPost = () => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts } = useContext(MyContext);
+  const { userData, posts, setPosts, setSessionExpired } = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -40,17 +40,21 @@ const CreateNewPost = () => {
         const responseData = await response.json();
         if (responseData.success === false) {
           //alert("Session expired, please login again!");
-          toast.warn('Session expired, please login again!')
+          //toast.warn('Session expired, please login again!')
+          setSessionExpired(true)
           setPosts({});
           return navigate("/");
         }
         setPosts([responseData, ...posts]);
         reset();
       } else {
-        setError("Error updating profile:", response.statusText);
+        //setError("Error updating profile:", response.statusText);
+        toast.error('An error occurred while creating the post.')
+
       }
     } catch (error) {
       console.error("Error fetching company details", error);
+      toast.error('An error occurred while creating the post.')
     }
   };
 
@@ -62,8 +66,8 @@ const CreateNewPost = () => {
           {...register("content", { required: true, maxLength: 500 })}
         />
         <input type="submit" />
-        {error && <div className="error">Error: {error}</div>}
-        {message && <div className="message">{message}</div>}
+        {/* {error && <div className="error">Error: {error}</div>}
+        {message && <div className="message">{message}</div>} */}
       </form>
       <ToastContainer
           position="top-right"
