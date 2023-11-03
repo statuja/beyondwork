@@ -18,7 +18,7 @@ import MyContext from "../../context/MyContext";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { userData, setUserData } = useContext(MyContext);
+  const { userData, setUserData, setLoggedOut } = useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -35,7 +35,8 @@ const Menu = () => {
       if (response.ok) {
         localStorage.removeItem("userData");
         setUserData({});
-        alert("You successfully logged out.");
+        setLoggedOut(true);
+        //alert("You successfully logged out.");
         navigate("/");
       } else {
         alert(responseData.error[0].msg);

@@ -131,8 +131,8 @@ const MyProvider = ({ children }) => {
         loggedOut,
         setLoggedOut,
         companyRegistered,
-        setCompanyRegistered
-        handleLogout,
+        setCompanyRegistered,
+        handleLogout
       }}
     >
       {children}
