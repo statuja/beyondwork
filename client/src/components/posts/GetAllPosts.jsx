@@ -13,7 +13,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
-  // const [posts, setPosts] = useState([]);
+
   const { userData, posts, setPosts } = useContext(MyContext);
 
   const [error, setError] = useState("");
@@ -40,7 +40,6 @@ const GetAllPosts = ({ userPosts }) => {
         console.log("Data received from the API:", data);
         if (data.success === false) {
           alert("Session expired, please login again!");
-          //setPosts({});
           return navigate("/");
         }
         setPosts(data);
@@ -54,7 +53,7 @@ const GetAllPosts = ({ userPosts }) => {
 
   useEffect(() => {
     getAllPosts();
-  }, [userPosts, posts]);
+  }, [userPosts]);
 
   const onSavePost = async (postId) => {
     try {
@@ -183,21 +182,10 @@ const GetAllPosts = ({ userPosts }) => {
         {posts?.map((item) => (
           <div key={item._id} className="postCard">
             <Link to={`/post/${item._id}`}></Link>
-            <div className="post-owner">
-              <div className="name-container">
-                <h3>
-                  <Link to={`/user/${item.createdBy._id}`}>
-                    {item.createdBy.userFullName}
-                  </Link>
-                </h3>
 
-                <div id="date">{formatDateTime(item.createdOn)}</div>
-              </div>
+            <div className="post-owner">
               <div className="img-container">
-                <Link
-                  className="userImg"
-                  to={`/user/profile/${item.createdBy._id}`}
-                >
+                <Link to={`/user/profile/${item.createdBy._id}`}>
                   <img
                     className="userImg"
                     src={
@@ -208,6 +196,14 @@ const GetAllPosts = ({ userPosts }) => {
                     alt="userImage"
                   />
                 </Link>
+              </div>
+              <div className="name">
+                <h3>
+                  <Link to={`/user/profile/${item.createdBy._id}`}>
+                    {item.createdBy.userFullName}
+                  </Link>
+                </h3>
+                <div id="date">{formatDateTime(item.createdOn)}</div>
               </div>
             </div>
 
