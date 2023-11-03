@@ -13,7 +13,9 @@ import CommentIcon from "@mui/icons-material/Comment";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
+
   const { userData, posts, setPosts } = useContext(MyContext);
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
@@ -226,7 +228,7 @@ const GetAllPosts = ({ userPosts }) => {
                   </span>
                   <div className="likes">
                     <div>{item.like}</div>
-                    <div> people liked it</div>
+                    <div className="people-liked-it"> people liked it</div>
                   </div>
                 </div>
 

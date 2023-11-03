@@ -9,19 +9,15 @@ const Home = () => {
 
   return (
     <>
-   
-     
-        <div className="newsfeed">
-          <h1>News feed</h1>
-          <CreateNewPost />  
-          <p>
-            Hello <b>{userData.userFullName}</b>, here is the latest news from
-            your colleagues
-          </p>
-            <GetAllPosts />  
-        </div>
-        
-    
+      <div className="newsfeed">
+        <h1>News feed</h1>
+        <CreateNewPost />
+        <p className="opening-sentence">
+          Hello <b>{userData.userFullName}</b>, here is the latest news from
+          your colleagues
+        </p>
+        <GetAllPosts />
+      </div>
     </>
   );
 };

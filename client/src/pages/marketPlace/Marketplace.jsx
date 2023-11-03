@@ -31,7 +31,6 @@ function MarketPlace() {
       condition: "used",
       images: [straller4, straller5, straller3],
       category: "stroller",
-      // Add more details as needed
     },
     {
       id: 3,
@@ -46,16 +45,29 @@ function MarketPlace() {
     // Add more products
   ];
 
+  const productsInRows = [];
+  for (let i = 0; i < products.length; i += 3) {
+    productsInRows.push(products.slice(i, i + 3));
+  }
+
   return (
     <div className="product-container">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {productsInRows.map((row, rowIndex) => (
+        <div key={rowIndex} className="product-row">
+          {row.map((product, index) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              isFirstInRow={index === 0}
+            />
+          ))}
+        </div>
       ))}
     </div>
   );
 }
 
-function ProductCard({ product }) {
+function ProductCard({ product, isFirstInRow }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const previousImage = () => {
@@ -73,15 +85,18 @@ function ProductCard({ product }) {
   return (
     <div className="wrapper">
       <div className="products-container">
+        {isFirstInRow && <h1>Market Place</h1>}
         <div className="product-card">
           <div className="product-images">
             <img src={product.images[currentImageIndex]} alt={product.name} />
-            <span className="carousel-button" onClick={previousImage}>
-              &lt; Prev
-            </span>
-            <span className="carousel-button" onClick={nextImage}>
-              Next &gt;
-            </span>
+            <div className="carousel-prev-next">
+              <span className="carousel-button" onClick={previousImage}>
+                &lt; Prev
+              </span>
+              <span className="carousel-button" onClick={nextImage}>
+                Next &gt;
+              </span>
+            </div>
           </div>
           <div className="product-details">
             <h3>{product.name}</h3>

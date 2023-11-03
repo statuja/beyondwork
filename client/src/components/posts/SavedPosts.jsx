@@ -52,7 +52,7 @@ const SavedPosts = () => {
 
   return (
     <>
-      <div className="main-container">
+      <div className="saved-posts-container">
         <h1>Your Saved Posts</h1>
         <div className="wrapper">
           <div className="savedPosts">
