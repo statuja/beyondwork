@@ -4,22 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import EditPost from "./EditPost";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
-//import ReactTooltip from "react-tooltip";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
-
   const { userData, posts, setPosts } = useContext(MyContext);
-
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
+  const [savedPosts, setSavedPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
 
   const getAllPosts = async () => {
     try {
@@ -34,7 +34,7 @@ const GetAllPosts = ({ userPosts }) => {
         },
         credentials: "include",
       });
-      
+
       console.log("API response received:", response.status);
 
       if (response.ok) {
@@ -45,6 +45,7 @@ const GetAllPosts = ({ userPosts }) => {
           return navigate("/");
         }
         setPosts(data);
+        // Set saved and liked posts based on user data
       } else {
         console.error("Error updating profile:", response.statusText);
       }
@@ -54,8 +55,27 @@ const GetAllPosts = ({ userPosts }) => {
   };
 
   useEffect(() => {
+    const savedPostsFromStorage = localStorage.getItem("savedPosts");
+    if (savedPostsFromStorage) {
+      setSavedPosts(JSON.parse(savedPostsFromStorage));
+    }
+
+    const likedPostsFromStorage = localStorage.getItem("likedPosts");
+    if (likedPostsFromStorage) {
+      setLikedPosts(JSON.parse(likedPostsFromStorage));
+    }
+
     getAllPosts();
   }, [userPosts]);
+
+  useEffect(() => {
+    localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
+  }, [savedPosts]);
+
+  useEffect(() => {
+    localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
+  }, [likedPosts]);
+
 
   const onSavePost = async (postId) => {
     try {
@@ -71,14 +91,25 @@ const GetAllPosts = ({ userPosts }) => {
         }
       );
       if (response.ok) {
-        setMessage("Post has been saved successfully.");
+        const responseData = await response.json();
+        if (responseData.action === "save") {
+          setMessage("Post has been saved successfully.");
+          const updatedSavedPosts = [...savedPosts, postId];
+          setSavedPosts(updatedSavedPosts);
+        } else if (responseData.action === "unsave") {
+          setMessage("Post has been unsaved successfully.");
+          const updatedSavedPosts = savedPosts.filter((id) => id !== postId);
+          setSavedPosts(updatedSavedPosts);
+        }
       } else {
-        setError("Failed to save the post.");
+        setError("Failed to save or unsave the post.");
       }
     } catch (error) {
-      setError("An error occurred while saving the post.");
+      setError("An error occurred while saving or unsaving the post.");
     }
   };
+
+
 
   const handleOnDelete = async (postId) => {
     try {
@@ -124,16 +155,20 @@ const GetAllPosts = ({ userPosts }) => {
 
       if (response.ok) {
         const updatedPost = await response.json();
-
         const oldPosts = [...posts];
-
         const idx = oldPosts.findIndex((item) => item._id === postId);
         oldPosts[idx] = updatedPost;
-
         setPosts([...oldPosts]);
         // setPosts((prevPosts) =>
         //   prevPosts?.map((post) => (post._id === postId ? updatedPost : post))
         // );
+        if (likedPosts.includes(postId)) {
+          const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
+          setLikedPosts(updatedLikedPosts);
+        } else {
+          const updatedLikedPosts = [...likedPosts, postId];
+          setLikedPosts(updatedLikedPosts);
+        }
       } else {
         const errorData = await response.json();
         console.error("Error liking post:", errorData.message);
@@ -144,7 +179,6 @@ const GetAllPosts = ({ userPosts }) => {
       setError("An error occurred while liking the post.");
     }
   };
-
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
     setShowEditForm(true);
@@ -181,82 +215,98 @@ const GetAllPosts = ({ userPosts }) => {
         {error && <div>Error: {error}</div>}
         {message && <div>{message}</div>}
 
-        {posts?.map((item) => (
-          <div key={item._id} className="postCard">
-            <Link to={`/post/${item._id}`}></Link>
+        {savedPosts &&
+          likedPosts &&
+          posts?.map((item) => (
+            <div key={item._id} className="postCard">
+              <Link to={`/post/${item._id}`}></Link>
 
-            <div className="post-owner">
-              <div className="img-container">
-                <Link to={`/user/profile/${item.createdBy._id}`}>
-                  <img
-                    className="userImg"
-                    src={
-                      item.createdBy.userImage
-                        ? `http://localhost:5000/user/uploads/${item.createdBy.userImage}`
-                        : "http://localhost:5000/user/uploads/default_avatar.jpeg"
-                    }
-                    alt="userImage"
-                  />
-                </Link>
-              </div>
-              <div className="name">
-                <h3>
+              <div className="post-owner">
+                <div className="img-container">
                   <Link to={`/user/profile/${item.createdBy._id}`}>
-                    {item.createdBy.userFullName}
+                    <img
+                      className="userImg"
+                      src={
+                        item.createdBy.userImage
+                          ? `http://localhost:5000/user/uploads/${item.createdBy.userImage}`
+                          : "http://localhost:5000/user/uploads/default_avatar.jpeg"
+                      }
+                      alt="userImage"
+                    />
                   </Link>
-                </h3>
-                <div id="date">{formatDateTime(item.createdOn)}</div>
-              </div>
-            </div>
-
-            <p className="post-content">{item.content}</p>
-            <span className="post-footer">
-              <div className="likesAndComments">
-                <div className="left">
-                  <span title="Save this post">
-                    <BookmarkBorderIcon
-                      className="icon"
-                      onClick={() => onSavePost(item._id)}
-                    />
-                  </span>
-                  <span title="Comment">
-                    <CommentIcon className="icon" />
-                  </span>
-                  <span title="Like">
-                    <ThumbUpOffAltIcon
-                      className="icon"
-                      onClick={() => handleLikePost(item._id)}
-                    />
-                  </span>
-                  <div className="likes">
-                    <div>{item.like}</div>
-                    <div className="people-liked-it"> people liked it</div>
-                  </div>
                 </div>
+                <div className="name">
+                  <h3>
+                    <Link to={`/user/profile/${item.createdBy._id}`}>
+                      {item.createdBy.userFullName}
+                    </Link>
+                  </h3>
+                  <div id="date">{formatDateTime(item.createdOn)}</div>
+                </div>
+              </div>
 
-                {renderEditPostComponent(item._id)}
-              </div>
-              <div className="right">
-                {userData._id === item.createdBy._id && (
-                  <span title="Edit this post">
-                    <EditIcon
-                      className="icon"
-                      onClick={() => handleOnEditPostOn(item._id)}
-                    />
-                  </span>
-                )}
-                {userData._id === item.createdBy._id && (
-                  <span title="Delete this post">
-                    <DeleteIcon
-                      className="icon"
-                      onClick={() => handleOnDelete(item._id)}
-                    />
-                  </span>
-                )}
-              </div>
-            </span>
-          </div>
-        ))}
+              <p className="post-content">{item.content}</p>
+              <span className="post-footer">
+                <div className="likesAndComments">
+                  <div className="left">
+                    <span title="Save this post">
+                      {savedPosts.includes(item._id) ? (
+                        <BookmarkIcon
+                          className="icon"
+                          onClick={() => onSavePost(item._id)}
+                        />
+                      ) : (
+                        <BookmarkBorderIcon
+                          className="icon"
+                          onClick={() => onSavePost(item._id)}
+                        />
+                      )}
+                    </span>
+                    <span title="Comment">
+                      <CommentIcon className="icon" />
+                    </span>
+                    <span title="Like">
+                      {likedPosts.includes(item._id) ? (
+                        <ThumbUpIcon
+                          className="icon"
+                          onClick={() => handleLikePost(item._id)}
+                        />
+                      ) : (
+                        <ThumbUpOffAltIcon
+                          className="icon"
+                          onClick={() => handleLikePost(item._id)}
+                        />
+                      )}
+                    </span>
+                    <div className="likes">
+                      <div>{item.like}</div>
+                      <div className="people-liked-it"> people liked it</div>
+                    </div>
+                  </div>
+
+                  {renderEditPostComponent(item._id)}
+                </div>
+                <div className="right">
+                  {userData._id === item.createdBy._id && (
+                    <span title="Edit this post">
+                      <EditIcon
+                        className="icon"
+                        onClick={() => handleOnEditPostOn(item._id)}
+                      />
+                    </span>
+                  )}
+                  {userData._id === item.createdBy._id && (
+                    <span title="Delete this post">
+                      <DeleteIcon
+                        className="icon"
+                        onClick={() => handleOnDelete(item._id)}
+                      />
+                    </span>
+                  )}
+                </div>
+              </span>
+            </div>
+          ))}
       </div>
     </>
   );

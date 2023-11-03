@@ -207,19 +207,34 @@ export const savePost = async (req, res) => {
     const usersId = req.user._id;
     const postId = req.params;
 
-    const updatedUser = await User.findByIdAndUpdate(
-      usersId,
-      {
-        $push: { savedPosts: req.body.postId },
-      },
-      { new: true }
-    );
-
-    res.json(updatedUser);
+    // Check if the post is already saved
+    const user = await User.findById(usersId);
+    if (user.savedPosts.includes(req.body.postId)) {
+      // If already saved, remove the post from savedPosts
+      await User.findByIdAndUpdate(
+        usersId,
+        {
+          $pull: { savedPosts: req.body.postId },
+        },
+        { new: true }
+      );
+      res.json({ success: true, action: "unsave" }); // Indicate the action as "unsave" in the response
+    } else {
+      // If not saved, add the post to savedPosts
+      const updatedUser = await User.findByIdAndUpdate(
+        usersId,
+        {
+          $push: { savedPosts: req.body.postId },
+        },
+        { new: true }
+      );
+      res.json({ success: true, action: "save", updatedUser }); // Indicate the action as "save" in the response
+    }
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ success: false, error: error.message }); // Handle errors appropriately
   }
 };
+
 
 export const getSavedPosts = async (req, res) => {
   try {
