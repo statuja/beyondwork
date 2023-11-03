@@ -103,18 +103,17 @@ const MyProvider = ({ children }) => {
     }
   }, []);
 
-   const handleLogout = () => {
-     // Clear the userData from local storage
-     localStorage.removeItem("userData");
+  const handleLogout = () => {
+    // Clear the userData from local storage
+    localStorage.removeItem("userData");
 
-     // Clear the userData state
-     setUserData(null);
+    // Clear the userData state
+    setUserData(null);
 
-     // Perform any additional logout operations as needed
-     // For example, you might want to redirect the user to the login page
-     // or perform other cleanup tasks.
-   };
-
+    // Perform any additional logout operations as needed
+    // For example, you might want to redirect the user to the login page
+    // or perform other cleanup tasks.
+  };
 
   return (
     <MyContext.Provider
