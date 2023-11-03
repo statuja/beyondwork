@@ -81,9 +81,18 @@ function EditMyProfile() {
 
     if (name.includes(".")) {
       const [nestedKey, nestedField] = name.split(".");
+      if (!updatedFormData[nestedKey]) {
+        updatedFormData[nestedKey] = {}; // Initialize the nested object if it doesn't exist
+      }
       updatedFormData[nestedKey][nestedField] = value;
-    } else if (name.startsWith("userContact")) {
+    } else if (
+      name.startsWith("userContact") ||
+      name.startsWith("userAddress")
+    ) {
       const [parentKey, nestedField] = name.split(".");
+      if (!updatedFormData[parentKey]) {
+        updatedFormData[parentKey] = {}; // Initialize the nested object if it doesn't exist
+      }
       updatedFormData[parentKey][nestedField] = value;
     } else {
       if (name !== "userPassword") updatedFormData[name] = value;
@@ -224,7 +233,7 @@ function EditMyProfile() {
         <div className="bottom">
           <form onSubmit={handleSubmit}>
             <div>
-              <label name="userFullName">Full Name: </label>
+              <label htmlFor="userFullName">Full Name: </label>
               <input
                 type="text"
                 name="userFullName"
@@ -234,7 +243,7 @@ function EditMyProfile() {
               />
             </div>
             <div>
-              <label name="userJobTitle">Job Title: </label>
+              <label htmlFor="userJobTitle">Job Title: </label>
               <input
                 type="text"
                 name="userJobTitle"
@@ -245,7 +254,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userDepartment">Department: </label>
+              <label htmlFor="userDepartment">Department: </label>
               <input
                 type="text"
                 name="userDepartment"
@@ -256,7 +265,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userAddress.address">Address: </label>
+              <label htmlFor="userAddress.address">Address: </label>
               <input
                 type="text"
                 name="userAddress.address"
@@ -271,7 +280,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userAddress.city">City: </label>
+              <label htmlFor="userAddress.city">City: </label>
               <input
                 type="text"
                 name="userAddress.city"
@@ -286,12 +295,12 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userAddress.country">Country: </label>
+              <label htmlFor="userAddress.country">Country: </label>
               <input
                 type="text"
                 name="userAddress.country"
                 value={
-                  formData.userAddress?.country && formData.userAddress.country
+                  formData.userAddress?.country && formData.userAddress?.country
                     ? formData.userAddress.country
                     : ""
                 }
@@ -301,7 +310,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userAddress.zipCode">Zipcode: </label>
+              <label htmlFor="userAddress.zipCode">Zipcode: </label>
               <input
                 type="text"
                 name="userAddress.zipCode"
@@ -316,7 +325,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="dateOfBirth">Date of Birth: </label>
+              <label htmlFor="dateOfBirth">Date of Birth: </label>
               <input
                 type="date"
                 name="dateOfBirth"
@@ -327,7 +336,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="description">Description: </label>
+              <label htmlFor="description">Description: </label>
               <br></br>
               <textarea
                 name="description"
@@ -338,7 +347,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userContact.email">Email: </label>
+              <label htmlFor="userContact.email">Email: </label>
               <input
                 type="email"
                 name="userContact.email"
@@ -349,7 +358,7 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label name="userPassword">Password: </label>
+              <label htmlFor="userPassword">Password: </label>
               <input
                 type="password"
                 name="userPassword"
