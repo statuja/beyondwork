@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import "./AllUsers.scss";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AllUsers() {
-  const { userData } = useContext(MyContext);
+  const navigate = useNavigate();
+  const { userData, setSessionExpired } = useContext(MyContext);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
@@ -23,40 +28,92 @@ function AllUsers() {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        const data = await response.json();
-
-        if (Array.isArray(data)) {
-          setUsers(data);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success === false) {
+            //alert("Session expired, please login again!");
+            //toast.warn('Session expired, please login again!')
+            setSessionExpired(true)
+            setUsers({});
+            return navigate("/");
+          }
+          if (Array.isArray(data)) {
+            setUsers(data);
+            console.log(users);
+          }
         } else {
+          toast.error('Invalid data format.')
           throw new Error("Invalid data format");
         }
       } catch (error) {
         setError(error.message);
+        toast.error(error.message)
+
       }
     };
     if (userData) {
       fetchAllUsers();
     }
   }, [userData]);
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return (
+  //     <div className="user-cards-container">
+  //       <div className="error-message">Error: {error}</div>
+  //     </div>
+  //   );
+  // }
   return (
-    <div className="user-cards-container">
-      <h2>User List</h2>
-      <div className="user-cards">
-        {users.map((user) => (
-          <div key={user._id} className="user-card">
-            <div className="user-image-placeholder"></div>
-            <div className="user-details">
-              <p>Name: {user.userFullName}</p>
-              <p>Job Title: {user.userJobTitle}</p>
-              <p>Department: {user.userDepartment}</p>
-              <p>Email: {user.userContact.email}</p>
+    <div className="wrapper">
+      <div className="user-cards-container">
+        <h1>Your Colleagues</h1>
+        <div className="user-cards">
+          {users.map((user) => (
+            <div key={user._id} className="user-card">
+              <MailOutlineIcon className="icon" />
+              <Link to={`/user/profile/${user._id}`}>
+                {" "}
+                <div className="user-image-placeholder">
+                  {user && user.userImage && (
+                    <img
+                      className="user-image-placeholder"
+                      src={`http://localhost:5000/user/uploads/${user.userImage}`}
+                      alt="userImage"
+                    />
+                  )}
+                </div>{" "}
+              </Link>
+              <div className="user-details">
+                <p>
+                  <b>Name: </b>
+
+                  {user.userFullName}
+                </p>
+                <p>
+                  <b>Job Title:</b> {user.userJobTitle}
+                </p>
+                <p>
+                  <b>Department:</b> {user.userDepartment}
+                </p>
+                <p>
+                  <b>Email:</b> {user.userContact.email}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </div>
   );
 }

@@ -11,10 +11,12 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? "vercel server" //change when we deploy
-      : "http://localhost:3000",
+  origin: "http://localhost:3000",
+  // process.env.NODE_ENV === "production"
+  //   ? "vercel server" //change when we deploy
+  //   : "http://localhost:3000",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+
   credentials: true,
   preflightContinue: true,
   optionsSuccessStatus: 200,
@@ -24,16 +26,24 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 
-//Routes
+// Handle preflight requests
+app.options("*", cors(corsOptions));
+// Set up the necessary headers in the preflight response
+// app.options("*", cors(corsOptions), (req, res) => {
+//   res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.set("Access-Control-Allow-Methods", "POST");
+//   res.set("Access-Control-Allow-Methods", "PUT");
+//   res.set("Access-Control-Allow-Methods", "DELETE");
+//   res.set("Access-Control-Allow-Methods", "GET");
+//   res.set("Access-Control-Allow-Headers", "Content-Type");
+//   res.status(200).send();
+// });
 
+//Routes
+app.use(express.static("public"));
 app.use("/company", companyRoute);
 app.use("/user", userRoute);
 app.use("/post", postRoute);
-
-app.post("/server/test", (req, res) => {
-  console.log(req.body);
-  res.json("Yes server is connected with client now!");
-});
 
 mongoose
   .connect(process.env.MONGO_DB_LINK)

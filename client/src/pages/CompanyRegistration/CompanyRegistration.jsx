@@ -7,7 +7,7 @@ import MyContext from "../../context/MyContext";
 
 export const CompanyRegistration = () => {
   const navigate = useNavigate();
-  const { setAdminEmail, setCompanyName } = useContext(MyContext);
+  const { setAdminEmail, setCompanyName, companyRegistered, setCompanyRegistered } = useContext(MyContext);
 
   const {
     register,
@@ -49,6 +49,7 @@ export const CompanyRegistration = () => {
       if (response.ok) {
         setAdminEmail(responseData.defaultAdminEmail);
         setCompanyName(responseData.companyName);
+        setCompanyRegistered(true)
         navigate("/company/thankyou");
         reset();
       } else {

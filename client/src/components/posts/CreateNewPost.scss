@@ -1,0 +1,88 @@
+.create-new-post {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 90%;
+  background-color: #e7e7a38e;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+
+  .new-post-header {
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  h4 {
+    width: 80%;
+    font-size: 24px;
+    font-family: "Belanosima", sans-serif;
+    font-weight: 400;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 20px;
+    position: relative;
+
+    textarea {
+      padding: 20px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(251, 251, 246, 0.784);
+      min-height: 150px;
+      font-size: 20px;
+    }
+
+    input[type="submit"] {
+      background: #ffae0091;
+      color: #37424d;
+      border: none;
+      border-radius: 5px;
+      padding: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 14px;
+      width: 100px;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+
+      &:hover {
+        background: #ffb000;
+      }
+      @media (max-width: 768px) {
+        font-size: 10px;
+        width: 60px;
+      }
+    }
+
+    a {
+      text-align: center;
+      text-decoration: none;
+      color: #37424d;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .error {
+      color: #d9534f;
+    }
+
+    .message {
+      color: #37424d;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 425px) {
+    .create-new-post {
+      border: 2px solid red;
+    }
+  }
+}

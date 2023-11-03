@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import Post from "../models/Post.js";
 dotenv.config();
 
 const SALT_ROUNDS = 9;
@@ -13,19 +14,16 @@ export const createUser = async (req, res) => {
     const { userPassword } = req.body;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(userPassword, salt);
-    req.body.userPassword = hashedPassword;
+    req.body.userPassword = hashedPassword; // replace the userPassword field in the req.body with the hashed password before creating the new user. This approach modifies the req.body object to include the hashed password.
     const newUser = await User.create({
       ...req.body,
-      userPassword: hashedPassword,
-    });
-    console.log(companyID);
+      userPassword: hashedPassword, //directly include the userPassword: hashedPassword field when creating the new user. This approach does not modify the req.body object and includes the hashed password directly in the User.create call.
+    }); // lines 17 and 19 achieve the same result
     console.log(newUser);
-
     res.json(newUser);
   } catch (error) {
     res.json(error.message);
   }
-
   console.log("end");
 };
 
@@ -106,24 +104,86 @@ export const logout = async (req, res) => {
 export const getMyProfile = async (req, res) => {
   res.json(req.user);
 };
+// export const getMyProfile = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.user._id);
+//     const { userImage, coverImage, ...rest } = user._doc;
+//     const userData = {
+//       ...rest,
+//       userImage: userImage,
+//       coverImage: coverImage,
+//     };
+//     res.json(userData);
+//   } catch (error) {
+//     res.json(error.message);
+//   }
+// };
+
+// export const updateMyProfile = async (req, res) => {
+//   try {
+//     const updatedUserData = { ...req.body };
+//     const userImage = req.file;
+//     if (userImage) {
+//       updatedUserData.userImage = userImage.filename;
+//     }
+//     const updatedUser = await User.findByIdAndUpdate(
+//       req.user._id,
+//       updatedUserData
+//     );
+//     console.log(updatedUser);
+//     res.json("updated");
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 export const updateMyProfile = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+    const userId = req.params.userId;
+    const updatedUserData = { ...req.body };
+    const userImage = req.files["userImage"] ? req.files["userImage"][0] : null;
+    const coverImage = req.files["coverImage"]
+      ? req.files["coverImage"][0]
+      : null;
+    if (userImage) {
+      updatedUserData.userImage = userImage.filename;
+    }
+    if (coverImage) {
+      updatedUserData.coverImage = coverImage.filename;
+    }
+    // Encrypt the password if it has been updated
+    if (req.body.userPassword) {
+      const salt = await bcrypt.genSalt(SALT_ROUNDS);
+      const hashedPassword = await bcrypt.hash(req.body.userPassword, salt);
+      updatedUserData.userPassword = hashedPassword;
+    }
+    const updatedUser = await User.findByIdAndUpdate(userId, updatedUserData, {
       new: true,
     });
 
+    if (updatedUser) {
+      console.log("Updated User:", updatedUser);
+    } else {
+      console.log("User with ID not found or no changes were made.");
+    }
+
     res.json(updatedUser);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ error: error.message });
   }
 };
 
 export const getUserProfile = async (req, res) => {
   try {
     const selectedUser = await User.findById(req.params.id);
-
-    res.json(selectedUser);
+    const { userImage, coverImage, ...rest } = selectedUser._doc;
+    const userData = {
+      ...rest,
+      userImage: userImage,
+      coverImage: coverImage,
+    };
+    res.json(userData);
+    console.log(userData);
   } catch (error) {
     res.json(error.message);
   }
@@ -145,31 +205,61 @@ export const deleteUser = async (req, res) => {
 export const savePost = async (req, res) => {
   try {
     const usersId = req.user._id;
+    const postId = req.params;
 
-    const updatedUser = await User.findByIdAndUpdate(
-      usersId,
-      {
-        $push: { savedPosts: req.body.postId },
-      },
-      { new: true }
-    );
-
-    res.json(updatedUser);
+    // Check if the post is already saved
+    const user = await User.findById(usersId);
+    if (user.savedPosts.includes(req.body.postId)) {
+      // If already saved, remove the post from savedPosts
+      await User.findByIdAndUpdate(
+        usersId,
+        {
+          $pull: { savedPosts: req.body.postId },
+        },
+        { new: true }
+      );
+      res.json({ success: true, action: "unsave" }); // Indicate the action as "unsave" in the response
+    } else {
+      // If not saved, add the post to savedPosts
+      const updatedUser = await User.findByIdAndUpdate(
+        usersId,
+        {
+          $push: { savedPosts: req.body.postId },
+        },
+        { new: true }
+      );
+      res.json({ success: true, action: "save", updatedUser }); // Indicate the action as "save" in the response
+    }
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ success: false, error: error.message }); // Handle errors appropriately
   }
 };
+
 
 export const getSavedPosts = async (req, res) => {
   try {
     const usersId = req.user._id;
 
-    const savedPosts = await User.findById(usersId)
-      .select("savedPosts")
-      .populate("savedPosts");
+    const user = await User.findById(usersId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." }); // Handle the case where the user is not found
+    }
+    const postsId = user.savedPosts;
+    const allPosts = await Post.find({ _id: { $in: postsId } }).populate(
+      "createdBy"
+    );
+    // for (const id of postsId) {
+    //   const post = await Post.findById(id).populate("createdBy");
+    //   allPosts.push(post);
+    // }
 
-    res.json(savedPosts);
+    console.log(postsId);
+    if (!Array.isArray(user.savedPosts)) {
+      return res.status(400).json({ message: "Saved posts is not an array." }); // Handle the case where savedPosts is not an array
+    }
+
+    res.json(allPosts);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json({ message: error.message }); // Handle other errors
   }
 };

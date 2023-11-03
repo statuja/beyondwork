@@ -1,6 +1,6 @@
 .topbarContainer {
   height: 50px;
-  width: 100%;
+  width: 100vw !important;
   background-color: #004225;
   display: flex;
   align-items: center;
@@ -9,34 +9,43 @@
   z-index: 999;
   .left {
     flex: 3;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    /* justify-content: space-between; */
+   gap: 80px;
+    color: #f5f5dc;
     .logo {
       cursor: pointer;
-      a{
+      a {
         text-decoration: none;
       }
-      h3{
+      h3 {
         font-size: 24px;
-        margin-left: 20px;
         font-weight: bold;
         color: #f5f5dc;
         cursor: pointer;
       }
-      img{
-        width: 50px;
-        margin: 0 15px;
-
+      img {
+        width: 40px;
+        margin: 0 12px;
       }
     }
-   
+    .icon {
+      text-decoration: none;
+     /*  color: #ffb000; */
+      color: #f5f5dc;
+      font-size: 28px;
+    }
   }
-
   .center {
-    margin-right: 15px ;
+    margin-right: 15px;
     flex: 5;
     .searchbar {
       width: 100%;
       height: 30px;
-      background-color: #f5f5dc;
+      background-color: #f3f3e6f6;
+      background-color: rgb(245, 245, 235);
       border-radius: 80px;
       display: flex;
       align-items: center;
@@ -48,7 +57,7 @@
         margin: 5px;
         border: none;
         width: 70%;
-        background-color: #f5f5dc;
+        background-color: rgba(245, 245, 220, 0.247);
       }
       input:focus {
         outline: none;
@@ -59,7 +68,7 @@
     flex: 3;
     display: flex;
     align-items: center;
-    justify-content:space-around;
+    justify-content: space-around;
     color: #f5f5dc;
     padding: 0 10px;
     .icons {
@@ -87,6 +96,11 @@
         }
       }
     }
+    #burger-menu-icon {
+      display: none;  
+      margin-right: 10px;
+    }
+    
     img {
       border: 2px solid #f5f5dc;
       width: 32px;
@@ -98,31 +112,33 @@
   }
 }
 
-@media (max-width: 768px)  {
+@media (max-width: 768px) {
   .topbarContainer {
-  .left{
-    .logo{
-      h3{
-        display: none;
+    width: 100%;
+    .left {
+      gap: 15px;
+      padding-right: 20px;
+      padding-left: 10px;
+      .logo {
+        h3 {
+          display: none;
+        }
+      }
+    }
+
+    #burger-menu-icon {
+      display: block !important;
+    }
+  }
+}
+@media (min-width: 769px) {
+  .topbarContainer {
+    .left {
+      .logo {
+        img {
+          display: none;
+        }
       }
     }
   }
-  }
 }
-@media (min-width: 769px)  {
-  .topbarContainer {
-  .left{
-    .logo{
-      img{
-        display: none;
-      }
-    }
-  }
-  }
-}
-
-
-
-
-
-

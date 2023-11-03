@@ -1,13 +1,19 @@
+import "./CreateNewPost.scss";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateNewPost = () => {
-  const { userData, posts, setPosts } = useContext(MyContext);
+  const navigate = useNavigate();
+
+  const { userData, posts, setPosts, setSessionExpired } = useContext(MyContext);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -30,33 +36,57 @@ const CreateNewPost = () => {
         },
         credentials: "include",
       });
-      const responseData = await response.json();
-      console.log("CREATE NEW POST: responseData:", responseData);
       if (response.ok) {
-        setMessage(`You post has been successfully published.`);
+        const responseData = await response.json();
+        if (responseData.success === false) {
+          //alert("Session expired, please login again!");
+          //toast.warn('Session expired, please login again!')
+          setSessionExpired(true)
+          setPosts({});
+          return navigate("/");
+        }
         setPosts([responseData, ...posts]);
+        reset();
       } else {
-        setError(responseData.error[0].msg);
+        //setError("Error updating profile:", response.statusText);
+        toast.error('An error occurred while creating the post.')
+
       }
     } catch (error) {
-      setError(
-        "An error occurred while processing your request. Please try again later."
-      );
+      console.error("Error fetching company details", error);
+      toast.error('An error occurred while creating the post.')
     }
   };
-  console.log("check", posts);
+
   return (
-    <div>
-      <h2>Create a New Post</h2>
+    <div className="create-new-post">
+      <h4 className="new-post-header">Create a New Post...</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register("content", { required: true, maxLength: 100 })}
+          {...register("content", { required: true, maxLength: 1000 })}
+          onKeyUp={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              e.target.value += "\n";
+            }
+          }}
         />
         <input type="submit" />
-        <Link to="/user/create">create new User</Link>
-        {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>}
+        {/* {error && <div className="error">Error: {error}</div>}
+        {message && <div className="message">{message}</div>} */}
       </form>
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
     </div>
   );
 };

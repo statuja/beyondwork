@@ -1,37 +1,134 @@
 .user-cards-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(245, 245, 220, 0.743);
+  justify-content: center;
+  border-radius: 10px;
+  border-radius: 15px;
+  padding: 20px;
 }
 
+h1 {
+  font-size: 40px;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
+  padding: 20px;
+  text-align: center;
+}
 .user-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  justify-content: center;
 }
 
 .user-card {
-    display: flex;
-    align-items: center;
-    background-color: #ffb000;
-    border-radius: 5px;
-    padding: 20px;
-    width: 400px;
-}
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(251, 251, 246, 0.784);
+  border-radius: 5px;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
-.user-image-placeholder {
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .icon {
+    font-size: 40px;
+    color: #004225;
+    transition: all 0.3s;
+    align-self: flex-end;
+    &:hover {
+      color: #ffb000;
+      cursor: pointer;
+    }
+  }
+
+  .user-image-placeholder {
     height: 80px;
     width: 80px;
     border-radius: 50%;
     background-color: #004225;
     margin-right: 20px;
-}
+    cursor: pointer;
+  }
 
-.user-details {
+  .user-details {
     display: flex;
     flex-direction: column;
+    p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #ffb000;
+        font-weight: 900;
+      }
+    }
+  }
 }
 
-.user-details p {
-    margin: 5px 0;
+@media screen and (max-width: 519px) {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .user-cards-container {
+    width: 90%;
+  }
+
+  .user-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .user-card {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .user-image-placeholder {
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+
+@media screen and (min-width: 520px) and (max-width: 1024px) {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .user-cards-container {
+    width: 90%;
+  }
+
+  .user-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .user-card {
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+  }
 }

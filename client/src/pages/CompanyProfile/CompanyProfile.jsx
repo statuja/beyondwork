@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CompanyProfile.scss";
 import MyContext from "../../context/MyContext";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CompanyProfile = () => {
-  const { userData } = useContext(MyContext);
+  const navigate = useNavigate();
+  const { userData, setSessionExpired } = useContext(MyContext);
   const [company, setCompany] = useState({});
-  const companyID = userData && userData.userCompany;
+  const companyID = userData.userCompany;
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
@@ -20,34 +24,121 @@ const CompanyProfile = () => {
             credentials: "include",
           }
         );
-
-        const data = await response.json();
-        setCompany(data);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success === false) {
+            //alert("Session expired, please login again!");
+            //toast.warn('Session expired, please login again!')
+            setSessionExpired(true)
+            setCompany({});
+            return navigate("/");
+          }
+          setCompany(data);
+        } else {
+          console.error("Error fetching data:", response.statusText);
+        toast.error('Failed to fetch company details.')
+        }
       } catch (error) {
         console.error("Error fetching company details", error);
+        toast.error('Error fetching company details.')
       }
     };
     fetchCompanyDetails();
-  }, [companyID, company]);
+  }, [companyID]);
+
   return (
     <div className="companyProfile">
       <h1>Company Profile</h1>
-      <p>Company Name: {company.companyName}</p>
-      <p>Company Type: {company.companyType}</p>
-      <p>Number of Employees: {company.numberOfEmployees}</p>
-      <p>Company Address:</p>
-      <p>Address: {company.companyAddress && company.companyAddress.address}</p>
-      <p>City: {company.companyAddress && company.companyAddress.city}</p>
-      <p>
-        Zip Code: {company.companyAddress && company.companyAddress.zipCode}
-      </p>
-      <p>Country: {company.companyAddress && company.companyAddress.country}</p>
-      <p>Company Contact Details:</p>
-      <p>Email: {company.companyContact && company.companyContact.email}</p>
-      <p>
-        Phone Number:{" "}
-        {company.companyContact && company.companyContact.phoneNumber}
-      </p>
+      {company.companyLogo ? (
+        <img
+          style={{ width: "200px" }}
+          src={`http://localhost:5000/uploads/${company.companyLogo}`}
+          alt="Company Logo"
+        />
+      ) : (
+        <p>No logo available</p>
+      )}
+      <div className="bottom">
+        <div className="cards-container">
+          <div className="card">
+            <h3>Company Details</h3>
+            <div className="flex-wrapper">
+              <div className="labels">
+                <h5>Company Name:</h5>
+                <h5> Company Type:</h5>
+                <h5> Number of Employees:</h5>
+              </div>
+              <div className="data">
+                <p>{company.companyName}</p>
+                <p>{company.companyType}</p>
+                <p> {company.numberOfEmployees}</p>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <h3>Company Address</h3>
+            <div className="flex-wrapper">
+              <div className="labels">
+                <h5> Address:</h5>
+                <h5> City:</h5>
+                <h5> Zip Code:</h5>
+                <h5>Country:</h5>
+              </div>
+              <div className="data">
+                <p>
+                  {company.companyAddress && company.companyAddress.address}
+                </p>
+                <p>{company.companyAddress && company.companyAddress.city}</p>
+                <p>
+                  {company.companyAddress && company.companyAddress.zipCode}
+                </p>
+                <p>
+                  {company.companyAddress && company.companyAddress.country}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <h3>Contact Details</h3>
+            <div className="flex-wrapper">
+              <div className="labels">
+                <h5> Email: </h5>
+                <h5> Phone Number:</h5>
+              </div>
+              <div className="data">
+                <p>{company.companyContact && company.companyContact.email}</p>{" "}
+                <p>
+                  {company.companyContact && company.companyContact.phoneNumber}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {userData.adminRole ? (
+        <Link
+          to={{
+            pathname: "/updateCompanyProfile",
+            state: {
+              company: company,
+            },
+          }}
+        >
+          Edit Company Profile
+        </Link>
+      ) : null}
+        <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    ></ToastContainer>
     </div>
   );
 };

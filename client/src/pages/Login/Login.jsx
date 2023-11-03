@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
 import people from "../../images/Young_people.png";
 import "./Login.scss";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserData } = useContext(MyContext);
+  const { setUserData, loggedOut, sessionExpired } = useContext(MyContext);
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -17,7 +20,17 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const [error, setError] = useState("");
+  useEffect(() => {
+    if (loggedOut === true) {
+      toast.warn('You successfully logged out.');
+    }
+  }, [])
+
+  useEffect(() => {
+    if (sessionExpired === true) {
+      toast.warn('Session expired, please login again.')
+    }
+  }, [])
 
   const onSubmit = async (data) => {
     const newDataObject = {
@@ -38,10 +51,9 @@ const Login = () => {
       if (response.ok) {
         const responseData = await response.json();
         setUserData(responseData.user);
-        navigate("/create/post");
+        navigate("/newsfeed");
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
         setError(errorData.error);
       }
     } catch (error) {
@@ -102,6 +114,20 @@ const Login = () => {
         </div>
         <img src={people} alt="People connected" />
       </div>
+
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+    ></ToastContainer>
+
     </div>
   );
 };
