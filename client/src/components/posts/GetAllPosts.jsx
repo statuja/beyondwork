@@ -11,7 +11,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
-
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
   const { userData, posts, setPosts } = useContext(MyContext);
@@ -183,7 +182,7 @@ const GetAllPosts = ({ userPosts }) => {
             <Link to={`/post/${item._id}`}></Link>
 
             <div className="post-owner">
-            <div className="img-container">
+              <div className="img-container">
                 <Link to={`/user/profile/${item.createdBy._id}`}>
                   <img
                     className="userImg"
@@ -198,14 +197,13 @@ const GetAllPosts = ({ userPosts }) => {
               </div>
               <div className="name">
                 <h3>
-                  <Link to={`/user/${item.createdBy._id}`}>
+                  <Link to={`/user/profile/${item.createdBy._id}`}>
                     {item.createdBy.userFullName}
                   </Link>
                 </h3>
                 <div id="date">{formatDateTime(item.createdOn)}</div>
               </div>
             </div>
-           
 
             <p className="post-content">{item.content}</p>
             <span className="post-footer">
