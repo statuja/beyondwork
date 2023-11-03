@@ -53,7 +53,7 @@ const CreateNewPost = () => {
 
   return (
     <div className="create-new-post">
-      <h4>Create a New Post...</h4>
+      <h4 className="new-post-header">Create a New Post...</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
           {...register("content", { required: true, maxLength: 500 })}

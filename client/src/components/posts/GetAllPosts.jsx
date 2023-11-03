@@ -11,11 +11,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 //import ReactTooltip from "react-tooltip";
 
-
-  const GetAllPosts = ({ userPosts }) => {
-  const navigate = useNavigate(); 
+const GetAllPosts = ({ userPosts }) => {
+  const navigate = useNavigate();
   // const [posts, setPosts] = useState([]);
-  const { userData , posts, setPosts } = useContext(MyContext);
+  const { userData, posts, setPosts } = useContext(MyContext);
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -23,12 +22,10 @@ import CommentIcon from "@mui/icons-material/Comment";
   const [showEditForm, setShowEditForm] = useState(false);
 
   const getAllPosts = async () => {
-
-
     try {
-      if (userPosts){
-        setPosts(userPosts)
-        return
+      if (userPosts) {
+        setPosts(userPosts);
+        return;
       }
       const response = await fetch("http://localhost:5000/post/all", {
         method: "GET",
@@ -37,7 +34,7 @@ import CommentIcon from "@mui/icons-material/Comment";
         },
         credentials: "include",
       });
-      console.log("API response received:", response.status); 
+      console.log("API response received:", response.status);
       if (response.ok) {
         const data = await response.json();
         console.log("Data received from the API:", data);
@@ -50,7 +47,6 @@ import CommentIcon from "@mui/icons-material/Comment";
       } else {
         console.error("Error updating profile:", response.statusText);
       }
-   
     } catch (error) {
       console.error("Error fetching company details", error);
     }
@@ -236,7 +232,7 @@ import CommentIcon from "@mui/icons-material/Comment";
                   </span>
                   <div className="likes">
                     <div>{item.like}</div>
-                    <div> people liked it</div>
+                    <div className="people-liked-it"> people liked it</div>
                   </div>
                 </div>
 

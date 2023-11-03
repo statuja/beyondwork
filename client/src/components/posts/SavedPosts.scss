@@ -1,8 +1,8 @@
-.main-container {
+.saved-posts-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  //height: 100vh;
+  height: 100vh;
   border-radius: 15px;
   padding: 20px;
 
@@ -35,6 +35,7 @@
         box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1);
         background-color: rgba(251, 251, 246, 0.784);
         border-radius: 6px;
+        min-height: 100px;
 
         .post-content {
           flex: 1;
@@ -62,10 +63,11 @@
   }
 }
 @media (max-width: 1024px) {
-  .main-container {
+  .saved-posts-container {
     flex-wrap: wrap;
     flex-direction: row;
     // margin: 50px 0 50px 0;
+    justify-content: center;
     h1 {
       font-size: 30px;
     }
