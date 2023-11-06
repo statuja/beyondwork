@@ -63,7 +63,7 @@ const CreateNewPost = () => {
       <h4 className="new-post-header">Create a New Post...</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register("content", { required: true, maxLength: 1000 })}
+          {...register("content", { required: true, maxLength: 1500 })}
           onKeyUp={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();

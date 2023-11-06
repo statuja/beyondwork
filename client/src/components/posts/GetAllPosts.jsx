@@ -304,8 +304,9 @@ const GetAllPosts = ({ userPosts }) => {
                     </div>
                   </div>
 
-                  {renderEditPostComponent(item._id)}
+                  
                 </div>
+                
                 <div className="right">
                   {userData._id === item.createdBy._id && (
                     <span title="Edit this post">
@@ -325,6 +326,7 @@ const GetAllPosts = ({ userPosts }) => {
                   )}
                 </div>
               </span>
+              {renderEditPostComponent(item._id)}
             </div>
           ))}
       </div>

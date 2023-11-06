@@ -1,68 +1,63 @@
 .profileLeftCont {
+  //border: 4px solid rgba(81, 255, 0, 0.929);
   display: flex;
   flex-direction: column;
-  align-items:flex-start;
-  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
   width: 100%;
-     
-  
+
   .header {
+    //border: 4px solid rgb(0, 21, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 30px;
    
-    gap: 20px;
-    h4 {
-      font-size: 24px;
-      
+    h2 {
+      font-size: 32px;
     }
     span {
-      font-weight: 300;
       font-size: 18px;
-      text-align: center;
+      line-height: 26px;
     }
-  }
-}
-
-.info {
-  h4 {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 10px;
   }
 
   .infoSec {
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    //border: 2px solid rgb(0, 21, 255);
+    gap: 15px;
     .infoItem {
-      margin-bottom: 10px;
       .infoKey {
-        font-weight: 500;
-        margin-right: 15px;
+        font-size: 22px;
+        font-weight: 700;
+        margin-right: 20px;
         color: #555;
       }
       .infoValue {
-        font-weight: 300;
+        font-size: 18px;
       }
     }
   }
-}
-
-.edit-btn {
-  margin-top: 30px !important;
-
-    a {
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 15px;
-      background-color: #ffb000;
-      text-decoration: none;
-      margin: 10px;
-      border: none;
-
-      &:hover {
-        transform: scale(1.03);
-        background-color: #ffcf9d;
+  a {
+    width: 100px;
+    background: #ffae0091;
+    color: #37424d;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    text-align: center;
+    //position: absolute;
+    &:hover {
+      background: #ffb000;
     }
-    }
+   
+  }
 }
