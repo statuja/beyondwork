@@ -189,29 +189,26 @@ function EditMyProfile() {
 
   return (
     <>
-      <div className="profile">
-        <h1>Edit Your Profile</h1>
-        <div className="cover">
-          <div className="user-images">
+      <div className="edit-profile">
+        <div className="edit-cover">
             {userData && userData.coverImage && (
               <img
-                style={{ width: "400px" }}
-                className="coverImg"
+                
+                className="e-coverImg"
                 src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
                 alt="coverImage"
               />
             )}
             {userData && userData.userImage && (
               <img
-                className="userImg"
+                className="e-userImg"
                 src={`http://localhost:5000/user/uploads/${userData.userImage}`}
                 alt="userImage"
               />
             )}
-          </div>
-          <div className="upload-buttons">
+             <div className="upload-buttons">
             <button type="button" onClick={handleClickCover}>
-              Upload a new cover photo
+              Cover picture
             </button>
             {/* <label htmlFor="coverImage">Change Cover Image</label> */}
             <input
@@ -224,7 +221,7 @@ function EditMyProfile() {
             />
 
             <button type="button" onClick={handleClickProfile}>
-              Upload a new profile picture
+             Profile picture
             </button>
             {/* <label htmlFor="userImage">Change Avatar</label> */}
             <input
@@ -237,7 +234,10 @@ function EditMyProfile() {
             />
           </div>
         </div>
+       
+       
         <div className="bottom">
+      
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="userFullName">Full Name: </label>
@@ -247,6 +247,16 @@ function EditMyProfile() {
                 value={formData.userFullName}
                 onChange={handleInputChange}
                 placeholder="Full Name"
+              />
+            </div>
+            <div>
+              <label htmlFor="description">Description: </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="description"
+                rows={6}
               />
             </div>
             <div>
@@ -343,17 +353,6 @@ function EditMyProfile() {
             </div>
 
             <div>
-              <label htmlFor="description">Description: </label>
-              <br></br>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                placeholder="description"
-              />
-            </div>
-
-            <div>
               <label htmlFor="userContact.email">Email: </label>
               <input
                 type="email"
@@ -380,8 +379,8 @@ function EditMyProfile() {
             </div>
 
             <div className="form-buttons">
-              <Link onClick={handleCancel}>Cancel</Link>
-              <button type="submit">Save Changes</button>
+              <Link className="btn" onClick={handleCancel}>Cancel</Link>
+              <button type="submit" className="btn">Save</button>
             </div>
           </form>
         </div>

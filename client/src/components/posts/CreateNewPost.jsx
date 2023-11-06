@@ -73,6 +73,7 @@ const CreateNewPost = () => {
             const selectedImage = e.target.files[0];
             console.log("Selected image:", selectedImage);
             setNewPost({ ...newPost, image: selectedImage });
+
           }}
         />
 
