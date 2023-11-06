@@ -4,6 +4,7 @@ import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const CreateNewPost = () => {
   const navigate = useNavigate();
@@ -19,13 +20,27 @@ const CreateNewPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("content", newPost.content);
-    formData.append("createdBy", userData._id);
-    formData.append("company", userData.userCompany);
+    if (newPost.content) {
+      formData.append("content", newPost.content);
+    } else {
+      formData.append("content", "Check this image"); // Set content to a default message
+    }
 
     if (newPost.image) {
       formData.append("image", newPost.image);
+    } else {
+      formData.append("image", null); // Set the image to null if no image is selected
     }
+
+    if (!newPost.content && !newPost.image) {
+      toast.error(
+        "Please provide content or select an image before submitting."
+      );
+      return;
+    }
+
+    formData.append("createdBy", userData._id);
+    formData.append("company", userData.userCompany);
     try {
       const response = await fetch("http://localhost:5000/post/create", {
         method: "POST",
@@ -39,7 +54,7 @@ const CreateNewPost = () => {
           setPosts({});
           return navigate("/");
         }
-        const imageUrl = `${responseData.image}`;
+        const imageUrl = responseData.image ? `${responseData.image}` : null;
         const newPost = {
           ...responseData,
           image: imageUrl,
@@ -47,6 +62,13 @@ const CreateNewPost = () => {
 
         setPosts([newPost, ...posts]);
         console.log("this", responseData.image);
+        e.target.reset();
+        setNewPost({
+          content: "",
+          image: null,
+          createdBy: userData._id,
+          company: userData.userCompany,
+        });
       } else {
         toast.error("An error occurred while creating the post.");
       }
@@ -65,17 +87,19 @@ const CreateNewPost = () => {
           id="content"
           onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
         />
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={(e) => {
-            const selectedImage = e.target.files[0];
-            console.log("Selected image:", selectedImage);
-            setNewPost({ ...newPost, image: selectedImage });
-
-          }}
-        />
+        <label htmlFor="icon-button-file">
+          <input
+            type="file"
+            id="icon-button-file"
+            style={{ display: "none" }}
+            accept="image/*"
+            onChange={(e) => {
+              const selectedImage = e.target.files[0];
+              setNewPost({ ...newPost, image: selectedImage });
+            }}
+          />
+          <AddPhotoAlternateIcon className="add-photo-icon" />
+        </label>
 
         <input type="submit" />
       </form>

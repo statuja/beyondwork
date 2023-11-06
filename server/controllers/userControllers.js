@@ -54,7 +54,11 @@ export const createDefaultAdmin = async (companyId, adminEmail) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ "userContact.email": email });
+    const caseInsensitiveEmail = new RegExp(email, "i"); // Creating a case-insensitive regular expression
+
+    const user = await User.findOne({
+      "userContact.email": caseInsensitiveEmail,
+    });
     if (!user) {
       return res.status(400).json({
         error:
@@ -235,7 +239,6 @@ export const savePost = async (req, res) => {
     res.status(500).json({ success: false, error: error.message }); // Handle errors appropriately
   }
 };
-
 
 export const getSavedPosts = async (req, res) => {
   try {
