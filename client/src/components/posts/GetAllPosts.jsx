@@ -12,15 +12,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
 
   const { userData, posts, setPosts, setSessionExpired } =
     useContext(MyContext);
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
   const [savedPosts, setSavedPosts] = useState([]);
@@ -44,15 +41,11 @@ const GetAllPosts = ({ userPosts }) => {
 
       if (response.ok) {
         const data = await response.json();
-        //console.log("Data received from the API:", data);
         if (data.success === false) {
-          //alert("Session expired, please login again!");
-          //toast.warn('Session expired, please login again!')
           setSessionExpired(true);
           return navigate("/");
         }
         setPosts(data);
-        // Set saved and liked posts based on user data
       } else {
         console.error("Error updating profile:", response.statusText);
         toast.error("Failed to fetch posts.");
@@ -65,11 +58,8 @@ const GetAllPosts = ({ userPosts }) => {
 
   useEffect(() => {
     const savedPostsFromStorage = localStorage.getItem("savedPosts");
-    console.log("savedPostsFromStorage:", savedPostsFromStorage); // Add this line for logging
-
     if (savedPostsFromStorage) {
       const parsedSavedPosts = JSON.parse(savedPostsFromStorage);
-      console.log("parsedSavedPosts:", parsedSavedPosts); // Add this line for logging
       setSavedPosts(parsedSavedPosts);
     }
 
@@ -103,25 +93,21 @@ const GetAllPosts = ({ userPosts }) => {
         }
       );
       if (response.ok) {
-        //setMessage("Post has been saved successfully.");
-
         const responseData = await response.json();
-        if (responseData.action === "save") {
-          //setMessage("Post has been saved successfully.");
-          const updatedSavedPosts = [...savedPosts, postId];
-          setSavedPosts(updatedSavedPosts);
-        } else if (responseData.action === "unsave") {
-          //setMessage("Post has been unsaved successfully.");
+        if (responseData.action === "unsave") {
           const updatedSavedPosts = savedPosts.filter((id) => id !== postId);
           setSavedPosts(updatedSavedPosts);
+          toast.success("Post successfully unsaved.");
+        } else if (responseData.action === "save") {
+          const updatedSavedPosts = [...savedPosts, postId];
+          setSavedPosts(updatedSavedPosts);
+          toast.success("Post successfully saved.");
         }
       } else {
-        //setError("Failed to save the post.");
-        toast.error("Failed to save the post.");
+        toast.error("Failed to save/unsave the post.");
       }
     } catch (error) {
-      //setError("An error occurred while saving the post.");
-      toast.error("An error occurred while saving the post.");
+      toast.error("An error occurred while saving/unsaving the post.");
     }
   };
 
@@ -231,9 +217,6 @@ const GetAllPosts = ({ userPosts }) => {
   return (
     <>
       <div className="post-Container">
-        {/* {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>} */}
-
         {savedPosts &&
           likedPosts &&
           posts?.map((item) => (
@@ -277,19 +260,23 @@ const GetAllPosts = ({ userPosts }) => {
               <span className="post-footer">
                 <div className="likesAndComments">
                   <div className="left">
-                    <span title="Save this post">
+                    <div className="right">
                       {savedPosts.includes(item._id) ? (
-                        <BookmarkIcon
-                          className="icon"
-                          onClick={() => onSavePost(item._id)}
-                        />
+                        <span title="Unsave this post">
+                          <BookmarkIcon
+                            className="icon"
+                            onClick={() => onSavePost(item._id)}
+                          />
+                        </span>
                       ) : (
-                        <BookmarkBorderIcon
-                          className="icon"
-                          onClick={() => onSavePost(item._id)}
-                        />
+                        <span title="Save this post">
+                          <BookmarkBorderIcon
+                            className="icon"
+                            onClick={() => onSavePost(item._id)}
+                          />
+                        </span>
                       )}
-                    </span>
+                    </div>
                     <span title="Comment">
                       <CommentIcon className="icon" />
                     </span>
@@ -311,10 +298,8 @@ const GetAllPosts = ({ userPosts }) => {
                       <div className="people-liked-it"> people liked it</div>
                     </div>
                   </div>
-
-                  
                 </div>
-                
+
                 <div className="right">
                   {userData._id === item.createdBy._id && (
                     <span title="Edit this post">

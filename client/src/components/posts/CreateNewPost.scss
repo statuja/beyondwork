@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+
   .new-post-header {
     @media (max-width: 768px) {
       font-size: 16px;
@@ -27,7 +28,7 @@
     flex-direction: column;
     width: 80%;
     gap: 20px;
-    //position: relative;
+    position: relative;
 
     textarea {
       padding: 20px;
@@ -56,6 +57,7 @@
       &:hover {
         background: #ffb000;
       }
+
       @media (max-width: 768px) {
         font-size: 10px;
         width: 60px;
@@ -72,6 +74,21 @@
       }
     }
 
+    .add-photo-icon {
+      font-size: 30px;
+      color: grey;
+      position: absolute;
+      bottom: 80px;
+      right: 10px;
+      transition: color 0.3s, cursor 0.3s;
+
+      &:hover {
+        color: #ff8000;
+        cursor: pointer;
+      }
+
+    }
+
     .error {
       color: #d9534f;
     }
@@ -80,6 +97,7 @@
       color: #37424d;
     }
   }
+
   @media (min-width: 0px) and (max-width: 425px) {
     .create-new-post {
       border: 2px solid red;
