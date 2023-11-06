@@ -1,6 +1,5 @@
 import "./CreateNewPost.scss";
 import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,48 +7,47 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CreateNewPost = () => {
   const navigate = useNavigate();
-
   const { userData, posts, setPosts, setSessionExpired } =
     useContext(MyContext);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const [newPost, setNewPost] = useState({
+    content: "",
+    image: null,
+    createdBy: userData._id,
+    company: userData.userCompany,
+  });
 
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("content", newPost.content);
+    formData.append("createdBy", userData._id);
+    formData.append("company", userData.userCompany);
 
-  const onSubmit = async (data) => {
-    const newData = {
-      content: data.content,
-      createdBy: userData._id,
-      company: userData.userCompany,
-      //  image: data.image,
-    };
+    if (newPost.image) {
+      formData.append("image", newPost.image);
+    }
     try {
       const response = await fetch("http://localhost:5000/post/create", {
         method: "POST",
-        body: JSON.stringify(newData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: formData,
         credentials: "include",
       });
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.success === false) {
-          //alert("Session expired, please login again!");
-          //toast.warn('Session expired, please login again!')
           setSessionExpired(true);
           setPosts({});
           return navigate("/");
         }
-        setPosts([responseData, ...posts]);
-        reset();
+        const imageUrl = `${responseData.image}`;
+        const newPost = {
+          ...responseData,
+          image: imageUrl,
+        };
+
+        setPosts([newPost, ...posts]);
+        console.log("this", responseData.image);
       } else {
-        //setError("Error updating profile:", response.statusText);
         toast.error("An error occurred while creating the post.");
       }
     } catch (error) {
@@ -61,19 +59,25 @@ const CreateNewPost = () => {
   return (
     <div className="create-new-post">
       <h4 className="new-post-header">Create a New Post...</h4>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <textarea
-          {...register("content", { required: true, maxLength: 1500 })}
-          onKeyUp={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              e.target.value += "\n";
-            }
+          maxLength={1500}
+          id="content"
+          onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+        />
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={(e) => {
+            const selectedImage = e.target.files[0];
+            console.log("Selected image:", selectedImage);
+            setNewPost({ ...newPost, image: selectedImage });
+
           }}
         />
+
         <input type="submit" />
-        {/* {error && <div className="error">Error: {error}</div>}
-        {message && <div className="message">{message}</div>} */}
       </form>
       <ToastContainer
         position="top-right"

@@ -40,21 +40,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// router.post(
-//   "/public/uploads",
-//   upload.single("companyLogo"),
-//   (req, res, next) => {
-//     const file = req.file;
-//     if (!file) {
-//       const error = new Error("Please upload a file");
-//       error.httpStatusCode = 400;
-//       return next(error);
-//     }
-//     // Handle success
-//     res.send(file);
-//   }
-// );
-//
 
 router.post(
   "/create",

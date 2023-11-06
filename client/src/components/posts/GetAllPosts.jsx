@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
@@ -264,6 +265,15 @@ const GetAllPosts = ({ userPosts }) => {
               </div>
 
               <p className="post-content">{item.content}</p>
+              <div>
+                {item && item.image && (
+                  <img
+                    width="300px"
+                    src={`http://localhost:5000/post/uploads/${item.image}`}
+                    alt="post"
+                  />
+                )}
+              </div>
               <span className="post-footer">
                 <div className="likesAndComments">
                   <div className="left">
