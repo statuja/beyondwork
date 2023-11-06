@@ -1,6 +1,5 @@
 import "./BurgerMenu.scss";
 import { Link, useNavigate } from "react-router-dom";
-
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 //import FeedIcon from '@mui/icons-material/Feed';
@@ -33,10 +32,9 @@ const Menu = () => {
       const responseData = await response.json();
 
       if (response.ok) {
-        localStorage.removeItem("userData");
+        localStorage.clear();
         setUserData({});
         setLoggedOut(true);
-        //alert("You successfully logged out.");
         navigate("/");
       } else {
         alert(responseData.error[0].msg);
