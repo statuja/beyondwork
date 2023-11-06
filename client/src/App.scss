@@ -5,31 +5,37 @@
   font-family: "Montserrat", sans-serif;
 }
 body{
-  background-color: rgba(245, 245, 220, 0.247);
-  
+  background-color: rgba(245, 245, 220, 0.254);
 }
 
 .content {
-  min-height: fit-content;
+  border: 3px solid rgb(70, 128, 0);
+  min-height: 100vh;
   padding-top: 30px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   display: flex;
 
   .menuCont {
-    flex: 2;
+    flex: 2.5;
+    //border: 3px solid rgb(0, 9, 128);
   }
   .contentCont {
-    flex: 10;
-    padding: 0 20px;
-   
+    padding: 0 100px;
+    flex: 12.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //border: 2px solid purple;
+    
   }
 }
 
 @media screen and (max-width: 798px) {
   .content {
-    padding: 20px 0;
+ 
     .menuCont {
       display: none;
+      //border: 2px solid purple;
     }
     .contentCont {
       flex: 9;
@@ -49,6 +55,9 @@ body{
 }
 @media screen and (max-width: 425px) {
   .content {
-    width: 100%;
+    //width: 100%;
+    .contentCont {
+      padding: 0 20px;
+    }
   }
 }

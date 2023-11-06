@@ -1,28 +1,41 @@
 .edit-post-wrapper {
-    //border: 1px solid black;
-    margin-top: 20px;
-    width: 90%;
-
+    margin-top: 10px;
+    width: 80%;
+    
     form {
         margin-bottom: 20px;
-        label {
-            float: left;
-            margin-right: 10px;
-        }
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        
         textarea {
-            border-radius: 15px;
-            padding: 10px;
+            border-radius: 6px;
+            padding: 20px;
+            width: 100%;
+            min-height: 150px;
+            border: 1px solid rgba(128, 128, 128, 0.282);
         }
         input {
-            margin-left: 20px;
-            padding: 5px;
-            border: 0px;
-            background-color: #ffae0091;
+            background: #ffae0091;
+            color: #37424d;
+            border: none;
             border-radius: 5px;
+            padding: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
             font-size: 14px;
+            width: 100px;
+            bottom: 10px;
+            left: 10px;
+      
+            &:hover {
+              background: #ffb000;
+            }
+            @media (max-width: 768px) {
+              font-size: 10px;
+              width: 60px;
+            }
         }
-        
-        
     }
 }
 

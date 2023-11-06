@@ -132,7 +132,7 @@ const UserProfile = () => {
             )}
           </div>
           <div className="profileRight">
-          <h2>My posts</h2>
+          <h3>Recent posts</h3>
             {/* Display user's posts */}
             <GetAllPosts userPosts={userPosts}/> 
           </div>
