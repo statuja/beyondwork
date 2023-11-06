@@ -32,7 +32,8 @@ const Menu = () => {
 
       if (response.ok) {
         //alert("You successfully logged out.");
-        localStorage.removeItem("userData");
+        // localStorage.removeItem("userData");
+        localStorage.clear();
         setUserData({});
         setLoggedOut(true);
         navigate("/");
@@ -47,61 +48,61 @@ const Menu = () => {
   };
   return (
     <>
-    <ul className="menu">
-      <li>
-        <Link to={`/user/profile/${userData._id}`}>
-          <AccountCircleOutlinedIcon className="icon" /> My Profile
-        </Link>
-      </li>
-      <li>
-        <Link to="/company/profile">
-          <ApartmentOutlinedIcon className="icon" /> Company Profile
-        </Link>
-      </li>
-      <li>
-        <Link to="/newsfeed">
-          <NewspaperIcon className="icon" /> News Feed
-        </Link>
-      </li>
-
-      {userData.adminRole ? (
+      <ul className="menu">
         <li>
-          <Link to="/user/create">
-            <PersonAddAltOutlinedIcon className="icon" /> Add New User
+          <Link to={`/user/profile/${userData._id}`}>
+            <AccountCircleOutlinedIcon className="icon" /> My Profile
           </Link>
         </li>
-      ) : null}
+        <li>
+          <Link to="/company/profile">
+            <ApartmentOutlinedIcon className="icon" /> Company Profile
+          </Link>
+        </li>
+        <li>
+          <Link to="/newsfeed">
+            <NewspaperIcon className="icon" /> News Feed
+          </Link>
+        </li>
 
-      <li>
-        <Link to="/savedposts">
-          <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
-        </Link>
-      </li>
-      <li>
-        <Link to="/allusers">
-          <Groups2OutlinedIcon className="icon" /> Your Colleagues
-        </Link>
-      </li>
-      <li>
-        <Link to="#">
-          <CalendarMonthIcon className="icon" /> Events
-        </Link>
-      </li>
-      <li>
-        <Link to="/marketplace">
-          <StorefrontIcon className="icon" /> Marketplace
-        </Link>
-      </li>
-      <li>
-        <Link to="#">
-          <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
-        </Link>
-      </li>
+        {userData.adminRole ? (
+          <li>
+            <Link to="/user/create">
+              <PersonAddAltOutlinedIcon className="icon" /> Add New User
+            </Link>
+          </li>
+        ) : null}
 
-      <li onClick={handleOnClick}>
-        <LogoutOutlinedIcon className="icon" /> Logout
-      </li>
-    </ul>
+        <li>
+          <Link to="/savedposts">
+            <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
+          </Link>
+        </li>
+        <li>
+          <Link to="/allusers">
+            <Groups2OutlinedIcon className="icon" /> Your Colleagues
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <CalendarMonthIcon className="icon" /> Events
+          </Link>
+        </li>
+        <li>
+          <Link to="/marketplace">
+            <StorefrontIcon className="icon" /> Marketplace
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
+          </Link>
+        </li>
+
+        <li onClick={handleOnClick}>
+          <LogoutOutlinedIcon className="icon" /> Logout
+        </li>
+      </ul>
     </>
   );
 };
