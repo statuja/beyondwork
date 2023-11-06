@@ -3,13 +3,11 @@ import Post from "../models/Post.js";
 export const createPost = async (req, res) => {
   try {
     const userId = req.user._id;
-
     const companyId = req.user.userCompany;
 
-    //const image = faker.image.url();
-
     const newPost = await Post.create({
-      ...req.body,
+      content: req.body.content,
+      image: req.file ? req.file.filename : null,
       createdBy: userId,
       company: companyId,
     }).then((item) =>
@@ -81,15 +79,12 @@ export const editPost = async (req, res) => {
     const postId = req.params.postId;
     const newContent = req.body.content;
 
-    //console.log(newContent);
-
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
       { content: newContent },
       { new: true }
     );
 
-    //console.log(updatedPost);
     res.json(updatedPost);
   } catch (error) {
     res.json(error.message);
@@ -109,8 +104,7 @@ export const likePost = async (req, res) => {
           { _id: postId },
           { $push: { likedBy: userId }, $inc: { like: 1 } },
           { new: true }
-        )
-        .populate({
+        ).populate({
           path: "createdBy",
           select: "userFullName userImage",
         });
