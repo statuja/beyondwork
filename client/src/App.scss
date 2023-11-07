@@ -48,18 +48,21 @@ body {
     }
 
     .contentCont {
+      width: 100%;
       flex: 9;
+      padding: 10px;
     }
   }
 }
 
-@media screen and (max-width: 1220px) {
+@media screen and (max-width: 1440px) {
   .content {
     .menuCont {
-      flex: 2.5;
+      flex: 3.5;
     }
 
     .contentCont {
+      padding: 0 80px;
       flex: 9.5;
     }
   }

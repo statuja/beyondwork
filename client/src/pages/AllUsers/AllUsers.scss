@@ -131,8 +131,16 @@ h1 {
   }
 }
 
+@media screen and (max-width: 1440px) {
+  .user-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
 @media screen and (min-width: 520px) and (max-width: 1024px) {
   .wrapper {
+    width: 90%;
     display: flex;
     justify-content: center;
   }
@@ -142,7 +150,7 @@ h1 {
   }
 
   .user-cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 10px;
   }
 
