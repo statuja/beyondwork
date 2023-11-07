@@ -10,14 +10,14 @@ import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
-
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { userData, setUserData, setLoggedOut } = useContext(MyContext);
+  const { userData, setUserData, setLoggedOut, isDarkMode } =
+    useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -46,7 +46,7 @@ const Menu = () => {
     }
   };
   return (
-    <ul className="burgerMenu">
+    <ul className={`burgerMenu ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <li>
         <Link to={`/user/profile/${userData._id}`}>
           <AccountCircleOutlinedIcon className="icon" /> My Profile

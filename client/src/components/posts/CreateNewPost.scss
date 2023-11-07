@@ -10,6 +10,11 @@
   justify-content: center;
   margin-bottom: 30px;
 
+  &.dark-mode {
+    background-color: #3D3A3A;
+    color: #FCFCF4;
+  }
+
   .new-post-header {
     @media (max-width: 768px) {
       font-size: 16px;

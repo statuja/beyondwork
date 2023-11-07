@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const EditCompanyProfile = () => {
   const navigate = useNavigate();
-  const { userData } = useContext(MyContext);
+  const { userData, isDarkMode } = useContext(MyContext);
   const companyID = userData.userCompany;
   const [companyData, setCompanyData] = useState({
     companyName: "",
@@ -138,7 +138,9 @@ const EditCompanyProfile = () => {
   };
 
   return (
-    <div className="EditcompanyProfile">
+    <div
+      className={`EditcompanyProfile ${isDarkMode ? "dark-mode" : "light-mode"}`}
+    >
       <h1>Edit Company Profile</h1>
       {companyData.companyLogo ? (
         <img
@@ -272,13 +274,12 @@ const EditCompanyProfile = () => {
               </div>
             </div>
           </div>{" "}
-         
-        </form> <div className="Submitbuttons">
-            <Link onClick={handleSubmit}>Save Changes</Link>
-            <Link onClick={handleCancel}>Cancel</Link>
-          </div>
+        </form>{" "}
+        <div className="Submitbuttons">
+          <Link onClick={handleSubmit}>Save Changes</Link>
+          <Link onClick={handleCancel}>Cancel</Link>
+        </div>
       </div>
-
       <ToastContainer
         position="top-right"
         autoClose={5000}

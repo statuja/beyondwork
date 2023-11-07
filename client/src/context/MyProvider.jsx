@@ -69,6 +69,7 @@ const MyProvider = ({ children }) => {
   const [companyRegistered, setCompanyRegistered] = useState(false);
   const [sessionExpired, setSessionExpired] = useState(false);
   const [savedPosts, setSavedPosts] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -106,16 +107,12 @@ const MyProvider = ({ children }) => {
 
   const handleLogout = () => {
     // Clear the userData from local storage
-    localStorage.removeItem("userData");
-
-    // Clear the userData state
+    localStorage.clear();
     setUserData(null);
-
-    // Perform any additional logout operations as needed
-    // For example, you might want to redirect the user to the login page
-    // or perform other cleanup tasks.
   };
-
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
   return (
     <MyContext.Provider
       value={{
@@ -138,6 +135,8 @@ const MyProvider = ({ children }) => {
         setSessionExpired,
         savedPosts,
         setSavedPosts,
+        isDarkMode, // Include the dark mode state in the context
+        toggleDarkMode, // Include the toggle function in the context
       }}
     >
       {children}

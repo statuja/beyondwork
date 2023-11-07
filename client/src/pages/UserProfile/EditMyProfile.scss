@@ -6,7 +6,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+&.dark-mode {
+    background-color: #3D3A3A;
+    color: #FCFCF4;
+  }
   .edit-cover {
     height: 400px;
     position: relative;

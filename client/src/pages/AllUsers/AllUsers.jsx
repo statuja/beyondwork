@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import "./AllUsers.scss";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AllUsers() {
   const navigate = useNavigate();
-  const { userData, setSessionExpired } = useContext(MyContext);
+  const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
@@ -33,7 +33,7 @@ function AllUsers() {
           if (data.success === false) {
             //alert("Session expired, please login again!");
             //toast.warn('Session expired, please login again!')
-            setSessionExpired(true)
+            setSessionExpired(true);
             setUsers({});
             return navigate("/");
           }
@@ -42,13 +42,12 @@ function AllUsers() {
             console.log(users);
           }
         } else {
-          toast.error('Invalid data format.')
+          toast.error("Invalid data format.");
           throw new Error("Invalid data format");
         }
       } catch (error) {
         setError(error.message);
-        toast.error(error.message)
-
+        toast.error(error.message);
       }
     };
     if (userData) {
@@ -63,15 +62,25 @@ function AllUsers() {
   //   );
   // }
   return (
-    <div className="wrapper">
-      <div className="user-cards-container">
+    <div className={`wrapper ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+      <div
+        className={`user-cards-container ${
+          isDarkMode ? "dark-mode" : "light-mode"
+        }`}
+      >
         <h1>Your Colleagues</h1>
-        <div className="user-cards">
+        <div
+          className={`user-cards ${isDarkMode ? "dark-mode" : "light-mode"}`}
+        >
           {users.map((user) => (
-            <div key={user._id} className="user-card">
-              <MailOutlineIcon className="icon" />
+            <div
+              key={user._id}
+              className={`user-card ${isDarkMode ? "dark-mode" : "light-mode"}`}
+            >
+              <MailOutlineIcon
+                className={`icon ${isDarkMode ? "dark-mode" : "light-mode"} `}
+              />
               <Link to={`/user/profile/${user._id}`}>
-                {" "}
                 <div className="user-image-placeholder">
                   {user && user.userImage && (
                     <img
@@ -103,17 +112,17 @@ function AllUsers() {
         </div>
       </div>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </div>
   );
 }
