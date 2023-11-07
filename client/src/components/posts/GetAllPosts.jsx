@@ -248,10 +248,9 @@ const GetAllPosts = ({ userPosts }) => {
               </div>
 
               <p className="post-content">{item.content}</p>
-              <div>
+              <div className="post-img">
                 {item && item.image && (
-                  <img
-                    width="300px"
+                  <img className="post-img"
                     src={`http://localhost:5000/post/uploads/${item.image}`}
                     alt="post"
                   />
