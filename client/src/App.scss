@@ -4,9 +4,17 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
-body{
+
+body {
   background-color: rgba(245, 245, 220, 0.254);
+
+  &.dark-mode {
+    background-color: rgb(40, 39, 39);
+    color: #F5F5DC;
+  }
+
 }
+
 
 .content {
   //border: 3px solid rgb(70, 128, 0);
@@ -16,27 +24,29 @@ body{
   display: flex;
 
   .menuCont {
-    flex: 2.5;
+    flex: 3;
     //border: 3px solid rgb(0, 9, 128);
   }
+
   .contentCont {
     padding: 0 100px;
-    flex: 12.5;
+    flex: 11;
     display: flex;
     justify-content: center;
     align-items: center;
     //border: 2px solid purple;
-    
+
   }
 }
 
 @media screen and (max-width: 798px) {
   .content {
- 
+
     .menuCont {
       display: none;
       //border: 2px solid purple;
     }
+
     .contentCont {
       flex: 9;
     }
@@ -48,13 +58,16 @@ body{
     .menuCont {
       flex: 2.5;
     }
+
     .contentCont {
       flex: 9.5;
     }
   }
 }
+
 @media screen and (max-width: 425px) {
   .content {
+
     //width: 100%;
     .contentCont {
       padding: 0 20px;

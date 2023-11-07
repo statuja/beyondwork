@@ -16,7 +16,8 @@ import MyContext from "../../context/MyContext";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { userData, setUserData, setLoggedOut } = useContext(MyContext);
+  const { userData, setUserData, setLoggedOut, isDarkMode } =
+    useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -48,7 +49,8 @@ const Menu = () => {
   };
   return (
     <>
-      <ul className="menu">
+      <ul className={`menu ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+        {/* Apply dark mode based on the isDarkMode state */}
         <li>
           <Link to={`/user/profile/${userData._id}`}>
             <AccountCircleOutlinedIcon className="icon" /> My Profile
@@ -64,7 +66,6 @@ const Menu = () => {
             <NewspaperIcon className="icon" /> News Feed
           </Link>
         </li>
-
         {userData.adminRole ? (
           <li>
             <Link to="/user/create">
@@ -72,7 +73,6 @@ const Menu = () => {
             </Link>
           </li>
         ) : null}
-
         <li>
           <Link to="/savedposts">
             <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
@@ -98,7 +98,6 @@ const Menu = () => {
             <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
           </Link>
         </li>
-
         <li onClick={handleOnClick}>
           <LogoutOutlinedIcon className="icon" /> Logout
         </li>

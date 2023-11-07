@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CompanyProfile = () => {
   const navigate = useNavigate();
-  const { userData, setSessionExpired } = useContext(MyContext);
+  const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
   const [company, setCompany] = useState({});
   const companyID = userData.userCompany;
 
@@ -45,7 +45,9 @@ const CompanyProfile = () => {
   }, [companyID]);
 
   return (
-    <div className="companyProfile">
+    <div
+      className={`companyProfile ${isDarkMode ? "dark-mode" : "light-mode"}`}
+    >
       <h1>Company Profile</h1>
       {company.companyLogo ? (
         <img

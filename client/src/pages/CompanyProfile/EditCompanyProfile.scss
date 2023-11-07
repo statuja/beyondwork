@@ -8,6 +8,9 @@
     margin-bottom: 20px;
     border-radius: 15px;
 
+    &.dark-mode {
+        background-color: #3D3A3A;
+    }
 
     img {
         // width: 170px;
@@ -120,17 +123,13 @@
     }
 }
 
-@media (min-width: 0px) and (max-width: 768px) {
+@media screen and (max-width: 1440px) {
     .EditcompanyProfile {
         text-align: left !important;
 
         h1 {
             font-size: 24px;
         }
-
-        // .bottom {
-        //     width: 80%;
-        // }
 
         .cards-container {
             flex-direction: column;

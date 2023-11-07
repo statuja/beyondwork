@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts, setSessionExpired } =
+  const { userData, posts, setPosts, setSessionExpired, isDarkMode } =
     useContext(MyContext);
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -216,7 +216,7 @@ const GetAllPosts = ({ userPosts }) => {
 
   return (
     <>
-      <div className="post-Container">
+      <div className={`post-Container ${isDarkMode ?  'dark-mode' : 'light-mode'}`}>
         {savedPosts &&
           likedPosts &&
           posts?.map((item) => (

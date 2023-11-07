@@ -8,7 +8,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const CreateNewPost = () => {
   const navigate = useNavigate();
-  const { userData, posts, setPosts, setSessionExpired } =
+  const { userData, posts, setPosts, setSessionExpired, isDarkMode } =
     useContext(MyContext);
   const [newPost, setNewPost] = useState({
     content: "",
@@ -79,7 +79,9 @@ const CreateNewPost = () => {
   };
 
   return (
-    <div className="create-new-post">
+    <div
+      className={`create-new-post ${isDarkMode ? "dark-mode" : "light-mode"}`}
+    >
       <h4 className="new-post-header">Create a New Post...</h4>
       <form onSubmit={handleSubmit}>
         <textarea

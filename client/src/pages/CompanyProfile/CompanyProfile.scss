@@ -8,6 +8,10 @@
     margin-bottom: 20px;
     border-radius: 15px;
 
+    &.dark-mode {
+        background-color: #3D3A3A;
+    }
+
     img {
         // width: 170px;
         max-height: 200px;
@@ -53,13 +57,12 @@
             align-items: center;
 
             .card {
-                flex-basis: 33%;
-                gap: 15px;
+                flex-basis: 1;
                 height: 250px;
                 background-color: rgba(251, 251, 246, 0.896);
                 border-radius: 8px;
                 margin: 10px;
-                padding: 20px 40px;
+                padding: 10px 20px;
                 border: 1px solid rgba(128, 128, 128, 0.22);
                 box-shadow: 6px 6px 10px 0 rgba(92, 91, 91, 0.25),
                     -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
@@ -83,8 +86,9 @@
 
                 h5,
                 p {
-                    margin: 5px 10px;
+                    margin: 5px;
                     flex: 1;
+                    font-size: 16px;
                 }
 
                 p {
@@ -98,7 +102,7 @@
 }
 
 
-@media (min-width: 0px) and (max-width: 768px) {
+@media (min-width: 0px) and (max-width: 1440px) {
     .companyProfile {
 
         h1 {
