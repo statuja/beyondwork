@@ -65,9 +65,10 @@ const MyProvider = ({ children }) => {
   const [companyData, setCompanyData] = useState(null);
   const [userData, setUserData] = useState("");
   const [posts, setPosts] = useState([]);
-  const [loggedOut, setLoggedOut] = useState(false)
-  const [companyRegistered, setCompanyRegistered] = useState(false)
-  const [sessionExpired, setSessionExpired] = useState(false)
+  const [loggedOut, setLoggedOut] = useState(false);
+  const [companyRegistered, setCompanyRegistered] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
+  const [savedPosts, setSavedPosts] = useState([]);
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -92,7 +93,7 @@ const MyProvider = ({ children }) => {
             .toISOString()
             .split("T")[0];
           setUserData({ ...data, dateOfBirth: formattedDate });
-
+          setSavedPosts(data.savedPosts);
           // Store the fetched userData in local storage
           localStorage.setItem("userData", JSON.stringify(data));
         } catch (error) {
@@ -134,7 +135,9 @@ const MyProvider = ({ children }) => {
         setCompanyRegistered,
         handleLogout,
         sessionExpired,
-        setSessionExpired
+        setSessionExpired,
+        savedPosts,
+        setSavedPosts,
       }}
     >
       {children}

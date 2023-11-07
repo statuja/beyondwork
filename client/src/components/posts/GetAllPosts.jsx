@@ -10,13 +10,15 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts, setSessionExpired } = useContext(MyContext);
+  const { userData, posts, setPosts, setSessionExpired } =
+    useContext(MyContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [editPostId, setEditPostId] = useState(null);
@@ -45,26 +47,30 @@ const GetAllPosts = ({ userPosts }) => {
         //console.log("Data received from the API:", data);
         if (data.success === false) {
           //alert("Session expired, please login again!");
-        //toast.warn('Session expired, please login again!')
-        setSessionExpired(true)
+          //toast.warn('Session expired, please login again!')
+          setSessionExpired(true);
           return navigate("/");
         }
         setPosts(data);
         // Set saved and liked posts based on user data
       } else {
         console.error("Error updating profile:", response.statusText);
-        toast.error('Failed to fetch posts.')
+        toast.error("Failed to fetch posts.");
       }
     } catch (error) {
       console.error("Error fetching company details", error);
-      toast.error('Error fetching posts.')
+      toast.error("Error fetching posts.");
     }
   };
 
   useEffect(() => {
     const savedPostsFromStorage = localStorage.getItem("savedPosts");
+    console.log("savedPostsFromStorage:", savedPostsFromStorage); // Add this line for logging
+
     if (savedPostsFromStorage) {
-      setSavedPosts(JSON.parse(savedPostsFromStorage));
+      const parsedSavedPosts = JSON.parse(savedPostsFromStorage);
+      console.log("parsedSavedPosts:", parsedSavedPosts); // Add this line for logging
+      setSavedPosts(parsedSavedPosts);
     }
 
     const likedPostsFromStorage = localStorage.getItem("likedPosts");
@@ -82,7 +88,6 @@ const GetAllPosts = ({ userPosts }) => {
   useEffect(() => {
     localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
   }, [likedPosts]);
-
 
   const onSavePost = async (postId) => {
     try {
@@ -111,18 +116,14 @@ const GetAllPosts = ({ userPosts }) => {
           setSavedPosts(updatedSavedPosts);
         }
       } else {
-
         //setError("Failed to save the post.");
-        toast.error('Failed to save the post.')
+        toast.error("Failed to save the post.");
       }
     } catch (error) {
       //setError("An error occurred while saving the post.");
-      toast.error('An error occurred while saving the post.')
-
+      toast.error("An error occurred while saving the post.");
     }
   };
-
-
 
   const handleOnDelete = async (postId) => {
     try {
@@ -143,15 +144,14 @@ const GetAllPosts = ({ userPosts }) => {
         setPosts((prevPosts) =>
           prevPosts.filter((post) => post._id !== postId)
         );
-        toast.success('Post has been successfully deleted.')
+        toast.success("Post has been successfully deleted.");
       } else {
         //setError("Failed to delete the post.");
-        toast.error('Failed to delete the post.')
+        toast.error("Failed to delete the post.");
       }
     } catch (error) {
       //setError("An error occurred while deleting the post.");
-      toast.error('An error occurred while deleting the post.')
-
+      toast.error("An error occurred while deleting the post.");
     }
   };
 
@@ -190,13 +190,12 @@ const GetAllPosts = ({ userPosts }) => {
         const errorData = await response.json();
         console.error("Error liking post:", errorData.message);
         //setError("Failed to like the post.");
-        toast.error('Failed to like the post.')
-
+        toast.error("Failed to like the post.");
       }
     } catch (error) {
       console.error("An error occurred while liking the post:", error);
       //setError("An error occurred while liking the post.");
-      toast.error('An error occurred while liking the post.')
+      toast.error("An error occurred while liking the post.");
     }
   };
   const handleOnEditPostOn = (postId) => {
@@ -266,6 +265,15 @@ const GetAllPosts = ({ userPosts }) => {
               </div>
 
               <p className="post-content">{item.content}</p>
+              <div>
+                {item && item.image && (
+                  <img
+                    width="300px"
+                    src={`http://localhost:5000/post/uploads/${item.image}`}
+                    alt="post"
+                  />
+                )}
+              </div>
               <span className="post-footer">
                 <div className="likesAndComments">
                   <div className="left">
@@ -304,8 +312,9 @@ const GetAllPosts = ({ userPosts }) => {
                     </div>
                   </div>
 
-                  {renderEditPostComponent(item._id)}
+                  
                 </div>
+                
                 <div className="right">
                   {userData._id === item.createdBy._id && (
                     <span title="Edit this post">
@@ -325,21 +334,22 @@ const GetAllPosts = ({ userPosts }) => {
                   )}
                 </div>
               </span>
+              {renderEditPostComponent(item._id)}
             </div>
           ))}
       </div>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </>
   );
 };

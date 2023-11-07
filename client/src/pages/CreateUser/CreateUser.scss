@@ -1,9 +1,10 @@
 .main-container {
   background-color: rgba(245, 245, 220, 0.57);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 92vh;
+  height: 80vh;
 
   h3 {
     font-size: 22px;
@@ -61,7 +62,7 @@
       }
 
       .button {
-        width: 10%;
+        width: 30%;
         margin-top: 10px;
         border: none;
         border-radius: 6px;
@@ -93,6 +94,14 @@
     justify-content: center;
     position: fixed;
     right: 80px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
   }
 }
 
@@ -129,7 +138,6 @@
     }
 
     .addUser {
-      width: 100%;
       padding: 10px;
 
       form {

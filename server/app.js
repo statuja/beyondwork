@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import companyRoute from "./routes/companyRoute.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
+// import bodyParser from 'express'
 dotenv.config();
 
 const app = express();
@@ -21,10 +22,15 @@ const corsOptions = {
   preflightContinue: true,
   optionsSuccessStatus: 200,
 };
-console.log(`corsoption: ${corsOptions.origin}`);
+// console.log(`corsoption: ${corsOptions.origin}`);
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
+
+// // Increase payload size limit
+// app.use(bodyParser.json({ limit: '50mb' }));
+// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 
 // Handle preflight requests
 app.options("*", cors(corsOptions));
