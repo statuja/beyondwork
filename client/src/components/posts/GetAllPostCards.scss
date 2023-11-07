@@ -11,6 +11,7 @@
   background-color: #e7e7a38e;
   padding: 30px 0;
   margin-top: 30px;
+  word-wrap: break-word;
 
   .postCard {
     gap: 15px;
@@ -86,6 +87,13 @@
       white-space:break-spaces;
       @media (max-width: 768px) {
         font-size: 14px;
+      }
+    }
+
+    .post-img {
+      width: 300px;
+      @media (max-width: 768px) {
+        width: 200px;
       }
     }
 
