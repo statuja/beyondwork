@@ -16,12 +16,19 @@ import "react-toastify/dist/ReactToastify.css";
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts, setSessionExpired, isDarkMode } =
-    useContext(MyContext);
+  const {
+    userData,
+    posts,
+    setPosts,
+    setSessionExpired,
+    isDarkMode,
+    savedPosts,
+    setSavedPosts,
+    likedPosts,
+    setLikedPosts,
+  } = useContext(MyContext);
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [savedPosts, setSavedPosts] = useState([]);
-  const [likedPosts, setLikedPosts] = useState([]);
 
   const getAllPosts = async () => {
     try {
@@ -46,6 +53,19 @@ const GetAllPosts = ({ userPosts }) => {
           return navigate("/");
         }
         setPosts(data);
+        // Retrieve savedPosts and likedPosts from local storage
+        const savedPostsFromStorage = JSON.parse(
+          localStorage.getItem("savedPosts")
+        );
+        if (savedPostsFromStorage) {
+          setSavedPosts(savedPostsFromStorage);
+        }
+        const likedPostsFromStorage = JSON.parse(
+          localStorage.getItem("likedPosts")
+        );
+        if (likedPostsFromStorage) {
+          setLikedPosts(likedPostsFromStorage);
+        }
       } else {
         console.error("Error updating profile:", response.statusText);
         toast.error("Failed to fetch posts.");
@@ -57,19 +77,18 @@ const GetAllPosts = ({ userPosts }) => {
   };
 
   useEffect(() => {
-    const savedPostsFromStorage = localStorage.getItem("savedPosts");
-    if (savedPostsFromStorage) {
-      const parsedSavedPosts = JSON.parse(savedPostsFromStorage);
-      setSavedPosts(parsedSavedPosts);
+    const storedSavedPosts = JSON.parse(localStorage.getItem("savedPosts"));
+    if (storedSavedPosts) {
+      setSavedPosts(storedSavedPosts);
     }
 
-    const likedPostsFromStorage = localStorage.getItem("likedPosts");
-    if (likedPostsFromStorage) {
-      setLikedPosts(JSON.parse(likedPostsFromStorage));
+    const storedLikedPosts = JSON.parse(localStorage.getItem("likedPosts"));
+    if (storedLikedPosts) {
+      setLikedPosts(storedLikedPosts);
     }
 
     getAllPosts();
-  }, [userPosts]);
+  }, [userPosts, setSavedPosts, setLikedPosts]);
 
   useEffect(() => {
     localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
@@ -216,7 +235,9 @@ const GetAllPosts = ({ userPosts }) => {
 
   return (
     <>
-      <div className={`post-Container ${isDarkMode ?  'dark-mode' : 'light-mode'}`}>
+      <div
+        className={`post-Container ${isDarkMode ? "dark-mode" : "light-mode"}`}
+      >
         {savedPosts &&
           likedPosts &&
           posts?.map((item) => (
@@ -250,7 +271,8 @@ const GetAllPosts = ({ userPosts }) => {
               <p className="post-content">{item.content}</p>
               <div className="post-img">
                 {item && item.image && (
-                  <img className="post-img"
+                  <img
+                    className="post-img"
                     src={`http://localhost:5000/post/uploads/${item.image}`}
                     alt="post"
                   />
@@ -261,14 +283,14 @@ const GetAllPosts = ({ userPosts }) => {
                   <div className="left">
                     <div className="right">
                       {savedPosts.includes(item._id) ? (
-                        <span title="Unsave this post">
+                        <span>
                           <BookmarkIcon
                             className="icon"
                             onClick={() => onSavePost(item._id)}
                           />
                         </span>
                       ) : (
-                        <span title="Save this post">
+                        <span>
                           <BookmarkBorderIcon
                             className="icon"
                             onClick={() => onSavePost(item._id)}
