@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
-body{
+body {
   background-color: rgba(245, 245, 220, 0.254);
 }
 
@@ -26,13 +26,11 @@ body{
     justify-content: center;
     align-items: center;
     //border: 2px solid purple;
-    
   }
 }
 
 @media screen and (max-width: 798px) {
   .content {
- 
     .menuCont {
       display: none;
       //border: 2px solid purple;
