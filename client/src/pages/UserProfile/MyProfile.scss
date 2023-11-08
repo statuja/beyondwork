@@ -8,10 +8,10 @@
   //justify-content: center;
 
 
-&.dark-mode {
-      background-color: #3D3A3A;
-        color: #FCFCF4;
-}
+  &.dark-mode {
+    background-color: #3D3A3A;
+    color: #FCFCF4;
+  }
 
 
   .profileCover {
@@ -70,10 +70,11 @@
       background-color: rgba(231, 231, 163, 3.556863);
       border-radius: 15px;
 
-  
+
       h3 {
         text-align: center;
       }
+
       p {
         margin-top: 30px;
       }
@@ -82,7 +83,7 @@
 }
 
 
-@media screen and (max-width: 1220px) 
+@media screen and (max-width: 1220px) {
   .profile {
     .profileCover {
       height: 340px;

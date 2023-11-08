@@ -44,9 +44,8 @@ const SavedPosts = () => {
   }, [savedPosts]);
 
   return (
-    <>
-      <div className="savedPosts">
-        <h2>Your Saved Posts</h2>
+    <div className="saved-posts-container ">
+        <h1>Your Saved Posts</h1>
         {loading ? (
           <p>Loading...</p>
         ) : savedPosts && savedPosts.length > 0 ? (
@@ -57,7 +56,6 @@ const SavedPosts = () => {
         ) : (
           <p>No saved posts found.</p>
         )}
-      </div>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -70,7 +68,7 @@ const SavedPosts = () => {
         pauseOnHover
         theme="light"
       ></ToastContainer>
-    </>
+    </div>
   );
 };
 

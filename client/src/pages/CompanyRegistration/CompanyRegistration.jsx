@@ -7,7 +7,12 @@ import MyContext from "../../context/MyContext";
 
 export const CompanyRegistration = () => {
   const navigate = useNavigate();
-  const { setAdminEmail, setCompanyName, companyRegistered, setCompanyRegistered } = useContext(MyContext);
+  const {
+    setAdminEmail,
+    setCompanyName,
+    companyRegistered,
+    setCompanyRegistered,
+  } = useContext(MyContext);
 
   const {
     register,
@@ -49,7 +54,7 @@ export const CompanyRegistration = () => {
       if (response.ok) {
         setAdminEmail(responseData.defaultAdminEmail);
         setCompanyName(responseData.companyName);
-        setCompanyRegistered(true)
+        setCompanyRegistered(true);
         navigate("/company/thankyou");
         reset();
       } else {
@@ -84,7 +89,7 @@ export const CompanyRegistration = () => {
             {...register("companyName", { required: "This is required." })}
           />
 
-          <div className="wrapper">
+          <div className="fields-wrapper">
             <div className="selection">
               <label htmlFor="companyType">* Industry:</label>
               <select
@@ -132,7 +137,7 @@ export const CompanyRegistration = () => {
           </div>
           <label htmlFor="address">* Company Address:</label>
 
-          <div className="wrapper">
+          <div className="fields-wrapper">
             <input
               type="text"
               placeholder="Street, Building, Office No."
@@ -144,8 +149,7 @@ export const CompanyRegistration = () => {
               {...register("zipCode", { required: true })}
             />
           </div>
-          <div className="wrapper">
-            {" "}
+          <div className="fields-wrapper">
             <input
               type="text"
               placeholder="City"
