@@ -1,5 +1,6 @@
 .wrapper {
   background-color: rgba(231, 231, 163, 0.5568627451);
+  border-radius: 15px;
 
   &.dark-mode {
     background-color: #333;
@@ -51,10 +52,12 @@ h1 {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;
   }
-    &.dark-mode {
-      background-color: #FCFCF4;
-      color: #3D3A3A;
-    }
+
+  &.dark-mode {
+    background-color: #FCFCF4;
+    color: #3D3A3A;
+  }
+
   .icon {
     font-size: 40px;
     color: #004225;

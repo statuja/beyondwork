@@ -1,15 +1,34 @@
+import React, { useState, useEffect } from "react";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./MarketPlace.scss";
-// import doona1 from "./image/doona1.jpg";
-// import doona2 from "./image/doona2.jpg";
-// import doona3 from "./image/doona3.jpg";
-// import straller3 from "../marketPlace/image/straller3.png";
-// import straller4 from "./image/straller4.jpg";
-// import straller5 from "./image/straller5.jpg";
-// import chair1 from "./image/chair1.jpg";
-// import chair2 from "./image/chair2.jpg";
-// import chair3 from "./image/chair3.jpg";
 
 function MarketPlace() {
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  // Add an event listener to determine when to show the scroll-to-top arrow.
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        // Adjust this value as needed
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="products-container">
       <h1>Check out our colleagues Market Place</h1>
@@ -167,6 +186,13 @@ function MarketPlace() {
           </div>
         </section>
       </section>
+      <div className="scroll-to-top-container">
+        {showScrollToTop && (
+          <div className="scroll-to-top" onClick={scrollToTop}>
+            <KeyboardArrowUpIcon />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

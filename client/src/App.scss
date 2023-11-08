@@ -10,11 +10,9 @@ body {
 
   &.dark-mode {
     background-color: rgb(40, 39, 39);
-    color: #F5F5DC;
+    color: #f5f5dc;
   }
-
 }
-
 
 .content {
   //border: 3px solid rgb(70, 128, 0);
@@ -33,17 +31,13 @@ body {
     flex: 11;
     display: flex;
     justify-content: center;
-    align-items: center;
+   // align-items: center;
     //border: 2px solid purple;
-
   }
 }
 
-
-
 @media screen and (max-width: 768px) {
   .content {
-
     .menuCont {
       display: none;
       //border: 2px solid purple;
@@ -57,6 +51,7 @@ body {
     }
   }
 }
+
 @media screen and (max-width: 1220px) {
   .contentCont {
   padding: 10px;
@@ -65,7 +60,6 @@ body {
 
 
 @media screen and (max-width: 1440px) {
-
   .content {
     .menuCont {
       flex: 3.5;
@@ -81,7 +75,6 @@ body {
 
 @media screen and (max-width: 425px) {
   .content {
-
     //width: 100%;
     .contentCont {
       padding: 0 10px;
@@ -89,6 +82,4 @@ body {
   }
 
 }
-
-
 
