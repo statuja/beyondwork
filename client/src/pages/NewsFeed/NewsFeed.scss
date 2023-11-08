@@ -1,6 +1,6 @@
 .newsfeed {
   width: 90%;
- //border: 2px solid rgb(30, 104, 30);
+  //border: 2px solid rgb(30, 104, 30);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,11 +13,9 @@
     font-family: "Belanosima", sans-serif;
     font-weight: 400;
   }
-  p {
-    font-size: 24px;
-   
-  }
+ 
   .opening-sentence {
+    font-size: 24px;
     @media (max-width: 768px) {
       font-size: 16px;
       text-align: center;
