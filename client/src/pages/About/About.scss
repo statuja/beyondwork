@@ -123,6 +123,9 @@ body {
       grid-gap: 25px;
 
       #developer-card {
+        .developer-img{
+          object-fit: cover;
+        }
         display: flex;
         flex-direction: column;
         align-items: center;

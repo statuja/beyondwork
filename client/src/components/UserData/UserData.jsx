@@ -66,6 +66,7 @@ const UserData = ({ isMe, user }) => {
             </div>
           </div>
             <Link to="/user/editmyprofile">Edit profile</Link>
+            <Link className="create-link" to="/newsfeed">Create a post</Link> 
         </div>
       </>
     );

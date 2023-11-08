@@ -3,8 +3,8 @@ import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyProfile.scss";
 import "./EditMyProfile.scss";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditMyProfile() {
   const { userData, setUserData, setSessionExpired } = useContext(MyContext);
@@ -156,7 +156,7 @@ function EditMyProfile() {
         if (data.success === false) {
           //alert("Server error");
           //toast.warn('Session expired, please login again!')
-          setSessionExpired(true)
+          setSessionExpired(true);
           setUserData({});
           return navigate("/");
         }
@@ -166,12 +166,11 @@ function EditMyProfile() {
         navigate(`/user/profile/${userData._id}`);
       } else {
         console.error("Error updating profile:", response.statusText);
-        toast.error('Error updating profile.')
-
+        toast.error("Error updating profile.");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      toast.error('Error updating profile.')
+      toast.error("Error updating profile.");
     }
   };
 
@@ -191,39 +190,24 @@ function EditMyProfile() {
     <>
       <div className="edit-profile">
         <div className="edit-cover">
-            {userData && userData.coverImage && (
-              <img
-                
-                className="e-coverImg"
-                src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
-                alt="coverImage"
-              />
-            )}
-            {userData && userData.userImage && (
-              <img
-                className="e-userImg"
-                src={`http://localhost:5000/user/uploads/${userData.userImage}`}
-                alt="userImage"
-              />
-            )}
-             <div className="upload-buttons">
-            <button type="button" onClick={handleClickCover}>
-              Cover picture
-            </button>
-            {/* <label htmlFor="coverImage">Change Cover Image</label> */}
-            <input
-              type="file"
-              name="coverImage"
-              accept="image/*"
-              id="coverInput"
-              style={{ display: "none" }}
-              onChange={handleImageChange}
+          {userData && userData.coverImage && (
+            <img
+              className="e-coverImg"
+              src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
+              alt="coverImage"
             />
-
+          )}
+          {userData && userData.userImage && (
+            <img
+              className="e-userImg"
+              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
+              alt="userImage"
+            />
+          )}
+          <div className="upload-buttons">
             <button type="button" onClick={handleClickProfile}>
-             Profile picture
+              Profile picture
             </button>
-            {/* <label htmlFor="userImage">Change Avatar</label> */}
             <input
               type="file"
               name="userImage"
@@ -232,12 +216,22 @@ function EditMyProfile() {
               style={{ display: "none" }}
               onChange={handleImageChange}
             />
+
+            <button type="button" onClick={handleClickCover}>
+              Cover picture
+            </button>
+            <input
+              type="file"
+              name="coverImage"
+              accept="image/*"
+              id="coverInput"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
           </div>
         </div>
-       
-       
+
         <div className="bottom">
-      
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="userFullName">Full Name: </label>
@@ -379,24 +373,28 @@ function EditMyProfile() {
             </div>
 
             <div className="form-buttons">
-              <Link className="btn" onClick={handleCancel}>Cancel</Link>
-              <button type="submit" className="btn">Save</button>
+              <Link className="btn" onClick={handleCancel}>
+                Cancel
+              </Link>
+              <button type="submit" className="btn">
+                Save
+              </button>
             </div>
           </form>
         </div>
       </div>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </>
   );
 }

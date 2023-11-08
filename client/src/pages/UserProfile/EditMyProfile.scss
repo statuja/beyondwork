@@ -17,6 +17,7 @@
       object-fit: cover;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
+      //border: 3px solid rgb(0, 115, 255);
     }
 
     .e-userImg {
@@ -31,7 +32,7 @@
       border: 3px solid white;
     }
     .upload-buttons {
-      float: right;
+      float: right;      
       width: 20%;
       //border: 3px solid rgb(8, 0, 255);
       display: flex;
@@ -109,7 +110,6 @@
           }
         }
       }
-
       label {
         font-weight: 600;
         font-size: 18px;
@@ -123,16 +123,92 @@
         font-size: 16px;
         outline: none;
       }
+      
     }
   }
 }
 
-@media (min-width: 0px) and (max-width: 768px) {
-  .edit-over {
-    display: flex;
-    flex-direction: column;
-    //border: 1px solid black;
-    height: 500px !important;
-    margin-top: 30px;
+@media screen and (max-width: 1024px) {
+  .edit-profile {
+    //border: 3px solid rgb(25, 0, 255);
+    .edit-cover {
+      .upload-buttons {
+        width: 40%;
+        button[type="button"] {
+          width: 110px;
+          font-size: 12px;
+        }
+      }
+    }
+    .bottom {
+      form {
+        width: 80%;
+        label {
+          font-size: 16px;
+        }
+        input,
+        textarea {
+          font-size: 14px;
+        }
+        .form-buttons {
+          width: 50%;
+          .btn {
+            font-size: 12px;
+          }
+        }
+      }
+    }
   }
 }
+
+@media screen and (max-width: 425px) {
+  .edit-profile {
+    gap: 30px;
+    //border: 3px solid rgb(25, 0, 255);
+    .edit-cover {
+      height: 340px;
+      //position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 70px;
+      .e-coverImg {
+        height: 250px;
+      }
+      .e-userImg {
+        width: 150px;
+        height: 150px;
+        left: 125px;
+        right: 0;
+        top: 170px;
+      }
+      .upload-buttons {
+       
+        width: 60%;
+        button[type="button"] {
+          width: 110px;
+          font-size: 12px;
+        }
+      }
+    }
+    .bottom {
+      form {
+        width: 80%;
+        label {
+          font-size: 16px;
+        }
+        input,
+        textarea {
+          font-size: 14px;
+        }
+        .form-buttons {
+          width: 70%;
+          .btn {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
