@@ -7,12 +7,10 @@
   //border: 2px solid red;
   //justify-content: center;
 
-
-&.dark-mode {
-      background-color: #3D3A3A;
-        color: #FCFCF4;
-}
-
+  &.dark-mode {
+    background-color: #3d3a3a;
+    color: #fcfcf4;
+  }
 
   .profileCover {
     height: 400px;
@@ -49,7 +47,6 @@
 
     // justify-content:space-around;
     .profileLeft {
-
       margin-top: 20px;
       padding: 0 20px;
       //padding-left: 40px;
@@ -70,7 +67,6 @@
       background-color: rgba(231, 231, 163, 3.556863);
       border-radius: 15px;
 
-  
       h3 {
         text-align: center;
       }
@@ -81,8 +77,7 @@
   }
 }
 
-
-@media screen and (max-width: 1220px) 
+@media screen and (max-width: 1220px) {
   .profile {
     .profileCover {
       height: 340px;
@@ -104,6 +99,5 @@
       padding: 10px;
       flex-direction: column;
     }
-
   }
 }

@@ -10,11 +10,11 @@
   border: 1px solid #004225;
 
   &.dark-mode {
-    background-color: #3D3A3A;
-    color: #FCFCF4;
+    background-color: #3d3a3a;
+    color: #fcfcf4;
 
     a {
-      color: #FCFCF4
+      color: #fcfcf4;
     }
   }
 
@@ -54,7 +54,7 @@
   }
 }
 
-@media (max-width: 768pc) {
+@media (max-width: 768px) {
   .burgerMenu {
     font-size: 14px;
 
@@ -70,9 +70,8 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .burgerMenu {
     display: none;
-
   }
 }

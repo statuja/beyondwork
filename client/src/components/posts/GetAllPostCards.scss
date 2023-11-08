@@ -14,15 +14,35 @@
   word-wrap: break-word;
 
   &.dark-mode {
-    background-color: #3D3A3A;
-    color: #FCFCF4;
+    background-color: #3d3a3a;
+    color: #fcfcf4;
 
     .post-owner,
     .post-footer {
       color: black;
     }
   }
+  .sticky-scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    animation: updown 2s ease infinite;
+  }
 
+  .arrow-icon {
+    color: #004225;
+    font-size: 40px;
+
+    &:hover {
+      cursor: pointer;
+      color: #ffae00bb;
+    }
+    @media (max-width: 425px) {
+      font-size: 26px;
+      margin-right: 30px;
+    }
+  }
   .postCard {
     gap: 15px;
     display: flex;
@@ -69,7 +89,6 @@
             font-size: 12px;
             float: left;
           }
-
         }
       }
 
