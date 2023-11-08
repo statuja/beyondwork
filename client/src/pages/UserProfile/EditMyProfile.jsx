@@ -207,29 +207,27 @@ function EditMyProfile() {
               alt="userImage"
             />
           )}
-          <div className="upload-buttons">
-            <button type="button" onClick={handleClickCover}>
-              Cover picture
-            </button>
-            {/* <label htmlFor="coverImage">Change Cover Image</label> */}
-            <input
-              type="file"
-              name="coverImage"
-              accept="image/*"
-              id="coverInput"
-              style={{ display: "none" }}
-              onChange={handleImageChange}
-            />
-
+           <div className="upload-buttons">
             <button type="button" onClick={handleClickProfile}>
               Profile picture
             </button>
-            {/* <label htmlFor="userImage">Change Avatar</label> */}
             <input
               type="file"
               name="userImage"
               accept="image/*"
               id="profileInput"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
+
+            <button type="button" onClick={handleClickCover}>
+              Cover picture
+            </button>
+            <input
+              type="file"
+              name="coverImage"
+              accept="image/*"
+              id="coverInput"
               style={{ display: "none" }}
               onChange={handleImageChange}
             />

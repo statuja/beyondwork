@@ -6,6 +6,8 @@ import GetAllPosts from "../../components/posts/GetAllPosts";
 import "./MyProfile.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -128,8 +130,16 @@ const UserProfile = () => {
           </div>
           <div className="profileRight">
             <h3>Recent posts</h3>
-            {/* Display user's posts */}
-            <GetAllPosts userPosts={userPosts} />
+
+            {loading ? (
+              <p>Loading...</p>
+            ) : userPosts && userPosts.length > 0 ? (
+              <GetAllPosts userPosts={userPosts} />
+            ) : (
+              <p>No posts created yet.</p>
+            )}
+            
+
           </div>
         </div>
       </div>

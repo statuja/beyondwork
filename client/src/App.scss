@@ -39,7 +39,9 @@ body {
   }
 }
 
-@media screen and (max-width: 798px) {
+
+
+@media screen and (max-width: 768px) {
   .content {
 
     .menuCont {
@@ -50,12 +52,19 @@ body {
     .contentCont {
       width: 100%;
       flex: 9;
+
+      padding: 0 50px;
+    }
+  }
+}
+@media screen and (max-width: 1220px) {
       padding: 10px;
     }
   }
 }
 
 @media screen and (max-width: 1440px) {
+
   .content {
     .menuCont {
       flex: 3.5;
@@ -64,6 +73,7 @@ body {
     .contentCont {
       padding: 0 80px;
       flex: 9.5;
+      padding: 0 50px;
     }
   }
 }
@@ -73,7 +83,11 @@ body {
 
     //width: 100%;
     .contentCont {
-      padding: 0 20px;
+      padding: 0 10px;
     }
   }
+
 }
+
+
+

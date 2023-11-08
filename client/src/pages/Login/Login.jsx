@@ -70,7 +70,7 @@ const Login = () => {
           <img src={logo} alt="BeyondWork Logo" />
         </div>
         <div className="textContainer">
-          <h1>Welcome to BeyondWork!</h1>
+          <h2>Welcome to BeyondWork!</h2>
           <p>The digital haven where work and play converge.</p>
           <p>
             We understand that work is just one facet of a fulfilling life, and
@@ -95,7 +95,8 @@ const Login = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <input type="submit" value="Login" className="button" />
+            <div><input type="submit" value="Login" className="button" /></div>
+            
             {typeof error === "string" && error && (
               <div className="error">{error}</div>
             )}
@@ -112,7 +113,7 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <img src={people} alt="People connected" />
+       <img src={people} alt="People connected" /> 
       </div>
 
       <ToastContainer
