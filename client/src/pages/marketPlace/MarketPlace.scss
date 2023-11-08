@@ -16,7 +16,7 @@
 }
 
 .section {
-  // border: 2px solid red;
+  //border: 2px solid red;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -37,18 +37,26 @@
   align-items: center;
   justify-content: space-between;
   background-color: rgba(251, 251, 246, 0.784);
-  border-radius: 10px;
-  border: 1px solid #ffb000;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        &:hover {
+          transform: scale(1.02);
+          transition: transform 0.2s ease-in-out;
+        }
 
   .card {
     // flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
+    gap: 10px;
     cursor: pointer;
     background-color: #f8f8f81e;
     border-radius: 10px;
-    // border: 2px solid yellow;
+    //border: 2px solid yellow;
     color: black;
 
     p {
@@ -61,16 +69,22 @@
       font-family: "Belanosima", sans-serif;
     }
     button {
-      background-color: #ffb000;
-      color: black;
+      align-self: center;
+      width: 120px;
+      background: #ffae0091;
+      color: #37424d;
       border: none;
-      padding: 8px 16px;
-      margin-top: 10px;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
       cursor: pointer;
-      &:active {
-        transform: scale(0.98);
-
-        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+      transition: background 0.3s;
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 20px;
+      //position: absolute;
+      &:hover {
+        background: #ffb000;
       }
     }
   }

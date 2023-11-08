@@ -7,6 +7,7 @@
   gap: 50px;
   width: 100%;
   position: relative;
+  
 
   .header {
     //border: 4px solid rgb(0, 21, 255);
@@ -31,12 +32,14 @@
     width: 100%;
     //border: 2px solid rgb(0, 21, 255);
     gap: 10px;
+    
     .infoItem {
       .infoKey {
         font-size: 22px;
         font-weight: 700;
         margin-right: 20px;
         color: #555;
+      
       }
       .infoValue {
         font-size: 18px;

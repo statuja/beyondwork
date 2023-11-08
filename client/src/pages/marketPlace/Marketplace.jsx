@@ -64,7 +64,7 @@ function MarketPlace() {
           <div className="card">
             <h2>EEZY S TWIST</h2>
             <h3>category: </h3>
-            <p>stroller</p>
+            <p>Stroller</p>
             <h3>description:</h3>
             <p>
               With one hand the seat unit and integrated leg rest can be rotated
@@ -76,7 +76,7 @@ function MarketPlace() {
             <p>used</p>
             <h3>Price: </h3>
             <p>100.00€</p>
-            <button>contact the seller</button>
+            <button>Contact the seller</button>
           </div>
         </section>
 
