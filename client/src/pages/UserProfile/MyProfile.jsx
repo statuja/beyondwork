@@ -128,9 +128,11 @@ const UserProfile = () => {
               <p>User not found</p>
             )}
           </div>
-          <div className="profileRight">
+          <div className={`profileRight ${isDarkMode? "dark-mode": "light-mode"}`}>
             <h3>Recent posts</h3>
-
+            {id === userData._id && (
+               <Link className="create-link" to="/newsfeed">Create a post</Link> 
+            )}
             {loading ? (
               <p>Loading...</p>
             ) : userPosts && userPosts.length > 0 ? (
@@ -138,7 +140,7 @@ const UserProfile = () => {
             ) : (
               <p>No posts created yet.</p>
             )}
-            
+           
 
           </div>
         </div>

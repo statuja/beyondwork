@@ -20,6 +20,8 @@
     span {
       font-size: 18px;
       line-height: 26px;
+      word-wrap: break-word;
+      white-space: break-spaces;
     }
   }
 
@@ -59,11 +61,7 @@
       background: #ffb000;
     }
   }
-  .create-link{
-    position: absolute;
-    left: 795px;
-    top: 40px;
-  }
+  
 }
 
 @media screen and (max-width: 1220px) {
@@ -92,10 +90,6 @@
         }
       }
     }
-    .create-link{
-      position: absolute;
-      left: 110px;
-      top: 480px;
-    }
+   
   }
 }

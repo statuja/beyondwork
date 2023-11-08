@@ -247,7 +247,7 @@ function EditMyProfile() {
               />
             </div>
             <div>
-              <label htmlFor="description">Description: </label>
+              <label htmlFor="description">About me: </label>
               <textarea
                 name="description"
                 value={formData.description}

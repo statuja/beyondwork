@@ -47,12 +47,12 @@ const UserData = ({ isMe, user }) => {
               <span className="infoKey">Country:</span>
               <span className="infoValue">{user?.userAddress?.country}</span>
             </div>
-            <div className="infoItem">
+            {/* <div className="infoItem">
               <span className="infoKey">Phone Number:</span>
               <span className="infoValue">
                 {user?.userContact?.phoneNumber}
               </span>
-            </div>
+            </div> */}
             <div className="infoItem">
               <span className="infoKey">Email:</span>
               <span className="infoValue">{user?.userContact?.email}</span>
@@ -66,7 +66,7 @@ const UserData = ({ isMe, user }) => {
             </div>
           </div>
             <Link to="/user/editmyprofile">Edit profile</Link>
-            <Link className="create-link" to="/newsfeed">Create a post</Link> 
+           
         </div>
       </>
     );
