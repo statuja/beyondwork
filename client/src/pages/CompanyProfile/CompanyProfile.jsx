@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import "./CompanyProfile.scss";
 import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CompanyProfile = () => {
   const navigate = useNavigate();
-  const { userData, setSessionExpired } = useContext(MyContext);
+  const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
   const [company, setCompany] = useState({});
   const companyID = userData.userCompany;
 
@@ -27,27 +27,27 @@ const CompanyProfile = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.success === false) {
-            //alert("Session expired, please login again!");
-            //toast.warn('Session expired, please login again!')
-            setSessionExpired(true)
+            setSessionExpired(true);
             setCompany({});
             return navigate("/");
           }
           setCompany(data);
         } else {
           console.error("Error fetching data:", response.statusText);
-        toast.error('Failed to fetch company details.')
+          toast.error("Failed to fetch company details.");
         }
       } catch (error) {
         console.error("Error fetching company details", error);
-        toast.error('Error fetching company details.')
+        toast.error("Error fetching company details.");
       }
     };
     fetchCompanyDetails();
   }, [companyID]);
 
   return (
-    <div className="companyProfile">
+    <div
+      className={`companyProfile ${isDarkMode ? "dark-mode" : "light-mode"}`}
+    >
       <h1>Company Profile</h1>
       {company.companyLogo ? (
         <img
@@ -61,37 +61,43 @@ const CompanyProfile = () => {
       <div className="bottom">
         <div className="cards-container">
           <div className="card">
-            <h3>Company Details</h3>
-            <div className="flex-wrapper">
-              <div className="labels">
+            <div>
+              <h3>Company Details</h3>
+              <div className="label">
                 <h5>Company Name:</h5>
-                <h5> Company Type:</h5>
-                <h5> Number of Employees:</h5>
-              </div>
-              <div className="data">
                 <p>{company.companyName}</p>
+              </div>
+              <div className="label">
+                <h5> Company Type:</h5>
                 <p>{company.companyType}</p>
+              </div>
+              <div className="label">
+                <h5> Number of Employees:</h5>
                 <p> {company.numberOfEmployees}</p>
               </div>
             </div>
           </div>
           <div className="card">
-            <h3>Company Address</h3>
-            <div className="flex-wrapper">
-              <div className="labels">
-                <h5> Address:</h5>
-                <h5> City:</h5>
-                <h5> Zip Code:</h5>
-                <h5>Country:</h5>
-              </div>
-              <div className="data">
+            <div>
+              <h3>Company Address</h3>
+              <div className="label">
+                <h5>Address:</h5>
                 <p>
                   {company.companyAddress && company.companyAddress.address}
                 </p>
+              </div>
+              <div className="label">
+                <h5>City:</h5>
                 <p>{company.companyAddress && company.companyAddress.city}</p>
+              </div>
+              <div className="label">
+                <h5>Zip Code:</h5>
                 <p>
                   {company.companyAddress && company.companyAddress.zipCode}
                 </p>
+              </div>
+              <div className="label">
+                <h5>Country:</h5>
                 <p>
                   {company.companyAddress && company.companyAddress.country}
                 </p>
@@ -99,14 +105,14 @@ const CompanyProfile = () => {
             </div>
           </div>
           <div className="card">
-            <h3>Contact Details</h3>
-            <div className="flex-wrapper">
-              <div className="labels">
-                <h5> Email: </h5>
-                <h5> Phone Number:</h5>
+            <div>
+              <h3>Contact Details</h3>
+              <div className="label">
+                <h5>Email:</h5>
+                <p>{company.companyContact && company.companyContact.email}</p>
               </div>
-              <div className="data">
-                <p>{company.companyContact && company.companyContact.email}</p>{" "}
+              <div className="label">
+                <h5>Phone Number:</h5>
                 <p>
                   {company.companyContact && company.companyContact.phoneNumber}
                 </p>
@@ -127,18 +133,18 @@ const CompanyProfile = () => {
           Edit Company Profile
         </Link>
       ) : null}
-        <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-    ></ToastContainer>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </div>
   );
 };

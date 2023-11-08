@@ -7,32 +7,42 @@
     align-items: center;
     background-color: #004225;
     color: #F5F5DC;
-   
+
+    &.dark-mode {
+        background-color: #333;
+        color: #fff;
+    }
+
     .left {
-        
+
         text-align: left;
         font-size: 12px;
     }
+
     .right {
         gap: 10px;
         display: flex;
         font-weight: bold;
+
         a {
-            color: #F5F5DC !important; ;
+            color: #F5F5DC !important;
+            ;
         }
     }
 
     @media (min-width: 768px) {
         padding: 10px 20px;
         height: 50px;
+
         .left {
             text-align: left;
             font-size: 14px;
         }
+
         .right {
             min-width: 120px;
             gap: 25px;
-            
+
         }
     }
 }

@@ -8,9 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
+
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userData, setSessionExpired } = useContext(MyContext);
+  const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -99,7 +100,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="profile">
+      <div className={`profile ${isDarkMode ? "dark-mode" : "light-mode"}`}>
         <div className="profileCover">
           {user && user.coverImage && (
             <img
@@ -129,6 +130,7 @@ const UserProfile = () => {
           </div>
           <div className="profileRight">
             <h3>Recent posts</h3>
+
             {loading ? (
               <p>Loading...</p>
             ) : userPosts && userPosts.length > 0 ? (
@@ -137,6 +139,7 @@ const UserProfile = () => {
               <p>No posts created yet.</p>
             )}
             
+
           </div>
         </div>
       </div>

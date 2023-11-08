@@ -3,8 +3,8 @@ import React, { useContext, useState, useEffect } from "react";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import "./CreateUser.scss";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const UserRegistration = () => {
   const defaultImageUrl =
@@ -20,7 +20,7 @@ export const UserRegistration = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const { userData, setSessionExpired } = useContext(MyContext);
+  const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
 
   const onSubmit = async (data) => {
     const newData = {
@@ -55,22 +55,24 @@ export const UserRegistration = () => {
         if (data.success === false) {
           //alert("Session expired, please login again!");
           //toast.warn('Session expired, please login again!')
-          setSessionExpired(true)
+          setSessionExpired(true);
           reset();
           return navigate("/");
         }
         // setMessage(
         //   `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
         // );
-        toast.success(`You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`);
+        toast.success(
+          `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
+        );
         reset();
       } else {
         console.error("Error updating profile:", response.statusText);
-        toast.error('Failed to create profile.')
+        toast.error("Failed to create profile.");
       }
     } catch (error) {
       console.error("Error creating profile", error);
-      toast.error('Error creating profile')
+      toast.error("Error creating profile");
     }
   };
 
@@ -78,19 +80,26 @@ export const UserRegistration = () => {
     if (Object.keys(errors).length !== 0) {
       console.log("Errors:", errors);
       //setError("All fields are required");
-      toast.error('All fields are required.');
+      toast.error("All fields are required.");
     }
   }, [errors]);
 
   return (
     <>
-      <div className="main-container">
+      <div
+        className={`main-container ${isDarkMode ? "dark-mode" : "light-mode"}`}
+      >
         <div>
-        <h1>Hello Admin!</h1>
-        <p>Here, you can register all the employees in your team:</p>
+          <h1>Hello Admin!</h1>
+          <p>Here, you can register all the employees in your team:</p>
         </div>
         <div className="addUser">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className={`form ${
+              isDarkMode ? "dark-mode" : "light-mode"
+            }`}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <label htmlFor="userFullName">Employee Full Name:</label>
             <input
               type="text"
@@ -168,18 +177,17 @@ export const UserRegistration = () => {
       </div>
 
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
-
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </>
   );
 };

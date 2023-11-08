@@ -69,6 +69,9 @@ const MyProvider = ({ children }) => {
   const [companyRegistered, setCompanyRegistered] = useState(false);
   const [sessionExpired, setSessionExpired] = useState(false);
   const [savedPosts, setSavedPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -96,6 +99,19 @@ const MyProvider = ({ children }) => {
           setSavedPosts(data.savedPosts);
           // Store the fetched userData in local storage
           localStorage.setItem("userData", JSON.stringify(data));
+          // Retrieve savedPosts and likedPosts from local storage
+          const savedPostsFromStorage = JSON.parse(
+            localStorage.getItem("savedPosts")
+          );
+          if (savedPostsFromStorage) {
+            setSavedPosts(savedPostsFromStorage);
+          }
+          const likedPostsFromStorage = JSON.parse(
+            localStorage.getItem("likedPosts")
+          );
+          if (likedPostsFromStorage) {
+            setLikedPosts(likedPostsFromStorage);
+          }
         } catch (error) {
           setUserData(null);
         }
@@ -106,16 +122,12 @@ const MyProvider = ({ children }) => {
 
   const handleLogout = () => {
     // Clear the userData from local storage
-    localStorage.removeItem("userData");
-
-    // Clear the userData state
+    localStorage.clear();
     setUserData(null);
-
-    // Perform any additional logout operations as needed
-    // For example, you might want to redirect the user to the login page
-    // or perform other cleanup tasks.
   };
-
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
   return (
     <MyContext.Provider
       value={{
@@ -138,6 +150,10 @@ const MyProvider = ({ children }) => {
         setSessionExpired,
         savedPosts,
         setSavedPosts,
+        likedPosts,
+        setLikedPosts,
+        isDarkMode, // Include the dark mode state in the context
+        toggleDarkMode, // Include the toggle function in the context
       }}
     >
       {children}

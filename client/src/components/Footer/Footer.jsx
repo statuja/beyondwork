@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Footer.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,10 +6,13 @@ import {
   faLinkedinIn,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import MyContext from "../../context/MyContext";
 
 function Footer() {
+  const { isDarkMode } = useContext(MyContext);
+
   return (
-    <div className="footer">
+    <div className={`footer ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <div className="left"> Copyright © 2023, Girls Power GmbH</div>
       <div className="right">
         <a

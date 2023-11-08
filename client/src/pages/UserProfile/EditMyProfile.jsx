@@ -7,7 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function EditMyProfile() {
-  const { userData, setUserData, setSessionExpired } = useContext(MyContext);
+  const { userData, setUserData, setSessionExpired, isDarkMode } =
+    useContext(MyContext);
   console.log(userData);
   const navigate = useNavigate();
   const userId = userData._id;
@@ -188,7 +189,9 @@ function EditMyProfile() {
 
   return (
     <>
-      <div className="edit-profile">
+      <div
+        className={`edit-profile ${isDarkMode ? "dark-mode" : "light-mode"}`}
+      >
         <div className="edit-cover">
           {userData && userData.coverImage && (
             <img
@@ -204,7 +207,7 @@ function EditMyProfile() {
               alt="userImage"
             />
           )}
-          <div className="upload-buttons">
+           <div className="upload-buttons">
             <button type="button" onClick={handleClickProfile}>
               Profile picture
             </button>

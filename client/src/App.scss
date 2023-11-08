@@ -4,9 +4,17 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
-body{
+
+body {
   background-color: rgba(245, 245, 220, 0.254);
+
+  &.dark-mode {
+    background-color: rgb(40, 39, 39);
+    color: #F5F5DC;
+  }
+
 }
+
 
 .content {
   //border: 3px solid rgb(70, 128, 0);
@@ -16,17 +24,18 @@ body{
   display: flex;
 
   .menuCont {
-    flex: 2.5;
+    flex: 3;
     //border: 3px solid rgb(0, 9, 128);
   }
+
   .contentCont {
     padding: 0 100px;
-    flex: 12.5;
+    flex: 11;
     display: flex;
     justify-content: center;
     align-items: center;
     //border: 2px solid purple;
-    
+
   }
 }
 
@@ -34,23 +43,35 @@ body{
 
 @media screen and (max-width: 768px) {
   .content {
- 
+
     .menuCont {
       display: none;
       //border: 2px solid purple;
     }
+
     .contentCont {
+      width: 100%;
       flex: 9;
+
       padding: 0 50px;
     }
   }
 }
 @media screen and (max-width: 1220px) {
+      padding: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+
   .content {
     .menuCont {
-      flex: 2.5;
+      flex: 3.5;
     }
+
     .contentCont {
+      padding: 0 80px;
       flex: 9.5;
       padding: 0 50px;
     }
@@ -59,10 +80,14 @@ body{
 
 @media screen and (max-width: 425px) {
   .content {
+
     //width: 100%;
     .contentCont {
       padding: 0 10px;
     }
   }
+
 }
+
+
 

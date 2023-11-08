@@ -1,3 +1,12 @@
+.wrapper {
+  background-color: rgba(231, 231, 163, 0.5568627451);
+
+  &.dark-mode {
+    background-color: #333;
+    color: #333;
+  }
+}
+
 .user-cards-container {
   display: flex;
   flex-direction: column;
@@ -7,6 +16,11 @@
   border-radius: 10px;
   border-radius: 15px;
   padding: 20px;
+
+  &.dark-mode {
+    background-color: #3D3A3A;
+    color: #FCFCF4;
+  }
 }
 
 h1 {
@@ -16,6 +30,7 @@ h1 {
   padding: 20px;
   text-align: center;
 }
+
 .user-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -36,12 +51,16 @@ h1 {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;
   }
-
+    &.dark-mode {
+      background-color: #FCFCF4;
+      color: #3D3A3A;
+    }
   .icon {
     font-size: 40px;
     color: #004225;
     transition: all 0.3s;
     align-self: flex-end;
+
     &:hover {
       color: #ffb000;
       cursor: pointer;
@@ -60,6 +79,7 @@ h1 {
   .user-details {
     display: flex;
     flex-direction: column;
+
     p {
       margin: 5px 0;
       font-size: 16px;
@@ -111,8 +131,16 @@ h1 {
   }
 }
 
+@media screen and (max-width: 1440px) {
+  .user-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
 @media screen and (min-width: 520px) and (max-width: 1024px) {
   .wrapper {
+    width: 90%;
     display: flex;
     justify-content: center;
   }
@@ -122,7 +150,7 @@ h1 {
   }
 
   .user-cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 10px;
   }
 
