@@ -19,7 +19,7 @@ const UserData = ({ isMe, user }) => {
         <div className="profileLeftCont">
           <div className="header">
             <h2>{user.userFullName}</h2>
-            <span><h3>About me:</h3> {user.description}</span>
+            <span><h3>About me:</h3>{user.description}</span>
           </div>
 
           <div className="infoSec">
@@ -75,7 +75,7 @@ const UserData = ({ isMe, user }) => {
       <div className="profileLeftCont">
         <div className="header">
           <h2>{user?.userFullName}</h2>
-          <span>{user.description}</span>
+          <span><h3>About me:</h3>{user.description}</span>
         </div>
 
         <div className="infoSec">
