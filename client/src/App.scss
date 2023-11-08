@@ -31,7 +31,7 @@ body {
     flex: 11;
     display: flex;
     justify-content: center;
-    align-items: center;
+   // align-items: center;
     //border: 2px solid purple;
   }
 }
@@ -51,6 +51,7 @@ body {
     }
   }
 }
+
 @media screen and (max-width: 1220px) {
   .contentCont {
     padding: 10px;
@@ -78,4 +79,6 @@ body {
       padding: 0 10px;
     }
   }
+
 }
+

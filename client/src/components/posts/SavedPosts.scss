@@ -12,79 +12,7 @@
     font-weight: 400;
   }
 
-  .wrapper {
-    background-color: #e7e7a38e;
-    padding: 20px;
-    margin: 20px;
-    width: 90%;
-    border-radius: 15px;
-    height: 100vh;
 
-    .savedPosts {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-
-      .post-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 15px;
-        padding: 10px;
-        box-shadow: 0 12px 8px rgba(0, 0, 0, 0.1);
-        background-color: rgba(251, 251, 246, 0.784);
-        border-radius: 6px;
-
-        .post-content {
-          flex: 1;
-          white-space:break-spaces;
-
-          .text,
-          .postBy {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            margin: 10px 0 10px 0;
-
-            .createdBy {
-              font-weight: bold;
-              flex: 9;
-            }
-
-            .img-container {
-              flex: 1;
-              width: 60px;
-              height: 60px;
-
-              .userImg {
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                object-fit: cover;
-
-                @media (max-width: 425px) {
-                  width: 60px;
-                }
-              }
-            }
-          }
-        }
-
-        .date-and-likes {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          font-size: 10px;
-
-          p {
-            font-size: 10px;
-          }
-        }
-      }
-    }
-  }
 }
 
 @media (max-width: 1024px) {
@@ -96,28 +24,6 @@
 
     h1 {
       font-size: 30px;
-    }
-
-    .wrapper {
-      width: 100%;
-
-      .savedPosts {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-        width: 100%;
-        margin: 50px 0 50px 0;
-
-        .post-card {
-          width: 100%;
-          padding: 10px; // Adjust the padding to control card height
-          margin: 10px 0;
-
-          .date-and-likes {
-            font-size: 10px;
-            padding: 0;
-          }
-        }
-      }
     }
   }
 }

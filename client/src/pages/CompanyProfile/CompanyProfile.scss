@@ -1,11 +1,13 @@
 .companyProfile {
     background-color: #f7f7e3;
     width: 100%;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
+    align-self: flex-start;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+    // justify-content: center;
+   // margin-bottom: 20px;
     border-radius: 15px;
 
     &.dark-mode {
@@ -61,7 +63,7 @@
                 height: 250px;
                 background-color: rgba(251, 251, 246, 0.896);
                 border-radius: 8px;
-                margin: 10px;
+                margin: 30px;
                 padding: 10px 20px;
                 border: 1px solid rgba(128, 128, 128, 0.22);
                 box-shadow: 6px 6px 10px 0 rgba(92, 91, 91, 0.25),
@@ -104,6 +106,7 @@
 
 @media (min-width: 0px) and (max-width: 1440px) {
     .companyProfile {
+        height: auto;
 
         h1 {
             font-size: 24px;
