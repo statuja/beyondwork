@@ -22,12 +22,13 @@ import Menu from "./components/Menu/Menu";
 import EditMyProfile from "./pages/UserProfile/EditMyProfile";
 import MarketPlace from "./pages/marketPlace/Marketplace";
 import MyContext from "./context/MyContext";
+import ScrollToTop from "./components/ScrollToTop"; // Add this line to import the ScrollToTop component
 
 function App() {
   const { isDarkMode } = useContext(MyContext);
- React.useEffect(() => {
-   document.body.classList.toggle("dark-mode", isDarkMode);
- }, [isDarkMode]);
+  React.useEffect(() => {
+    document.body.classList.toggle("dark-mode", isDarkMode);
+  }, [isDarkMode]);
 
   const routes = [
     // Main Layout Routes
@@ -84,6 +85,7 @@ const MainLayout = () => (
 
 const UserLayout = ({ isDarkMode }) => (
   <div className={isDarkMode ? "dark-mode" : "light-mode"}>
+    <ScrollToTop />
     <Topbar />
     <div className={`content ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <div className="contentCont">
