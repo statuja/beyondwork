@@ -29,7 +29,7 @@ const userSchema = new Schema(
     userPassword: { type: String, required: true },
     adminRole: { type: Boolean, default: false },
     //userImage: { type: String, default: "default_avatar.jpeg" },
-    userImage: { type: String, default: "default_avatar-new.png" },
+    userImage: { type: String, default: "default-avatar-new.png" },
     //coverImage: { type: String, default: "default-background.jpeg" },
     coverImage: { type: String, default: "default-background-new.jpg" },
     savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post", unique: true }],

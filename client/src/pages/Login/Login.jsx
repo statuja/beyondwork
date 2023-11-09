@@ -20,17 +20,17 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    if (loggedOut === true) {
-      toast.warn('You successfully logged out.');
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (loggedOut === true) {
+  //     toast.warn('You successfully logged out.');
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    if (sessionExpired === true) {
-      toast.warn('Session expired, please login again.')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (sessionExpired === true) {
+  //     toast.warn('Session expired, please login again.')
+  //   }
+  // }, [])
 
   const onSubmit = async (data) => {
     const newDataObject = {
