@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import people from "../../images/Young_people.png";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ThankYou = () => {
   const navigate = useNavigate();
@@ -46,7 +46,6 @@ export const ThankYou = () => {
         const errorData = await response.json();
         //setError(errorData.error);
         toast.error(errorData.error);
-
       }
     } catch (error) {
       console.log("Fetch error:", error);
@@ -57,9 +56,11 @@ export const ThankYou = () => {
 
   useEffect(() => {
     if (companyRegistered === true) {
-      toast.success('You successfully registered your company. Please find below your login credentials.');
+      toast.success(
+        "You successfully registered your company. Please find below your login credentials."
+      );
     }
-  }, [])
+  }, []);
 
   //console.log(errors);
   return (
@@ -78,11 +79,11 @@ export const ThankYou = () => {
             <br></br>
             <br></br>
             <p>
-              Here are your login credentials. 
+              Here are your login credentials.
               <br></br>
               <br></br>
-              Your admin email: <b>{adminEmail}</b>.
-              Your temporary password:<b> admin1234</b>.
+              Your admin email: <b>{adminEmail}</b>
+              Your temporary password:<b> admin1234</b>
             </p>
           </div>
           <h2>Login to {companyName} admin account</h2>
@@ -107,18 +108,17 @@ export const ThankYou = () => {
       </div>
 
       <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
       />
-
     </div>
   );
 };
