@@ -65,7 +65,7 @@ export default function Topbar() {
         </div>
       </div>
 
-      {isBurgerMenuOpen && <BurgerMenu />}
+      {isBurgerMenuOpen && <BurgerMenu setIsBurgerMenuOpen={setIsBurgerMenuOpen}/>}
     </div>
   );
 }
