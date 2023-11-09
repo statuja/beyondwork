@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import MyContext from "../../context/MyContext";
 import GetAllPosts from "../../components/posts/GetAllPosts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -54,7 +53,7 @@ const SavedPosts = () => {
             handleUnsavePost={handleUnsavePost}
           />
         ) : (
-          <p>No saved posts found.</p>
+          <p>No saved posts found</p>
         )}
       <ToastContainer
         position="top-right"
