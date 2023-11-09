@@ -28,7 +28,7 @@ function Contact() {
           feel free to contact us!
         </p>
 
-        <div className="wrapper">
+        <div className="contact-wrapper">
           <a
             href="mailto:info.beyondwork@gmail.com"
             target="_blank"
