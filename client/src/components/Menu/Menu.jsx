@@ -91,12 +91,12 @@ const Menu = () => {
           </Link>
         </li>
         <li>
-          <Link to="/#">
+          <Link to="#">
             <SmartToyIcon className="icon" /> Trivia and Quizzes
           </Link>
         </li>
         <li>
-          <Link to="/#">
+          <Link to="#">
             <SpaIcon className="icon" /> Wellness and Sport
           </Link>
         </li>

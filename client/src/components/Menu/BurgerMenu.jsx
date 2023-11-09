@@ -16,7 +16,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
 import MyContext from "../../context/MyContext";
 
-const Menu = () => {
+const Menu = ({setIsBurgerMenuOpen}) => {
   const navigate = useNavigate();
   const { userData, setUserData, setLoggedOut, isDarkMode } =
     useContext(MyContext);
@@ -41,6 +41,7 @@ const Menu = () => {
       } else {
         alert(responseData.error[0].msg);
       }
+      setIsBurgerMenuOpen(false)
     } catch (error) {
       alert(
         "An error occurred while processing your request. Please try again later."
@@ -50,59 +51,70 @@ const Menu = () => {
   return (
     <ul className={`burgerMenu ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <li>
-        <Link to={`/user/profile/${userData._id}`}>
+        <Link to={`/user/profile/${userData._id}`} onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <AccountCircleOutlinedIcon className="icon" /> My Profile
         </Link>
       </li>
       <li>
-        <Link to="/company/profile">
+        <Link to="/company/profile" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <ApartmentOutlinedIcon className="icon" /> Company Profile
         </Link>
       </li>
       <li>
-        <Link to="/newsfeed">
+        <Link to="/newsfeed" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <NewspaperIcon className="icon" /> News Feed
         </Link>
       </li>
       {userData.adminRole ? (
         <li>
-          <Link to="/user/create">
+          <Link to="/user/create" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
             <PersonAddAltOutlinedIcon className="icon" /> Add New User
           </Link>
         </li>
       ) : null}
       <li>
-        <Link to="/savedposts">
+        <Link to="/savedposts" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
         </Link>
       </li>
       <li>
-        <Link to="/allusers">
+        <Link to="/allusers" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <Groups2OutlinedIcon className="icon" /> Your Colleagues
         </Link>
       </li>
       <li>
-        <Link to="#">
+        <Link to="#" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <CalendarMonthIcon className="icon" /> Events
         </Link>
       </li>
       <li>
-          <Link to="/#">
+          <Link to="/#" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
             <SmartToyIcon className="icon" /> Trivia and Quizzes
           </Link>
         </li>
         <li>
-          <Link to="/#">
+          <Link to="/#" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
             <SpaIcon className="icon" /> Wellness and Sport
           </Link>
         </li>
         <li>
-        <Link to="/marketplace">
+        <Link to="/marketplace" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <StorefrontIcon className="icon" /> Marketplace
         </Link>
       </li>
       <li>
-        <Link to="#">
+        <Link to="#" onClick={()=>{
+          setIsBurgerMenuOpen(false)}}>
           <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
         </Link>
       </li>
