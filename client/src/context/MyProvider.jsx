@@ -99,13 +99,15 @@ const MyProvider = ({ children }) => {
           setSavedPosts(data.savedPosts);
           // Store the fetched userData in local storage
           localStorage.setItem("userData", JSON.stringify(data));
+          localStorage.setItem("savedPosts", JSON.stringify(data.savedPosts));
+          
           // Retrieve savedPosts and likedPosts from local storage
-          const savedPostsFromStorage = JSON.parse(
-            localStorage.getItem("savedPosts")
-          );
-          if (savedPostsFromStorage) {
-            setSavedPosts(savedPostsFromStorage);
-          }
+          // const savedPostsFromStorage = JSON.parse(
+          //   localStorage.getItem("savedPosts")
+          // );
+          // if (savedPostsFromStorage) {
+          //   setSavedPosts(savedPostsFromStorage);
+          // }
           const likedPostsFromStorage = JSON.parse(
             localStorage.getItem("likedPosts")
           );

@@ -21,6 +21,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (id === userData._id) {
       setUser(userData); // If it's the user's own profile
+      fetchAllPosts()
       setLoading(false);
     } else {
       // Fetch user data by ID

@@ -59,11 +59,20 @@ const GetAllPosts = ({ userPosts }) => {
         const savedPostsFromStorage = JSON.parse(
           localStorage.getItem("savedPosts")
         );
+
+        console.log(
+          "GetAllPosts: savedPostsFromStorage",
+          savedPostsFromStorage
+        );
         if (savedPostsFromStorage) {
           setSavedPosts(savedPostsFromStorage);
         }
         const likedPostsFromStorage = JSON.parse(
           localStorage.getItem("likedPosts")
+        );
+        console.log(
+          "GetAllPosts: likedPostsFromStorage",
+          likedPostsFromStorage
         );
         if (likedPostsFromStorage) {
           setLikedPosts(likedPostsFromStorage);
@@ -77,6 +86,11 @@ const GetAllPosts = ({ userPosts }) => {
       toast.error("Error fetching posts.");
     }
   };
+
+  useEffect(() => {
+    console.log("useEffect [] starts");
+    getAllPosts();
+  }, []);
 
   useEffect(() => {
     const storedSavedPosts = JSON.parse(localStorage.getItem("savedPosts"));
@@ -179,7 +193,10 @@ const GetAllPosts = ({ userPosts }) => {
 
       if (response.ok) {
         const updatedPost = await response.json();
+        console.log("Liked Post response:", updatedPost);
         const oldPosts = [...posts];
+        console.log("Old posts:", oldPosts);
+        console.log("likedPosts posts:", likedPosts);
         const idx = oldPosts.findIndex((item) => item._id === postId);
         oldPosts[idx] = updatedPost;
         setPosts([...oldPosts]);
