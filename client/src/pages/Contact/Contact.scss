@@ -5,7 +5,9 @@
     align-items: center;
     background-color: #f5f5dc;
     color: rgb(55, 55, 55);
-
+p {
+        font-size: 20px;
+    }
     .left {
         height: 100%;
         flex: 1;
@@ -51,7 +53,7 @@
         align-items: center;
 
         h2 {
-            font-size: 22px;
+            font-size: 30px;
             font-family: 'Belanosima', sans-serif;
             font-weight: 400;
         }
@@ -98,7 +100,7 @@
 
             h1 {
                 width: 85%;
-                font-size: 20px;
+                font-size: 28px;
                 line-height: 24px;
                 text-align: center;
             }
@@ -108,7 +110,7 @@
             padding: 30px;
 
             h2 {
-                font-size: 14px;
+                font-size: 24px;
             }
 
             .contact-wrapper {
