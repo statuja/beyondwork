@@ -7,6 +7,7 @@
 
 body {
   background-color: rgba(245, 245, 220, 0.254);
+  overflow-x: hidden;
 
   &.dark-mode {
     background-color: rgb(40, 39, 39);
@@ -33,6 +34,7 @@ body {
     justify-content: center;
    // align-items: center;
     //border: 2px solid purple;
+    
   }
 }
 
@@ -58,11 +60,11 @@ body {
   }
 }
 
-@media screen and (max-width: 1220px) {
+/* @media screen and (max-width: 1220px) {
   .contentCont {
   padding: 10px;
   }
-}
+} */
 
 
 @media screen and (max-width: 1440px) {
@@ -82,7 +84,7 @@ body {
   .content {
     //width: 100%;
     .contentCont {
-      padding: 0 10px;
+      padding: 0 15px;
     }
   }
 

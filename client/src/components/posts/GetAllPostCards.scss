@@ -12,7 +12,12 @@
   padding: 30px 0;
   margin-top: 30px;
   word-wrap: break-word;
-  //background-image: url(../../images/);
+  background-image: linear-gradient(#f5f5dca9, #f5f5dcd6), url(../../images/post.gif); //
+  //background-image: linear-gradient(#5f90c099, #4d7dde), url(../../images/post.gif); //
+  //background-color: rgba(255, 255, 255, 0.37);
+  //background-image: url(../../images/post.gif);
+  //background: rgb(131,58,180);
+  //background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,138,29,0.5354516806722689) 0%, rgba(252, 221, 69, 0.439) 100%);
 
   &.dark-mode {
     background-color: #3d3a3a;
@@ -51,7 +56,8 @@
     align-items: center;
     justify-content: center;
     padding: 20px 40px;
-    width: 90%;
+    width: 80%;
+    //background-color: rgba(251, 251, 246, 0.896);
     background-color: rgba(251, 251, 246, 0.896);
     border-radius: 8px;
     border: 1px solid rgba(128, 128, 128, 0.22);
@@ -194,6 +200,3 @@
   }
 }
 
-.toast{
-  background-color: green;
-}
