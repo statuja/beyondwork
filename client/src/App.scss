@@ -38,6 +38,12 @@ body {
   }
 }
 
+.Toastify__toast--success, .Toastify__toast--error, .Toastify__toast--warning {
+  color: #37424d !important;
+  border-radius: 15px !important;
+  background: #f4f4d7 !important;
+}
+
 @media screen and (max-width: 768px) {
   .content {
     .menuCont {
