@@ -20,11 +20,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  // useEffect(() => {
-  //   if (loggedOut === true) {
-  //     toast.warn('You successfully logged out.');
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (loggedOut === true) {
+      toast.warn('You successfully logged out.');
+    }
+  }, [])
 
   // useEffect(() => {
   //   if (sessionExpired === true) {
