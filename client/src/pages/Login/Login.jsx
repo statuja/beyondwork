@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
+//import people from "../../images/All_Walk_07.gif";
 import people from "../../images/Young_people.png";
 import "./Login.scss";
 import { ToastContainer, toast } from 'react-toastify';
@@ -65,7 +66,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="left">
+      <div className="login-left">
         <div className="logo">
           <img src={logo} alt="BeyondWork Logo" />
         </div>
@@ -79,7 +80,7 @@ const Login = () => {
           </p>
         </div>
       </div>
-      <div className="right">
+      <div className="login-right">
         <div className="right-top">
           <h2>Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -113,7 +114,7 @@ const Login = () => {
             </button>
           </div>
         </div>
-       <img src={people} alt="People connected" /> 
+       <img className="peopleImg" src={people} alt="People connected" /> 
       </div>
 
       <ToastContainer
