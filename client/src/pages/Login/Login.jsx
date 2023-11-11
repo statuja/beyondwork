@@ -4,15 +4,15 @@ import { useForm } from "react-hook-form";
 import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
-//import people from "../../images/All_Walk_07.gif";
 import people from "../../images/Young_people.png";
 import "./Login.scss";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserData, loggedOut, sessionExpired } = useContext(MyContext);
+  const { setUserData, loggedOut} =
+    useContext(MyContext);
   const [error, setError] = useState("");
 
   const {
@@ -23,9 +23,9 @@ const Login = () => {
 
   useEffect(() => {
     if (loggedOut === true) {
-      toast.warn('You successfully logged out.');
+      toast.warn("You successfully logged out.");
     }
-  }, [])
+  }, []);
 
   // useEffect(() => {
   //   if (sessionExpired === true) {
@@ -96,8 +96,10 @@ const Login = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <div><input type="submit" value="Login" className="button" /></div>
-            
+            <div>
+              <input type="submit" value="Login" className="button" />
+            </div>
+
             {typeof error === "string" && error && (
               <div className="error">{error}</div>
             )}
@@ -114,22 +116,21 @@ const Login = () => {
             </button>
           </div>
         </div>
-       <img className="peopleImg" src={people} alt="People connected" /> 
+        <img className="peopleImg" src={people} alt="People connected" />
       </div>
 
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
-
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </div>
   );
 };
