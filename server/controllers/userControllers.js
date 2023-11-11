@@ -263,7 +263,6 @@ export const unsavePost = async (req, res) => {
   }
 };
 
-
 export const getSavedPosts = async (req, res) => {
   try {
     const usersId = req.user._id;
@@ -289,5 +288,26 @@ export const getSavedPosts = async (req, res) => {
     res.json(allPosts);
   } catch (error) {
     res.status(500).json({ message: error.message }); // Handle other errors
+  }
+};
+
+// Controller method to fetch liked posts for a specific user
+export const getLikedPosts = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    // Find posts where the user's ID is in the likedBy array
+    const likedPosts = await Post.find({ likedBy: userId })
+      .populate({
+        path: "createdBy",
+        select: "userFullName userImage",
+      })
+      .sort("-_id");
+
+    res.json(likedPosts);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching liked posts." });
   }
 };
