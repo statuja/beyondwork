@@ -11,6 +11,7 @@ import {
   getUserProfile,
   deleteUser,
   savePost,
+  unsavePost,
   getSavedPosts,
 } from "../controllers/userControllers.js";
 import authorization from "../middleware/authorization.js";
@@ -85,6 +86,8 @@ router.put(
 router.get("/getUserProfile/:id", authorization, getUserProfile);
 router.delete("/deleteUser/:userId", authorization, isAdmin, deleteUser);
 router.post("/savePost/:postId", authorization, savePost);
+router.delete("/unsavePost/:postId", authorization, unsavePost);
+
 router.get("/savedPosts", authorization, getSavedPosts);
 
 export default router;

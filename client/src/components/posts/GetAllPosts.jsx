@@ -137,12 +137,46 @@ const GetAllPosts = ({ userPosts }) => {
           const updatedSavedPosts = [...savedPosts, postId];
           setSavedPosts(updatedSavedPosts);
           toast.success("Post successfully saved.");
+        } else if (responseData.action === "already_saved") {
+          // Optionally, you can show a message or handle it in a different way
+          console.log("Post is already saved.");
         }
       } else {
         toast.error("Failed to save/unsave the post.");
       }
     } catch (error) {
       toast.error("An error occurred while saving/unsaving the post.");
+    }
+  };
+
+  // New function for unsaving posts
+  const onUnsavePost = async (postId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/user/unsavePost/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.action === "unsave") {
+          const updatedSavedPosts = savedPosts.filter((id) => id !== postId);
+          setSavedPosts(updatedSavedPosts);
+          toast.success("Post successfully unsaved.");
+        } else {
+          // Optionally, you can show a message or handle it in a different way
+          console.log("Post was not saved.");
+        }
+      } else {
+        toast.error("Failed to unsave the post.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while unsaving the post.");
     }
   };
 
@@ -222,6 +256,40 @@ const GetAllPosts = ({ userPosts }) => {
       toast.error("An error occurred while liking the post.");
     }
   };
+
+  // New function for unliking posts
+  const handleUnlikePost = async (postId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/post/unlike/${postId}/${userData._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
+        const updatedPost = await response.json();
+        const oldPosts = [...posts];
+        const idx = oldPosts.findIndex((item) => item._id === postId);
+        oldPosts[idx] = updatedPost;
+        setPosts([...oldPosts]);
+        const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
+        setLikedPosts(updatedLikedPosts);
+      } else {
+        const errorData = await response.json();
+        console.error("Error unliking post:", errorData.message);
+        toast.error("Failed to unlike the post.");
+      }
+    } catch (error) {
+      console.error("An error occurred while unliking the post:", error);
+      toast.error("An error occurred while unliking the post.");
+    }
+  };
+
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
     setShowEditForm(true);
@@ -341,7 +409,7 @@ const GetAllPosts = ({ userPosts }) => {
                         <span>
                           <BookmarkIcon
                             className="icon"
-                            onClick={() => onSavePost(item._id)}
+                            onClick={() => onUnsavePost(item._id)}
                           />
                         </span>
                       ) : (
@@ -360,7 +428,7 @@ const GetAllPosts = ({ userPosts }) => {
                       {likedPosts.includes(item._id) ? (
                         <ThumbUpIcon
                           className="icon"
-                          onClick={() => handleLikePost(item._id)}
+                          onClick={() => handleUnlikePost(item._id)} // Use handleUnlikePost for unliking
                         />
                       ) : (
                         <ThumbUpOffAltIcon
