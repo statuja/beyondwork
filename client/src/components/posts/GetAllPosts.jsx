@@ -46,8 +46,6 @@ const GetAllPosts = ({ userPosts }) => {
         credentials: "include",
       });
 
-      console.log("API response received:", response.status);
-
       if (response.ok) {
         const data = await response.json();
         if (data.success === false) {
@@ -55,28 +53,6 @@ const GetAllPosts = ({ userPosts }) => {
           return navigate("/");
         }
         setPosts(data);
-        // Retrieve savedPosts and likedPosts from local storage
-        const savedPostsFromStorage = JSON.parse(
-          localStorage.getItem("savedPosts")
-        );
-
-        console.log(
-          "GetAllPosts: savedPostsFromStorage",
-          savedPostsFromStorage
-        );
-        if (savedPostsFromStorage) {
-          setSavedPosts(savedPostsFromStorage);
-        }
-        const likedPostsFromStorage = JSON.parse(
-          localStorage.getItem("likedPosts")
-        );
-        console.log(
-          "GetAllPosts: likedPostsFromStorage",
-          likedPostsFromStorage
-        );
-        if (likedPostsFromStorage) {
-          setLikedPosts(likedPostsFromStorage);
-        }
       } else {
         console.error("Error updating profile:", response.statusText);
         toast.error("Failed to fetch posts.");
@@ -88,31 +64,8 @@ const GetAllPosts = ({ userPosts }) => {
   };
 
   useEffect(() => {
-    console.log("useEffect [] starts");
-    getAllPosts();
-  }, []);
-
-  useEffect(() => {
-    const storedSavedPosts = JSON.parse(localStorage.getItem("savedPosts"));
-    if (storedSavedPosts) {
-      setSavedPosts(storedSavedPosts);
-    }
-
-    const storedLikedPosts = JSON.parse(localStorage.getItem("likedPosts"));
-    if (storedLikedPosts) {
-      setLikedPosts(storedLikedPosts);
-    }
-
     getAllPosts();
   }, [userPosts, setSavedPosts, setLikedPosts]);
-
-  useEffect(() => {
-    localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
-  }, [savedPosts]);
-
-  useEffect(() => {
-    localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
-  }, [likedPosts]);
 
   const onSavePost = async (postId) => {
     try {
@@ -195,23 +148,19 @@ const GetAllPosts = ({ userPosts }) => {
       );
 
       if (response.ok) {
-        //setMessage("Post has been successfully deleted.");
         setPosts((prevPosts) =>
           prevPosts.filter((post) => post._id !== postId)
         );
         toast.success("Post has been successfully deleted.");
       } else {
-        //setError("Failed to delete the post.");
         toast.error("Failed to delete the post.");
       }
     } catch (error) {
-      //setError("An error occurred while deleting the post.");
       toast.error("An error occurred while deleting the post.");
     }
   };
 
   const handleLikePost = async (postId) => {
-    console.log(postId);
     try {
       const response = await fetch(
         `http://localhost:5000/post/like/${postId}/${userData._id}`,
@@ -223,70 +172,34 @@ const GetAllPosts = ({ userPosts }) => {
           credentials: "include",
         }
       );
-      console.log(response.ok);
-
       if (response.ok) {
         const updatedPost = await response.json();
-        console.log("Liked Post response:", updatedPost);
-        const oldPosts = [...posts];
-        console.log("Old posts:", oldPosts);
-        console.log("likedPosts posts:", likedPosts);
-        const idx = oldPosts.findIndex((item) => item._id === postId);
-        oldPosts[idx] = updatedPost;
-        setPosts([...oldPosts]);
-        // setPosts((prevPosts) =>
-        //   prevPosts?.map((post) => (post._id === postId ? updatedPost : post))
-        // );
-        if (likedPosts.includes(postId)) {
+
+        // Check if the post is in the likedPosts array
+        const isLiked = likedPosts.includes(postId);
+
+        // Update likedPosts based on the response
+        if (isLiked) {
           const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
           setLikedPosts(updatedLikedPosts);
         } else {
           const updatedLikedPosts = [...likedPosts, postId];
           setLikedPosts(updatedLikedPosts);
         }
+
+        // Update the posts state
+        const updatedPosts = posts.map((item) =>
+          item._id === postId ? updatedPost : item
+        );
+        setPosts(updatedPosts);
       } else {
         const errorData = await response.json();
         console.error("Error liking post:", errorData.message);
-        //setError("Failed to like the post.");
         toast.error("Failed to like the post.");
       }
     } catch (error) {
       console.error("An error occurred while liking the post:", error);
-      //setError("An error occurred while liking the post.");
       toast.error("An error occurred while liking the post.");
-    }
-  };
-
-  // New function for unliking posts
-  const handleUnlikePost = async (postId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/post/unlike/${postId}/${userData._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
-
-      if (response.ok) {
-        const updatedPost = await response.json();
-        const oldPosts = [...posts];
-        const idx = oldPosts.findIndex((item) => item._id === postId);
-        oldPosts[idx] = updatedPost;
-        setPosts([...oldPosts]);
-        const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
-        setLikedPosts(updatedLikedPosts);
-      } else {
-        const errorData = await response.json();
-        console.error("Error unliking post:", errorData.message);
-        toast.error("Failed to unlike the post.");
-      }
-    } catch (error) {
-      console.error("An error occurred while unliking the post:", error);
-      toast.error("An error occurred while unliking the post.");
     }
   };
 
@@ -428,7 +341,7 @@ const GetAllPosts = ({ userPosts }) => {
                       {likedPosts.includes(item._id) ? (
                         <ThumbUpIcon
                           className="icon"
-                          onClick={() => handleUnlikePost(item._id)} // Use handleUnlikePost for unliking
+                          onClick={() => handleLikePost(item._id)}
                         />
                       ) : (
                         <ThumbUpOffAltIcon
@@ -437,6 +350,7 @@ const GetAllPosts = ({ userPosts }) => {
                         />
                       )}
                     </span>
+
                     <div className="likes">
                       <div>{item.like}</div>
                       <div className="people-liked-it"> people liked it</div>

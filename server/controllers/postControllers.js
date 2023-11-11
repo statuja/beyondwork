@@ -94,23 +94,41 @@ export const editPost = async (req, res) => {
 export const likePost = async (req, res) => {
   try {
     const { postId, userId } = req.params;
-
-    const post = await Post.findOneAndUpdate(
-      { _id: postId, likedBy: { $ne: userId } }, // Check if the user hasn't liked the post already
-      { $push: { likedBy: userId }, $inc: { like: 1 } },
-      { new: true }
-    ).populate({
-      path: "createdBy",
-      select: "userFullName userImage",
-    });
-
-    if (!post) {
-      return res
-        .status(400)
-        .json({ message: "Post already liked by the user." });
+    console.log(req.params);
+    let postQuery = await Post.findById(postId);
+    if (postQuery) {
+      const userCheck = postQuery.likedBy.includes(userId);
+      console.log(userCheck);
+      if (!userCheck) {
+        const doc = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $push: { likedBy: userId }, $inc: { like: 1 } },
+          { new: true }
+        ).populate({
+          path: "createdBy",
+          select: "userFullName userImage",
+        });
+        if (doc) {
+          res.json(doc);
+        } else {
+          res.status(404).json({ message: "Post not found" });
+        }
+      } else {
+        const doc2 = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $pull: { likedBy: userId }, $inc: { like: -1 } },
+          { new: true }
+        ).populate({
+          path: "createdBy",
+          select: "userFullName userImage",
+        });
+        if (doc2) {
+          res.json(doc2);
+        } else {
+          res.status(404).json({ message: "Post not found" });
+        }
+      }
     }
-
-    res.json(post);
   } catch (error) {
     res
       .status(500)
@@ -118,25 +136,3 @@ export const likePost = async (req, res) => {
   }
 };
 
-export const unlikePost = async (req, res) => {
-  try {
-    const { postId, userId } = req.params;
-
-    const post = await Post.findOneAndUpdate(
-      { _id: postId, likedBy: userId }, // Check if the user has liked the post
-      { $pull: { likedBy: userId }, $inc: { like: -1 } },
-      { new: true }
-    ).populate({
-      path: "createdBy",
-      select: "userFullName userImage",
-    });
-
-    if (!post) {
-      return res.status(400).json({ message: "Post not liked by the user." });
-    }
-
-    res.json(post);
-  } catch (error) {
-    res.status(500).json({ message: "An error occurred while unliking the post." });
-  }
-};

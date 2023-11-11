@@ -9,7 +9,6 @@ import {
   getOnePost,
   getUserPosts,
   likePost,
-  unlikePost,
 } from "../controllers/postControllers.js";
 import authorization from "../middleware/authorization.js";
 
@@ -40,9 +39,8 @@ router.get("/getOne/:postId", authorization, getOnePost);
 
 router.delete("/delete/:postId", authorization, deletePost);
 
-router.put("/edit/:postId", authorization, editPost);
+router.post("/edit/:postId", authorization, editPost);
 
 router.post("/like/:postId/:userId", authorization, likePost);
-router.post("/unlike/:postId/:userId", authorization, unlikePost); // Add the new route for unliking
 
 export default router;
