@@ -39,7 +39,7 @@ router.get("/getOne/:postId", authorization, getOnePost);
 
 router.delete("/delete/:postId", authorization, deletePost);
 
-router.post("/edit/:postId", authorization, editPost);
+router.put("/edit/:postId", authorization, editPost);
 
 router.post("/like/:postId/:userId", authorization, likePost);
 
