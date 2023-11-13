@@ -8,20 +8,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
-
 const UserProfile = () => {
   const navigate = useNavigate();
   const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userPosts, setUserPosts] = useState([]); // State variable for user's posts
+  const [userPosts, setUserPosts] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (id === userData._id) {
       setUser(userData); // If it's the user's own profile
-      fetchAllPosts()
+      fetchAllPosts();
       setLoading(false);
     } else {
       // Fetch user data by ID
@@ -41,18 +40,11 @@ const UserProfile = () => {
           if (response.ok) {
             const data = await response.json();
             if (data.success === false) {
-              //alert("Session expired, please login again!");
-              //toast.warn('Session expired, please login again!')
               setSessionExpired(true);
               setUser({});
               return navigate("/");
             }
             setUser(data); // Set the user data including images
-            // if (data.success === false) {
-            //   alert("Server error");
-            //   setUser({});
-            //   return navigate("/");
-            // }
             setLoading(false);
           } else {
             console.error("Error fetching profile:", response.statusText);
@@ -67,8 +59,6 @@ const UserProfile = () => {
       fetchUserDataById(id);
     }
   }, [id, userData]);
-
-  //console.log(userData);
 
   const fetchAllPosts = async () => {
     try {
@@ -86,11 +76,9 @@ const UserProfile = () => {
         const data = await response.json();
         setUserPosts(data); // Update the user's posts
       } else {
-        //setError("Failed to fetch user's posts.");
         toast.error("Failed to fetch user's posts.");
       }
     } catch (error) {
-      //setError("An error occurred while fetching user's posts.");
       toast.error("An error occurred while fetching user's posts.");
     }
   };
@@ -129,10 +117,16 @@ const UserProfile = () => {
               <p>User not found</p>
             )}
           </div>
-          <div className={`profileRight ${isDarkMode? "dark-mode": "light-mode"}`}>
+          <div
+            className={`profileRight ${
+              isDarkMode ? "dark-mode" : "light-mode"
+            }`}
+          >
             <h3>Recent posts</h3>
             {id === userData._id && (
-               <Link className="create-link" to="/newsfeed">Create a post</Link> 
+              <Link className="create-link" to="/newsfeed">
+                Create a post
+              </Link>
             )}
             {loading ? (
               <p>Loading...</p>
@@ -141,8 +135,6 @@ const UserProfile = () => {
             ) : (
               <p>No posts created yet.</p>
             )}
-           
-
           </div>
         </div>
       </div>

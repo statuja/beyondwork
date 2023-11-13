@@ -1,7 +1,8 @@
 .wrapper {
   background-color: rgba(231, 231, 163, 0.5568627451);
   border-radius: 15px;
-min-width: 100%;
+  min-width: 100%;
+
   &.dark-mode {
     background-color: #333;
     color: #333;
@@ -89,6 +90,14 @@ h1 {
       font-size: 16px;
     }
 
+    .emails {
+      text-transform: lowercase;
+
+      b {
+        text-transform: capitalize;
+      }
+    }
+
     a {
       text-decoration: none;
       color: #333;
@@ -110,12 +119,14 @@ h1 {
 
   .user-cards-container {
     width: 90%;
+
+    .user-cards {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
   }
 
-  .user-cards {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
+
 
   .icon {
     font-size: 20px;

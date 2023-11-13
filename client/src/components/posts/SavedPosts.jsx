@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import GetAllPosts from "../../components/posts/GetAllPosts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SavedPosts = () => {
-  const [savedPosts, setSavedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [savedPosts, setSavedPosts] = useState([]); // State variable for user's posts
 
   const fetchSavedPosts = async () => {
     try {
@@ -33,28 +33,17 @@ const SavedPosts = () => {
     fetchSavedPosts();
   }, []);
 
-  const handleUnsavePost = (postId) => {
-    const updatedSavedPosts = savedPosts.filter((post) => post._id !== postId);
-    setSavedPosts(updatedSavedPosts);
-  };
-
-  useEffect(() => {
-    fetchSavedPosts(); 
-  }, [savedPosts]);
 
   return (
     <div className="saved-posts-container ">
-        <h1>Your Saved Posts</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : savedPosts && savedPosts.length > 0 ? (
-          <GetAllPosts
-            userPosts={savedPosts}
-            handleUnsavePost={handleUnsavePost}
-          />
-        ) : (
-          <p>No saved posts found</p>
-        )}
+      <h1>Your Saved Posts</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : savedPosts && savedPosts.length > 0 ? (
+        <GetAllPosts userPosts={savedPosts} />
+      ) : (
+        <p>No saved posts found</p>
+      )}
       <ToastContainer
         position="top-right"
         autoClose={5000}
