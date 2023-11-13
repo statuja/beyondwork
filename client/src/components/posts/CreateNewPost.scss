@@ -5,15 +5,14 @@
   padding: 20px;
   width: 100%;
   background-color: #e7e7a38e;
-  //background-image: linear-gradient(#f5f5dc2c, #f5f5dc2f), url(../../images/davies-designs-studio-txJ27-2-7Bw-unsplash.jpg);
+  //background-image: linear-gradient(#f5f5dc2f, #f0f5dc32), url(../../images/8.jpg);
   background-position: center;
-  background-size: cover;
+  background-size:cover;
   background-repeat: no-repeat;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
-
+  margin-bottom: 70px;
 
   &.dark-mode {
     background-color: #3D3A3A;
@@ -107,10 +106,10 @@
       color: #37424d;
     }
   }
+}
 
-  @media (min-width: 0px) and (max-width: 425px) {
-    .create-new-post {
-      border: 2px solid red;
-    }
+@media screen and (max-width: 425px) {
+  .create-new-post {
+    margin-bottom: 50px;
   }
 }
