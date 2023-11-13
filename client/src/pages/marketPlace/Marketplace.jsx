@@ -5,11 +5,9 @@ import "./MarketPlace.scss";
 function MarketPlace() {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
-  // Add an event listener to determine when to show the scroll-to-top arrow.
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
-        // Adjust this value as needed
         setShowScrollToTop(true);
       } else {
         setShowScrollToTop(false);
@@ -182,6 +180,28 @@ function MarketPlace() {
             <p>New</p>
             <h3>Price: </h3>
             <p>300€</p>
+            <button>contact the seller</button>
+          </div>
+        </section>
+
+        <section className="cards-section">
+          <div className="bicycle-card-img">
+            <div className="product-images"></div>
+          </div>
+          <div className="card">
+            <h2>Mountainbike 26zoll</h2>
+            <h3>category: </h3>
+            <p>Bicycle</p>
+            <h3>description:</h3>
+            <p>
+              I have my bike for sale since leaving the city soon !! Smooth gear
+              changes really good condition overall !! Kept in the basement
+              Ready to ride !!
+            </p>
+            <h3>condition: </h3>
+            <p>Used- like new</p>
+            <h3>Price: </h3>
+            <p>150.00€</p>
             <button>contact the seller</button>
           </div>
         </section>

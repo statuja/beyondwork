@@ -39,10 +39,10 @@
   background-color: rgba(251, 251, 246, 0.784);
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        &:hover {
-          transform: scale(1.02);
-          transition: transform 0.2s ease-in-out;
-        }
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+  }
 
   .card {
     // flex-wrap: wrap;
@@ -168,12 +168,22 @@
   }
 }
 
+.bicycle-card-img {
+  background-image: url("./image/bicycle1.png");
+  background-size: 100px;
+
+  &:hover {
+    background-image: url("./image/bicycle2.png");
+  }
+}
+
 .LikiTrike-card-img,
 .EEZY-card-img,
 .chair-card-img,
 .germanBooks-card-img,
 .car-card-img,
-.tickets-card-img {
+.tickets-card-img,
+.bicycle-card-img {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
