@@ -31,8 +31,6 @@ function AllUsers() {
         if (response.ok) {
           const data = await response.json();
           if (data.success === false) {
-            //alert("Session expired, please login again!");
-            //toast.warn('Session expired, please login again!')
             setSessionExpired(true);
             setUsers({});
             return navigate("/");
@@ -54,13 +52,7 @@ function AllUsers() {
       fetchAllUsers();
     }
   }, [userData]);
-  // if (error) {
-  //   return (
-  //     <div className="user-cards-container">
-  //       <div className="error-message">Error: {error}</div>
-  //     </div>
-  //   );
-  // }
+
   return (
     <div className={`wrapper ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <div
@@ -89,7 +81,7 @@ function AllUsers() {
                       alt="userImage"
                     />
                   )}
-                </div>{" "}
+                </div>
               </Link>
               <div className="user-details">
                 <p>
@@ -103,7 +95,7 @@ function AllUsers() {
                 <p>
                   <b>Department:</b> {user.userDepartment}
                 </p>
-                <p>
+                <p className="emails">
                   <b>Email:</b> {user.userContact.email}
                 </p>
               </div>
