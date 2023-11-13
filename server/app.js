@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.FRONTEND_ORIGIN,
   // process.env.NODE_ENV === "production"
   //   ? "vercel server" //change when we deploy
   //   : "http://localhost:3000",
