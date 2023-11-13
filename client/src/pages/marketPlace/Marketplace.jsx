@@ -239,7 +239,7 @@ function MarketPlace() {
           <div className="card">
             <h2>Comfee portable air conditioner</h2>
             <h3>category: </h3>
-            <p>Sofa</p>
+            <p>Clima</p>
             <h3>description:</h3>
             <p>
               Quick set-up. For the use of the device, it is not necessary to
