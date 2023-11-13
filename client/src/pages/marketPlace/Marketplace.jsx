@@ -208,6 +208,7 @@ function MarketPlace() {
             <button>contact the seller</button>
           </div>
         </section>
+
         <section className="cards-section">
           <div className="sofa-card-img">
             <div className="product-images"></div>
@@ -227,6 +228,35 @@ function MarketPlace() {
             <p>Used</p>
             <h3>Price: </h3>
             <p>74.99€</p>
+            <button>contact the seller</button>
+          </div>
+        </section>
+
+        <section className="cards-section">
+          <div className="mobile-card-img">
+            <div className="product-images"></div>
+          </div>
+          <div className="card">
+            <h2>Comfee portable air conditioner</h2>
+            <h3>category: </h3>
+            <p>Sofa</p>
+            <h3>description:</h3>
+            <p>
+              Quick set-up. For the use of the device, it is not necessary to
+              drill a holes in the wall. The supplied flat nozzle allows the use
+              of tilted as well as sliding windows. High performance: The CMK
+              2600 from Climia has significantly more performance than air
+              conditioning devices without an exhaust hose. Long service life
+              and continuous operation are possible with this air conditioner.
+              Space-saving air conditioner: The air cooler has a compact
+              dimensions of 70 x 34 x 35 cm (H x W x D). The air cooler can be
+              used flexibly in the office or at home and is equipped with a max.
+              volume of 53 db(A), quieter than a conventional refrigerator.
+            </p>
+            <h3>condition: </h3>
+            <p>New- never used</p>
+            <h3>Price: </h3>
+            <p>299.99€</p>
             <button>contact the seller</button>
           </div>
         </section>
