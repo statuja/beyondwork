@@ -77,6 +77,7 @@ export default App;
 
 const MainLayout = () => (
   <>
+    <ScrollToTop />
     <Navbar />
     <Outlet />
     <Footer />
