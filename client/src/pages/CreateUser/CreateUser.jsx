@@ -95,9 +95,7 @@ export const UserRegistration = () => {
         </div>
         <div className="addUser">
           <form
-            className={`form ${
-              isDarkMode ? "dark-mode" : "light-mode"
-            }`}
+            className={`form ${isDarkMode ? "dark-mode" : "light-mode"}`}
             onSubmit={handleSubmit(onSubmit)}
           >
             <label htmlFor="userFullName">Employee Full Name:</label>
@@ -152,23 +150,12 @@ export const UserRegistration = () => {
                 maxLength: 30,
               })}
             />
-            {/* <label htmlFor="adminRole">Admin role:</label>
-            <label>Admin</label>
-            <input {...register("Admin role:", { required: true })} type="radio" value="Employee" />
-            <label>Employee</label>
-            <input {...register("Admin role:", { required: true })} type="radio" value=" Admin" /> */}
-            {/* <select {...register("adminRole")}>
-          <option value="No">Not an Admin</option>
-          <option value="Yes">Admin</option>
-        </select> */}
-            {/* <label>Is this user an admin?</label>
-        <input {...register("adminRole")} type="radio" value="Yes" />
-        <input
-          {...register("adminRole")}
-          type="radio"
-          value=" No"
-          defaultChecked
-        /> */}
+            <label htmlFor="adminRole">Admin Role:</label>
+
+            <select {...register("adminRole")}>
+              <option value={true}>Yes</option>
+              <option value={false}> No</option>
+            </select>
             <input type="submit" className="button" />
             {/* {message && <div>{message}</div>} */}
           </form>
