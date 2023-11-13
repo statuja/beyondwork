@@ -12,19 +12,25 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const GetAllPosts = ({ userPosts }) => {
   const navigate = useNavigate();
 
-  const { userData, posts, setPosts, setSessionExpired } =
-    useContext(MyContext);
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const {
+    userData,
+    posts,
+    setPosts,
+    setSessionExpired,
+    isDarkMode,
+    savedPosts,
+    setSavedPosts,
+    likedPosts,
+    setLikedPosts,
+  } = useContext(MyContext);
   const [editPostId, setEditPostId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [savedPosts, setSavedPosts] = useState([]);
-  const [likedPosts, setLikedPosts] = useState([]);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   const getAllPosts = async () => {
     try {
@@ -40,19 +46,13 @@ const GetAllPosts = ({ userPosts }) => {
         credentials: "include",
       });
 
-      console.log("API response received:", response.status);
-
       if (response.ok) {
         const data = await response.json();
-        //console.log("Data received from the API:", data);
         if (data.success === false) {
-          //alert("Session expired, please login again!");
-          //toast.warn('Session expired, please login again!')
           setSessionExpired(true);
           return navigate("/");
         }
         setPosts(data);
-        // Set saved and liked posts based on user data
       } else {
         console.error("Error updating profile:", response.statusText);
         toast.error("Failed to fetch posts.");
@@ -64,30 +64,8 @@ const GetAllPosts = ({ userPosts }) => {
   };
 
   useEffect(() => {
-    const savedPostsFromStorage = localStorage.getItem("savedPosts");
-    console.log("savedPostsFromStorage:", savedPostsFromStorage); // Add this line for logging
-
-    if (savedPostsFromStorage) {
-      const parsedSavedPosts = JSON.parse(savedPostsFromStorage);
-      console.log("parsedSavedPosts:", parsedSavedPosts); // Add this line for logging
-      setSavedPosts(parsedSavedPosts);
-    }
-
-    const likedPostsFromStorage = localStorage.getItem("likedPosts");
-    if (likedPostsFromStorage) {
-      setLikedPosts(JSON.parse(likedPostsFromStorage));
-    }
-
     getAllPosts();
-  }, [userPosts]);
-
-  useEffect(() => {
-    localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
-  }, [savedPosts]);
-
-  useEffect(() => {
-    localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
-  }, [likedPosts]);
+  }, [userPosts, setSavedPosts, setLikedPosts]);
 
   const onSavePost = async (postId) => {
     try {
@@ -103,25 +81,55 @@ const GetAllPosts = ({ userPosts }) => {
         }
       );
       if (response.ok) {
-        //setMessage("Post has been saved successfully.");
-
         const responseData = await response.json();
-        if (responseData.action === "save") {
-          //setMessage("Post has been saved successfully.");
-          const updatedSavedPosts = [...savedPosts, postId];
-          setSavedPosts(updatedSavedPosts);
-        } else if (responseData.action === "unsave") {
-          //setMessage("Post has been unsaved successfully.");
+        if (responseData.action === "unsave") {
           const updatedSavedPosts = savedPosts.filter((id) => id !== postId);
           setSavedPosts(updatedSavedPosts);
+          toast.success("Post successfully unsaved.");
+        } else if (responseData.action === "save") {
+          const updatedSavedPosts = [...savedPosts, postId];
+          setSavedPosts(updatedSavedPosts);
+          toast.success("Post successfully saved.");
+        } else if (responseData.action === "already_saved") {
+          // Optionally, you can show a message or handle it in a different way
+          console.log("Post is already saved.");
         }
       } else {
-        //setError("Failed to save the post.");
-        toast.error("Failed to save the post.");
+        toast.error("Failed to save/unsave the post.");
       }
     } catch (error) {
-      //setError("An error occurred while saving the post.");
-      toast.error("An error occurred while saving the post.");
+      toast.error("An error occurred while saving/unsaving the post.");
+    }
+  };
+
+  // New function for unsaving posts
+  const onUnsavePost = async (postId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/user/unsavePost/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.action === "unsave") {
+          const updatedSavedPosts = savedPosts.filter((id) => id !== postId);
+          setSavedPosts(updatedSavedPosts);
+          toast.success("Post successfully unsaved.");
+        } else {
+          // Optionally, you can show a message or handle it in a different way
+          console.log("Post was not saved.");
+        }
+      } else {
+        toast.error("Failed to unsave the post.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while unsaving the post.");
     }
   };
 
@@ -140,23 +148,19 @@ const GetAllPosts = ({ userPosts }) => {
       );
 
       if (response.ok) {
-        //setMessage("Post has been successfully deleted.");
         setPosts((prevPosts) =>
           prevPosts.filter((post) => post._id !== postId)
         );
         toast.success("Post has been successfully deleted.");
       } else {
-        //setError("Failed to delete the post.");
         toast.error("Failed to delete the post.");
       }
     } catch (error) {
-      //setError("An error occurred while deleting the post.");
       toast.error("An error occurred while deleting the post.");
     }
   };
 
   const handleLikePost = async (postId) => {
-    console.log(postId);
     try {
       const response = await fetch(
         `http://localhost:5000/post/like/${postId}/${userData._id}`,
@@ -168,36 +172,37 @@ const GetAllPosts = ({ userPosts }) => {
           credentials: "include",
         }
       );
-      console.log(response.ok);
-
       if (response.ok) {
         const updatedPost = await response.json();
-        const oldPosts = [...posts];
-        const idx = oldPosts.findIndex((item) => item._id === postId);
-        oldPosts[idx] = updatedPost;
-        setPosts([...oldPosts]);
-        // setPosts((prevPosts) =>
-        //   prevPosts?.map((post) => (post._id === postId ? updatedPost : post))
-        // );
-        if (likedPosts.includes(postId)) {
+
+        // Check if the post is in the likedPosts array
+        const isLiked = likedPosts.includes(postId);
+
+        // Update likedPosts based on the response
+        if (isLiked) {
           const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
           setLikedPosts(updatedLikedPosts);
         } else {
           const updatedLikedPosts = [...likedPosts, postId];
           setLikedPosts(updatedLikedPosts);
         }
+
+        // Update the posts state
+        const updatedPosts = posts.map((item) =>
+          item._id === postId ? updatedPost : item
+        );
+        setPosts(updatedPosts);
       } else {
         const errorData = await response.json();
         console.error("Error liking post:", errorData.message);
-        //setError("Failed to like the post.");
         toast.error("Failed to like the post.");
       }
     } catch (error) {
       console.error("An error occurred while liking the post:", error);
-      //setError("An error occurred while liking the post.");
       toast.error("An error occurred while liking the post.");
     }
   };
+
   const handleOnEditPostOn = (postId) => {
     setEditPostId(postId);
     setShowEditForm(true);
@@ -228,11 +233,47 @@ const GetAllPosts = ({ userPosts }) => {
     return `${formattedDate} at ${formattedTime}`;
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        // Adjust this value as needed
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Function to scroll to the top of the posts
+  const scrollToTopOfPosts = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // You can use "auto" for instant scrolling
+    });
+  };
+  console.log("all", posts);
+  console.log("saved", savedPosts);
   return (
     <>
-      <div className="post-Container">
-        {/* {error && <div>Error: {error}</div>}
-        {message && <div>{message}</div>} */}
+      <div
+        className={`post-Container ${isDarkMode ? "dark-mode" : "light-mode"}`}
+      >
+        {showScrollToTop && (
+          <div
+            className={`scroll-to-top ${
+              showScrollToTop ? "sticky-scroll-to-top" : ""
+            }`}
+            onClick={scrollToTopOfPosts}
+          >
+            <KeyboardArrowUpIcon className="arrow-icon" />
+          </div>
+        )}
 
         {savedPosts &&
           likedPosts &&
@@ -265,10 +306,10 @@ const GetAllPosts = ({ userPosts }) => {
               </div>
 
               <p className="post-content">{item.content}</p>
-              <div>
+              <div className="post-img">
                 {item && item.image && (
                   <img
-                    width="300px"
+                    className="post-img"
                     src={`http://localhost:5000/post/uploads/${item.image}`}
                     alt="post"
                   />
@@ -277,24 +318,28 @@ const GetAllPosts = ({ userPosts }) => {
               <span className="post-footer">
                 <div className="likesAndComments">
                   <div className="left">
-                    <span title="Save this post">
+                    <div className="right">
                       {savedPosts.includes(item._id) ? (
-                        <BookmarkIcon
-                          className="icon"
-                          onClick={() => onSavePost(item._id)}
-                        />
+                        <span>
+                          <BookmarkIcon
+                            className="icon"
+                            onClick={() => onUnsavePost(item._id)}
+                          />
+                        </span>
                       ) : (
-                        <BookmarkBorderIcon
-                          className="icon"
-                          onClick={() => onSavePost(item._id)}
-                        />
+                        <span>
+                          <BookmarkBorderIcon
+                            className="icon"
+                            onClick={() => onSavePost(item._id)}
+                          />
+                        </span>
                       )}
-                    </span>
+                    </div>
                     <span title="Comment">
                       <CommentIcon className="icon" />
                     </span>
                     <span title="Like">
-                      {likedPosts.includes(item._id) ? (
+                      {item.likedBy.includes(userData._id) ? (
                         <ThumbUpIcon
                           className="icon"
                           onClick={() => handleLikePost(item._id)}
@@ -306,15 +351,14 @@ const GetAllPosts = ({ userPosts }) => {
                         />
                       )}
                     </span>
+
                     <div className="likes">
                       <div>{item.like}</div>
                       <div className="people-liked-it"> people liked it</div>
                     </div>
                   </div>
-
-                  
                 </div>
-                
+
                 <div className="right">
                   {userData._id === item.createdBy._id && (
                     <span title="Edit this post">

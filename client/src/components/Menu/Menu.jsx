@@ -9,6 +9,8 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import SpaIcon from '@mui/icons-material/Spa';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useContext } from "react";
@@ -16,7 +18,8 @@ import MyContext from "../../context/MyContext";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { userData, setUserData, setLoggedOut } = useContext(MyContext);
+  const { userData, setUserData, setLoggedOut, isDarkMode } =
+    useContext(MyContext);
 
   const handleOnClick = async () => {
     try {
@@ -32,7 +35,8 @@ const Menu = () => {
 
       if (response.ok) {
         //alert("You successfully logged out.");
-        localStorage.removeItem("userData");
+        // localStorage.removeItem("userData");
+        localStorage.clear();
         setUserData({});
         setLoggedOut(true);
         navigate("/");
@@ -47,61 +51,69 @@ const Menu = () => {
   };
   return (
     <>
-    <ul className="menu">
-      <li>
-        <Link to={`/user/profile/${userData._id}`}>
-          <AccountCircleOutlinedIcon className="icon" /> My Profile
-        </Link>
-      </li>
-      <li>
-        <Link to="/company/profile">
-          <ApartmentOutlinedIcon className="icon" /> Company Profile
-        </Link>
-      </li>
-      <li>
-        <Link to="/newsfeed">
-          <NewspaperIcon className="icon" /> News Feed
-        </Link>
-      </li>
-
-      {userData.adminRole ? (
+      <ul className={`menu ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+        {/* Apply dark mode based on the isDarkMode state */}
         <li>
-          <Link to="/user/create">
-            <PersonAddAltOutlinedIcon className="icon" /> Add New User
+          <Link to={`/user/profile/${userData._id}`}>
+            <AccountCircleOutlinedIcon className="icon" /> My Profile
           </Link>
         </li>
-      ) : null}
-
-      <li>
-        <Link to="/savedposts">
-          <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
-        </Link>
-      </li>
-      <li>
-        <Link to="/allusers">
-          <Groups2OutlinedIcon className="icon" /> Your Colleagues
-        </Link>
-      </li>
-      <li>
-        <Link to="#">
-          <CalendarMonthIcon className="icon" /> Events
-        </Link>
-      </li>
-      <li>
-        <Link to="/marketplace">
-          <StorefrontIcon className="icon" /> Marketplace
-        </Link>
-      </li>
-      <li>
-        <Link to="#">
-          <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
-        </Link>
-      </li>
-
-      <li onClick={handleOnClick}>
-        <LogoutOutlinedIcon className="icon" /> Logout
-      </li>
-    </ul>
+        <li>
+          <Link to="/company/profile">
+            <ApartmentOutlinedIcon className="icon" /> Company Profile
+          </Link>
+        </li>
+        <li>
+          <Link to="/newsfeed">
+            <NewspaperIcon className="icon" /> News Feed
+          </Link>
+        </li>
+        {userData.adminRole ? (
+          <li>
+            <Link to="/user/create">
+              <PersonAddAltOutlinedIcon className="icon" /> Add New User
+            </Link>
+          </li>
+        ) : null}
+        <li>
+          <Link to="/savedposts">
+            <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
+          </Link>
+        </li>
+        <li>
+          <Link to="/allusers">
+            <Groups2OutlinedIcon className="icon" /> Your Colleagues
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <CalendarMonthIcon className="icon" /> Events
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <SmartToyIcon className="icon" /> Trivia and Quizzes
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <SpaIcon className="icon" /> Wellness and Sport
+          </Link>
+        </li>
+        <li>
+          <Link to="/marketplace">
+            <StorefrontIcon className="icon" /> Marketplace
+          </Link>
+        </li>
+        <li>
+          <Link to="#">
+            <TipsAndUpdatesOutlinedIcon className="icon" /> Suggestions Box
+          </Link>
+        </li>
+        <li onClick={handleOnClick}>
+          <LogoutOutlinedIcon className="icon" /> Logout
+        </li>
+      </ul>
     </>
   );
 };

@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import people from "../../images/Young_people.png";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ThankYou = () => {
   const navigate = useNavigate();
@@ -41,12 +41,12 @@ export const ThankYou = () => {
       if (response.ok) {
         const responseData = await response.json();
         setUserData(responseData.user);
+
         navigate("/company/profile");
       } else {
         const errorData = await response.json();
         //setError(errorData.error);
         toast.error(errorData.error);
-
       }
     } catch (error) {
       console.log("Fetch error:", error);
@@ -57,9 +57,11 @@ export const ThankYou = () => {
 
   useEffect(() => {
     if (companyRegistered === true) {
-      toast.success('You successfully registered your company. Please find below your login credentials.');
+      toast.success(
+        "You successfully registered your company. Please find below your login credentials."
+      );
     }
-  }, [])
+  }, []);
 
   //console.log(errors);
   return (
@@ -69,23 +71,20 @@ export const ThankYou = () => {
           <img src={logo} alt="BeyondWork Logo" />
         </div>{" "}
         <div className="textContainer">
-          <h1>Thank you for registering your company with BeyondWork!</h1>
+          <h2>
+            Thank you for registering your company with <span>BeyondWork</span>!
+          </h2>
         </div>
       </div>
       <div className="right">
         <div className="right-top">
+        <h2>Login to {companyName} admin account</h2>
           <div className="thankMsg">
-            <br></br>
-            <br></br>
+            <p>Here are your login credentials:</p>
             <p>
-              Here are your login credentials. 
-              <br></br>
-              <br></br>
-              Your admin email: <b>{adminEmail}</b>.
-              Your temporary password:<b> admin1234</b>.
+              admin email: <span>{adminEmail}</span>, temporary password:<span> 6DV$cWT5</span>
             </p>
           </div>
-          <h2>Login to {companyName} admin account</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="email">Email:</label>
             <input
@@ -99,26 +98,28 @@ export const ThankYou = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <input type="submit" value="Login" className="button" />
-            {error && <div> {error}</div>}
+            <div><input type="submit" value="Login" className="button" /></div>
+            
+            {typeof error === "string" && error && (
+              <div className="error">{error}</div>
+            )}
           </form>
         </div>
         <img src={people} alt="People connected" />
       </div>
 
       <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
       />
-
     </div>
   );
 };

@@ -135,3 +135,4 @@ export const likePost = async (req, res) => {
       .json({ message: "An error occurred while liking the post." });
   }
 };
+

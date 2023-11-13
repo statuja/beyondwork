@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_green.png";
 import people from "../../images/Young_people.png";
 import "./Login.scss";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserData, loggedOut, sessionExpired } = useContext(MyContext);
+  const { setUserData, loggedOut} =
+    useContext(MyContext);
   const [error, setError] = useState("");
 
   const {
@@ -22,15 +23,15 @@ const Login = () => {
 
   useEffect(() => {
     if (loggedOut === true) {
-      toast.warn('You successfully logged out.');
+      toast.warn("You successfully logged out.");
     }
-  }, [])
+  }, []);
 
-  useEffect(() => {
-    if (sessionExpired === true) {
-      toast.warn('Session expired, please login again.')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (sessionExpired === true) {
+  //     toast.warn('Session expired, please login again.')
+  //   }
+  // }, [])
 
   const onSubmit = async (data) => {
     const newDataObject = {
@@ -65,12 +66,12 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="left">
+      <div className="login-left">
         <div className="logo">
           <img src={logo} alt="BeyondWork Logo" />
         </div>
         <div className="textContainer">
-          <h1>Welcome to BeyondWork!</h1>
+          <h2>Welcome to BeyondWork!</h2>
           <p>The digital haven where work and play converge.</p>
           <p>
             We understand that work is just one facet of a fulfilling life, and
@@ -79,7 +80,7 @@ const Login = () => {
           </p>
         </div>
       </div>
-      <div className="right">
+      <div className="login-right">
         <div className="right-top">
           <h2>Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -95,7 +96,10 @@ const Login = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <input type="submit" value="Login" className="button" />
+            <div>
+              <input type="submit" value="Login" className="button" />
+            </div>
+
             {typeof error === "string" && error && (
               <div className="error">{error}</div>
             )}
@@ -112,22 +116,21 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <img src={people} alt="People connected" />
+        <img className="peopleImg" src={people} alt="People connected" />
       </div>
 
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
-
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </div>
   );
 };

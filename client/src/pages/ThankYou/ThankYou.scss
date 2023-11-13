@@ -1,5 +1,5 @@
 .thankyou {
-  height: 92vh;
+  height: 89vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,13 +7,13 @@
   color: rgb(55, 55, 55);
 
   .left {
+    padding-top: 150px;
     height: 100%;
     flex: 1;
     gap: 150px;
-    padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
     background: linear-gradient(#f5f5dceb, #f5f5dc9d),
       url(../../images/Hands.png) center;
@@ -30,26 +30,38 @@
       }
     }
 
-    h1 {
-      width: 65%;
-      font-size: 35px;
-      line-height: 40px;
-      text-align: center;
-      font-family: 'Belanosima', sans-serif;
-      font-weight: 400;
-    }
+    .textContainer {
+      //border: 2px solid red;
+      width: 60%;
+      gap: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
+      h2 {
+        //text-align: center;
+        font-size: 40px;
+        line-height: 46px;
+        font-family: "Belanosima", sans-serif;
+        font-weight: 500;
+        span {
+          font-size: 46px;
+          font-weight: 500;
+          font-family: "Belanosima", sans-serif;
+        }
+      }
+    }
   }
 
   .right {
+    //border: 2px solid red;
     height: 100%;
     flex: 1;
     display: flex;
+    padding: 0 50px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 50px;
-    padding-bottom: 0 !important;
 
     img {
       // width: 100%;
@@ -61,45 +73,58 @@
       height: fit-content;
       display: flex;
       flex: auto;
-      gap: 40px;
+      gap: 30px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
-      .thankMsg {
-        width: 60%;
+      h2 {
+        font-size: 30px;
+        font-family: "Belanosima", sans-serif;
+        font-weight: 400;
       }
 
-      h2 {
-        font-size: 22px;
+      .thankMsg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        p {
+          font-size: 16px;
+          span {
+            font-weight: bold;
+            color: #ffb000;
+          }
+        }
       }
 
       form {
-        width: 60%;
+        width: 80%;
+        gap: 15px;
+        padding: 30px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 15px;
-        padding: 30px;
         background-color: #ffb000;
         border-radius: 10px;
-
-        input {
-          width: 90%;
-          padding: 10px 10px;
-          border: none;
-          outline: none;
-          border-radius: 6px;
-          background-color: #f5f5dc;
-          transition: transform 0.2s;
-
-          &:hover {
-            transform: scale(1.03);
+        div {
+          padding-top: 15px;
+          display: flex;
+          justify-content: center;
+          .button {
+            border: none;
+            border-radius: 6px;
+            background-color: #f5f5dc;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40%;
+            //transition: transform 0.3s;
+            &:hover {
+              transform: scale(1.03);
+              background-color: #ffcf9d;
+              width: 42%;
+            }
           }
-        }
-
-        .error {
-          color: red;
         }
 
         label {
@@ -107,18 +132,21 @@
           text-align: left;
         }
 
-        .button {
-          padding: 10px;
+        input {
+          width: 100%;
+          padding: 10px 10px;
           border: none;
+          outline: none;
           border-radius: 6px;
           background-color: #f5f5dc;
-          font-weight: bold;
-          cursor: pointer;
-
+          // transition: transform 0.2s;
           &:hover {
             transform: scale(1.03);
-            background-color: #FFCF9D;
           }
+        }
+
+        .error {
+          color: red;
         }
       }
     }
@@ -131,102 +159,98 @@
     flex-direction: column;
 
     .left {
-      gap: 20px;
-      padding: 10px;
+      padding-top: 0;
+      gap: 50px;
       background-image: none;
 
-      img {
-        width: 80%;
-      }
-
       .textContainer {
-        // width: 85%;
-
-        h1 {
-          font-size: 20px;
-          line-height: 24px;
-          margin-bottom: 20px;
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        h2 {
+          font-size: 30px;
+          line-height: 36px;
+          text-align: center;
         }
       }
     }
 
     .right {
-      padding: 30px;
-      background-image: none;
-
+      margin-top: 40px;
+      padding: 0 30px;
       img {
         max-width: 100%;
         height: auto;
       }
-
-      h2 {
-        font-size: 14px;
-      }
-
-      p {
-        font-size: 12px;
-      }
-
-      form {
-        width: 80%;
-
-        label {
-          display: none;
+      .right-top {
+        gap: 20px;
+        h2 {
+          font-size: 24px;
+          text-align: center;
         }
 
-        input {
+        .thankMsg {
+          p {
+            font-size: 14px;
+            text-align: center;
+          }
+        }
+
+        form {
           width: 90%;
-        }
-
-        select {
-          width: 50%
+          padding: 20px;
+          margin-bottom: 40px;
+          label {
+            display: none;
+          }
         }
       }
     }
   }
 }
 
-@media (min-width: 426px) and (max-width:1024px) {
+@media (min-width: 426px) and (max-width: 1024px) {
   .thankyou {
+    height: 100%;
     flex-direction: column;
-    height: 100vh;
-
     .left {
-      height: auto;
-      padding: 20px;
+      padding-top: 0;
+      gap: 50px;
       background-image: none;
-
-      img {
-        width: 30%;
-      }
-
-      h1 {
-        font-size: 20px;
-        line-height: 24px;
-        margin-bottom: 20px;
-      }
-
-      p {
-        font-size: 14px;
-      }
+      .textContainer {
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        h2 {
+          font-size: 36px;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+      }  
     }
 
     .right {
-      padding: 20px;
-      gap: 5px;
-
+      margin-top: 40px;
+      padding: 0 30px;
       h2 {
         font-size: 14px;
       }
-
-      form {
-        margin-bottom: 20px;
-
-        label {
-          display: none;
+      .right-top {
+        gap: 20px;
+        h2 {
+          font-size: 24px;
         }
-
-
+      
+        form {
+          width: 80%;
+          padding: 20px;
+          margin-bottom: 40px;
+          label {
+            display: none;
+          }
+        }
       }
     }
   }

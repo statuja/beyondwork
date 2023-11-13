@@ -4,12 +4,14 @@ import UserData from "../../components/UserData/UserData";
 import MyContext from "../../context/MyContext";
 import GetAllPosts from "../../components/posts/GetAllPosts";
 import "./MyProfile.scss";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userData, setSessionExpired } = useContext(MyContext);
+  const { userData, setSessionExpired, isDarkMode } = useContext(MyContext);
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,6 +21,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (id === userData._id) {
       setUser(userData); // If it's the user's own profile
+      fetchAllPosts()
       setLoading(false);
     } else {
       // Fetch user data by ID
@@ -40,7 +43,7 @@ const UserProfile = () => {
             if (data.success === false) {
               //alert("Session expired, please login again!");
               //toast.warn('Session expired, please login again!')
-              setSessionExpired(true)
+              setSessionExpired(true);
               setUser({});
               return navigate("/");
             }
@@ -53,18 +56,18 @@ const UserProfile = () => {
             setLoading(false);
           } else {
             console.error("Error fetching profile:", response.statusText);
-            toast.error('Error fetching profile.')
+            toast.error("Error fetching profile.");
           }
         } catch (error) {
           console.error("Error fetching profile", error);
-          toast.error('Error fetching profile.')
+          toast.error("Error fetching profile.");
           setLoading(false);
         }
       };
       fetchUserDataById(id);
     }
   }, [id, userData]);
-  
+
   //console.log(userData);
 
   const fetchAllPosts = async () => {
@@ -84,26 +87,21 @@ const UserProfile = () => {
         setUserPosts(data); // Update the user's posts
       } else {
         //setError("Failed to fetch user's posts.");
-        toast.error("Failed to fetch user's posts.")
+        toast.error("Failed to fetch user's posts.");
       }
     } catch (error) {
       //setError("An error occurred while fetching user's posts.");
-      toast.error("An error occurred while fetching user's posts.")
+      toast.error("An error occurred while fetching user's posts.");
     }
-    
   };
 
-
-
   useEffect(() => {
-    
     fetchAllPosts();
   }, [userData]);
-  
 
   return (
     <>
-      <div className="profile">
+      <div className={`profile ${isDarkMode ? "dark-mode" : "light-mode"}`}>
         <div className="profileCover">
           {user && user.coverImage && (
             <img
@@ -131,26 +129,35 @@ const UserProfile = () => {
               <p>User not found</p>
             )}
           </div>
-          <div className="profileRight">
-          <h3>Recent posts</h3>
-            {/* Display user's posts */}
-            <GetAllPosts userPosts={userPosts}/> 
+          <div className={`profileRight ${isDarkMode? "dark-mode": "light-mode"}`}>
+            <h3>Recent posts</h3>
+            {id === userData._id && (
+               <Link className="create-link" to="/newsfeed">Create a post</Link> 
+            )}
+            {loading ? (
+              <p>Loading...</p>
+            ) : userPosts && userPosts.length > 0 ? (
+              <GetAllPosts userPosts={userPosts} />
+            ) : (
+              <p>No posts created yet.</p>
+            )}
+           
+
           </div>
         </div>
-        
       </div>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-    ></ToastContainer>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      ></ToastContainer>
     </>
   );
 };

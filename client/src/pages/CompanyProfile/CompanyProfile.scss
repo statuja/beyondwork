@@ -1,23 +1,27 @@
 .companyProfile {
-    background-color: rgba(245, 245, 220, 0.743);
+    background-color: #f7f7e3;
     width: 100%;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
+    align-self: flex-start;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
+    // justify-content: center;
+   // margin-bottom: 20px;
     border-radius: 15px;
-    padding: 40px 0;
+
+    &.dark-mode {
+        background-color: #3D3A3A;
+    }
 
     img {
-        width: 170px;
-        height: 170px;
-        border-radius: 50%;
-        object-fit: cover;
+        // width: 170px;
+        max-height: 200px;
+        border-radius: 5%;
+        // object-fit: cover;
     }
 
     h1 {
-        font-size: 40px;
         margin-bottom: 10px;
         font-family: "Belanosima", sans-serif;
         font-weight: 400;
@@ -55,13 +59,18 @@
             align-items: center;
 
             .card {
-                flex-basis: 33%;
-                height: 300px;
-                border-radius: 16px;
-                border: 1px solid #ffb000;
-                background-color: #f7f7e3;
-                margin: 10px;
-                padding: 20px;
+                flex-basis: 1;
+                height: 250px;
+                background-color: rgba(251, 251, 246, 0.896);
+                border-radius: 8px;
+                margin: 30px;
+                padding: 10px 20px;
+                border: 1px solid rgba(128, 128, 128, 0.22);
+                box-shadow: 6px 6px 10px 0 rgba(92, 91, 91, 0.25),
+                    -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
+                color: rgb(33, 33, 33);
+                transition: background-color 0.3s;
+                white-space: break-spaces;
 
                 h3 {
                     margin-bottom: 20px;
@@ -71,61 +80,37 @@
                 }
             }
 
-            .flex-wrapper {
+            .label {
                 display: flex;
-                justify-content: center;
+                flex-direction: row;
+                margin-right: 20px;
                 align-items: flex-start;
-                gap: 20px;
-
-                h5 {
-                    font-weight: bold;
-                }
 
                 h5,
                 p {
-                    height: 50px;
-                    font-size: 14px;
-                    align-self: center;
-                }
-
-
-                input,
-                .labels,
-                .data {
-                    margin: 5px 0;
+                    margin: 5px;
+                    flex: 1;
                     font-size: 16px;
                 }
 
-                input {
-                    border-radius: 5px;
-                    padding: 5px;
-                    border: 1px solid #ffb000;
-                    height: 35px;
-                }
-
-                .labels,
-                .data {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
+                p {
+                    text-align: left;
                 }
             }
+
+
         }
     }
 }
 
-@media (min-width: 0px) and (max-width: 768px) {
+
+@media (min-width: 0px) and (max-width: 1440px) {
     .companyProfile {
-        text-align: left !important;
+        height: auto;
 
         h1 {
             font-size: 24px;
         }
-
-        // .bottom {
-        //     width: 80%;
-        // }
 
         .cards-container {
             flex-direction: column;
@@ -134,25 +119,13 @@
             .card {
                 width: 100%;
 
-                .flex-wrapper {
-                    justify-content: space-around;
+                .label {
+
 
                     h5,
                     p,
                     input {
                         font-size: 14px;
-                    }
-
-                    p {
-                        align-self: flex-start
-                    }
-
-                    .labels {
-                        text-align: left;
-                    }
-
-                    .data {
-                        text-align: right;
                     }
                 }
             }

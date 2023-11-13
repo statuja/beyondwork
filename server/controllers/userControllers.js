@@ -54,7 +54,11 @@ export const createDefaultAdmin = async (companyId, adminEmail) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ "userContact.email": email });
+    const caseInsensitiveEmail = new RegExp(email, "i"); // Creating a case-insensitive regular expression
+
+    const user = await User.findOne({
+      "userContact.email": caseInsensitiveEmail,
+    });
     if (!user) {
       return res.status(400).json({
         error:
@@ -202,40 +206,62 @@ export const deleteUser = async (req, res) => {
     res.json(error);
   }
 };
-
 export const savePost = async (req, res) => {
   try {
     const usersId = req.user._id;
-    const postId = req.params;
+    const postId = req.params.postId; // Fix: use req.params.postId instead of req.params
 
     // Check if the post is already saved
     const user = await User.findById(usersId);
-    if (user.savedPosts.includes(req.body.postId)) {
-      // If already saved, remove the post from savedPosts
-      await User.findByIdAndUpdate(
-        usersId,
-        {
-          $pull: { savedPosts: req.body.postId },
-        },
-        { new: true }
-      );
-      res.json({ success: true, action: "unsave" }); // Indicate the action as "unsave" in the response
+    if (user.savedPosts.includes(postId)) {
+      // If already saved, send a response indicating it's already saved
+      res.json({ success: true, action: "already_saved" });
     } else {
       // If not saved, add the post to savedPosts
       const updatedUser = await User.findByIdAndUpdate(
         usersId,
         {
-          $push: { savedPosts: req.body.postId },
+          $push: { savedPosts: postId },
         },
         { new: true }
       );
-      res.json({ success: true, action: "save", updatedUser }); // Indicate the action as "save" in the response
+      res.json({ success: true, action: "save", updatedUser });
     }
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message }); // Handle errors appropriately
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
+export const unsavePost = async (req, res) => {
+  try {
+    const usersId = req.user._id;
+    const postId = req.params.postId;
+
+    const user = await User.findById(usersId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    if (!user.savedPosts.includes(postId)) {
+      // If post is not saved, send a response indicating it's not saved
+      return res.status(400).json({ success: true, action: "not_saved" });
+    }
+
+    // Remove the post from savedPosts
+    const updatedUser = await User.findByIdAndUpdate(
+      usersId,
+      {
+        $pull: { savedPosts: postId },
+      },
+      { new: true }
+    );
+
+    res.json({ success: true, action: "unsave", updatedUser });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
 
 export const getSavedPosts = async (req, res) => {
   try {
@@ -262,5 +288,26 @@ export const getSavedPosts = async (req, res) => {
     res.json(allPosts);
   } catch (error) {
     res.status(500).json({ message: error.message }); // Handle other errors
+  }
+};
+
+// Controller method to fetch liked posts for a specific user
+export const getLikedPosts = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    // Find posts where the user's ID is in the likedBy array
+    const likedPosts = await Post.find({ likedBy: userId })
+      .populate({
+        path: "createdBy",
+        select: "userFullName userImage",
+      })
+      .sort("-_id");
+
+    res.json(likedPosts);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching liked posts." });
   }
 };

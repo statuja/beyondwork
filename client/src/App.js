@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import { CompanyRegistration } from "./pages/CompanyRegistration/CompanyRegistration";
@@ -18,130 +19,22 @@ import SavedPosts from "./components/posts/SavedPosts";
 import EditCompanyProfile from "./pages/CompanyProfile/EditCompanyProfile";
 import Topbar from "./components/Topbar/Topbar";
 import Menu from "./components/Menu/Menu";
-import { useContext } from "react";
-import MyContext from "./context/MyContext";
 import EditMyProfile from "./pages/UserProfile/EditMyProfile";
 import MarketPlace from "./pages/marketPlace/Marketplace";
-
-// function App() {
-//   const { userData } = useContext(MyContext);
-//   const Layout = () => {
-//     if (!userData?._id) {
-//       return (
-//         <>
-//           <Navbar />
-//           <Outlet />
-//           <Footer />
-//         </>
-//       );
-//     } else {
-//       return (
-//         <>
-//           <Topbar />
-//           <div className="content">
-//             <div className="contentCont">
-//               <Outlet />
-//             </div>
-//             <div className="menuCont">
-//               <Menu />
-//             </div>
-//           </div>
-//           <Footer />
-//         </>
-//       );
-//     }
-//   };
-
-//   const router = createBrowserRouter([
-//     {
-//       path: "/",
-//       element: <Layout />,
-//       children: [
-//         {
-//           path: "/",
-//           element: <Login />,
-//         },
-//         {
-//           path: "/about",
-//           element: <About />,
-//         },
-//         {
-//           path: "/contact",
-//           element: <Contact />,
-//         },
-//         {
-//           path: "/company/create",
-//           element: <CompanyRegistration />,
-//         },
-//         {
-//           path: "/company/thankyou",
-//           element: <ThankYou />,
-//         },
-//         {
-//           path: "/user/login",
-//           element: <Login />,
-//         },
-//         {
-//           path: "/user/create",
-//           element: <UserRegistration />,
-//         },
-//         {
-//           path: "/newsfeed",
-//           element: <NewsFeed />,
-//         },
-//         {
-//           path: "/create/post",
-//           element: <CreateNewPost />,
-//         },
-//         {
-//           path: "/all/post",
-//           element: <GetAllPosts />,
-//         },
-//         {
-//           path: "/savedposts",
-//           element: <SavedPosts />,
-//         },
-//         {
-//           path: "/company/profile",
-//           element: <CompanyProfile />,
-//         },
-//         {
-//           path: "/updateCompanyProfile",
-//           element: <EditCompanyProfile />,
-//         },
-//         {
-//           path: "/user/profile/:id",
-//           element: <MyProfile />,
-//         },
-//         {
-//           path: "/user/editmyprofile",
-//           element: <EditMyProfile />,
-//         },
-//         {
-//           path: "/allusers",
-//           element: <AllUsers />,
-//         },
-//       ],
-//     },
-//   ]);
-
-//   return (
-//     <div>
-//       <RouterProvider router={router} />
-//     </div>
-//   );
-// }
-
-// export default App;
+import MyContext from "./context/MyContext";
+import ScrollToTop from "./components/ScrollToTop"; // Add this line to import the ScrollToTop component
 
 function App() {
-  const { userData } = useContext(MyContext);
+  const { isDarkMode } = useContext(MyContext);
+  React.useEffect(() => {
+    document.body.classList.toggle("dark-mode", isDarkMode);
+  }, [isDarkMode]);
 
   const routes = [
-    // Login Layout Routes
+    // Main Layout Routes
     {
       path: "/",
-      element: <LoginLayout />,
+      element: <MainLayout />,
       children: [
         { path: "/", element: <Login /> },
         { path: "/about", element: <About /> },
@@ -151,10 +44,10 @@ function App() {
         { path: "/user/login", element: <Login /> },
       ],
     },
-    // Main Layout Routes
+    // User Layout Routes
     {
       path: "/",
-      element: <MainLayout />,
+      element: <UserLayout />,
       children: [
         { path: "/user/create", element: <UserRegistration /> },
         { path: "/newsfeed", element: <NewsFeed /> },
@@ -182,18 +75,20 @@ function App() {
 
 export default App;
 
-const LoginLayout = () => (
+const MainLayout = () => (
   <>
+    <ScrollToTop />
     <Navbar />
     <Outlet />
     <Footer />
   </>
 );
 
-const MainLayout = () => (
-  <>
+const UserLayout = ({ isDarkMode }) => (
+  <div className={isDarkMode ? "dark-mode" : "light-mode"}>
+    <ScrollToTop />
     <Topbar />
-    <div className="content">
+    <div className={`content ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <div className="contentCont">
         <Outlet />
       </div>
@@ -202,5 +97,5 @@ const MainLayout = () => (
       </div>
     </div>
     <Footer />
-  </>
+  </div>
 );

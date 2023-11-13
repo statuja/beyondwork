@@ -28,11 +28,13 @@ const userSchema = new Schema(
     userContact: contactSchema,
     userPassword: { type: String, required: true },
     adminRole: { type: Boolean, default: false },
-    userImage: {type: String, default: "default_avatar.jpeg"},
-    coverImage: {type: String, default: "default-background.jpeg"},
+    //userImage: { type: String, default: "default_avatar.jpeg" },
+    userImage: { type: String, default: "default-avatar-new.png" },
+    //coverImage: { type: String, default: "default-background.jpeg" },
+    coverImage: { type: String, default: "default-background-new.jpg" },
     savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post", unique: true }],
     description: String,
-    dateOfBirth: Date,
+    dateOfBirth: { type: Date, default: "1997-10-04T00:00:00.000+00:00" },
   },
   { versionKey: false }
 );

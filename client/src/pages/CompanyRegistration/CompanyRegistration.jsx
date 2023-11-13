@@ -7,7 +7,12 @@ import MyContext from "../../context/MyContext";
 
 export const CompanyRegistration = () => {
   const navigate = useNavigate();
-  const { setAdminEmail, setCompanyName, companyRegistered, setCompanyRegistered } = useContext(MyContext);
+  const {
+    setAdminEmail,
+    setCompanyName,
+    companyRegistered,
+    setCompanyRegistered,
+  } = useContext(MyContext);
 
   const {
     register,
@@ -49,7 +54,7 @@ export const CompanyRegistration = () => {
       if (response.ok) {
         setAdminEmail(responseData.defaultAdminEmail);
         setCompanyName(responseData.companyName);
-        setCompanyRegistered(true)
+        setCompanyRegistered(true);
         navigate("/company/thankyou");
         reset();
       } else {
@@ -84,12 +89,13 @@ export const CompanyRegistration = () => {
             {...register("companyName", { required: "This is required." })}
           />
 
-          <div className="wrapper">
+          <div className="fields-wrapper">
             <div className="selection">
               <label htmlFor="companyType">* Industry:</label>
               <select
                 {...register("companyType", { required: "This is required." })}
               >
+                <option value="" disabled selected>Select</option>
                 <option value="Agriculture">Agriculture</option>
                 <option value="Building materials">Building materials</option>
                 <option value="Chemicals">Chemicals</option>
@@ -123,6 +129,7 @@ export const CompanyRegistration = () => {
             <div className="selection">
               <label htmlFor="numberOfEmployees">* Number of Employees:</label>
               <select {...register("numberOfEmployees", { required: true })}>
+              <option value="" disabled selected>Select</option>
                 <option value="<50">0-50</option>
                 <option value="51-100">51-100</option>
                 <option value="101-500">101-500</option>
@@ -132,7 +139,7 @@ export const CompanyRegistration = () => {
           </div>
           <label htmlFor="address">* Company Address:</label>
 
-          <div className="wrapper">
+          <div className="fields-wrapper">
             <input
               type="text"
               placeholder="Street, Building, Office No."
@@ -144,8 +151,7 @@ export const CompanyRegistration = () => {
               {...register("zipCode", { required: true })}
             />
           </div>
-          <div className="wrapper">
-            {" "}
+          <div className="fields-wrapper">
             <input
               type="text"
               placeholder="City"

@@ -1,7 +1,7 @@
 import "./About.scss"
 import logo from "../../images/Logo_green.png";
 import logo1 from "../../images/marwah.png";
-import logo2 from "../../images/avatar2.png";
+import logo2 from "../../images/irina.jpg";
 import logo3 from "../../images/elena.jpg";
 import logo4 from "../../images/netta.png";
 
