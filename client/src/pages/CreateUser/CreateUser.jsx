@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const UserRegistration = () => {
   const defaultImageUrl =
-    "http://localhost:5000/user/uploads/default_avatar.jpeg";
+    `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`;
 
   const navigate = useNavigate();
   const {
@@ -42,7 +42,7 @@ export const UserRegistration = () => {
       // userImage: defaultImageUrl,
     };
     try {
-      const response = await fetch("http://localhost:5000/user/create", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/create`, {
         method: "POST",
         body: JSON.stringify(newData),
         headers: {

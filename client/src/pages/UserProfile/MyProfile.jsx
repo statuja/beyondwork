@@ -28,7 +28,7 @@ const UserProfile = () => {
       const fetchUserDataById = async (userId) => {
         try {
           const response = await fetch(
-            `http://localhost:5000/user/getUserProfile/${userId}`,
+            `${process.env.REACT_APP_BACKEND_URL}/user/getUserProfile/${userId}`,
             {
               method: "GET",
               headers: {
@@ -73,7 +73,7 @@ const UserProfile = () => {
   const fetchAllPosts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/post/getUsersPosts/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/getUsersPosts/${id}`,
         {
           method: "GET",
           headers: {
@@ -106,14 +106,14 @@ const UserProfile = () => {
           {user && user.coverImage && (
             <img
               className="coverImg"
-              src={`http://localhost:5000/user/uploads/${user.coverImage}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${user.coverImage}`}
               alt="coverImage"
             />
           )}
           {user && user.userImage && (
             <img
               className="userImg"
-              src={`http://localhost:5000/user/uploads/${user.userImage}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${user.userImage}`}
               alt="userImage"
             />
           )}

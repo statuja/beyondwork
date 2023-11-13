@@ -16,7 +16,7 @@ function AllUsers() {
     const fetchAllUsers = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/user/allUsers/${userData.userCompany}`,
+          `${process.env.REACT_APP_BACKEND_URL}/user/allUsers/${userData.userCompany}`,
           {
             method: "GET",
             headers: {

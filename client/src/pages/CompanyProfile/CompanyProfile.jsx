@@ -15,7 +15,7 @@ const CompanyProfile = () => {
     const fetchCompanyDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/company/viewCompanyProfile/${companyID}`,
+          `${process.env.REACT_APP_BACKEND_URL}/company/viewCompanyProfile/${companyID}`,
           {
             method: "GET",
             headers: {
@@ -52,7 +52,7 @@ const CompanyProfile = () => {
       {company.companyLogo ? (
         <img
           style={{ width: "200px" }}
-          src={`http://localhost:5000/uploads/${company.companyLogo}`}
+          src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${company.companyLogo}`}
           alt="Company Logo"
         />
       ) : (
