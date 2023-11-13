@@ -54,8 +54,8 @@ function MarketPlace() {
             <p>Like new</p>
             <h3>Price: </h3>
             <p>189.99€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -77,8 +77,8 @@ function MarketPlace() {
             <p>used</p>
             <h3>Price: </h3>
             <p>100.00€</p>
-            <button>Contact the seller</button>
           </div>
+          <button>Contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -100,8 +100,8 @@ function MarketPlace() {
             <p>good</p>
             <h3>Price: </h3>
             <p>34.00€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -129,8 +129,8 @@ function MarketPlace() {
             <p>good</p>
             <h3>Price: </h3>
             <p>10.00€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -155,8 +155,8 @@ function MarketPlace() {
             <p>very good</p>
             <h3>Price: </h3>
             <p>13,200€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -183,8 +183,8 @@ function MarketPlace() {
             <p>New</p>
             <h3>Price: </h3>
             <p>300€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -205,8 +205,8 @@ function MarketPlace() {
             <p>Used- like new</p>
             <h3>Price: </h3>
             <p>150.00€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -228,8 +228,8 @@ function MarketPlace() {
             <p>Used</p>
             <h3>Price: </h3>
             <p>74.99€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
 
         <section className="cards-section">
@@ -257,8 +257,8 @@ function MarketPlace() {
             <p>New- never used</p>
             <h3>Price: </h3>
             <p>299.99€</p>
-            <button>contact the seller</button>
           </div>
+          <button>contact the seller</button>
         </section>
       </section>
       <div className="scroll-to-top-container">

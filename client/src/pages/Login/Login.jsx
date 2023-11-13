@@ -11,9 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserData, loggedOut} =
-    useContext(MyContext);
+  const { setUserData, loggedOut} = useContext(MyContext);
   const [error, setError] = useState("");
+  const [animation, setAnimation] = useState(false)
 
   const {
     register,
@@ -26,6 +26,13 @@ const Login = () => {
       toast.warn("You successfully logged out.");
     }
   }, []);
+
+  useEffect(()=>{
+    const delay = setTimeout(()=>{
+      setAnimation(true);
+      clearTimeout(delay);
+    }, 100)
+  }, [])
 
   // useEffect(() => {
   //   if (sessionExpired === true) {
@@ -65,12 +72,12 @@ const Login = () => {
   console.log(errors);
 
   return (
-    <div className="login">
+    <div className='login'>
       <div className="login-left">
         <div className="logo">
           <img src={logo} alt="BeyondWork Logo" />
         </div>
-        <div className="textContainer">
+        <div className={`textContainer ${animation ? 'animate': ''}`}>
           <h2>Welcome to BeyondWork!</h2>
           <p>The digital haven where work and play converge.</p>
           <p>

@@ -60,12 +60,13 @@
         transition-delay: 0.6s;
       }
     }
-    &:hover {
-      .textContainer h2,
-      .textContainer p {
+    &.animate {
+      border: 2px solid red;
+     
+       
         transform: translateX(0);
         opacity: 1;
-      }
+     
     }
   }
 

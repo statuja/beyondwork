@@ -5,7 +5,7 @@ import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 //import FeedIcon from '@mui/icons-material/Feed';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
@@ -77,7 +77,7 @@ const Menu = () => {
         ) : null}
         <li>
           <Link to="/savedposts">
-            <BookmarkBorderOutlinedIcon className="icon" /> Saved Posts
+            <BookmarkIcon className="icon" /> Saved Posts
           </Link>
         </li>
         <li>
