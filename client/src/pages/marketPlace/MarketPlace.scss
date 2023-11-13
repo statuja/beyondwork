@@ -185,6 +185,14 @@
   }
 }
 
+.mobile-card-img {
+  background-image: url("./image/mobile1.jpg");
+  background-size: contain;
+
+  &:hover {
+    background-image: url("./image/mobile2.jpg");
+  }
+}
 .LikiTrike-card-img,
 .EEZY-card-img,
 .chair-card-img,
@@ -192,7 +200,8 @@
 .car-card-img,
 .tickets-card-img,
 .bicycle-card-img,
-.sofa-card-img {
+.sofa-card-img,
+.mobile-card-img {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -208,17 +217,17 @@
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 10px rgba(255, 174, 0, 0.8);
+    box-shadow: 0 0 10px rgba(255, 174, 0, 0.6); /* Adjust the alpha value */
   }
   50% {
     transform: scale(1.2);
-    box-shadow: 0 0 20px rgba(255, 176, 0, 0.9), 0 0 30px rgba(255, 176, 0, 0.7);
-    background-color: #ffb000;
+    box-shadow: 0 0 20px rgba(255, 176, 0, 0.7), 0 0 30px rgba(255, 176, 0, 0.5); /* Adjust the alpha value */
+    background-color: #ffae0091;
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 10px rgba(255, 174, 0, 0.8);
-    background-color: #ffae00;
+    box-shadow: 0 0 10px rgba(255, 174, 0, 0.6); /* Adjust the alpha value */
+    background-color: #ffae0091;
   }
 }
 
@@ -227,23 +236,23 @@
   justify-content: center;
 
   .btn {
-    background-color: #ffae00;
+    background: #ffae0091;
     margin: 40px 0 60px 0;
-    animation: pulse 1s infinite;
+    animation: pulse 1.5s infinite;
     align-self: center;
     width: 170px;
-    border: 1px solid #004225;
+    border: none;
     border-radius: 8px;
     padding: 8px;
     font-size: 12px;
     cursor: pointer;
-    transition: box-shadow 0.3s; /* Add a smooth transition for the glow effect */
+    transition: box-shadow 0.3s;
   }
 
   .btn:hover {
-    animation: none; /* Pause the animation on hover */
+    animation: none;
     background-color: #ffb000;
     transform: scale(1.1);
-    box-shadow: 0 0 40px rgba(255, 176, 0, 0.8), 0 0 60px rgba(255, 176, 0, 0.6);
+    box-shadow: 0 0 40px rgba(255, 176, 0, 0.6), 0 0 60px rgba(255, 176, 0, 0.4); /* Adjust the alpha value */
   }
 }
