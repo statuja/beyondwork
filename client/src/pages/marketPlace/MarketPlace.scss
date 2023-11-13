@@ -29,13 +29,32 @@
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+  button {
+    align-self: center;
+    width: 120px;
+    background: #ffae0091;
+    color: #37424d;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 20px;
+    //position: absolute;
+    &:hover {
+      background: #ffb000;
+    }
+  }
 }
 
 .cards-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   background-color: rgba(251, 251, 246, 0.784);
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -67,25 +86,6 @@
       text-align: center;
       margin-bottom: 7px;
       font-family: "Belanosima", sans-serif;
-    }
-    button {
-      align-self: center;
-      width: 120px;
-      background: #ffae0091;
-      color: #37424d;
-      border: none;
-      border-radius: 8px;
-      padding: 8px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background 0.3s;
-      text-decoration: none;
-      text-align: center;
-      margin-bottom: 20px;
-      //position: absolute;
-      &:hover {
-        background: #ffb000;
-      }
     }
   }
   @media (max-width: 768px) {
