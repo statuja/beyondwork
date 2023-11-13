@@ -9,7 +9,7 @@ const SavedPosts = () => {
 
   const fetchSavedPosts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/user/savedPosts", {
+      const response = await fetch( `${process.env.REACT_APP_BACKEND_URL}/user/savedPosts`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

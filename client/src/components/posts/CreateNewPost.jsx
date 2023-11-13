@@ -42,7 +42,7 @@ const CreateNewPost = () => {
     formData.append("createdBy", userData._id);
     formData.append("company", userData.userCompany);
     try {
-      const response = await fetch("http://localhost:5000/post/create", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/post/create`, {
         method: "POST",
         body: formData,
         credentials: "include",

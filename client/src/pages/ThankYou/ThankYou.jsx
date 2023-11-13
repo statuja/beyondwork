@@ -30,7 +30,7 @@ export const ThankYou = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/user/login", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
         method: "POST",
         body: JSON.stringify(newDataObject),
         headers: {

@@ -54,7 +54,7 @@ export default function Topbar() {
             {userData && userData.userImage && (
               <img
                 className="user-image-placeholder"
-                src={`http://localhost:5000/user/uploads/${userData.userImage}`}
+                src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${userData.userImage}`}
                 alt="userImage"
               />
             )}

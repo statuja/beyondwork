@@ -38,7 +38,7 @@ const GetAllPosts = ({ userPosts }) => {
         setPosts(userPosts);
         return;
       }
-      const response = await fetch("http://localhost:5000/post/all", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/post/all`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const GetAllPosts = ({ userPosts }) => {
   const onSavePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/savePost/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/savePost/${postId}`,
         {
           method: "POST",
           headers: {
@@ -106,7 +106,7 @@ const GetAllPosts = ({ userPosts }) => {
   const onUnsavePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/unsavePost/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/unsavePost/${postId}`,
         {
           method: "DELETE",
           headers: {
@@ -136,7 +136,7 @@ const GetAllPosts = ({ userPosts }) => {
   const handleOnDelete = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/post/delete/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/delete/${postId}`,
         {
           method: "DELETE",
           headers: {
@@ -163,7 +163,7 @@ const GetAllPosts = ({ userPosts }) => {
   const handleLikePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/post/like/${postId}/${userData._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/like/${postId}/${userData._id}`,
         {
           method: "POST",
           headers: {
@@ -288,8 +288,8 @@ const GetAllPosts = ({ userPosts }) => {
                       className="userImg"
                       src={
                         item.createdBy.userImage
-                          ? `http://localhost:5000/user/uploads/${item.createdBy.userImage}`
-                          : "http://localhost:5000/user/uploads/default_avatar.jpeg"
+                          ? `${process.env.REACT_APP_BACKEND_URL}/user/uploads/${item.createdBy.userImage}`
+                          : `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`
                       }
                       alt="userImage"
                     />
@@ -310,7 +310,7 @@ const GetAllPosts = ({ userPosts }) => {
                 {item && item.image && (
                   <img
                     className="post-img"
-                    src={`http://localhost:5000/post/uploads/${item.image}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/post/uploads/${item.image}`}
                     alt="post"
                   />
                 )}
