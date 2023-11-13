@@ -30,6 +30,9 @@ function MarketPlace() {
   return (
     <div className="products-container">
       <h1>Check out our colleagues Market Place</h1>
+      <div className="button-container">
+        <button className="btn">Add your Item for sell</button>
+      </div>
       <section className="section">
         <section className="cards-section">
           <div className="LikiTrike-card-img">
@@ -202,6 +205,28 @@ function MarketPlace() {
             <p>Used- like new</p>
             <h3>Price: </h3>
             <p>150.00€</p>
+            <button>contact the seller</button>
+          </div>
+        </section>
+        <section className="cards-section">
+          <div className="sofa-card-img">
+            <div className="product-images"></div>
+          </div>
+          <div className="card">
+            <h2>3 seater Sofa</h2>
+            <h3>category: </h3>
+            <p>Sofa</p>
+            <h3>description:</h3>
+            <p>
+              Offering 3 seater sofa in beige The sofa has signs of wear on the
+              fabric (see photos), but is otherwise in good condition. Since our
+              family is about to grow, we now need a larger sofa. non-smoking
+              home with no pets Private sale, hence no warranty or return
+            </p>
+            <h3>condition: </h3>
+            <p>Used</p>
+            <h3>Price: </h3>
+            <p>74.99€</p>
             <button>contact the seller</button>
           </div>
         </section>
