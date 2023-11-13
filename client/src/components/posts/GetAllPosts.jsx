@@ -257,7 +257,8 @@ const GetAllPosts = ({ userPosts }) => {
       behavior: "smooth", // You can use "auto" for instant scrolling
     });
   };
-
+  console.log("all", posts);
+  console.log("saved", savedPosts);
   return (
     <>
       <div
@@ -338,7 +339,7 @@ const GetAllPosts = ({ userPosts }) => {
                       <CommentIcon className="icon" />
                     </span>
                     <span title="Like">
-                      {likedPosts.includes(item._id) ? (
+                      {item.likedBy.includes(userData._id) ? (
                         <ThumbUpIcon
                           className="icon"
                           onClick={() => handleLikePost(item._id)}
