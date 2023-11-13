@@ -5,10 +5,15 @@
   padding: 20px;
   width: 100%;
   background-color: #e7e7a38e;
+  //background-image: linear-gradient(#f5f5dc2c, #f5f5dc2f), url(../../images/davies-designs-studio-txJ27-2-7Bw-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+
 
   &.dark-mode {
     background-color: #3D3A3A;
@@ -40,7 +45,7 @@
       outline: none;
       border: none;
       border-radius: 5px;
-      background-color: rgba(251, 251, 246, 0.784);
+      background-color: rgb(251, 251, 246);
       min-height: 150px;
       font-size: 20px;
     }
