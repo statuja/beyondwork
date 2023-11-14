@@ -85,7 +85,7 @@ function AllUsers() {
                   {user && user.userImage && (
                     <img
                       className="user-image-placeholder"
-                      src={`http://localhost:5000/user/uploads/${user.userImage}`}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${user.userImage}`}
                       alt="userImage"
                     />
                   )}
