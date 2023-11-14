@@ -7,8 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const UserRegistration = () => {
-  const defaultImageUrl =
-    `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`;
+  const defaultImageUrl = `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`;
 
   const navigate = useNavigate();
   const {
@@ -42,26 +41,24 @@ export const UserRegistration = () => {
       // userImage: defaultImageUrl,
     };
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/create`, {
-        method: "POST",
-        body: JSON.stringify(newData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/create`,
+        {
+          method: "POST",
+          body: JSON.stringify(newData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         if (data.success === false) {
-          //alert("Session expired, please login again!");
-          //toast.warn('Session expired, please login again!')
           setSessionExpired(true);
           reset();
           return navigate("/");
         }
-        // setMessage(
-        //   `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
-        // );
         toast.success(
           `You have successfully registered ${newData.userFullName}. Please continue and add another employee to the system.`
         );
@@ -79,7 +76,6 @@ export const UserRegistration = () => {
   useEffect(() => {
     if (Object.keys(errors).length !== 0) {
       console.log("Errors:", errors);
-      //setError("All fields are required");
       toast.error("All fields are required.");
     }
   }, [errors]);
@@ -151,15 +147,23 @@ export const UserRegistration = () => {
               })}
             />
             <label htmlFor="adminRole">Admin Role:</label>
-
+            {/* <div className="myRow">
+              <input
+                {...register("adminRole")}
+                type="radio"
+                value={false}
+                defaultChecked
+              />{" "}
+              No
+              <input {...register("adminRole")} type="radio" value={true} /> Yes
+            </div> */}
             <select {...register("adminRole")}>
-              <option value={true}>Yes</option>
               <option value={false}> No</option>
+              <option value={true}>Yes</option>
             </select>
+
             <input type="submit" className="button" />
-            {/* {message && <div>{message}</div>} */}
           </form>
-          {/* {error && <div>Error: {error}</div>} */}
         </div>
       </div>
 
