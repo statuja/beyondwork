@@ -25,6 +25,7 @@ export const viewCompanyProfile = async (req, res) => {
     };
     res.json(companyData);
   } catch (error) {
+    console.log("Error viewing company", object);
     res.json({ error: error.message });
   }
 };
@@ -36,14 +37,15 @@ export const updateCompanyProfile = async (req, res) => {
     if (logo) {
       updatedCompanyData.companyLogo = logo.filename;
     }
-    console.log(updatedCompanyData);
+
     const updatedCompany = await Company.findByIdAndUpdate(
       req.user.userCompany,
       updatedCompanyData
     );
-    console.log(updatedCompany);
+
     res.json("updated");
   } catch (error) {
+    console.log("Error updating company", object);
     res.status(500).json({ error: error.message });
   }
 };

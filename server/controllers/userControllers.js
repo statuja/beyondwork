@@ -1,8 +1,8 @@
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import Post from "../models/Post.js";
 
 dotenv.config();
 
@@ -10,7 +10,6 @@ const SALT_ROUNDS = 9;
 const defaultPass = process.env.DEFAULT_ADMIN_PASSWORD;
 
 export const createUser = async (req, res) => {
-  console.log("start");
   try {
     const { userPassword } = req.body;
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
@@ -20,12 +19,12 @@ export const createUser = async (req, res) => {
       ...req.body,
       userPassword: hashedPassword, //directly include the userPassword: hashedPassword field when creating the new user. This approach does not modify the req.body object and includes the hashed password directly in the User.create call.
     }); // lines 17 and 19 achieve the same result
-    console.log(newUser);
+
     res.json(newUser);
   } catch (error) {
+    console.log("Error creating user", error);
     res.json(error.message);
   }
-  console.log("end");
 };
 
 export const createDefaultAdmin = async (companyId, adminEmail) => {
@@ -47,7 +46,7 @@ export const createDefaultAdmin = async (companyId, adminEmail) => {
     });
     return newUser;
   } catch (error) {
-    console.log(error);
+    console.log("Error creating default admin", error);
   }
 };
 
@@ -75,7 +74,7 @@ export const loginUser = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
       expiresIn: "1h",
     });
-    console.log(`token: ${token}`);
+
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -83,8 +82,8 @@ export const loginUser = async (req, res) => {
     });
 
     res.status(200).json({ user: user, token: token });
-    console.log(user.userCompany);
   } catch (error) {
+    console.log("Error logging in", error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -97,6 +96,7 @@ export const allUsers = async (req, res) => {
     );
     res.status(200).json(users);
   } catch (error) {
+    console.log("Error getting all users", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -109,38 +109,6 @@ export const logout = async (req, res) => {
 export const getMyProfile = async (req, res) => {
   res.json(req.user);
 };
-// export const getMyProfile = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.user._id);
-//     const { userImage, coverImage, ...rest } = user._doc;
-//     const userData = {
-//       ...rest,
-//       userImage: userImage,
-//       coverImage: coverImage,
-//     };
-//     res.json(userData);
-//   } catch (error) {
-//     res.json(error.message);
-//   }
-// };
-
-// export const updateMyProfile = async (req, res) => {
-//   try {
-//     const updatedUserData = { ...req.body };
-//     const userImage = req.file;
-//     if (userImage) {
-//       updatedUserData.userImage = userImage.filename;
-//     }
-//     const updatedUser = await User.findByIdAndUpdate(
-//       req.user._id,
-//       updatedUserData
-//     );
-//     console.log(updatedUser);
-//     res.json("updated");
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
 
 export const updateMyProfile = async (req, res) => {
   try {
@@ -174,6 +142,7 @@ export const updateMyProfile = async (req, res) => {
 
     res.json(updatedUser);
   } catch (error) {
+    console.log("Error updating user", error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -190,6 +159,7 @@ export const getUserProfile = async (req, res) => {
     res.json(userData);
     console.log(userData);
   } catch (error) {
+    console.log("Error getting user profile", error);
     res.json(error.message);
   }
 };
@@ -203,13 +173,15 @@ export const deleteUser = async (req, res) => {
     }
     return res.json({ message: "User deleted successfully" });
   } catch (error) {
+    console.log("Error deleting user", error);
     res.json(error);
   }
 };
+
 export const savePost = async (req, res) => {
   try {
     const usersId = req.user._id;
-    const postId = req.params.postId; // Fix: use req.params.postId instead of req.params
+    const postId = req.params.postId;
 
     // Check if the post is already saved
     const user = await User.findById(usersId);
@@ -259,6 +231,7 @@ export const unsavePost = async (req, res) => {
 
     res.json({ success: true, action: "unsave", updatedUser });
   } catch (error) {
+    console.log("Error unsaving post", error);
     res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -266,7 +239,6 @@ export const unsavePost = async (req, res) => {
 export const getSavedPosts = async (req, res) => {
   try {
     const usersId = req.user._id;
-
     const user = await User.findById(usersId);
     if (!user) {
       return res.status(404).json({ message: "User not found." }); // Handle the case where the user is not found
@@ -275,23 +247,17 @@ export const getSavedPosts = async (req, res) => {
     const allPosts = await Post.find({ _id: { $in: postsId } }).populate(
       "createdBy"
     );
-    // for (const id of postsId) {
-    //   const post = await Post.findById(id).populate("createdBy");
-    //   allPosts.push(post);
-    // }
 
-    console.log(postsId);
     if (!Array.isArray(user.savedPosts)) {
       return res.status(400).json({ message: "Saved posts is not an array." }); // Handle the case where savedPosts is not an array
     }
-
     res.json(allPosts);
   } catch (error) {
+    console.log("Error getting saved post", error);
     res.status(500).json({ message: error.message }); // Handle other errors
   }
 };
 
-// Controller method to fetch liked posts for a specific user
 export const getLikedPosts = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -306,6 +272,7 @@ export const getLikedPosts = async (req, res) => {
 
     res.json(likedPosts);
   } catch (error) {
+    console.log("Error getting liked posts", error);
     res
       .status(500)
       .json({ message: "An error occurred while fetching liked posts." });
