@@ -35,7 +35,7 @@ const SavedPosts = () => {
 
   useEffect(() => {
     fetchSavedPosts();
-  }, []);
+  }, [savedPosts]);
 
   return (
     <div className="saved-posts-container">

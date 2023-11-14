@@ -1,6 +1,8 @@
 # BeyondWorK 
 
-Short description of your MERN stack project.
+BeyondWord is MERN stack group project, developed by four junior developers as a part of the Final Project of the DCI Further Training as a Web & Software Developer. 
+
+Beyond Work is a platform for employees to connect on a personal level.
 
 ## Table of Contents
 
@@ -16,15 +18,31 @@ Short description of your MERN stack project.
 
 ## Introduction
 
-Briefly introduce your MERN stack project, its purpose, and the problems it solves. Mention any key functionalities and goals.
+Beyond Work is a social network meant for employees in a company to interact on a personal level, create meaningful and deeper connections and share non-work related information and experiences.
+
+Why do we need something like Beyond Work?
+When thinking about the present company culture, we notice how many companies now work in a remote environment, or from different sites across the world. While this certainly has some great advantages, sometimes it can feel quite lonely and employees might miss the interpersonal relationships that are created on the workplace.
+
+Moreover, it is scientifically proven that a more connected team makes stronger and more motivated workers.
+On top of that, companies usually rely on mere chat tools for internal communication, meaning that some important information or attempts at more personal connection get lost in the hundreds of messages we receive every day.
+
+Beyond Work, that looks and works more like a social media, is meant to fill the gap between employees and help them connect and bond.
 
 ## Features
 
 Highlight the main features of your project. You can use bullet points for better readability:
 
-- Feature 1
-- Feature 2
-- ...
+- Company and Admin Registration and User creation
+- Administrator role to add/remove users, manage the company profile
+- Create edit, and delete posts.
+- Create post with an image
+- Like/unlike and save/unsave posts
+- Edit profile with profile image and cover image
+- View other employees and their profiles
+- Responsive on different type of screens 
+- Dark mode option
+- Login Authentication and Authorization 
+
 
 ## Requirements
 
@@ -32,7 +50,9 @@ Specify the requirements to run your project:
 
 - Node.js
 - MongoDB
-- ...
+- npm install
+- To run client side: npm start
+- To run server side: nodemon app.js / npm start
 
 ## Installation
 
@@ -53,32 +73,32 @@ Explain how to use your application. Include any commands, scripts, or endpoints
 
 ## Technologies Used
 
-List the technologies and frameworks used in your project:
+List the technologies and frameworks we used in our project:
 
 - MongoDB
 - Express.js
 - React.js
 - Node.js
-- ...
+- Git & Github
+- Postman
+- npm 
+- MUi
+- SASS
+
+## UI/UX Design & Task Management
+
+- Figma
+- Miro
+- Trello
+- Canva
 
 ## Project Structure
 
 Briefly explain the organization of your project's code. For example:
 
-- `src/`: Contains the frontend React code.
+- `client/`: Contains the frontend React code.
 - `server/`: Contains the backend Express.js code.
-- `database/`: Includes database-related files.
-- ...
 
-## Contributing
-
-If you welcome contributions from the community, provide guidelines on how others can contribute to your project. Include information about the coding style, testing, and submitting pull requests.
-
-## License
-
-Specify the license under which your project is distributed. For example:
-
-This project is licensed under the [MIT License](LICENSE).
 
 # beyondwork
 
