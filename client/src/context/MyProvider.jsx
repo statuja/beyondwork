@@ -12,7 +12,6 @@ const MyProvider = ({ children }) => {
   const [sessionExpired, setSessionExpired] = useState(false);
   const [savedPosts, setSavedPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
-
   const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   const updateCompanyData = (newData) => {
@@ -22,7 +21,7 @@ const MyProvider = ({ children }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user/myProfile", {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/myProfile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -72,8 +71,8 @@ const MyProvider = ({ children }) => {
         setSavedPosts,
         likedPosts,
         setLikedPosts,
-        isDarkMode, // Include the dark mode state in the context
-        toggleDarkMode, // Include the toggle function in the context
+        isDarkMode, 
+        toggleDarkMode, 
       }}
     >
       {children}

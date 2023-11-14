@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const UserRegistration = () => {
   const defaultImageUrl =
-    "http://localhost:5000/user/uploads/default_avatar.jpeg";
+    `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`;
 
   const navigate = useNavigate();
   const {
@@ -42,7 +42,7 @@ export const UserRegistration = () => {
       // userImage: defaultImageUrl,
     };
     try {
-      const response = await fetch("http://localhost:5000/user/create", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/create`, {
         method: "POST",
         body: JSON.stringify(newData),
         headers: {
@@ -95,9 +95,7 @@ export const UserRegistration = () => {
         </div>
         <div className="addUser">
           <form
-            className={`form ${
-              isDarkMode ? "dark-mode" : "light-mode"
-            }`}
+            className={`form ${isDarkMode ? "dark-mode" : "light-mode"}`}
             onSubmit={handleSubmit(onSubmit)}
           >
             <label htmlFor="userFullName">Employee Full Name:</label>
@@ -152,23 +150,12 @@ export const UserRegistration = () => {
                 maxLength: 30,
               })}
             />
-            {/* <label htmlFor="adminRole">Admin role:</label>
-            <label>Admin</label>
-            <input {...register("Admin role:", { required: true })} type="radio" value="Employee" />
-            <label>Employee</label>
-            <input {...register("Admin role:", { required: true })} type="radio" value=" Admin" /> */}
-            {/* <select {...register("adminRole")}>
-          <option value="No">Not an Admin</option>
-          <option value="Yes">Admin</option>
-        </select> */}
-            {/* <label>Is this user an admin?</label>
-        <input {...register("adminRole")} type="radio" value="Yes" />
-        <input
-          {...register("adminRole")}
-          type="radio"
-          value=" No"
-          defaultChecked
-        /> */}
+            <label htmlFor="adminRole">Admin Role:</label>
+
+            <select {...register("adminRole")}>
+              <option value={true}>Yes</option>
+              <option value={false}> No</option>
+            </select>
             <input type="submit" className="button" />
             {/* {message && <div>{message}</div>} */}
           </form>

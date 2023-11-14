@@ -13,7 +13,7 @@ const EditPost = ({ postId, getAllPosts, setShowEditForm }) => {
     const fetchCompanyData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/post/getOne/${postId}`,
+          `${process.env.REACT_APP_BACKEND_URL}/post/getOne/${postId}`,
           {
             method: "GET",
             headers: {
@@ -43,7 +43,7 @@ const EditPost = ({ postId, getAllPosts, setShowEditForm }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/post/edit/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/edit/${postId}`,
         {
           method: "PUT",
           headers: {

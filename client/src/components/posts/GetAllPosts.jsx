@@ -38,13 +38,16 @@ const GetAllPosts = ({ userPosts }) => {
         setPosts(userPosts);
         return;
       }
-      const response = await fetch("http://localhost:5000/post/all", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/post/all`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -70,7 +73,7 @@ const GetAllPosts = ({ userPosts }) => {
   const onSavePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/savePost/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/savePost/${postId}`,
         {
           method: "POST",
           headers: {
@@ -91,7 +94,6 @@ const GetAllPosts = ({ userPosts }) => {
           setSavedPosts(updatedSavedPosts);
           toast.success("Post successfully saved.");
         } else if (responseData.action === "already_saved") {
-          // Optionally, you can show a message or handle it in a different way
           console.log("Post is already saved.");
         }
       } else {
@@ -102,11 +104,10 @@ const GetAllPosts = ({ userPosts }) => {
     }
   };
 
-  // New function for unsaving posts
   const onUnsavePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/unsavePost/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/unsavePost/${postId}`,
         {
           method: "DELETE",
           headers: {
@@ -122,7 +123,6 @@ const GetAllPosts = ({ userPosts }) => {
           setSavedPosts(updatedSavedPosts);
           toast.success("Post successfully unsaved.");
         } else {
-          // Optionally, you can show a message or handle it in a different way
           console.log("Post was not saved.");
         }
       } else {
@@ -136,7 +136,7 @@ const GetAllPosts = ({ userPosts }) => {
   const handleOnDelete = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/post/delete/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/delete/${postId}`,
         {
           method: "DELETE",
           headers: {
@@ -163,7 +163,7 @@ const GetAllPosts = ({ userPosts }) => {
   const handleLikePost = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/post/like/${postId}/${userData._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/like/${postId}/${userData._id}`,
         {
           method: "POST",
           headers: {
@@ -174,11 +174,7 @@ const GetAllPosts = ({ userPosts }) => {
       );
       if (response.ok) {
         const updatedPost = await response.json();
-
-        // Check if the post is in the likedPosts array
         const isLiked = likedPosts.includes(postId);
-
-        // Update likedPosts based on the response
         if (isLiked) {
           const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
           setLikedPosts(updatedLikedPosts);
@@ -186,8 +182,6 @@ const GetAllPosts = ({ userPosts }) => {
           const updatedLikedPosts = [...likedPosts, postId];
           setLikedPosts(updatedLikedPosts);
         }
-
-        // Update the posts state
         const updatedPosts = posts.map((item) =>
           item._id === postId ? updatedPost : item
         );
@@ -250,7 +244,6 @@ const GetAllPosts = ({ userPosts }) => {
     };
   }, []);
 
-  // Function to scroll to the top of the posts
   const scrollToTopOfPosts = () => {
     window.scrollTo({
       top: 0,
@@ -288,8 +281,8 @@ const GetAllPosts = ({ userPosts }) => {
                       className="userImg"
                       src={
                         item.createdBy.userImage
-                          ? `http://localhost:5000/user/uploads/${item.createdBy.userImage}`
-                          : "http://localhost:5000/user/uploads/default_avatar.jpeg"
+                          ? `${process.env.REACT_APP_BACKEND_URL}/user/uploads/${item.createdBy.userImage}`
+                          : `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`
                       }
                       alt="userImage"
                     />
@@ -310,7 +303,7 @@ const GetAllPosts = ({ userPosts }) => {
                 {item && item.image && (
                   <img
                     className="post-img"
-                    src={`http://localhost:5000/post/uploads/${item.image}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/post/uploads/${item.image}`}
                     alt="post"
                   />
                 )}

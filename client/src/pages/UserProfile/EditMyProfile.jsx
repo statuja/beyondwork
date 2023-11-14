@@ -147,7 +147,7 @@ function EditMyProfile() {
       };
 
       const response = await fetch(
-        `http://localhost:5000/user/updateMyProfile/${userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/updateMyProfile/${userId}`,
         requestOptions
       );
 
@@ -196,14 +196,14 @@ function EditMyProfile() {
           {userData && userData.coverImage && (
             <img
               className="e-coverImg"
-              src={`http://localhost:5000/user/uploads/${userData.coverImage}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${userData.coverImage}`}
               alt="coverImage"
             />
           )}
           {userData && userData.userImage && (
             <img
               className="e-userImg"
-              src={`http://localhost:5000/user/uploads/${userData.userImage}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${userData.userImage}`}
               alt="userImage"
             />
           )}

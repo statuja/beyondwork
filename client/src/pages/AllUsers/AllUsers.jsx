@@ -16,7 +16,7 @@ function AllUsers() {
     const fetchAllUsers = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/user/allUsers/${userData.userCompany}`,
+          `${process.env.REACT_APP_BACKEND_URL}/user/allUsers/${userData.userCompany}`,
           {
             method: "GET",
             headers: {
@@ -31,8 +31,6 @@ function AllUsers() {
         if (response.ok) {
           const data = await response.json();
           if (data.success === false) {
-            //alert("Session expired, please login again!");
-            //toast.warn('Session expired, please login again!')
             setSessionExpired(true);
             setUsers({});
             return navigate("/");
@@ -54,13 +52,7 @@ function AllUsers() {
       fetchAllUsers();
     }
   }, [userData]);
-  // if (error) {
-  //   return (
-  //     <div className="user-cards-container">
-  //       <div className="error-message">Error: {error}</div>
-  //     </div>
-  //   );
-  // }
+
   return (
     <div className={`wrapper ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <div
@@ -85,11 +77,11 @@ function AllUsers() {
                   {user && user.userImage && (
                     <img
                       className="user-image-placeholder"
-                      src={`http://localhost:5000/user/uploads/${user.userImage}`}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/user/uploads/${user.userImage}`}
                       alt="userImage"
                     />
                   )}
-                </div>{" "}
+                </div>
               </Link>
               <div className="user-details">
                 <p>
@@ -103,7 +95,7 @@ function AllUsers() {
                 <p>
                   <b>Department:</b> {user.userDepartment}
                 </p>
-                <p>
+                <p className="emails">
                   <b>Email:</b> {user.userContact.email}
                 </p>
               </div>

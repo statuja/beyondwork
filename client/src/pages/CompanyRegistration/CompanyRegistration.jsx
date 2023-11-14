@@ -42,7 +42,7 @@ export const CompanyRegistration = () => {
         defaultAdminEmail: data.defaultAdminEmail,
       };
 
-      const response = await fetch("http://localhost:5000/company/create", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/company/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
