@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./MarketPlace.scss";
+import MyContext from "../../context/MyContext";
 
 function MarketPlace() {
+  const { isDarkMode } = useContext(MyContext);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ function MarketPlace() {
     });
   };
   return (
-    <div className="products-container">
+    <div className={`products-container ${isDarkMode ? "dark-mode" : ""}`}>
       <h1>Check out our colleagues Market Place</h1>
       <div className="button-container">
         <button className="btn">Add your Item for sell</button>
