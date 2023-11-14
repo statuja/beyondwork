@@ -31,7 +31,7 @@ const SavedPosts = () => {
 
   useEffect(() => {
     fetchSavedPosts();
-  }, []);
+  }, [savedPosts]);
 
 
   return (
