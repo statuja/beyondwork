@@ -1,6 +1,4 @@
-import express from "express";
 import User from "../models/User.js";
-import { check, validationResult } from "express-validator";
 import {
   allUsers,
   createUser,
@@ -17,7 +15,9 @@ import {
 } from "../controllers/userControllers.js";
 import authorization from "../middleware/authorization.js";
 import isAdmin from "../middleware/adminAuthorization.js";
+import { check, validationResult } from "express-validator";
 import multer from "multer";
+import express from "express";
 
 const router = express.Router();
 
@@ -55,7 +55,6 @@ router.post(
       res.send({ error: error.array() });
     }
   },
-
   createUser
 );
 
@@ -72,9 +71,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/login", loginUser);
+
 router.get("/logout", logout);
+
 router.get("/allUsers/:companyId", authorization, allUsers);
+
 router.get("/myProfile", authorization, getMyProfile);
+
 router.put(
   "/updateMyProfile/:userId",
   authorization,
@@ -84,11 +87,17 @@ router.put(
   ]),
   updateMyProfile
 );
+
 router.get("/getUserProfile/:id", authorization, getUserProfile);
+
 router.delete("/deleteUser/:userId", authorization, isAdmin, deleteUser);
+
 router.post("/savePost/:postId", authorization, savePost);
+
 router.delete("/unsavePost/:postId", authorization, unsavePost);
+
 router.get("/savedPosts", authorization, getSavedPosts);
+
 router.get("/likedPosts", authorization, getLikedPosts);
 
 export default router;

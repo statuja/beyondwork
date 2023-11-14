@@ -16,6 +16,7 @@ export const createPost = async (req, res) => {
 
     res.json(newPost);
   } catch (error) {
+    console.log("Error creating post", error);
     res.json(error.message);
   }
 };
@@ -29,9 +30,10 @@ export const getAllPosts = async (req, res) => {
         select: "userFullName userImage",
       })
       .sort("-_id");
-    // console.log(posts);
+
     res.json(posts);
   } catch (error) {
+    console.log("Error getting post", error);
     res.json(error.message);
   }
 };
@@ -46,6 +48,7 @@ export const getUserPosts = async (req, res) => {
 
     res.json(posts);
   } catch (error) {
+    console.log("Error getting user post", error);
     res.json(error.message);
   }
 };
@@ -58,6 +61,7 @@ export const getOnePost = async (req, res) => {
 
     res.json(post);
   } catch (error) {
+    console.log("Error getting one post", error);
     res.json(error.message);
   }
 };
@@ -70,6 +74,7 @@ export const deletePost = async (req, res) => {
 
     res.json(post);
   } catch (error) {
+    console.log("Error deleting post", error);
     res.json(error.message);
   }
 };
@@ -87,6 +92,7 @@ export const editPost = async (req, res) => {
 
     res.json(updatedPost);
   } catch (error) {
+    console.log("Error editing post", error);
     res.json(error.message);
   }
 };
@@ -94,11 +100,11 @@ export const editPost = async (req, res) => {
 export const likePost = async (req, res) => {
   try {
     const { postId, userId } = req.params;
-    console.log(req.params);
+
     let postQuery = await Post.findById(postId);
     if (postQuery) {
       const userCheck = postQuery.likedBy.includes(userId);
-      console.log(userCheck);
+
       if (!userCheck) {
         const doc = await Post.findOneAndUpdate(
           { _id: postId },
@@ -135,4 +141,3 @@ export const likePost = async (req, res) => {
       .json({ message: "An error occurred while liking the post." });
   }
 };
-

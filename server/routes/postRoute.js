@@ -1,6 +1,3 @@
-import express from "express";
-import multer from "multer";
-
 import {
   createPost,
   deletePost,
@@ -11,6 +8,8 @@ import {
   likePost,
 } from "../controllers/postControllers.js";
 import authorization from "../middleware/authorization.js";
+import express from "express";
+import multer from "multer";
 
 const router = express.Router();
 
@@ -27,7 +26,6 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
-//
 
 router.post("/create", authorization, upload.single("image"), createPost);
 
