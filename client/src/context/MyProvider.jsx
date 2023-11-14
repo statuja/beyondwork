@@ -12,7 +12,14 @@ const MyProvider = ({ children }) => {
   const [sessionExpired, setSessionExpired] = useState(false);
   const [savedPosts, setSavedPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+  const storedDarkMode = localStorage.getItem("darkMode");
+  const initialDarkMode = storedDarkMode ? JSON.parse(storedDarkMode) : false;
+  const [isDarkMode, setIsDarkMode] = useState(initialDarkMode);
+
+  useEffect(() => {
+    // Save dark mode setting to local storage when it changes
+    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
 
   const updateCompanyData = (newData) => {
     setCompanyData(newData);
@@ -21,13 +28,16 @@ const MyProvider = ({ children }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/myProfile`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/user/myProfile`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
         const data = await response.json();
         const formattedDate = new Date(data.dateOfBirth)
           .toISOString()
@@ -71,8 +81,8 @@ const MyProvider = ({ children }) => {
         setSavedPosts,
         likedPosts,
         setLikedPosts,
-        isDarkMode, 
-        toggleDarkMode, 
+        isDarkMode,
+        toggleDarkMode,
       }}
     >
       {children}

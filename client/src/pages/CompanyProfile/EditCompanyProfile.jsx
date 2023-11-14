@@ -145,7 +145,7 @@ const EditCompanyProfile = () => {
       {companyData.companyLogo ? (
         <img
           style={{ width: "200px" }}
-          src={``${process.env.REACT_APP_BACKEND_URL}/uploads/${companyData.companyLogo}`}
+          src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${companyData.companyLogo}`}
           alt="Company Logo"
         />
       ) : (

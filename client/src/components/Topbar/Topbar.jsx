@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 // import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
@@ -13,8 +14,7 @@ import BurgerMenu from "../Menu/BurgerMenu";
 
 export default function Topbar() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const { userData , isDarkMode, toggleDarkMode} = useContext(MyContext);
- 
+  const { userData, isDarkMode, toggleDarkMode } = useContext(MyContext);
 
   //const isMobile = window.innerWidth <= 768;
   return (
@@ -47,7 +47,11 @@ export default function Topbar() {
             <span>1</span>
           </div>
           <div className="iconItem" onClick={toggleDarkMode}>
-            <DarkModeOutlinedIcon className="icon" />
+            {isDarkMode ? (
+              <DarkModeIcon className="icon" />
+            ) : (
+              <DarkModeOutlinedIcon className="icon" />
+            )}
           </div>
 
           <Link to={`/user/profile/${userData._id}`}>
@@ -65,7 +69,9 @@ export default function Topbar() {
         </div>
       </div>
 
-      {isBurgerMenuOpen && <BurgerMenu setIsBurgerMenuOpen={setIsBurgerMenuOpen}/>}
+      {isBurgerMenuOpen && (
+        <BurgerMenu setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
+      )}
     </div>
   );
 }
