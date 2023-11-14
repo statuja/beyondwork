@@ -27,12 +27,12 @@ const Login = () => {
  //   }
  // }, []);
 
-  useEffect(()=>{
-    const delay = setTimeout(()=>{
-      setAnimation(true);
-      clearTimeout(delay);
-    }, 100)
-  }, [])
+//  useEffect(()=>{
+//    const delay = setTimeout(()=>{
+//      setAnimation(true);
+//      clearTimeout(delay);
+//    }, 100)
+//  }, [])
 
   // useEffect(() => {
   //   if (sessionExpired === true) {
