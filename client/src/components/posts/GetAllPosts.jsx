@@ -38,13 +38,16 @@ const GetAllPosts = ({ userPosts }) => {
         setPosts(userPosts);
         return;
       }
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/post/all`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/post/all`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -91,7 +94,6 @@ const GetAllPosts = ({ userPosts }) => {
           setSavedPosts(updatedSavedPosts);
           toast.success("Post successfully saved.");
         } else if (responseData.action === "already_saved") {
-          // Optionally, you can show a message or handle it in a different way
           console.log("Post is already saved.");
         }
       } else {
@@ -102,7 +104,6 @@ const GetAllPosts = ({ userPosts }) => {
     }
   };
 
-  // New function for unsaving posts
   const onUnsavePost = async (postId) => {
     try {
       const response = await fetch(
@@ -122,7 +123,6 @@ const GetAllPosts = ({ userPosts }) => {
           setSavedPosts(updatedSavedPosts);
           toast.success("Post successfully unsaved.");
         } else {
-          // Optionally, you can show a message or handle it in a different way
           console.log("Post was not saved.");
         }
       } else {
@@ -174,11 +174,7 @@ const GetAllPosts = ({ userPosts }) => {
       );
       if (response.ok) {
         const updatedPost = await response.json();
-
-        // Check if the post is in the likedPosts array
         const isLiked = likedPosts.includes(postId);
-
-        // Update likedPosts based on the response
         if (isLiked) {
           const updatedLikedPosts = likedPosts.filter((id) => id !== postId);
           setLikedPosts(updatedLikedPosts);
@@ -186,8 +182,6 @@ const GetAllPosts = ({ userPosts }) => {
           const updatedLikedPosts = [...likedPosts, postId];
           setLikedPosts(updatedLikedPosts);
         }
-
-        // Update the posts state
         const updatedPosts = posts.map((item) =>
           item._id === postId ? updatedPost : item
         );
@@ -250,7 +244,6 @@ const GetAllPosts = ({ userPosts }) => {
     };
   }, []);
 
-  // Function to scroll to the top of the posts
   const scrollToTopOfPosts = () => {
     window.scrollTo({
       top: 0,
