@@ -10,6 +10,10 @@
   // border: 2px solid pink;
   width: 100%;
 
+  &.dark-mode {
+    background-color: #3D3A3A;
+  }
+
   h1 {
     font-family: "Belanosima", sans-serif;
   }
@@ -29,6 +33,7 @@
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+
   button {
     align-self: center;
     width: 120px;
@@ -59,6 +64,7 @@
   background-color: rgba(251, 251, 246, 0.784);
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
   &:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;
@@ -89,6 +95,7 @@
       font-family: "Belanosima", sans-serif;
     }
   }
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -124,6 +131,7 @@
 
 .LikiTrike-card-img {
   background-image: url("./image/doona1.jpg");
+
   &:hover {
     background-image: url("./image/doona2.jpg");
   }
@@ -131,6 +139,7 @@
 
 .EEZY-card-img {
   background-image: url("./image/straller1.png");
+
   &:hover {
     background-image: url("./image/straller4.jpg");
     background-size: contain;
@@ -139,6 +148,7 @@
 
 .chair-card-img {
   background-image: url("./image/chair1.jpg");
+
   &:hover {
     background-image: url("./image/chair3.jpg");
   }
@@ -147,6 +157,7 @@
 .germanBooks-card-img {
   background-image: url("./image/german-book1.png");
   background-size: contain;
+
   &:hover {
     background-image: url("./image/german-book2.png");
     background-size: contain;
@@ -155,6 +166,7 @@
 
 .car-card-img {
   background-image: url("./image/car1.png");
+
   &:hover {
     background-image: url("./image/car2.png");
   }
@@ -194,6 +206,7 @@
     background-image: url("./image/mobile2.jpg");
   }
 }
+
 .LikiTrike-card-img,
 .EEZY-card-img,
 .chair-card-img,
@@ -218,16 +231,21 @@
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 10px rgba(255, 174, 0, 0.6); /* Adjust the alpha value */
+    box-shadow: 0 0 10px rgba(255, 174, 0, 0.6);
+    /* Adjust the alpha value */
   }
+
   50% {
     transform: scale(1.2);
-    box-shadow: 0 0 20px rgba(255, 176, 0, 0.7), 0 0 30px rgba(255, 176, 0, 0.5); /* Adjust the alpha value */
+    box-shadow: 0 0 20px rgba(255, 176, 0, 0.7), 0 0 30px rgba(255, 176, 0, 0.5);
+    /* Adjust the alpha value */
     background-color: #ffae0091;
   }
+
   100% {
     transform: scale(1);
-    box-shadow: 0 0 10px rgba(255, 174, 0, 0.6); /* Adjust the alpha value */
+    box-shadow: 0 0 10px rgba(255, 174, 0, 0.6);
+    /* Adjust the alpha value */
     background-color: #ffae0091;
   }
 }
@@ -254,6 +272,7 @@
     animation: none;
     background-color: #ffb000;
     transform: scale(1.1);
-    box-shadow: 0 0 40px rgba(255, 176, 0, 0.6), 0 0 60px rgba(255, 176, 0, 0.4); /* Adjust the alpha value */
+    box-shadow: 0 0 40px rgba(255, 176, 0, 0.6), 0 0 60px rgba(255, 176, 0, 0.4);
+    /* Adjust the alpha value */
   }
 }

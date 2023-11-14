@@ -106,7 +106,13 @@ function About() {
                   width: 150,
                 }}
               ></img>
-              <h5>Marwah Al-Dujaili</h5>
+              <a
+                href="https://github.com/Marwahaldujaili"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <h5>Marwah Al-Dujaili</h5>
+              </a>
               <h6>Co-founder & Lead Developer</h6>
               <p>
                 Marwah, a co-founder of Beyond Work, is our visionary leader,
@@ -127,7 +133,13 @@ function About() {
                   width: 150,
                 }}
               ></img>
-              <h5>Iryna Khartanovich</h5>
+              <a
+                href="https://github.com/statuja"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <h5>Iryna Khartanovich</h5>
+              </a>
               <h6>Co-founder & Lead Developer</h6>
               <p>
                 Iryna is the technical backbone of our platform. As a Fullstack
@@ -148,7 +160,13 @@ function About() {
                   width: 150,
                 }}
               ></img>
-              <h5>Elena Armaroli</h5>
+              <a
+                href="https://github.com/elenarmaroli"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <h5>Elena Armaroli</h5>
+              </a>
               <h6>Co-founder & Lead Developer</h6>
               <p>
                 Elena is our frontend and backend magician. Her prowess in
@@ -168,7 +186,13 @@ function About() {
                   width: 150,
                 }}
               ></img>
-              <h5>Netta Barel</h5>
+              <a
+                href="https://github.com/Netta8"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <h5>Netta Barel</h5>
+              </a>
               <h6>Co-founder & Lead Developer</h6>
               <p>
                 Netta is our dynamic Fullstack developer and community manager,
