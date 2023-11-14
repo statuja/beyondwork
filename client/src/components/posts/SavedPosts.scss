@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   width: 100%;
   border-radius: 15px;
   padding: 20px;
@@ -14,10 +13,9 @@
   }
 
   p {
-    margin: auto;
+    margin: 0 auto;
     padding: 20px;
   }
-
 }
 
 @media (max-width: 1024px) {

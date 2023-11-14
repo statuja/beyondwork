@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import GetAllPosts from "../../components/posts/GetAllPosts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./SavedPosts.scss";
 
 const SavedPosts = () => {
   const [loading, setLoading] = useState(true);
@@ -9,13 +10,16 @@ const SavedPosts = () => {
 
   const fetchSavedPosts = async () => {
     try {
-      const response = await fetch( `${process.env.REACT_APP_BACKEND_URL}/user/savedPosts`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/savedPosts`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         setSavedPosts(data);
@@ -33,9 +37,8 @@ const SavedPosts = () => {
     fetchSavedPosts();
   }, []);
 
-
   return (
-    <div className="saved-posts-container ">
+    <div className="saved-posts-container">
       <h1>Your Saved Posts</h1>
       {loading ? (
         <p>Loading...</p>
