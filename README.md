@@ -7,14 +7,14 @@ Beyond Work is a platform for employees to connect on a personal level.
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Beyondwork Developers](#beyondwork-developers)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Introduction
 
@@ -27,6 +27,12 @@ Moreover, it is scientifically proven that a more connected team makes stronger 
 On top of that, companies usually rely on mere chat tools for internal communication, meaning that some important information or attempts at more personal connection get lost in the hundreds of messages we receive every day.
 
 Beyond Work, that looks and works more like a social media, is meant to fill the gap between employees and help them connect and bond.
+
+# Beyondwork Developers
+- Netta Barel - https://github.com/Netta8
+- Elena Armaroli - https://github.com/elenarmaroli
+- Iryna Khartanovich - https://github.com/statuja
+- Marwah Al-Dujaili - https://github.com/Marwahaldujaili
 
 ## Features
 
@@ -100,10 +106,5 @@ Briefly explain the organization of your project's code. For example:
 - `server/`: Contains the backend Express.js code.
 
 
-# Beyondwork Developers
-- Netta Barel - https://github.com/Netta8
-- Elena Armaroli - https://github.com/elenarmaroli
-- Iryna Khartanovich - https://github.com/statuja
-- Marwah Al-Dujaili - https://github.com/Marwahaldujaili
 
 
