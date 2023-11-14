@@ -30,7 +30,7 @@ const EditCompanyProfile = () => {
     const fetchCompanyData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/company/viewCompanyProfile/${companyID}`,
+          `${process.env.REACT_APP_BACKEND_URL}/company/viewCompanyProfile/${companyID}`,
           {
             method: "GET",
             headers: {
@@ -107,7 +107,7 @@ const EditCompanyProfile = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/company/updateCompanyProfile/${companyID}`,
+       `${process.env.REACT_APP_BACKEND_URL}/company/updateCompanyProfile/${companyID}`,
         {
           method: "POST",
           body: formData,
@@ -145,7 +145,7 @@ const EditCompanyProfile = () => {
       {companyData.companyLogo ? (
         <img
           style={{ width: "200px" }}
-          src={`http://localhost:5000/uploads/${companyData.companyLogo}`}
+          src={``${process.env.REACT_APP_BACKEND_URL}/uploads/${companyData.companyLogo}`}
           alt="Company Logo"
         />
       ) : (
