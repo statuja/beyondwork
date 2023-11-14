@@ -100,5 +100,10 @@ Briefly explain the organization of your project's code. For example:
 - `server/`: Contains the backend Express.js code.
 
 
-# beyondwork
+# Beyondwork Developers
+- Netta Barel - https://github.com/Netta8
+- Elena Armaroli - https://github.com/elenarmaroli
+- Iryna Khartanovich - https://github.com/statuja
+- Marwah Al-Dujaili - https://github.com/Marwahaldujaili
+
 
