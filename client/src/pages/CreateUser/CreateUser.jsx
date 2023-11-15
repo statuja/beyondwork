@@ -150,7 +150,7 @@ export const UserRegistration = () => {
             />
             <label htmlFor="adminRole">Admin Role:</label>
 
-            <div className="myRow">
+            <div className={`myRow ${isDarkMode ? "dark-mode" : "light-mode"}`}>
               <input
                 {...register("adminRole")}
                 type="radio"
