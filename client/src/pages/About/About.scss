@@ -41,13 +41,13 @@
       align-items: flex-start;
 
       h2 {
-        font-size: 50px;
+        font-size: 40px;
         font-family: "Belanosima", sans-serif;
         font-weight: 500;
       }
 
       p {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
         line-height: 32px;
       }
@@ -63,6 +63,7 @@
     align-items: center;
     justify-content: center;
     gap: 50px;
+
     .paragraph-top {
       display: flex;
       flex-direction: column;
@@ -74,14 +75,17 @@
         font-family: "Belanosima", sans-serif;
         font-weight: 400;
       }
+
       p {
         font-size: 18px;
         line-height: 26px;
       }
     }
+
     .paragraph {
       display: flex;
       flex-direction: column;
+
       h3 {
         text-align: center;
         font-size: 30px;
@@ -97,6 +101,7 @@
         margin-bottom: 5px;
         font-size: 22px;
       }
+
       p {
         font-size: 18px;
         line-height: 26px;
@@ -126,6 +131,7 @@
       font-weight: 400;
       margin-bottom: 20px;
     }
+
     h4 {
       font-family: "Belanosima", sans-serif;
       font-weight: 600;
@@ -133,6 +139,7 @@
       margin-bottom: 5px;
       font-size: 22px;
     }
+
     p {
       font-size: 18px;
       line-height: 26px;
@@ -154,11 +161,13 @@
       font-weight: 400;
       margin-bottom: 20px;
     }
+
     p {
       font-size: 18px;
       line-height: 26px;
       text-align: center;
     }
+
     .developer-card-wrapper {
       width: 100%;
       margin-top: 30px;
@@ -218,6 +227,7 @@
       font-weight: 400;
       font-size: 30px;
     }
+
     width: 80%;
     font-size: 18px;
     line-height: 26px;
