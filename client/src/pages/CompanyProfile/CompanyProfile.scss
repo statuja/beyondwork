@@ -14,7 +14,7 @@
 
     &.dark-mode {
         background-color: #3D3A3A;
-    }
+        }
 
     img {
         // width: 170px;
@@ -78,7 +78,7 @@
                     -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
                 color: rgb(33, 33, 33);
                 //transition: background-color 0.3s;
-                white-space: break-spaces;
+
                 //border: 2px solid red;
                 &:hover {
                     transform: scale(1.02);

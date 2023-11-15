@@ -1,6 +1,4 @@
-import express from "express";
 import Company from "../models/Company.js";
-import { check, validationResult } from "express-validator";
 import {
   createCompany,
   viewCompanyProfile,
@@ -8,7 +6,9 @@ import {
 } from "../controllers/companyControllers.js";
 import authorization from "../middleware/authorization.js";
 import isAdmin from "../middleware/adminAuthorization.js";
+import { check, validationResult } from "express-validator";
 import multer from "multer";
+import express from "express";
 
 const router = express.Router();
 
@@ -39,7 +39,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
 
 router.post(
   "/create",

@@ -1,17 +1,14 @@
 import React, { useContext } from "react";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./App.scss";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
-import { CompanyRegistration } from "./pages/CompanyRegistration/CompanyRegistration";
 import Login from "./pages/Login/Login";
-import { UserRegistration } from "./pages/CreateUser/CreateUser";
-import { ThankYou } from "./pages/ThankYou/ThankYou";
 import NewsFeed from "./pages/NewsFeed/NewsFeed";
 import CompanyProfile from "./pages/CompanyProfile/CompanyProfile";
 import MyProfile from "./pages/UserProfile/MyProfile";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.scss";
 import CreateNewPost from "./components/posts/CreateNewPost";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import GetAllPosts from "./components/posts/GetAllPosts";
@@ -22,7 +19,10 @@ import Menu from "./components/Menu/Menu";
 import EditMyProfile from "./pages/UserProfile/EditMyProfile";
 import MarketPlace from "./pages/marketPlace/Marketplace";
 import MyContext from "./context/MyContext";
-import ScrollToTop from "./components/ScrollToTop"; // Add this line to import the ScrollToTop component
+import ScrollToTop from "./components/ScrollToTop";
+import { CompanyRegistration } from "./pages/CompanyRegistration/CompanyRegistration";
+import { UserRegistration } from "./pages/CreateUser/CreateUser";
+import { ThankYou } from "./pages/ThankYou/ThankYou";
 
 function App() {
   const { isDarkMode } = useContext(MyContext);
@@ -31,7 +31,6 @@ function App() {
   }, [isDarkMode]);
 
   const routes = [
-    // Main Layout Routes
     {
       path: "/",
       element: <MainLayout />,
@@ -44,7 +43,6 @@ function App() {
         { path: "/user/login", element: <Login /> },
       ],
     },
-    // User Layout Routes
     {
       path: "/",
       element: <UserLayout />,

@@ -21,11 +21,12 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    if (loggedOut === true) {
-      toast.warn("You successfully logged out.");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (loggedOut === true) {
+  //     toast.warn("You successfully logged out.");
+  //   }
+  // }, []);
+
 
   useEffect(()=>{
     const delay = setTimeout(()=>{
@@ -33,6 +34,7 @@ const Login = () => {
       clearTimeout(delay);
     }, 500)
   }, [])
+
 
   // useEffect(() => {
   //   if (sessionExpired === true) {
@@ -77,7 +79,7 @@ const Login = () => {
         <div className="logo">
           <img src={logo} alt="BeyondWork Logo" />
         </div>
-        <div className={`textContainer ${animation ? 'animate': ''}`}>
+        <div className="textContainer">
           <h2>Welcome to BeyondWork!</h2>
           <p>The digital haven where work and play converge.</p>
           <p>

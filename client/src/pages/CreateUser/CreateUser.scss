@@ -48,7 +48,9 @@
         background-color: rgb(40, 39, 39);
       }
 
+
       input, .myRow {
+
         width: calc(50% - 10px);
         padding: 10px;
         border: none;
@@ -57,12 +59,17 @@
         cursor: text;
         background-color: #f5f5dc;
 
+        .myRow {
+          display: flex;
+          justify-content: space-between;
+        }
+
         &:hover {
           transform: scale(1.03);
         }
 
         &:focus {
-          border: 2px solid black;
+          border: 1px solid black;
         }
       }
 

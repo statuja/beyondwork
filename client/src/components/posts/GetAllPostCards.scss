@@ -18,11 +18,17 @@
   &.dark-mode {
     background-color: #3d3a3a;
     color: #fcfcf4;
+
+    .postCard {
+      box-shadow: none
+    }
+
     .post-owner,
     .post-footer {
       color: black;
     }
   }
+
   .sticky-scroll-to-top {
     position: fixed;
     bottom: 20px;
@@ -39,11 +45,13 @@
       cursor: pointer;
       color: #ffae00bb;
     }
+
     @media (max-width: 425px) {
       font-size: 26px;
       //  margin-right: 30px;
     }
   }
+
   .postCard {
     gap: 10px;
     display: flex;
@@ -128,6 +136,7 @@
 
     .post-img {
       width: 400px;
+
       img {
         border: 1px solid rgba(128, 128, 128, 0.22);
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);

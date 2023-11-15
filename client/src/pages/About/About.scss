@@ -92,6 +92,7 @@
         font-weight: 400;
         margin-bottom: 20px;
       }
+
       h4 {
         font-family: "Belanosima", sans-serif;
         font-weight: 600;
@@ -178,6 +179,7 @@
         .developer-img {
           object-fit: cover;
         }
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -205,6 +207,15 @@
         p {
           margin-top: 30px;
           font-size: 16px;
+        }
+
+        a {
+          text-decoration: none;
+          color: #004225;
+
+          :hover {
+            color: #ffb000;
+          }
         }
       }
     }
@@ -276,18 +287,22 @@
       h2 {
         font-size: 24px;
       }
+
       .developer-card-wrapper {
         width: 90%;
         grid-template-columns: repeat(1, 1fr) !important;
 
         #developer-card {
           height: auto;
+
           p {
             font-size: 16px;
           }
+
           h5 {
             font-size: 24px;
           }
+
           h6 {
             font-size: 18px;
           }

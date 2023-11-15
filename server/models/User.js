@@ -12,7 +12,6 @@ const addressSchema = new Schema(
 
 const contactSchema = new Schema(
   {
-    //phoneNumber: { type: String, default: "+123456789" },
     email: { type: String, required: true, unique: true },
   },
   { _id: false }
@@ -38,4 +37,5 @@ const userSchema = new Schema(
 );
 
 const User = model("User", userSchema);
+
 export default User;
