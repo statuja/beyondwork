@@ -13,13 +13,11 @@
     gap: 150px;
     display: flex;
     flex-direction: column;
-    //justify-content: center;
     align-items: center;
     background: linear-gradient(#f5f5dceb, #f5f5dc9d),
       url(../../images/Hands.png) center;
     background-size: cover;
     background-repeat: no-repeat;
-
 
     .logo {
       width: 45%;
@@ -32,7 +30,6 @@
     }
 
     .textContainer {
-      //border: 2px solid red;
       width: 70%;
       gap: 30px;
       display: flex;
@@ -65,13 +62,11 @@
     gap: 20px;
 
     img {
-      //width: 100%;
       max-width: 100%;
       height: auto;
     }
 
     .right-top {
-      //border: 2px solid red;
       height: fit-content;
       display: flex;
       flex: auto;
@@ -87,7 +82,6 @@
       }
 
       .msg {
-        //border: 2px solid red;
         width: 70%;
 
         p {
@@ -98,7 +92,6 @@
       }
 
       .contact-wrapper {
-        //border: 2px solid red;
         width: 60%;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -187,7 +180,6 @@
         }
 
         .contact-wrapper {
-          //border: 2px solid red;
           grid-template-columns: 1fr;
           gap: 10px;
 
@@ -259,8 +251,6 @@
         }
 
         .contact-wrapper {
-          //border: 2px solid red;
-
           grid-template-columns: 1fr 1fr;
           gap: 10px;
 
@@ -278,3 +268,4 @@
     }
   }
 }
+

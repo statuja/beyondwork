@@ -26,14 +26,14 @@ function About() {
 
         <div className="right">
           <div className="paragraph-top">
-          <h3>Our Mission</h3>
-          <p>
-            At Beyond Work, our mission is to strengthen workplace bonds, spark
-            creativity, and promote a healthy work-life balance.
-          </p>
+            <h3>Our Mission</h3>
+            <p>
+              At Beyond Work, our mission is to strengthen workplace bonds,
+              spark creativity, and promote a healthy work-life balance.
+            </p>
           </div>
           <div className="paragraph">
-          <h3>What We Offer</h3>
+            <h3>What We Offer</h3>
             <h4>Connect: </h4>
             <p>
               Beyond Work provides a platform for employees to connect on a
@@ -66,26 +66,25 @@ function About() {
 
       <div className="below">
         <div className="paragraph">
-        <h3>Who We Are</h3>
-        <p>
-          Beyond Work is more than just a website; it's a community driven by
-          our dedicated team. We're passionate about creating a positive work
-          environment, and we're committed to supporting your journey toward a
-          more balanced and enriching work-life experience.
-        </p>
-        <h3>Join Us Today</h3>
-        <p>
-          We invite you to be a part of Beyond Work. Together, we'll build a
-          thriving, engaging community where work doesn't have to end when the
-          clock strikes five. Explore, connect, and discover the many facets of
-          your colleagues, and let's make every aspect of work and life a
-          memorable adventure.
-        </p>
-      
+          <h3>Who We Are</h3>
+          <p>
+            Beyond Work is more than just a website; it's a community driven by
+            our dedicated team. We're passionate about creating a positive work
+            environment, and we're committed to supporting your journey toward a
+            more balanced and enriching work-life experience.
+          </p>
+          <h3>Join Us Today</h3>
+          <p>
+            We invite you to be a part of Beyond Work. Together, we'll build a
+            thriving, engaging community where work doesn't have to end when the
+            clock strikes five. Explore, connect, and discover the many facets
+            of your colleagues, and let's make every aspect of work and life a
+            memorable adventure.
+          </p>
         </div>
-        
+
         <div id="meet-the-developers">
-        <h3>Meet the Developers</h3>
+          <h3>Meet the Developers</h3>
           <p>
             At Beyond Work, our digital haven is the result of hard work and
             dedication from a passionate team of developers who believe in the

@@ -1,13 +1,13 @@
 import React from "react";
-import logo from "../../images/Logo_green.png";
 import "./Contact.scss";
+import logo from "../../images/Logo_green.png";
+import people from "../../images/Young_people.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faLinkedinIn,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import people from "../../images/Young_people.png";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function Contact() {

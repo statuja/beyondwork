@@ -1,8 +1,10 @@
-import "./GetAllPostCards.scss";
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import MyContext from "../../context/MyContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./GetAllPostCards.scss";
 import EditPost from "./EditPost";
+import MyContext from "../../context/MyContext";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -10,8 +12,6 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CommentIcon from "@mui/icons-material/Comment";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const GetAllPosts = ({ userPosts }) => {
@@ -230,7 +230,6 @@ const GetAllPosts = ({ userPosts }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
-        // Adjust this value as needed
         setShowScrollToTop(true);
       } else {
         setShowScrollToTop(false);
@@ -247,7 +246,7 @@ const GetAllPosts = ({ userPosts }) => {
   const scrollToTopOfPosts = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // You can use "auto" for instant scrolling
+      behavior: "smooth",
     });
   };
   console.log("all", posts);

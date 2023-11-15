@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
-import MyContext from "../../context/MyContext";
-import "./EditPost.scss";
 import { ToastContainer, toast } from "react-toastify";
+import "./EditPost.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
 
 const EditPost = ({ postId, getAllPosts, setShowEditForm }) => {
   const [postContent, setPostContent] = useState("");
@@ -54,8 +54,6 @@ const EditPost = ({ postId, getAllPosts, setShowEditForm }) => {
         }
       );
 
-      //console.log(formData);
-
       if (response.ok) {
         const data = await response.json();
         data.content = postContent;
@@ -69,9 +67,6 @@ const EditPost = ({ postId, getAllPosts, setShowEditForm }) => {
           }
         });
         setPosts(updatedPosts);
-        // getAllPosts()
-
-        //console.log("Post updated:", data, postContent);
       } else {
         console.error("Error updating post");
       }

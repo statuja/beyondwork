@@ -1,9 +1,8 @@
-import "./NewsFeed.scss";
 import { useContext } from "react";
+import "./NewsFeed.scss";
 import MyContext from "../../context/MyContext";
 import CreateNewPost from "../../components/posts/CreateNewPost";
 import GetAllPosts from "../../components/posts/GetAllPosts";
-import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 
 const Home = () => {
   const { userData } = useContext(MyContext);

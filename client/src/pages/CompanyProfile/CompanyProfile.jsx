@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./CompanyProfile.scss";
-import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "./CompanyProfile.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
 
 const CompanyProfile = () => {
   const navigate = useNavigate();

@@ -1,66 +1,64 @@
 .edit-post-wrapper {
-    margin-top: 10px;
-    width: 80%;
-    
-    form {
-        margin-bottom: 20px;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        
-        textarea {
-            border-radius: 6px;
-            padding: 20px;
-            width: 100%;
-            min-height: 150px;
-            border: 1px solid rgba(128, 128, 128, 0.282);
-        }
-        input {
-            background: #ffae0091;
-            color: #37424d;
-            border: none;
-            border-radius: 5px;
-            padding: 8px;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-size: 14px;
-            width: 100px;
-            bottom: 10px;
-            left: 10px;
-      
-            &:hover {
-              background: #ffb000;
-            }
-            @media (max-width: 768px) {
-              font-size: 10px;
-              width: 60px;
-            }
-        }
+  margin-top: 10px;
+  width: 80%;
+
+  form {
+    margin-bottom: 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+      border-radius: 6px;
+      padding: 20px;
+      width: 100%;
+      min-height: 150px;
+      border: 1px solid rgba(128, 128, 128, 0.282);
     }
+    input {
+      background: #ffae0091;
+      color: #37424d;
+      border: none;
+      border-radius: 5px;
+      padding: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 14px;
+      width: 100px;
+      bottom: 10px;
+      left: 10px;
+
+      &:hover {
+        background: #ffb000;
+      }
+      @media (max-width: 768px) {
+        font-size: 10px;
+        width: 60px;
+      }
+    }
+  }
 }
 
 @media (min-width: 0px) and (max-width: 768) {
-    .edit-post-wrapper {
-        width: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .edit-post-wrapper {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        form {
-            width: 300px;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: left;
-            align-items: space-between;
-            gap: 30px;
+    form {
+      width: 300px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: left;
+      align-items: space-between;
+      gap: 30px;
 
-            label {
-            margin-right: none;
-            }
-        }
-
-        
+      label {
+        margin-right: none;
+      }
     }
+  }
 }

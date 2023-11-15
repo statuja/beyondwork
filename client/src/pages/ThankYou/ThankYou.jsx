@@ -1,13 +1,13 @@
-import "./ThankYou.scss";
-import logo from "../../images/Logo_green.png";
-import { useContext } from "react";
-import MyContext from "../../context/MyContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import people from "../../images/Young_people.png";
+import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import "./ThankYou.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
+import logo from "../../images/Logo_green.png";
+import people from "../../images/Young_people.png";
 
 export const ThankYou = () => {
   const navigate = useNavigate();
@@ -30,14 +30,17 @@ export const ThankYou = () => {
     };
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
-        method: "POST",
-        body: JSON.stringify(newDataObject),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/login`,
+        {
+          method: "POST",
+          body: JSON.stringify(newDataObject),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const responseData = await response.json();
         setUserData(responseData.user);
@@ -45,12 +48,10 @@ export const ThankYou = () => {
         navigate("/company/profile");
       } else {
         const errorData = await response.json();
-        //setError(errorData.error);
         toast.error(errorData.error);
       }
     } catch (error) {
       console.log("Fetch error:", error);
-      //setError("An error occurred during login.");
       toast.error("An error occurred during login.");
     }
   };
@@ -63,7 +64,6 @@ export const ThankYou = () => {
     }
   }, []);
 
-  //console.log(errors);
   return (
     <div className="thankyou">
       <div className="left">
@@ -78,11 +78,12 @@ export const ThankYou = () => {
       </div>
       <div className="right">
         <div className="right-top">
-        <h2>Login to {companyName} admin account</h2>
+          <h2>Login to {companyName} admin account</h2>
           <div className="thankMsg">
             <p>Here are your login credentials:</p>
             <p>
-              admin email: <span>{adminEmail}</span>, temporary password:<span> 6DV$cWT5</span>
+              admin email: <span>{adminEmail}</span>, temporary password:
+              <span> 6DV$cWT5</span>
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,8 +99,10 @@ export const ThankYou = () => {
               placeholder="Your password"
               {...register("password", { required: true })}
             />
-            <div><input type="submit" value="Login" className="button" /></div>
-            
+            <div>
+              <input type="submit" value="Login" className="button" />
+            </div>
+
             {typeof error === "string" && error && (
               <div className="error">{error}</div>
             )}

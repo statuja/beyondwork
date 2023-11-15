@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./CompanyRegistration.scss";
-import logo from "../../images/Logo_green.png";
-import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
+import logo from "../../images/Logo_green.png";
 
 export const CompanyRegistration = () => {
   const navigate = useNavigate();
@@ -42,13 +42,16 @@ export const CompanyRegistration = () => {
         defaultAdminEmail: data.defaultAdminEmail,
       };
 
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/company/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newData),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/company/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newData),
+        }
+      );
 
       const responseData = await response.json();
       if (response.ok) {
@@ -95,7 +98,9 @@ export const CompanyRegistration = () => {
               <select
                 {...register("companyType", { required: "This is required." })}
               >
-                <option value="" disabled selected>Select</option>
+                <option value="" disabled selected>
+                  Select
+                </option>
                 <option value="Agriculture">Agriculture</option>
                 <option value="Building materials">Building materials</option>
                 <option value="Chemicals">Chemicals</option>
@@ -129,7 +134,9 @@ export const CompanyRegistration = () => {
             <div className="selection">
               <label htmlFor="numberOfEmployees">* Number of Employees:</label>
               <select {...register("numberOfEmployees", { required: true })}>
-              <option value="" disabled selected>Select</option>
+                <option value="" disabled selected>
+                  Select
+                </option>
                 <option value="<50">0-50</option>
                 <option value="51-100">51-100</option>
                 <option value="101-500">101-500</option>

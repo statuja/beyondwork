@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./MarketPlace.scss";
 import MyContext from "../../context/MyContext";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 function MarketPlace() {
   const { isDarkMode } = useContext(MyContext);

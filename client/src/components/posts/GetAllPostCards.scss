@@ -1,5 +1,4 @@
 .post-Container {
-  //border: 2px solid rgb(213, 110, 143);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +8,6 @@
   width: 100%;
   border-radius: 15px;
   background-color: #e7e7a38e;
-  //background-image: linear-gradient(#eceef093, #faf8f8ce), url(../../images/4.jpg);
   background-size: contain;
   padding: 30px 0;
   margin-top: 30px;
@@ -20,7 +18,7 @@
     color: #fcfcf4;
 
     .postCard {
-      box-shadow: none
+      box-shadow: none;
     }
 
     .post-owner,
@@ -48,7 +46,6 @@
 
     @media (max-width: 425px) {
       font-size: 26px;
-      //  margin-right: 30px;
     }
   }
 
@@ -62,9 +59,6 @@
     width: 80%;
     background-color: rgba(251, 251, 246, 0.896);
     border-radius: 8px;
-    //border: 1px solid rgba(128, 128, 128, 0.22);
-    //box-shadow: 0 12px 18px rgba(0, 0, 0, 0.1);
-    //box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     box-shadow: 6px 6px 10px 0 rgba(92, 91, 91, 0.25),
       -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
 
@@ -122,9 +116,7 @@
     .post-content {
       padding: 10px;
       font-size: 16px;
-      //min-height: fit-content;
       border-radius: 8px;
-      //box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       color: rgb(33, 33, 33);
       transition: background-color 0.3s;
       white-space: break-spaces;
