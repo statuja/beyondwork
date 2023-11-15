@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import "./Footer.scss";
+import MyContext from "../../context/MyContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faLinkedinIn,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import MyContext from "../../context/MyContext";
 
 function Footer() {
   const { isDarkMode } = useContext(MyContext);

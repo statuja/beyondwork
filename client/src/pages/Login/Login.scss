@@ -1,5 +1,4 @@
 .login {
-  //border: 2px solid blue;
   height: 89vh;
   display: flex;
   justify-content: center;
@@ -14,13 +13,12 @@
     gap: 40px;
     display: flex;
     flex-direction: column;
-    //justify-content: center;
     align-items: center;
     background: linear-gradient(#f5f5dceb, #f5f5dc9d),
       url(../../images/Hands.png) center;
     background-size: cover;
     background-repeat: no-repeat;
-   
+
     .logo {
       width: 45%;
       height: auto;
@@ -32,7 +30,6 @@
     }
 
     .textContainer {
-      //border: 2px solid red;
       width: 70%;
       gap: 30px;
       display: flex;
@@ -40,38 +37,22 @@
       justify-content: center;
       align-items: flex-start;
 
-      h2 {
-        font-size: 50px;
-        font-family: "Belanosima", sans-serif;
-        font-weight: 500;
-        // opacity: 0;
-        // transform: translateX(-100%);
-        // transition: all 0.5s ease-out;
-        // transition-delay: 0.3s; 
-      }
-
+      h2,
       p {
-        font-size: 26px;
+        font-size: 20px;
         font-weight: 600;
         line-height: 32px;
-        // opacity: 0;
-        // transform: translateX(-100%);
-        // transition: all 0.5s ease-out;
-        // transition-delay: 0.6s;
+      }
+
+      h2 {
+        font-size: 40px;
+        font-family: "Belanosima", sans-serif;
+        font-weight: 500;
       }
     }
-    // &.animate {
-    //   border: 2px solid red;
-     
-       
-    //     transform: translateX(0);
-    //     opacity: 1;
-     
-    // }
   }
 
   .login-right {
-    //border: 2px solid red;
     height: 100%;
     flex: 1;
     display: flex;
@@ -79,9 +60,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
+    gap: 20px;
     img {
-      //width: 100%;
       max-width: 100%;
       height: auto;
     }
@@ -121,7 +101,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 40%;
-            //transition: transform 0.3s;
             &:hover {
               transform: scale(1.03);
               background-color: #ffcf9d;
@@ -142,7 +121,6 @@
           outline: none;
           border-radius: 6px;
           background-color: #f5f5dc;
-          // transition: transform 0.2s;
           &:hover {
             transform: scale(1.03);
           }
@@ -156,13 +134,16 @@
       .signUp {
         display: flex;
         justify-content: flex-end;
-        // align-items: center;
         width: 70%;
-
+        gap: 10px;
+        p {
+          font-size: 16px;
+          line-height: 22px;
+        }
         .button {
           padding: 10px;
           border: none;
-          border-radius: 6px;
+          border-radius: 8px;
           background-color: #ffb000;
           font-weight: bold;
           cursor: pointer;
@@ -173,10 +154,7 @@
         }
       }
     }
-
   }
-
-
 }
 
 @media (max-width: 425px) {
@@ -189,7 +167,7 @@
       background-image: none;
 
       .textContainer {
-        width: 80%;
+        width: 85%;
         justify-content: center;
         align-items: center;
         gap: 10px;
@@ -198,18 +176,12 @@
           line-height: 34px;
           text-align: center;
           margin-bottom: 20px;
-          transition: none;
-          transform: translateX(0);
-          opacity: 1;
         }
-  
+
         p {
-          font-size: 16px;
-          line-height: 20px;
+          font-size: 20px;
+          line-height: 24px;
           text-align: center;
-          transition: none;
-          transform: translateX(0);
-          opacity: 1;
         }
       }
     }
@@ -220,9 +192,9 @@
       img {
         max-width: 100%;
         height: auto;
-      } 
+      }
       .right-top {
-        gap: 20px;
+        gap: 10px;
         h2 {
           font-size: 24px;
           text-align: center;
@@ -240,14 +212,14 @@
           justify-content: space-between;
           margin-bottom: 20px;
           width: 90%;
+          font-size: 12px;
+          p {
+            font-size: 14px;
+            line-height: 18px;
+          }
           .button {
             padding: 5px;
-            border: none;
-            border-radius: 8px;
-            background-color: #ffb000;
-            font-weight: bold;
-            cursor: pointer;
-            width: 150px;
+            font-size: 12px;
           }
         }
       }
@@ -272,18 +244,12 @@
           font-size: 36px;
           text-align: center;
           margin-bottom: 20px;
-          transition: none;
-          transform: translateX(0);
-          opacity: 1;
         }
 
         p {
           font-size: 20px;
           line-height: 24px;
           text-align: center;
-          transition: none;
-          transform: translateX(0);
-          opacity: 1;
         }
       }
     }

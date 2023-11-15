@@ -1,8 +1,9 @@
 import "./BurgerMenu.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import MyContext from "../../context/MyContext";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
-//import FeedIcon from '@mui/icons-material/Feed';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
@@ -13,10 +14,6 @@ import SpaIcon from "@mui/icons-material/Spa";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { useContext } from "react";
-import MyContext from "../../context/MyContext";
-
-//const API_URL = process.env.REACT_APP_BACKEND_URL
 
 const Menu = ({ setIsBurgerMenuOpen }) => {
   const navigate = useNavigate();

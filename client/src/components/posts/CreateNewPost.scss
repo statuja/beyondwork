@@ -5,9 +5,8 @@
   padding: 20px;
   width: 100%;
   background-color: #e7e7a38e;
-  //background-image: linear-gradient(#f5f5dc2f, #f0f5dc32), url(../../images/8.jpg);
   background-position: center;
-  background-size:cover;
+  background-size: cover;
   background-repeat: no-repeat;
   border-radius: 15px;
   align-items: center;
@@ -15,8 +14,8 @@
   margin-bottom: 70px;
 
   &.dark-mode {
-    background-color: #3D3A3A;
-    color: #FCFCF4;
+    background-color: #3d3a3a;
+    color: #fcfcf4;
   }
 
   .new-post-header {
@@ -59,7 +58,6 @@
       transition: background 0.3s;
       font-size: 14px;
       width: 100px;
-      //position: absolute;
       bottom: 10px;
       left: 10px;
 
@@ -95,7 +93,6 @@
         color: #ff8000;
         cursor: pointer;
       }
-
     }
 
     .error {

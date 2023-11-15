@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import React, { useContext, useState, useEffect } from "react";
-import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
-import "./CreateUser.scss";
 import { ToastContainer, toast } from "react-toastify";
+import "./CreateUser.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
 
 export const UserRegistration = () => {
   const defaultImageUrl = `${process.env.REACT_APP_BACKEND_URL}/user/uploads/default_avatar.jpeg`;
@@ -38,7 +38,6 @@ export const UserRegistration = () => {
       },
       userPassword: data.userPassword,
       adminRole: data.adminRole,
-      // userImage: defaultImageUrl,
     };
     try {
       const response = await fetch(
@@ -87,7 +86,10 @@ export const UserRegistration = () => {
       >
         <div>
           <h1>Hello Admin!</h1>
-          <p>Here, you can register all the employees in your team:</p>
+          <p>
+            Please fill out the form below to register all the employees on your
+            team.
+          </p>
         </div>
         <div className="addUser">
           <form
@@ -147,7 +149,8 @@ export const UserRegistration = () => {
               })}
             />
             <label htmlFor="adminRole">Admin Role:</label>
-            {/* <div className="myRow">
+
+            <div className="myRow">
               <input
                 {...register("adminRole")}
                 type="radio"
@@ -156,11 +159,7 @@ export const UserRegistration = () => {
               />{" "}
               No
               <input {...register("adminRole")} type="radio" value={true} /> Yes
-            </div> */}
-            <select {...register("adminRole")}>
-              <option value={false}> No</option>
-              <option value={true}>Yes</option>
-            </select>
+            </div>
 
             <input type="submit" className="button" />
           </form>

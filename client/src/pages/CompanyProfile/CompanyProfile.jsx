@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./CompanyProfile.scss";
-import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "./CompanyProfile.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
 
 const CompanyProfile = () => {
   const navigate = useNavigate();
@@ -68,11 +68,11 @@ const CompanyProfile = () => {
                 <p>{company.companyName}</p>
               </div>
               <div className="label">
-                <h5> Company Type:</h5>
+                <h5>Company Type:</h5>
                 <p>{company.companyType}</p>
               </div>
               <div className="label">
-                <h5> Number of Employees:</h5>
+                <h5>Number of Employees:</h5>
                 <p> {company.numberOfEmployees}</p>
               </div>
             </div>
@@ -130,7 +130,7 @@ const CompanyProfile = () => {
             },
           }}
         >
-          Edit Company Profile
+          Edit Profile
         </Link>
       ) : null}
       <ToastContainer

@@ -14,17 +14,16 @@
   top: 0;
   z-index: 999;
 
-
   .left,
   .right {
     display: flex;
     justify-content: space-between;
     align-items: center;
     a {
-      margin: 0 30px;
+      margin: 0 20px;
       color: rgb(55, 55, 55);
       text-decoration: none;
-      img{
+      img {
         width: 40px;
       }
     }
@@ -37,7 +36,7 @@
     .right {
       a {
         font-size: 14px;
-        img{
+        img {
           width: 50px;
         }
       }

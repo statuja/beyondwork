@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import MyContext from "../../context/MyContext";
-import "./EditCompanyProfile.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "./EditCompanyProfile.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
 
 const EditCompanyProfile = () => {
   const navigate = useNavigate();
@@ -107,7 +107,7 @@ const EditCompanyProfile = () => {
 
     try {
       const response = await fetch(
-       `${process.env.REACT_APP_BACKEND_URL}/company/updateCompanyProfile/${companyID}`,
+        `${process.env.REACT_APP_BACKEND_URL}/company/updateCompanyProfile/${companyID}`,
         {
           method: "POST",
           body: formData,
@@ -139,7 +139,9 @@ const EditCompanyProfile = () => {
 
   return (
     <div
-      className={`EditcompanyProfile ${isDarkMode ? "dark-mode" : "light-mode"}`}
+      className={`EditcompanyProfile ${
+        isDarkMode ? "dark-mode" : "light-mode"
+      }`}
     >
       <h1>Edit Company Profile</h1>
       {companyData.companyLogo ? (

@@ -4,11 +4,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 82vh;
   border-radius: 15px;
 
   &.dark-mode {
-    background-color: #3D3A3A;
+    background-color: #3d3a3a;
   }
 
   h3 {
@@ -19,7 +18,7 @@
   }
 
   p {
-    padding: 10px;
+    padding: 16px;
   }
 
   .addUser {
@@ -29,7 +28,6 @@
     align-items: center;
     padding: 20px;
     width: 70%;
-
 
     form {
       width: 100%;
@@ -47,7 +45,7 @@
       }
 
       input,
-      select {
+      .myRow {
         width: calc(50% - 10px);
         padding: 10px;
         border: none;
@@ -78,6 +76,18 @@
         padding: 8px;
       }
 
+      .myRow {
+        display: flex;
+        background-color: #ffb000;
+        input {
+          width: 10%;
+          cursor: pointer;
+        }
+        &:hover {
+          transform: none;
+        }
+      }
+
       .button {
         width: 30%;
         margin-top: 10px;
@@ -91,7 +101,6 @@
 
         &:hover {
           transform: scale(1.03);
-          //width: 32%;
           background-color: #ffcf9d;
         }
       }
