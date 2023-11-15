@@ -41,6 +41,7 @@
 
   .bottom {
     display: flex;
+    align-self: flex-start;
     flex-direction: column;
     width: 90%;
     align-items: center;
@@ -89,6 +90,16 @@
       h5 {
         margin: 5px 0;
       }
+    a,
+    button {
+        // margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #ffb000;
+        text-decoration: none;
+        margin: 10px;
+        border: none;
+        color: black;
 
       input {
         margin: 5px 0;
