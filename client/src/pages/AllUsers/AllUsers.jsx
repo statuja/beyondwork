@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import MyContext from "../../context/MyContext";
-import "./AllUsers.scss";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { ToastContainer, toast } from "react-toastify";
+import "./AllUsers.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 function AllUsers() {
   const navigate = useNavigate();

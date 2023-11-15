@@ -1,20 +1,19 @@
 import "./menu.scss";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import MyContext from "../../context/MyContext";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
-//import FeedIcon from '@mui/icons-material/Feed';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import SpaIcon from '@mui/icons-material/Spa';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+import SpaIcon from "@mui/icons-material/Spa";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { useContext } from "react";
-import MyContext from "../../context/MyContext";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -23,19 +22,20 @@ const Menu = () => {
 
   const handleOnClick = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/logout`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/logout`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       const responseData = await response.json();
 
       if (response.ok) {
-        //alert("You successfully logged out.");
-        // localStorage.removeItem("userData");
         localStorage.clear();
         setUserData({});
         setLoggedOut(true);
@@ -52,7 +52,6 @@ const Menu = () => {
   return (
     <>
       <ul className={`menu ${isDarkMode ? "dark-mode" : "light-mode"}`}>
-        {/* Apply dark mode based on the isDarkMode state */}
         <li>
           <Link to={`/user/profile/${userData._id}`}>
             <AccountCircleOutlinedIcon className="icon" /> My Profile

@@ -1,9 +1,9 @@
-import "./CreateNewPost.scss";
 import React, { useContext, useState } from "react";
-import MyContext from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "./CreateNewPost.scss";
 import "react-toastify/dist/ReactToastify.css";
+import MyContext from "../../context/MyContext";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const CreateNewPost = () => {
@@ -23,13 +23,13 @@ const CreateNewPost = () => {
     if (newPost.content) {
       formData.append("content", newPost.content);
     } else {
-      formData.append("content", "Check this image"); // Set content to a default message
+      formData.append("content", "Check this image");
     }
 
     if (newPost.image) {
       formData.append("image", newPost.image);
     } else {
-      formData.append("image", null); // Set the image to null if no image is selected
+      formData.append("image", null);
     }
 
     if (!newPost.content && !newPost.image) {
@@ -42,11 +42,14 @@ const CreateNewPost = () => {
     formData.append("createdBy", userData._id);
     formData.append("company", userData.userCompany);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/post/create`, {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/post/create`,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.success === false) {

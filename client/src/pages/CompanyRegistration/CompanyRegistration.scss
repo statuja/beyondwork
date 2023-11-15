@@ -34,8 +34,8 @@
       width: 65%;
       font-size: 35px;
       line-height: 40px;
-      text-align:center;
-      font-family: 'Belanosima', sans-serif;
+      text-align: center;
+      font-family: "Belanosima", sans-serif;
       font-weight: 400;
     }
   }
@@ -52,7 +52,7 @@
 
     h2 {
       font-size: 22px;
-      font-family: 'Belanosima', sans-serif;
+      font-family: "Belanosima", sans-serif;
       font-weight: 400;
     }
 
@@ -80,10 +80,8 @@
         border-radius: 6px;
         background-color: #f5f5dc;
 
-        //transition: transform 0.3s ease-in;
         &:hover {
           transform: scale(1.03);
-
         }
       }
 
@@ -122,10 +120,8 @@
         font-weight: bold;
         cursor: pointer;
 
-        //transition: transform 0.3s;
         &:hover {
           transform: scale(1.03);
-          //width: 32%;
           background-color: #ffcf9d;
         }
       }
@@ -233,7 +229,6 @@
             select {
               width: 100%;
             }
-
           }
         }
 

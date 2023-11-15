@@ -1,6 +1,5 @@
-import React from "react";
-import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import "./Navbar.scss";
 import icon from "../../images/small_icon_green.png";
 
 function Navbar() {

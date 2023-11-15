@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "./MyProfile.scss";
+import "react-toastify/dist/ReactToastify.css";
 import UserData from "../../components/UserData/UserData";
 import MyContext from "../../context/MyContext";
 import GetAllPosts from "../../components/posts/GetAllPosts";
-import "./MyProfile.scss";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -19,11 +19,10 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (id === userData._id) {
-      setUser(userData); // If it's the user's own profile
+      setUser(userData);
       fetchAllPosts();
       setLoading(false);
     } else {
-      // Fetch user data by ID
       const fetchUserDataById = async (userId) => {
         try {
           const response = await fetch(
@@ -44,7 +43,7 @@ const UserProfile = () => {
               setUser({});
               return navigate("/");
             }
-            setUser(data); // Set the user data including images
+            setUser(data);
             setLoading(false);
           } else {
             console.error("Error fetching profile:", response.statusText);
@@ -74,7 +73,7 @@ const UserProfile = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setUserPosts(data); // Update the user's posts
+        setUserPosts(data);
       } else {
         toast.error("Failed to fetch user's posts.");
       }
