@@ -1,6 +1,6 @@
 .login {
   //border: 2px solid blue;
-  height: 89vh;
+  height: 88vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,34 +40,34 @@
       justify-content: center;
       align-items: flex-start;
 
+      h2,
+      p {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 32px;
+        /* opacity: 1;
+        transform: translateX(-100%);
+        transition: all 0.5s ease-out; */
+      }
+
       h2 {
         font-size: 50px;
         font-family: "Belanosima", sans-serif;
         font-weight: 500;
-        opacity: 0;
-        transform: translateX(-100%);
-        transition: all 0.5s ease-out;
-        transition-delay: 0.3s; 
+        //transition-delay: 0.3s;
       }
 
-      p {
-        font-size: 26px;
-        font-weight: 600;
-        line-height: 32px;
-        opacity: 0;
-        transform: translateX(-100%);
-        transition: all 0.5s ease-out;
+    /*   p {
         transition-delay: 0.6s;
-      }
+      } */
     }
-    &.animate {
-      border: 2px solid red;
-     
-       
+   /*  &.animate {
+      .textContainer h2,
+      .textContainer p {
         transform: translateX(0);
-        opacity: 1;
-     
-    }
+        opacity: 0;
+      }
+    } */
   }
 
   .login-right {
@@ -79,7 +79,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
+    gap: 20px;
     img {
       //width: 100%;
       max-width: 100%;
@@ -158,11 +158,15 @@
         justify-content: flex-end;
         // align-items: center;
         width: 70%;
-
+        gap: 10px;
+        p{
+          font-size: 16px;
+          line-height: 22px;
+        }
         .button {
           padding: 10px;
           border: none;
-          border-radius: 6px;
+          border-radius: 8px;
           background-color: #ffb000;
           font-weight: bold;
           cursor: pointer;
@@ -189,7 +193,7 @@
       background-image: none;
 
       .textContainer {
-        width: 80%;
+        width: 85%;
         justify-content: center;
         align-items: center;
         gap: 10px;
@@ -198,18 +202,18 @@
           line-height: 34px;
           text-align: center;
           margin-bottom: 20px;
-          transition: none;
+         /*  transition: none;
           transform: translateX(0);
-          opacity: 1;
+          opacity: 1; */
         }
   
         p {
-          font-size: 16px;
-          line-height: 20px;
+          font-size: 20px;
+          line-height: 24px;
           text-align: center;
-          transition: none;
+        /*   transition: none;
           transform: translateX(0);
-          opacity: 1;
+          opacity: 1; */
         }
       }
     }
@@ -222,7 +226,7 @@
         height: auto;
       } 
       .right-top {
-        gap: 20px;
+        gap: 10px;
         h2 {
           font-size: 24px;
           text-align: center;
@@ -240,14 +244,15 @@
           justify-content: space-between;
           margin-bottom: 20px;
           width: 90%;
+          font-size: 12px;
+          p{
+            font-size: 14px;
+            line-height: 18px;
+          }
           .button {
             padding: 5px;
-            border: none;
-            border-radius: 8px;
-            background-color: #ffb000;
-            font-weight: bold;
-            cursor: pointer;
-            width: 150px;
+            font-size: 12px;
+            
           }
         }
       }
@@ -272,18 +277,18 @@
           font-size: 36px;
           text-align: center;
           margin-bottom: 20px;
-          transition: none;
+         /*  transition: none;
           transform: translateX(0);
-          opacity: 1;
+          opacity: 1; */
         }
 
         p {
           font-size: 20px;
           line-height: 24px;
           text-align: center;
-          transition: none;
+         /*  transition: none;
           transform: translateX(0);
-          opacity: 1;
+          opacity: 1; */
         }
       }
     }

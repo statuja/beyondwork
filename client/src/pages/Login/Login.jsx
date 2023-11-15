@@ -31,7 +31,7 @@ const Login = () => {
     const delay = setTimeout(()=>{
       setAnimation(true);
       clearTimeout(delay);
-    }, 100)
+    }, 500)
   }, [])
 
   // useEffect(() => {

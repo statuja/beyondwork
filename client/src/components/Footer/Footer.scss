@@ -14,9 +14,9 @@
     }
 
     .left {
-
         text-align: left;
         font-size: 12px;
+        padding-right: 15px;
     }
 
     .right {
@@ -33,6 +33,7 @@
     @media (min-width: 768px) {
         padding: 10px 20px;
         height: 50px;
+        
 
         .left {
             text-align: left;

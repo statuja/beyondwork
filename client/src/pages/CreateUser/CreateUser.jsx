@@ -91,7 +91,7 @@ export const UserRegistration = () => {
       >
         <div>
           <h1>Hello Admin!</h1>
-          <p>Here, you can register all the employees in your team:</p>
+          <p>Please fill out the form below to register all the employees on your team.</p>
         </div>
         <div className="addUser">
           <form
@@ -151,11 +151,20 @@ export const UserRegistration = () => {
               })}
             />
             <label htmlFor="adminRole">Admin Role:</label>
-
-            <select {...register("adminRole")}>
+           {/*  <select {...register("adminRole")}>
               <option value={true}>Yes</option>
               <option value={false}> No</option>
-            </select>
+            </select> */}
+             <div className="myRow">
+              <input
+                {...register("adminRole")}
+                type="radio"
+                value={false}
+                defaultChecked
+              />{" "}
+              No
+              <input {...register("adminRole")} type="radio" value={true} /> Yes
+            </div>
             <input type="submit" className="button" />
             {/* {message && <div>{message}</div>} */}
           </form>
