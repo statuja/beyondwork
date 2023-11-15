@@ -54,10 +54,7 @@
         cursor: text;
         background-color: #f5f5dc;
 
-        .myRow {
-          display: flex;
-          justify-content: space-between;
-        }
+        
 
         &:hover {
           transform: scale(1.03);
@@ -79,9 +76,14 @@
       .myRow {
         display: flex;
         background-color: #ffb000;
+        &.dark-mode {
+          background-color: rgb(40, 39, 39);
+        }
+     
         input {
           width: 10%;
           cursor: pointer;
+      
         }
         &:hover {
           transform: none;
