@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import MyContext from "../../context/MyContext";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import "./MyProfile.scss";
 import "./EditMyProfile.scss";
-import { ToastContainer, toast } from "react-toastify";
+import MyContext from "../../context/MyContext";
 import "react-toastify/dist/ReactToastify.css";
 
 function EditMyProfile() {
@@ -36,46 +36,7 @@ function EditMyProfile() {
   const [loading, setLoading] = useState(true);
   console.log(formData);
   useEffect(() => {
-    // const fetchMyProfile = async () => {
-    //   try {
-    //     const response = await fetch(`http://localhost:5000/user/myProfile`, {
-    //       method: "GET",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       credentials: "include",
-    //     });
-
-    //     if (response.ok) {
-    //       const data = await response.json();
-    //       if (data.success === false) {
-    //         alert("Session expired, please login again!");
-    //         setUserData({});
-    //         return navigate("/");
-    //       }
-    //       const formattedDate = new Date(data.dateOfBirth)
-    //         .toISOString()
-    //         .split("T")[0];
-    setFormData(userData); // Set the fetched data to the formData state
-
-    //       setFormData({ ...data, dateOfBirth: formattedDate });
-    //       setLoading(false);
-    //     } else {
-    //       console.error("Error updating profile:", response.statusText);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error fetching company details", error);
-    //   }
-    // };
-    // fetchMyProfile()
-    //   .then((data) => {
-    //     setUser(data);
-    //     setLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching user details", error);
-    //     setLoading(false);
-    //   });
+    setFormData(userData);
   }, [userData]);
 
   const handleInputChange = (e) => {
@@ -85,7 +46,7 @@ function EditMyProfile() {
     if (name.includes(".")) {
       const [nestedKey, nestedField] = name.split(".");
       if (!updatedFormData[nestedKey]) {
-        updatedFormData[nestedKey] = {}; // Initialize the nested object if it doesn't exist
+        updatedFormData[nestedKey] = {};
       }
       updatedFormData[nestedKey][nestedField] = value;
     } else if (
@@ -94,7 +55,7 @@ function EditMyProfile() {
     ) {
       const [parentKey, nestedField] = name.split(".");
       if (!updatedFormData[parentKey]) {
-        updatedFormData[parentKey] = {}; // Initialize the nested object if it doesn't exist
+        updatedFormData[parentKey] = {};
       }
       updatedFormData[parentKey][nestedField] = value;
     } else {
@@ -124,7 +85,7 @@ function EditMyProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { savedPosts, userPassword, ...formDataWithoutSavedPosts } = formData; // Destructure formData to exclude the savedPosts field
+    const { savedPosts, userPassword, ...formDataWithoutSavedPosts } = formData;
     const updatedFormData = new FormData();
     for (const key in formDataWithoutSavedPosts) {
       if (key === "userAddress" || key === "userContact") {
@@ -155,8 +116,6 @@ function EditMyProfile() {
         const data = await response.json();
 
         if (data.success === false) {
-          //alert("Server error");
-          //toast.warn('Session expired, please login again!')
           setSessionExpired(true);
           setUserData({});
           return navigate("/");
@@ -207,7 +166,7 @@ function EditMyProfile() {
               alt="userImage"
             />
           )}
-           <div className="upload-buttons">
+          <div className="upload-buttons">
             <button type="button" onClick={handleClickProfile}>
               Profile picture
             </button>

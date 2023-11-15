@@ -17,7 +17,6 @@ const MyProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(initialDarkMode);
 
   useEffect(() => {
-    // Save dark mode setting to local storage when it changes
     localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 

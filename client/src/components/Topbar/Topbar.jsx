@@ -1,33 +1,25 @@
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import "./Topbar.scss";
+import MyContext from "../../context/MyContext";
+import BurgerMenu from "../Menu/BurgerMenu";
 import iconMobile from "../../images/small_icon_yellow.png";
 import SearchIcon from "@mui/icons-material/Search";
-//import PersonIcon from "@mui/icons-material/Person";
-// import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import MyContext from "../../context/MyContext";
-import BurgerMenu from "../Menu/BurgerMenu";
 
 export default function Topbar() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const { userData, isDarkMode, toggleDarkMode } = useContext(MyContext);
 
-  //const isMobile = window.innerWidth <= 768;
   return (
     <div
       className={`topbarContainer ${isDarkMode ? "dark-mode" : "light-mode"}`}
     >
       <div className="left">
         <span className="logo">
-          {/*  {isMobile ? (
-             <img src={iconMobile} alt="" />
-          ) : (
-            <h3>BeyondWork</h3>
-          )} */}
           <Link to="/newsfeed">
             <img src={iconMobile} alt="" />
             <h3>BeyondWork</h3>

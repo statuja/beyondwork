@@ -4,12 +4,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //height: 82vh;
   border-radius: 15px;
 
-
   &.dark-mode {
-    background-color: #3D3A3A;
+    background-color: #3d3a3a;
   }
 
   h3 {
@@ -31,9 +29,7 @@
     padding: 20px;
     width: 70%;
 
-
     form {
-      //border: 2px solid blue;
       width: 100%;
       padding: 20px;
       display: flex;
@@ -48,9 +44,8 @@
         background-color: rgb(40, 39, 39);
       }
 
-
-      input, .myRow {
-
+      input,
+      .myRow {
         width: calc(50% - 10px);
         padding: 10px;
         border: none;
@@ -84,13 +79,13 @@
       .myRow {
         display: flex;
         background-color: #ffb000;
-       input{
-        width: 10%;
-        cursor: pointer;
-       }
-       &:hover {
-        transform: none;
-      }
+        input {
+          width: 10%;
+          cursor: pointer;
+        }
+        &:hover {
+          transform: none;
+        }
       }
 
       .button {
@@ -106,7 +101,6 @@
 
         &:hover {
           transform: scale(1.03);
-          //width: 32%;
           background-color: #ffcf9d;
         }
       }

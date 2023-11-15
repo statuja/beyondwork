@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import GetAllPosts from "../../components/posts/GetAllPosts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./SavedPosts.scss";
+import GetAllPosts from "../../components/posts/GetAllPosts";
 
 const SavedPosts = () => {
   const [loading, setLoading] = useState(true);
-  const [savedPosts, setSavedPosts] = useState([]); // State variable for user's posts
+  const [savedPosts, setSavedPosts] = useState([]);
 
   const fetchSavedPosts = async () => {
     try {

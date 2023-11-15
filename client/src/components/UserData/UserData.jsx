@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import MyContext from "../../context/MyContext";
-import "./UserData.scss";
 import { Link } from "react-router-dom";
+import "./UserData.scss";
+import MyContext from "../../context/MyContext";
 
 const UserData = ({ isMe, user }) => {
   const { isDarkMode } = useContext(MyContext);
@@ -64,12 +64,6 @@ const UserData = ({ isMe, user }) => {
               </span>
               <span className="infoValue">{user?.userAddress?.country}</span>
             </div>
-            {/* <div className="infoItem">
-              <span className="infoKey">Phone Number:</span>
-              <span className="infoValue">
-                {user?.userContact?.phoneNumber}
-              </span>
-            </div> */}
             <div className="infoItem">
               <span className={`infoKey ${isDarkMode ? "dark-mode" : ""}`}>
                 Email:
