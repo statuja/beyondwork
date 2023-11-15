@@ -1,5 +1,5 @@
 .contact {
-  height: 89vh;
+  height: 88vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@
       }
 
       p {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 600;
         line-height: 32px;
       }
@@ -62,7 +62,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    gap: 20px;
     img {
       //width: 100%;
       max-width: 100%;
@@ -84,6 +84,7 @@
         font-weight: 400;
       }
       .msg {
+        //border: 2px solid red;
         width: 70%;
         p {
           font-size: 20px;
@@ -134,7 +135,7 @@
       gap: 50px;
       background-image: none;
       .textContainer {
-        width: 80%;
+        width: 85%;
         justify-content: center;
         align-items: center;
         gap: 10px;
@@ -157,11 +158,12 @@
       .right-top {
         gap: 20px;
         h2 {
+          
           font-size: 24px;
           text-align: center;
         }
         .msg {
-          width: 80%;
+          width: 100%;
           p {
             font-size: 16px;
             line-height: 22px;
@@ -169,7 +171,6 @@
         }
         .contact-wrapper {
           //border: 2px solid red;
-
           grid-template-columns: 1fr;
           gap: 10px;
           a {
@@ -214,7 +215,6 @@
       }
     }
     .contact-right {
-    
       margin-top: 40px;
       padding: 0 30px;
       .right-top {

@@ -87,7 +87,7 @@ export const UserRegistration = () => {
       >
         <div>
           <h1>Hello Admin!</h1>
-          <p>Here, you can register all the employees in your team:</p>
+          <p>Please fill out the form below to register all the employees on your team.</p>
         </div>
         <div className="addUser">
           <form
@@ -147,7 +147,12 @@ export const UserRegistration = () => {
               })}
             />
             <label htmlFor="adminRole">Admin Role:</label>
-            {/* <div className="myRow">
+
+           {/*  <select {...register("adminRole")}>
+              <option value={true}>Yes</option>
+              <option value={false}> No</option>
+            </select> */}
+             <div className="myRow">
               <input
                 {...register("adminRole")}
                 type="radio"
@@ -156,11 +161,7 @@ export const UserRegistration = () => {
               />{" "}
               No
               <input {...register("adminRole")} type="radio" value={true} /> Yes
-            </div> */}
-            <select {...register("adminRole")}>
-              <option value={false}> No</option>
-              <option value={true}>Yes</option>
-            </select>
+            </div>
 
             <input type="submit" className="button" />
           </form>
