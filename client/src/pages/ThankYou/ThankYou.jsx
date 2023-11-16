@@ -83,7 +83,7 @@ export const ThankYou = () => {
             <p>Here are your login credentials:</p>
             <p>
               admin email: <span>{adminEmail}</span>, temporary password:
-              <span> 6DV$cWT5</span>
+              <span> admin1234</span>
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
