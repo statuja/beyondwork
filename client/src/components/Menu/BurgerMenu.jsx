@@ -146,7 +146,7 @@ const Menu = ({ setIsBurgerMenuOpen }) => {
       </li>
       <li>
         <Link
-          to="/marketplace"
+          to="#"
           onClick={() => {
             setIsBurgerMenuOpen(false);
           }}
