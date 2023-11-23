@@ -89,6 +89,7 @@ Beyond Work, that looks and works more like a social media, is meant to fill the
 ## Screenshot
 Here, you can see the sleek and user-friendly interface of the Newsfeed once logged into BeyondWork. The function to create a post and add an image are easily accessible, providing a smooth and enjoyable user experience, together with the right-side menu displaying all the features and experiences offered by our platform. 
 
+![Screenshot](./server/public/snapshot.png)
 
 
 
