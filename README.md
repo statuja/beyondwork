@@ -13,6 +13,7 @@ Beyond Work is a platform for employees to connect on a personal level.
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 - [Project Structure](#project-structure)
+- [Screenshot](#screenshot)
 
 
 ## Introduction
@@ -59,6 +60,7 @@ Beyond Work, that looks and works more like a social media, is meant to fill the
 
 - Run the development server: `npm run dev`
 - Access the application at `http://localhost:3000`
+- Find the deployed version [here](https://beyondworkclient.onrender.com/)
 
 ## Technologies Used
 
@@ -83,6 +85,10 @@ Beyond Work, that looks and works more like a social media, is meant to fill the
 
 - `client/`: Contains the frontend React code.
 - `server/`: Contains the backend Express.js code.
+
+## Screenshot
+Here, you can see the sleek and user-friendly interface of the Newsfeed once logged into BeyondWork. The function to create a post and add an image are easily accessible, providing a smooth and enjoyable user experience, together with the right-side menu displaying all the features and experiences offered by our platform. 
+
 
 
 
