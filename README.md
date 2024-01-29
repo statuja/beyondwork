@@ -1,7 +1,7 @@
 # [BeyondWork](https://beyondworkclient.onrender.com/)
 ![logo](./client/src/images/Logo_green-small.png)
 
-BeyondWork is MERN stack group project, developed by four junior developers as a part of the Final Project of the DCI Further Training as a Web & Software Developer. 
+BeyondWork is a MERN stack group project, developed by four junior developers as a part of the Final Project of the DCI Further Training as a Web & Software Developer. 
 
 Beyond Work is a platform for employees to connect on a personal level.
 
